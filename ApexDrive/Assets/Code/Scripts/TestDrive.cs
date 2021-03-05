@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//******************//
+// TEMPORARY SCRIPT //
+//******************//
+
 public class TestDrive : MonoBehaviour
 {
 
@@ -9,6 +13,9 @@ public class TestDrive : MonoBehaviour
 
     private float AIMoveSpeed;
     private float playerMoveSpeed;
+
+    public float lifeTime;
+    private float timer;
 
     private Rigidbody myRigidbody;
 
@@ -18,6 +25,8 @@ public class TestDrive : MonoBehaviour
     {
         AIMoveSpeed = 3.0f;
         playerMoveSpeed = 7.0f;
+
+        timer = 0.0f;
 
         myRigidbody = GetComponent<Rigidbody>();
     }
@@ -30,7 +39,13 @@ public class TestDrive : MonoBehaviour
 
         if(isAI)
         {
-            myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, AIMoveSpeed);
+            if(timer <= lifeTime)
+            {
+                myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, AIMoveSpeed);
+
+                timer += Time.deltaTime;
+            }
+            
         }
         else
         {

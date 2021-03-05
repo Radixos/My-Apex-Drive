@@ -11,8 +11,6 @@ public class PositionUpdate : MonoBehaviour
 
     private RaceManager raceManager;
 
-    private bool isColliding;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -52,13 +50,13 @@ public class PositionUpdate : MonoBehaviour
                 hitColliders.Add(other.gameObject);
 
 
-                //if (collidersHit >= raceManager.totalColliders)
-                //{
-                //    collidersHit = 0;
-                //    laps++;
-                //    hitColliders.Clear();
-                //}
-                
+                if (collidersHit >= raceManager.totalColliders)
+                {
+                    collidersHit = 0;
+                    laps++;
+                    hitColliders.Clear();
+                }
+
             }
         }
 
