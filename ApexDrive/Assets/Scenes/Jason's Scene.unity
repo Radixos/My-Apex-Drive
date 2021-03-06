@@ -1127,7 +1127,7 @@ MonoBehaviour:
     rightWheel: {fileID: 265364543}
     motor: 0
     steering: 0
-  maxMotorTorque: 800
+  maxMotorTorque: 1000
   maxSteeringAngle: 30
 --- !u!54 &1139193485
 Rigidbody:
