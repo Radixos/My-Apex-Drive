@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //******************//
-// TEMPORARY SCRIPT //
+// TEMPORARY SCRIPT BUT
+// HAS SOME PERMANENT CODE
 //******************//
 
 public class TestDrive : MonoBehaviour
@@ -19,6 +21,13 @@ public class TestDrive : MonoBehaviour
 
     private Rigidbody myRigidbody;
 
+    public GameObject shield;
+    public Image powerMeter;
+    private float powerAmount;
+
+    private float shieldDelay;
+    private float shieldTimer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +36,10 @@ public class TestDrive : MonoBehaviour
         playerMoveSpeed = 7.0f;
 
         timer = 0.0f;
+        powerAmount = 1.0f;
+
+        shieldDelay = 0.7f;
+        shieldTimer = shieldDelay;
 
         myRigidbody = GetComponent<Rigidbody>();
     }
@@ -35,27 +48,61 @@ public class TestDrive : MonoBehaviour
     void Update()
     {
 
-        myRigidbody.velocity = Vector3.zero;
-
         if(isAI)
         {
-            if(timer <= lifeTime)
+            //if(timer <= lifeTime)
+            //{
+            if (shieldTimer >= shieldDelay)
             {
                 myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, AIMoveSpeed);
-
-                timer += Time.deltaTime;
             }
+            else shieldTimer += Time.deltaTime;
+                
+
+                //timer += Time.deltaTime;
+            //}
             
         }
         else
         {
-            if(Input.GetKey(KeyCode.W))
+            shield.SetActive(false);
+            myRigidbody.velocity = Vector3.zero;
+
+            if (Input.GetKey(KeyCode.W))
             {
                 myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, playerMoveSpeed);
             }
             else if(Input.GetKey(KeyCode.S))
             {
                 myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, -playerMoveSpeed);
+            }
+
+            if(powerAmount > 0)
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    shield.SetActive(true);
+
+                    powerAmount -= Time.deltaTime * 0.5f;
+
+                    powerMeter.fillAmount = powerAmount;
+                }
+            }
+            
+
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isAI)
+        {
+
+            if (other.gameObject.name == "Shield")
+            {
+                myRigidbody.AddForce(-transform.forward * 10.0f);
+                shieldTimer = 0.0f;
             }
         }
     }

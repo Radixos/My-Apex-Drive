@@ -22,28 +22,28 @@ public class RaceManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
-    {
-        if(raceCars.Count > 1)
-        {
-            countDownTimer -= Time.deltaTime;
+    //private void Update()
+    //{
+    //    if(raceCars.Count > 1)
+    //    {
+    //        countDownTimer -= Time.deltaTime;
 
-            if (countDownTimer <= 0)
-            {
-                countDownTimer = eliminationTimer;
-                raceCars[raceCars.Count - 1].gameObject.SetActive(false);
-                raceCars.Remove(raceCars[raceCars.Count - 1]);
-            }
+    //        if (countDownTimer <= 0)
+    //        {
+    //            countDownTimer = eliminationTimer;
+    //            raceCars[raceCars.Count - 1].gameObject.SetActive(false);
+    //            raceCars.Remove(raceCars[raceCars.Count - 1]);
+    //        }
 
-            eliminationTimeDisplay.text = Mathf.RoundToInt(countDownTimer).ToString();
-        }
-        else
-        {
-            eliminationTimeDisplay.text = raceCars[0].name.ToString() + " wins!";
-        }
+    //        eliminationTimeDisplay.text = Mathf.RoundToInt(countDownTimer).ToString();
+    //    }
+    //    else
+    //    {
+    //        eliminationTimeDisplay.text = raceCars[0].name.ToString() + " wins!";
+    //    }
         
  
-    }
+    //}
 
 
     void LateUpdate()
