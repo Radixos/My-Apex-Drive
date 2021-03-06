@@ -22,11 +22,17 @@ public class TestDrive : MonoBehaviour
     private Rigidbody myRigidbody;
 
     public GameObject shield;
+    public GameObject rampage;
     public Image powerMeter;
     private float powerAmount;
 
-    private float shieldDelay;
-    private float shieldTimer;
+    // Small delay to prevent racer from
+    // moving upon shield collision
+    private float shieldCollDelay;
+    private float shieldCollTimer;
+
+    private float rampageLifetime;
+    private float rampageTimer;
 
 
     // Start is called before the first frame update
@@ -38,8 +44,11 @@ public class TestDrive : MonoBehaviour
         timer = 0.0f;
         powerAmount = 1.0f;
 
-        shieldDelay = 0.7f;
-        shieldTimer = shieldDelay;
+        shieldCollDelay = 0.7f;
+        shieldCollTimer = shieldCollDelay;
+
+        rampageLifetime = 3.0f;
+        rampageTimer = rampageLifetime;
 
         myRigidbody = GetComponent<Rigidbody>();
     }
@@ -50,23 +59,32 @@ public class TestDrive : MonoBehaviour
 
         if(isAI)
         {
-            //if(timer <= lifeTime)
-            //{
-            if (shieldTimer >= shieldDelay)
+            if (timer <= lifeTime)
             {
-                myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, AIMoveSpeed);
-            }
-            else shieldTimer += Time.deltaTime;
-                
+                if (shieldCollTimer >= shieldCollDelay)
+                {
+                    myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, AIMoveSpeed);
+                }
+                else shieldCollTimer += Time.deltaTime;
 
-                //timer += Time.deltaTime;
-            //}
-            
+
+                timer += Time.deltaTime;
+            }
+
         }
         else
         {
             shield.SetActive(false);
-            myRigidbody.velocity = Vector3.zero;
+            //myRigidbody.velocity = Vector3.zero;
+
+            if(rampage.activeSelf)
+            {
+                if (rampageTimer >= rampageLifetime)
+                    rampage.SetActive(false);
+                else
+                    rampageTimer += Time.deltaTime;
+                
+            }
 
             if (Input.GetKey(KeyCode.W))
             {
@@ -82,28 +100,63 @@ public class TestDrive : MonoBehaviour
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
                     shield.SetActive(true);
-
                     powerAmount -= Time.deltaTime * 0.5f;
-
                     powerMeter.fillAmount = powerAmount;
                 }
+                else if(Input.GetKeyDown(KeyCode.E) && powerAmount >= 0.5)
+                {
+                    rampage.SetActive(true);
+                    rampageTimer = 0.0f;
+                    powerAmount -= 0.5f;
+                    powerMeter.fillAmount = powerAmount;
+                }
+                
             }
             
-
         }
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (isAI)
+    //    {
+
+    //        if (other.gameObject.name == "Shield")
+    //        {
+    //            myRigidbody.AddForce(-transform.forward * 10.0f, ForceMode.Impulse);
+    //            shieldCollTimer = 0.0f;
+    //        }
+    //    }
+    //}
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (isAI)
+
+        if ((collision.gameObject.CompareTag("Finish") || // Finish - temp tag for AI
+            collision.gameObject.CompareTag("Player")) && rampage.activeSelf)
         {
 
-            if (other.gameObject.name == "Shield")
+            if(rampage.activeSelf)
             {
-                myRigidbody.AddForce(-transform.forward * 10.0f);
-                shieldTimer = 0.0f;
-            }
+
+                if (isAI)
+                    timer = lifeTime + 1.0f;
+
+                Vector3 normal = Vector3.zero;
+                normal = collision.contacts[0].normal;
+
+                if (collision.gameObject.GetComponent<TestDrive>().shield.activeSelf)
+                {
+                    myRigidbody.AddForce(normal * 10.0f, ForceMode.Impulse);
+                    shieldCollTimer = 0.0f;
+                }
+                else
+                {
+                    collision.gameObject.GetComponent<Rigidbody>().AddForce(-normal * 10.0f, ForceMode.Impulse);
+                }
+            }            
+
         }
     }
 }
