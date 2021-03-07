@@ -35,7 +35,6 @@ public class PositionUpdate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.CompareTag("Waypoint"))
         {
             if (hitColliders.Count == 0)
