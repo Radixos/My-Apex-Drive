@@ -10,6 +10,16 @@ public class SphereCarController : MonoBehaviour
     private float horizontal;
     private float vertical;
 
+    [Header("Player Options")]
+    [SerializeField]
+    [Range(1, 4)]
+    public int currentPlayer;
+    private string horizontalInput;
+    private string accelerateInput;
+    private string brakeInput;
+    private string driftInput;
+    private string boostInput;
+
     [Header("Drifting Options")]
     [SerializeField]
     private bool isDrifting;
@@ -17,6 +27,12 @@ public class SphereCarController : MonoBehaviour
     [Range(0, 1)]
     [Tooltip("The higher this is, the faster the car will need to be going before you can initiate a drift")]
     private float driftSpeedThresholdPercent;
+
+    [Header("Turning Options")]
+    [SerializeField]
+    private float currentBoostMultiplier;
+    [SerializeField]
+    private float boostMultiplier;
 
     [Header("Turning Options")]
     [SerializeField]
@@ -38,11 +54,25 @@ public class SphereCarController : MonoBehaviour
     [SerializeField]
     private float maxSpeed;
 
+    private void Start()
+    {
+        //Assign controller at start. Could be done in update if we want to swap player controls mid game?
+        
+        //Input clarification: 
+        //Brake is actually reverse!!! To simulate controls similar to Rocket League.
+        horizontalInput = "Horizontal " + currentPlayer;
+        accelerateInput = "Accelerate " + currentPlayer;
+        brakeInput = "Brake " + currentPlayer;
+        driftInput = "Drift " + currentPlayer;
+        boostInput = "Boost " + currentPlayer;
+    }
+
     private void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-
+        horizontal = Input.GetAxisRaw(horizontalInput);
+        vertical = Input.GetButton(accelerateInput) ? 1 : 0;
+        vertical -= Input.GetButton(brakeInput) ? 1 : 0;
+        currentBoostMultiplier = Input.GetButton(boostInput) ? boostMultiplier : 1;
     }
 
     void FixedUpdate()
@@ -72,7 +102,7 @@ public class SphereCarController : MonoBehaviour
             return;
         }
 
-        if(Input.GetKey(KeyCode.LeftShift) && horizontal != 0 && acceleration / currSpeed >= driftSpeedThresholdPercent)
+        if(Input.GetButton(driftInput) && horizontal != 0 && acceleration / currSpeed >= driftSpeedThresholdPercent)
         {
             isDrifting = true;
         } else
@@ -101,7 +131,7 @@ public class SphereCarController : MonoBehaviour
             maxSpeed = vertical * driftingAcceleration;
         } else
         {
-            maxSpeed = vertical * acceleration;
+            maxSpeed = vertical * acceleration * currentBoostMultiplier;
         }
 
         currSpeed = Mathf.SmoothStep(currSpeed, maxSpeed, Time.deltaTime * 12f);
@@ -114,16 +144,7 @@ public class SphereCarController : MonoBehaviour
         }
         else
         {
-            sphereCollider.AddForce(carModel.transform.forward * currSpeed, ForceMode.Acceleration);
+            sphereCollider.AddForce(carModel.transform.forward * currSpeed * currentBoostMultiplier, ForceMode.Acceleration);
         }
-
-        ////Lower speed while turning and not drifting
-        //if (!isDrifting && horizontal != 0)
-        //{
-        //    sphereCollider.AddForce(-carModel.forward * currSpeed * friction);
-        //}
-
-        //Reduce Speed
-        //sphereCollider.AddForce(-carModel.forward * currSpeed * friction);
     }
 }
