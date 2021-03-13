@@ -5,21 +5,32 @@ using UnityEngine.UI;
 
 public class RaceManager : MonoBehaviour
 {
+    #region Singleton
+    public static RaceManager Instance { get; set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
+            Destroy(gameObject);
+    }
+    #endregion
 
     public List<PositionUpdate> raceCars;
 
     public int totalColliders;
 
     public float eliminationTimer;
-    private float countDownTimer;
+    //private float countDownTimer;
 
     public Text eliminationTimeDisplay;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        countDownTimer = eliminationTimer;
-    }
+    //void Start()
+    //{
+        //countDownTimer = eliminationTimer;
+    //}
 
     // Update is called once per frame
     //private void Update()
@@ -44,7 +55,6 @@ public class RaceManager : MonoBehaviour
         
  
     //}
-
 
     void LateUpdate()
     {

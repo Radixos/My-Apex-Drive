@@ -13,6 +13,8 @@ public class CameraFollowLead : MonoBehaviour
 {
     [SerializeField] private GameObject leadPlayer;
 
+    private RaceManager temp;
+
     private Transform objToFollow;
     private Transform objToLookAt;
 
@@ -20,7 +22,7 @@ public class CameraFollowLead : MonoBehaviour
 
     void Start()
     {
-        
+        temp = FindObjectOfType<RaceManager>();
     }
 
     void Update()
@@ -30,7 +32,7 @@ public class CameraFollowLead : MonoBehaviour
 
     void UpdateLeadFollow()
     {
-        leadPlayer = null;
+        leadPlayer = temp.raceCars[0].gameObject;
 
         //Determine transform for objToFollow
         //Determine transform for objToLookAt
