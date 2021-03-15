@@ -2,21 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SphereCarController : MonoBehaviour
 {
+    public CarAttributes carAttributes;
     public Rigidbody sphereCollider;
     public Transform carModel;
 
     private float horizontal;
     private float vertical;
 
+    [Header("Player Options")]
+    [Tooltip("This is assigned on Start so this cannot be changed in run time!")]
+    [SerializeField]
+    [Range(1, 4)]
+    public int currentPlayer;
+    private string horizontalInput;
+    private string accelerateInput;
+    private string brakeInput;
+    private string driftInput;
+    private string boostInput;
+
     [Header("Drifting Options")]
     [SerializeField]
     private bool isDrifting;
     [SerializeField]
     [Range(0, 1)]
-    [Tooltip("The higher this is, the faster the car will need to be going before you can initiate a drift")]
+    [Tooltip("The higher this is, the faster the car will need to be going before you can initiate a drift (likely does nothing)")]
     private float driftSpeedThresholdPercent;
+
+    [Header("Boost Options")]
+    [SerializeField]
+    private float currentBoostMultiplier;
+    [SerializeField]
+    private float boostMultiplier;
 
     [Header("Turning Options")]
     [SerializeField]
@@ -26,28 +45,51 @@ public class SphereCarController : MonoBehaviour
     [SerializeField]
     private float currAngle;
     [SerializeField]
-    private float maxTurnAngle;
-
-    [Header("Acceleration Options")]
+    private float currTurnAngle;
     [SerializeField]
-    private float maxAcceleration;
+    private float normalTurnAngle;
     [SerializeField]
-    private float currAcceleration;
-    [SerializeField]
-    [Range(0, 1)]
-    [Tooltip("The lower this is, the faster the car will go")]
-    private float friction;
+    private float driftTurnAngle;
 
     [Header("Speed Options")]
     [SerializeField]
-    private float maxSpeed;
+    private float driftingAcceleration;
+    [SerializeField]
+    private float acceleration;
     [SerializeField]
     private float currSpeed;
+    [SerializeField]
+    private float maxSpeed;
+
+    private void Start()
+    {
+        //Assign controller at start. Could be done in update if we want to swap player controls mid game?
+        
+        //Input clarification: 
+        //Brake is actually reverse!!! To simulate controls similar to Rocket League.
+        horizontalInput = "Horizontal " + currentPlayer;
+        accelerateInput = "Accelerate " + currentPlayer;
+        brakeInput = "Brake " + currentPlayer;
+        driftInput = "Drift " + currentPlayer;
+        boostInput = "Boost " + currentPlayer;
+
+        //Assign car attributes
+        driftSpeedThresholdPercent = carAttributes.driftSpeedThresholdPercent;
+        boostMultiplier = carAttributes.boostMultiplier;
+
+        normalTurnAngle = carAttributes.normalTurnAngle;
+        driftTurnAngle = carAttributes.driftTurnAngle;
+
+        driftingAcceleration = carAttributes.driftingAcceleration;
+        acceleration = carAttributes.acceleration;
+    }
 
     private void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+        horizontal = Input.GetAxisRaw(horizontalInput);
+        vertical = Input.GetButton(accelerateInput) ? 1 : 0;
+        vertical -= Input.GetButton(brakeInput) ? 1 : 0;
+        currentBoostMultiplier = Input.GetButton(boostInput) ? boostMultiplier : 1;
     }
 
     void FixedUpdate()
@@ -58,14 +100,6 @@ public class SphereCarController : MonoBehaviour
         HandleMovement();
         HandleSteering();
         HandleAnimation();
-
-        if (Input.GetKey(KeyCode.LeftShift) && currSpeed / maxSpeed > driftSpeedThresholdPercent && horizontal != 0)
-        {
-            isDrifting = true;
-        } else
-        {
-            isDrifting = false;
-        }
     }
 
     void HandleAnimation()
@@ -80,19 +114,28 @@ public class SphereCarController : MonoBehaviour
 
     void HandleSteering()
     {
-        if(sphereCollider.velocity.magnitude <= 0.1f)
+        if (currSpeed <= 0.1f && currSpeed >= -.1f)
         {
             return;
         }
 
-        float targetAngle = currAngle + (horizontal * maxTurnAngle);
+        if(Input.GetButton(driftInput) && horizontal != 0 && acceleration / currSpeed >= driftSpeedThresholdPercent)
+        {
+            isDrifting = true;
+        } else
+        {
+            isDrifting = false;
+        }
+
+        float targetAngle = currAngle + (horizontal * currTurnAngle);
         float angle = Mathf.SmoothDamp(carModel.localEulerAngles.y, targetAngle, ref turnVelocity, turnSpeed);
         if (isDrifting)
         {
-            maxTurnAngle = 60;
-        } else
+            currTurnAngle = driftTurnAngle;
+        }
+        else
         {
-            maxTurnAngle = 25;
+            currTurnAngle = normalTurnAngle;
         }
         carModel.localEulerAngles = new Vector3(0, angle, 0);
         currAngle = carModel.localEulerAngles.y;
@@ -100,25 +143,25 @@ public class SphereCarController : MonoBehaviour
 
     void HandleMovement()
     {
-        currAcceleration = vertical * maxAcceleration;
-        currSpeed = sphereCollider.velocity.magnitude;
-
-        //Acceleration only if not too fast
-        if (currSpeed < maxSpeed)
+        if (isDrifting)
         {
-            sphereCollider.AddForce(carModel.forward * currAcceleration);
+            maxSpeed = vertical * driftingAcceleration;
+        } else
+        {
+            maxSpeed = vertical * acceleration * currentBoostMultiplier;
         }
 
-        //Clamp Acceleration
-        if(Mathf.Abs(currAcceleration) > maxAcceleration)
-        {
-            currAcceleration = maxAcceleration;
-        }
+        currSpeed = Mathf.SmoothStep(currSpeed, maxSpeed, Time.deltaTime * 12f);
 
-        //Lower speed while turning and not drifting
-        if (!isDrifting && horizontal != 0)
+        //Forward Acceleration
+        if (isDrifting)
         {
-            sphereCollider.AddForce(-carModel.forward * currSpeed * friction);
+            sphereCollider.AddForce(carModel.transform.right * currSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
+            sphereCollider.AddForce(carModel.transform.forward * currSpeed, ForceMode.Acceleration);
+        }
+        else
+        {
+            sphereCollider.AddForce(carModel.transform.forward * currSpeed * currentBoostMultiplier, ForceMode.Acceleration);
         }
 
         //Reduce Speed
