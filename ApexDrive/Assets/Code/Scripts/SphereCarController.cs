@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SphereCarController : MonoBehaviour
 {
+    public CarAttributes carAttributes;
     public Rigidbody sphereCollider;
     public Transform carModel;
 
@@ -11,6 +13,7 @@ public class SphereCarController : MonoBehaviour
     private float vertical;
 
     [Header("Player Options")]
+    [Tooltip("This is assigned on Start so this cannot be changed in run time!")]
     [SerializeField]
     [Range(1, 4)]
     public int currentPlayer;
@@ -25,10 +28,10 @@ public class SphereCarController : MonoBehaviour
     private bool isDrifting;
     [SerializeField]
     [Range(0, 1)]
-    [Tooltip("The higher this is, the faster the car will need to be going before you can initiate a drift")]
+    [Tooltip("The higher this is, the faster the car will need to be going before you can initiate a drift (likely does nothing)")]
     private float driftSpeedThresholdPercent;
 
-    [Header("Turning Options")]
+    [Header("Boost Options")]
     [SerializeField]
     private float currentBoostMultiplier;
     [SerializeField]
@@ -42,7 +45,11 @@ public class SphereCarController : MonoBehaviour
     [SerializeField]
     private float currAngle;
     [SerializeField]
-    private float maxTurnAngle;
+    private float currTurnAngle;
+    [SerializeField]
+    private float normalTurnAngle;
+    [SerializeField]
+    private float driftTurnAngle;
 
     [Header("Speed Options")]
     [SerializeField]
@@ -65,6 +72,16 @@ public class SphereCarController : MonoBehaviour
         brakeInput = "Brake " + currentPlayer;
         driftInput = "Drift " + currentPlayer;
         boostInput = "Boost " + currentPlayer;
+
+        //Assign car attributes
+        driftSpeedThresholdPercent = carAttributes.driftSpeedThresholdPercent;
+        boostMultiplier = carAttributes.boostMultiplier;
+
+        normalTurnAngle = carAttributes.normalTurnAngle;
+        driftTurnAngle = carAttributes.driftTurnAngle;
+
+        driftingAcceleration = carAttributes.driftingAcceleration;
+        acceleration = carAttributes.acceleration;
     }
 
     private void Update()
@@ -110,15 +127,15 @@ public class SphereCarController : MonoBehaviour
             isDrifting = false;
         }
 
-        float targetAngle = currAngle + (horizontal * maxTurnAngle);
+        float targetAngle = currAngle + (horizontal * currTurnAngle);
         float angle = Mathf.SmoothDamp(carModel.localEulerAngles.y, targetAngle, ref turnVelocity, turnSpeed);
         if (isDrifting)
         {
-            maxTurnAngle = 60;
+            currTurnAngle = driftTurnAngle;
         }
         else
         {
-            maxTurnAngle = 25;
+            currTurnAngle = normalTurnAngle;
         }
         carModel.localEulerAngles = new Vector3(0, angle, 0);
         currAngle = carModel.localEulerAngles.y;
