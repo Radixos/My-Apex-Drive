@@ -12,13 +12,11 @@ using UnityEngine;
 
 public class PopoutDisplay : MonoBehaviour
 {
-    [SerializeField] private RectTransform[] pointers;
-    [SerializeField] private Camera uiCamera;
-
     private Collider[] objCollider;
     private Plane[] planes;
     private int playersCount;
 
+    [SerializeField] private GameObject arrow; 
     private RaceManager rm;
 
     private void Awake()
@@ -35,9 +33,6 @@ public class PopoutDisplay : MonoBehaviour
         playersCount = rm.raceCars.Count;
 
         planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-
-        //for (int i = 0; i < rm.raceCars.Count; i++)
-        //    objCollider[i] = rm.raceCars[i].GetComponent<Collider>(); //NullReferenceException
     }
 
     void Update()
@@ -49,52 +44,60 @@ public class PopoutDisplay : MonoBehaviour
     {
         for (int i = 0; i < playersCount; i++)
         {
-            if (GeometryUtility.TestPlanesAABB(planes, rm.raceCars[i].GetComponent<Collider>().bounds))
+            foreach (var player in rm.raceCars)
             {
-                Debug.Log(rm.raceCars[i].name + " has been detected!");
-            }
-            else
-            {
-                ArrowPointer(rm.raceCars[i].GetComponent<Transform>().position, i);
-                Debug.Log("Nothing has been detected");
+                Vector3 screenpos = Camera.main.WorldToScreenPoint(player.transform.position);
+
+                    //if (screenpos.z>0 &&
+                    //    screenpos.x>0 && screenpos.x<Screen.width &&
+                    //    screenpos.y>0 && screenpos.y<Screen.height)
+                    //        arrow.transform.localPosition = screenpos;    //Do nothing as nothing has to be done when players are on screen
+
+
+                if (screenpos.z < 0)
+                    screenpos *= -1;
+
+                Vector3 screenCenter = new Vector3(Screen.width, Screen.height, 0) / 2;
+                screenpos -= screenCenter;
+                float angle = Mathf.Atan2(screenpos.y, screenpos.x);
+                angle -= 90 * Mathf.Deg2Rad;
+
+                float cos = Mathf.Cos(angle);
+                float sin = Mathf.Sin(angle);
+
+                screenpos = screenCenter + new Vector3(sin * 150f, cos * 150f, 0f);
+                float m = cos / sin;
+
+                Vector3 screenBounds = screenCenter * 0.9f;
+
+                if (cos > 0)
+                {
+                    screenpos = new Vector3(screenBounds.y / m, screenBounds.y, 0f);
+                }
+                else
+                {
+                    screenpos = new Vector3(-screenBounds.y/m, -screenBounds.y, 0f);
+                }
+
+                if (screenpos.x > screenBounds.x)
+                {
+                    screenpos = new Vector3(screenBounds.x, screenBounds.x * m, 0f);
+                }
+                else if(screenpos.x < -screenBounds.x)
+                {
+                    screenpos = new Vector3(-screenBounds.x, -screenBounds.x*m, 0f);
+                }
+
+                screenpos += screenCenter;
+
+                arrow.transform.localPosition = screenpos;
+                arrow.transform.localRotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg);
             }
         }
     }
 
-    void ArrowPointer(Vector3 target, int playerNumber)
+    void ArrowDisplay()
     {
-        Vector3 toPosition = target;
-        Vector3 fromPosition = Camera.main.transform.position;
-        fromPosition.z = 0f;
-        Vector3 dir = (toPosition - fromPosition).normalized;
-        float angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) % 360;
-        pointers[playerNumber].localEulerAngles = new Vector3(0f, 0f, angle);
-
-        //Vector3 toPosition = target;
-        //Vector3 fromPosition = Camera.main.transform.position;
-        //fromPosition.z = 0f;
-        //Vector3 dir = (toPosition - fromPosition).normalized;
-        //float angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) % 360;
-        //pointers[playerNumber].localEulerAngles = new Vector3(0f, 0f, angle);
-
-        float borderSize = 50f;
-        Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(target);
-        bool isOffScreen = targetPositionScreenPoint.x <= borderSize || targetPositionScreenPoint.x >= Screen.width - borderSize || targetPositionScreenPoint.y <= borderSize || targetPositionScreenPoint.y >= Screen.height - borderSize;
-
-        if (isOffScreen)
-        {
-            Vector3 cappedTargetScreenPosition = targetPositionScreenPoint;
-            if (cappedTargetScreenPosition.x <= borderSize) cappedTargetScreenPosition.x = borderSize;
-            if (cappedTargetScreenPosition.x >= Screen.width - borderSize) cappedTargetScreenPosition.x = Screen.width - borderSize;
-            if (cappedTargetScreenPosition.y <= borderSize - borderSize) cappedTargetScreenPosition.y = borderSize;
-            if (cappedTargetScreenPosition.y >= Screen.height) cappedTargetScreenPosition.y = Screen.height - borderSize;
-
-            Vector3 pointerWorldPosition = Camera.main.ScreenToWorldPoint(cappedTargetScreenPosition);
-            pointers[playerNumber].position = pointerWorldPosition;
-            pointers[playerNumber].localPosition = new Vector3(pointers[playerNumber].localPosition.x, pointers[playerNumber].localPosition.y, 0f);
-
-        }
-            //Vector3 dir = rm.raceCars[playerNumber].transform.InverseTransformPoint();
-
+        
     }
 }
