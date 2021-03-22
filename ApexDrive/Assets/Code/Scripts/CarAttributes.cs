@@ -6,16 +6,18 @@ using UnityEngine;
 public class CarAttributes : ScriptableObject
 {
     [Header("Drifting Options")]
-    public float driftSpeedThresholdPercent;
+    public float driftSpeedThresholdPercent = 0.6f;
+    public float driftSideBoostMultiplier = 1.0f;
 
     [Header("Boost Options")]
-    public float boostMultiplier;
+    public float boostMultiplier = 1.3f;
 
     [Header("Turning Options")]
-    public float normalTurnAngle;
-    public float driftTurnAngle;
+    public float normalTurnAngle = 25f;
+    public float driftTurnAngle = 60f;
 
     [Header("Speed Options")]
-    public float driftingAcceleration;
-    public float acceleration;
+    public float driftingAcceleration = 70f;
+    public float acceleration = 70f;
+    public float drag = 2f;
 }
