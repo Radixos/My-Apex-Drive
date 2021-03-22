@@ -867,7 +867,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290221411}
   m_LocalRotation: {x: -0.0922958, y: 0.70105743, z: -0.0922958, w: 0.70105743}
-  m_LocalPosition: {x: 32.5, y: -104, z: 171.1}
+  m_LocalPosition: {x: 32.5, y: -104, z: 70.99}
   m_LocalScale: {x: 5, y: 1, z: 15}
   m_Children: []
   m_Father: {fileID: 1527486436}
@@ -980,6 +980,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car Root Sphere
       objectReference: {fileID: 0}
+    - target: {fileID: 6328636172979671952, guid: 55ae8337ab4615d488be878fef3ce3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6328636172979671955, guid: 55ae8337ab4615d488be878fef3ce3b7,
         type: 3}
       propertyPath: m_RootOrder
@@ -993,7 +998,7 @@ PrefabInstance:
     - target: {fileID: 6328636172979671955, guid: 55ae8337ab4615d488be878fef3ce3b7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6328636172979671955, guid: 55ae8337ab4615d488be878fef3ce3b7,
         type: 3}
@@ -1035,11 +1040,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6328636173520479631, guid: 55ae8337ab4615d488be878fef3ce3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328636173731818729, guid: 55ae8337ab4615d488be878fef3ce3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6328636173731818731, guid: 55ae8337ab4615d488be878fef3ce3b7,
         type: 3}
       propertyPath: carAttributes
       value: 
-      objectReference: {fileID: 11400000, guid: 841c01e7a872c3a4882b4d99db6d6f80,
+      objectReference: {fileID: 11400000, guid: 19ef5f49e4c94e44cb756584f1c0ecaa,
         type: 2}
     - target: {fileID: 6328636173731818731, guid: 55ae8337ab4615d488be878fef3ce3b7,
         type: 3}

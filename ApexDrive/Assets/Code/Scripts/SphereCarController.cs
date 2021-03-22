@@ -30,6 +30,8 @@ public class SphereCarController : MonoBehaviour
     [Range(0, 1)]
     [Tooltip("The higher this is, the faster the car will need to be going before you can initiate a drift (likely does nothing)")]
     private float driftSpeedThresholdPercent;
+    [SerializeField]
+    private float driftSideBoostMultiplier;
 
     [Header("Boost Options")]
     [SerializeField]
@@ -75,6 +77,7 @@ public class SphereCarController : MonoBehaviour
 
         //Assign car attributes
         driftSpeedThresholdPercent = carAttributes.driftSpeedThresholdPercent;
+        driftSideBoostMultiplier = carAttributes.driftSideBoostMultiplier;
         boostMultiplier = carAttributes.boostMultiplier;
 
         normalTurnAngle = carAttributes.normalTurnAngle;
@@ -82,13 +85,15 @@ public class SphereCarController : MonoBehaviour
 
         driftingAcceleration = carAttributes.driftingAcceleration;
         acceleration = carAttributes.acceleration;
+
+        sphereCollider.drag = carAttributes.drag;
     }
 
     private void Update()
     {
         horizontal = Input.GetAxisRaw(horizontalInput);
         vertical = Input.GetButton(accelerateInput) ? 1 : 0;
-        vertical -= Input.GetButton(brakeInput) ? 1 : 0;
+        vertical -= Input.GetButton(brakeInput) ? 0.5f : 0;
         currentBoostMultiplier = Input.GetButton(boostInput) ? boostMultiplier : 1;
     }
 
@@ -108,8 +113,18 @@ public class SphereCarController : MonoBehaviour
 
         RaycastHit hit;
         Physics.Raycast(carModel.position, -carModel.up, out hit, 1f);
+        Debug.DrawLine(carModel.position, hit.point, Color.red);
 
-        //Turn wheels/steering wheel based on horizontal input
+        Vector3 floorAngle = hit.normal;
+
+        Debug.Log(floorAngle);
+
+        floorAngle.x = carModel.transform.rotation.x;
+        floorAngle.y = hit.normal.y;
+        floorAngle.z = carModel.transform.rotation.z;
+
+        //carModel.up = Vector3.Lerp(carModel.up, floorAngle, Time.deltaTime * 8.0f);
+        //carModel.Rotate(0, transform.eulerAngles.y, 0);
     }
 
     void HandleSteering()
@@ -137,7 +152,7 @@ public class SphereCarController : MonoBehaviour
         {
             currTurnAngle = normalTurnAngle;
         }
-        carModel.localEulerAngles = new Vector3(0, angle, 0);
+        carModel.localEulerAngles = new Vector3(carModel.localEulerAngles.x, angle, carModel.localEulerAngles.z);
         currAngle = carModel.localEulerAngles.y;
     }
 
@@ -157,7 +172,7 @@ public class SphereCarController : MonoBehaviour
         if (isDrifting)
         {
             sphereCollider.AddForce(carModel.transform.right * currSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
-            sphereCollider.AddForce(carModel.transform.forward * currSpeed, ForceMode.Acceleration);
+            sphereCollider.AddForce(carModel.transform.forward * currSpeed * driftSideBoostMultiplier, ForceMode.Acceleration);
         }
         else
         {
