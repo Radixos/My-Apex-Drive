@@ -4,9 +4,10 @@ using UnityEngine;
 
 //---------------------------------------------------------------------------------------
 //                
-//This script needs to be attached to the Scene Manager or relevant object
-//
-//Number of pointers must be equal to number of players for the script to work correctly! Or does it?
+//This script needs to be attached to a Canvas or UI object:
+//eg.
+//> UI
+//>>Canvas
 //           
 //---------------------------------------------------------------------------------------
 
@@ -16,16 +17,14 @@ public class PopoutDisplay : MonoBehaviour
     private Plane[] planes;
     private int playersCount;
 
-    [SerializeField] private GameObject arrow; 
-    private RaceManager rm;
+    [SerializeField] private GameObject arrowPrefab;
 
-    private void Awake()
-    {
-        //for (int i = 0; i < pointers.Length; i++)
-        //{
-        //    pointers[i] = GetComponent<RectTransform>();    //Potential error
-        //}
-    }
+    [SerializeField] private Canvas ui;
+
+    List<GameObject> arrowPool = new List<GameObject>();
+    int arrowPoolCursor = 0;
+
+    private RaceManager rm;
 
     void Start()
     {
@@ -42,62 +41,102 @@ public class PopoutDisplay : MonoBehaviour
 
     void CameraViewUpdate()
     {
-        for (int i = 0; i < playersCount; i++)
+        ResetPool();
+
+        foreach (var obj in rm.raceCars)
         {
-            foreach (var player in rm.raceCars)
+            if (obj != rm.raceCars[0])
             {
-                Vector3 screenpos = Camera.main.WorldToScreenPoint(player.transform.position);
+                Debug.Log(obj.name);
+                Vector3 screenpos = Camera.main.WorldToScreenPoint(obj.transform.position);
 
-                    //if (screenpos.z>0 &&
-                    //    screenpos.x>0 && screenpos.x<Screen.width &&
-                    //    screenpos.y>0 && screenpos.y<Screen.height)
-                    //        arrow.transform.localPosition = screenpos;    //Do nothing as nothing has to be done when players are on screen
-
-
-                if (screenpos.z < 0)
-                    screenpos *= -1;
-
-                Vector3 screenCenter = new Vector3(Screen.width, Screen.height, 0) / 2;
-                screenpos -= screenCenter;
-                float angle = Mathf.Atan2(screenpos.y, screenpos.x);
-                angle -= 90 * Mathf.Deg2Rad;
-
-                float cos = Mathf.Cos(angle);
-                float sin = Mathf.Sin(angle);
-
-                screenpos = screenCenter + new Vector3(sin * 150f, cos * 150f, 0f);
-                float m = cos / sin;
-
-                Vector3 screenBounds = screenCenter * 0.9f;
-
-                if (cos > 0)
-                {
-                    screenpos = new Vector3(screenBounds.y / m, screenBounds.y, 0f);
-                }
+                if (screenpos.z > 0 &&
+                    screenpos.x > 0 && screenpos.x < Screen.width &&
+                    screenpos.y > 0 && screenpos.y < Screen.height)
+                { }
                 else
                 {
-                    screenpos = new Vector3(-screenBounds.y/m, -screenBounds.y, 0f);
-                }
+                    if (screenpos.z < 0)
+                        screenpos *= -1;
 
-                if (screenpos.x > screenBounds.x)
-                {
-                    screenpos = new Vector3(screenBounds.x, screenBounds.x * m, 0f);
-                }
-                else if(screenpos.x < -screenBounds.x)
-                {
-                    screenpos = new Vector3(-screenBounds.x, -screenBounds.x*m, 0f);
-                }
+                    Vector3 screenCenter = new Vector3(Screen.width, Screen.height, 0) / 2;
 
-                screenpos += screenCenter;
+                    screenpos -= screenCenter;
 
-                arrow.transform.localPosition = screenpos;
-                arrow.transform.localRotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg);
+                    float angle = Mathf.Atan2(screenpos.y, screenpos.x);
+                    angle -= 90f * Mathf.Deg2Rad;
+
+                    float cos = Mathf.Cos(angle);
+                    float sin = -Mathf.Sin(angle);
+
+                    screenpos = screenCenter + new Vector3(sin * 150f, cos * 150f, 0f);
+                    float m = cos / sin;
+
+                    Vector3 screenBounds = screenCenter * 0.9f;
+
+                    if (cos > 0)
+                    {
+                        screenpos = new Vector3(screenBounds.y / m, screenBounds.y, 0f);
+                    }
+                    else
+                    {
+                        screenpos = new Vector3(-screenBounds.y / m, -screenBounds.y, 0f);
+                    }
+
+                    if (screenpos.x > screenBounds.x)
+                    {
+                        screenpos = new Vector3(screenBounds.x, screenBounds.x * m, 0f);
+                    }
+                    else if (screenpos.x < -screenBounds.x)
+                    {
+                        screenpos = new Vector3(-screenBounds.x, -screenBounds.x * m, 0f);
+                    }
+
+                    //screenpos += screenCenter;
+
+                    GameObject arrow = GetArrow();
+                    arrow.transform.localScale = new Vector3(0.7f, 0.7f, 1f);
+                    arrow.transform.localPosition = screenpos;
+                    arrow.transform.localRotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg);
+                }
             }
         }
+
+        CleanPool();
     }
 
-    void ArrowDisplay()
+    GameObject GetArrow()
     {
-        
+        GameObject output;
+        Debug.Log("arrowPoolCursor: " + arrowPoolCursor);
+        Debug.Log("arrowPool.Count: " + arrowPool.Count);
+        if (arrowPoolCursor < arrowPool.Count)
+        {
+            output = arrowPool[arrowPoolCursor];
+        }
+        else
+        {
+            output = Instantiate(arrowPrefab) as GameObject;
+            output.transform.parent = transform;
+            arrowPool.Add(output);
+        }
+
+        arrowPoolCursor++;
+        return output;
+    }
+
+    void ResetPool()
+    {
+        arrowPoolCursor = 0;
+    }
+
+    void CleanPool()
+    {
+        while (arrowPool.Count > arrowPoolCursor)
+        {
+            GameObject obj = arrowPool[arrowPool.Count - 1];
+            arrowPool.Remove(obj);
+            Destroy(obj.gameObject);
+        }
     }
 }
