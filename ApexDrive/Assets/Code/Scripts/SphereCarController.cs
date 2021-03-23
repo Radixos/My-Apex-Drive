@@ -112,7 +112,7 @@ public class SphereCarController : MonoBehaviour
     {
         //Raycast down - angle model based on normal of floor
         RaycastHit hit;
-        if (Physics.Raycast(carModel.position, Vector3.down, out hit, 1f))
+        if (Physics.Raycast(carModel.position, Vector3.down, out hit, 3f))
         {
             inAir = false;
             Vector3 newUp = hit.normal;
