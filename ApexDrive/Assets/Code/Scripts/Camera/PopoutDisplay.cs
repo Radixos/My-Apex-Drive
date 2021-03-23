@@ -4,30 +4,27 @@ using UnityEngine;
 
 //---------------------------------------------------------------------------------------
 //                
-//This script needs to be attached to the Scene Manager or relevant object
-//
-//Number of pointers must be equal to number of players for the script to work correctly! Or does it?
+//This script needs to be attached to a Canvas or UI object:
+//eg.
+//> UI
+//>>Canvas
 //           
 //---------------------------------------------------------------------------------------
 
 public class PopoutDisplay : MonoBehaviour
 {
-    [SerializeField] private RectTransform[] pointers;
-    [SerializeField] private Camera uiCamera;
-
     private Collider[] objCollider;
     private Plane[] planes;
     private int playersCount;
 
-    private RaceManager rm;
+    [SerializeField] private GameObject arrowPrefab;
 
-    private void Awake()
-    {
-        //for (int i = 0; i < pointers.Length; i++)
-        //{
-        //    pointers[i] = GetComponent<RectTransform>();    //Potential error
-        //}
-    }
+    [SerializeField] private Canvas ui;
+
+    List<GameObject> arrowPool = new List<GameObject>();
+    int arrowPoolCursor = 0;
+
+    private RaceManager rm;
 
     void Start()
     {
@@ -35,9 +32,6 @@ public class PopoutDisplay : MonoBehaviour
         playersCount = rm.raceCars.Count;
 
         planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-
-        //for (int i = 0; i < rm.raceCars.Count; i++)
-        //    objCollider[i] = rm.raceCars[i].GetComponent<Collider>(); //NullReferenceException
     }
 
     void Update()
@@ -47,54 +41,102 @@ public class PopoutDisplay : MonoBehaviour
 
     void CameraViewUpdate()
     {
-        for (int i = 0; i < playersCount; i++)
+        ResetPool();
+
+        foreach (var obj in rm.raceCars)
         {
-            if (GeometryUtility.TestPlanesAABB(planes, rm.raceCars[i].GetComponent<Collider>().bounds))
+            if (obj != rm.raceCars[0])
             {
-                Debug.Log(rm.raceCars[i].name + " has been detected!");
-            }
-            else
-            {
-                ArrowPointer(rm.raceCars[i].GetComponent<Transform>().position, i);
-                Debug.Log("Nothing has been detected");
+                Debug.Log(obj.name);
+                Vector3 screenpos = Camera.main.WorldToScreenPoint(obj.transform.position);
+
+                if (screenpos.z > 0 &&
+                    screenpos.x > 0 && screenpos.x < Screen.width &&
+                    screenpos.y > 0 && screenpos.y < Screen.height)
+                { }
+                else
+                {
+                    if (screenpos.z < 0)
+                        screenpos *= -1;
+
+                    Vector3 screenCenter = new Vector3(Screen.width, Screen.height, 0) / 2;
+
+                    screenpos -= screenCenter;
+
+                    float angle = Mathf.Atan2(screenpos.y, screenpos.x);
+                    angle -= 90f * Mathf.Deg2Rad;
+
+                    float cos = Mathf.Cos(angle);
+                    float sin = -Mathf.Sin(angle);
+
+                    screenpos = screenCenter + new Vector3(sin * 150f, cos * 150f, 0f);
+                    float m = cos / sin;
+
+                    Vector3 screenBounds = screenCenter * 0.9f;
+
+                    if (cos > 0)
+                    {
+                        screenpos = new Vector3(screenBounds.y / m, screenBounds.y, 0f);
+                    }
+                    else
+                    {
+                        screenpos = new Vector3(-screenBounds.y / m, -screenBounds.y, 0f);
+                    }
+
+                    if (screenpos.x > screenBounds.x)
+                    {
+                        screenpos = new Vector3(screenBounds.x, screenBounds.x * m, 0f);
+                    }
+                    else if (screenpos.x < -screenBounds.x)
+                    {
+                        screenpos = new Vector3(-screenBounds.x, -screenBounds.x * m, 0f);
+                    }
+
+                    //screenpos += screenCenter;
+
+                    GameObject arrow = GetArrow();
+                    arrow.transform.localScale = new Vector3(0.7f, 0.7f, 1f);
+                    arrow.transform.localPosition = screenpos;
+                    arrow.transform.localRotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg);
+                }
             }
         }
+
+        CleanPool();
     }
 
-    void ArrowPointer(Vector3 target, int playerNumber)
+    GameObject GetArrow()
     {
-        Vector3 toPosition = target;
-        Vector3 fromPosition = Camera.main.transform.position;
-        fromPosition.z = 0f;
-        Vector3 dir = (toPosition - fromPosition).normalized;
-        float angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) % 360;
-        pointers[playerNumber].localEulerAngles = new Vector3(0f, 0f, angle);
-
-        //Vector3 toPosition = target;
-        //Vector3 fromPosition = Camera.main.transform.position;
-        //fromPosition.z = 0f;
-        //Vector3 dir = (toPosition - fromPosition).normalized;
-        //float angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) % 360;
-        //pointers[playerNumber].localEulerAngles = new Vector3(0f, 0f, angle);
-
-        float borderSize = 50f;
-        Vector3 targetPositionScreenPoint = Camera.main.WorldToScreenPoint(target);
-        bool isOffScreen = targetPositionScreenPoint.x <= borderSize || targetPositionScreenPoint.x >= Screen.width - borderSize || targetPositionScreenPoint.y <= borderSize || targetPositionScreenPoint.y >= Screen.height - borderSize;
-
-        if (isOffScreen)
+        GameObject output;
+        Debug.Log("arrowPoolCursor: " + arrowPoolCursor);
+        Debug.Log("arrowPool.Count: " + arrowPool.Count);
+        if (arrowPoolCursor < arrowPool.Count)
         {
-            Vector3 cappedTargetScreenPosition = targetPositionScreenPoint;
-            if (cappedTargetScreenPosition.x <= borderSize) cappedTargetScreenPosition.x = borderSize;
-            if (cappedTargetScreenPosition.x >= Screen.width - borderSize) cappedTargetScreenPosition.x = Screen.width - borderSize;
-            if (cappedTargetScreenPosition.y <= borderSize - borderSize) cappedTargetScreenPosition.y = borderSize;
-            if (cappedTargetScreenPosition.y >= Screen.height) cappedTargetScreenPosition.y = Screen.height - borderSize;
-
-            Vector3 pointerWorldPosition = Camera.main.ScreenToWorldPoint(cappedTargetScreenPosition);
-            pointers[playerNumber].position = pointerWorldPosition;
-            pointers[playerNumber].localPosition = new Vector3(pointers[playerNumber].localPosition.x, pointers[playerNumber].localPosition.y, 0f);
-
+            output = arrowPool[arrowPoolCursor];
         }
-            //Vector3 dir = rm.raceCars[playerNumber].transform.InverseTransformPoint();
+        else
+        {
+            output = Instantiate(arrowPrefab) as GameObject;
+            output.transform.parent = transform;
+            arrowPool.Add(output);
+        }
 
+        arrowPoolCursor++;
+        return output;
+    }
+
+    void ResetPool()
+    {
+        arrowPoolCursor = 0;
+    }
+
+    void CleanPool()
+    {
+        while (arrowPool.Count > arrowPoolCursor)
+        {
+            GameObject obj = arrowPool[arrowPool.Count - 1];
+            arrowPool.Remove(obj);
+            Destroy(obj.gameObject);
+        }
     }
 }
