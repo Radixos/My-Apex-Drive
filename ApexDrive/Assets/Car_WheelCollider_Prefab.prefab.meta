@@ -1,12 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:ApexDrive/Assets/Materials.meta
-guid: 2f9081776be842b4a9308294b3c34318
-folderAsset: yes
-DefaultImporter:
-=======
-guid: e8b803127d7979247a7cc8722b601496
+guid: 20d5abcacc8e0f849a35c11dedad5091
 PrefabImporter:
->>>>>>> main:ApexDrive/Assets/Car_WheelCollider_Prefab.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
