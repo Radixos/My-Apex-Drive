@@ -18,8 +18,6 @@ public class CameraFollowLead : MonoBehaviour
     private Transform objToFollow;
     private Transform objToLookAt;
 
-    //TODO: research: transform.GetComponent(typeof(Transform)) as Transform; https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html 
-
     void Start()
     {
         temp = FindObjectOfType<RaceManager>();
@@ -33,9 +31,6 @@ public class CameraFollowLead : MonoBehaviour
     void UpdateLeadFollow()
     {
         leadPlayer = temp.raceCars[0].gameObject;
-
-        //Determine transform for objToFollow
-        //Determine transform for objToLookAt
 
         gameObject.GetComponent<CinemachineVirtualCamera>().Follow = leadPlayer.transform;
         gameObject.GetComponent<CinemachineVirtualCamera>().LookAt = leadPlayer.transform;
