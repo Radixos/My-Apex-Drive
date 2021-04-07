@@ -22,6 +22,7 @@ public class SphereCarController : MonoBehaviour
     private string brakeInput;
     private string driftInput;
     private string boostInput;
+    private bool inAir;
 
     [Header("Drifting Options")]
     [SerializeField]
@@ -110,21 +111,21 @@ public class SphereCarController : MonoBehaviour
     void HandleAnimation()
     {
         //Raycast down - angle model based on normal of floor
-
         RaycastHit hit;
-        Physics.Raycast(carModel.position, -carModel.up, out hit, 1f);
-        Debug.DrawLine(carModel.position, hit.point, Color.red);
+        if (Physics.Raycast(carModel.position, Vector3.down, out hit, 3f))
+        {
+            inAir = false;
+            Vector3 newUp = hit.normal;
+            Vector3 oldForward = carModel.forward;
 
-        Vector3 floorAngle = hit.normal;
+            Vector3 newRight = Vector3.Cross(newUp, oldForward);
+            Vector3 newForward = Vector3.Cross(newRight, newUp);
 
-        Debug.Log(floorAngle);
-
-        floorAngle.x = carModel.transform.rotation.x;
-        floorAngle.y = hit.normal.y;
-        floorAngle.z = carModel.transform.rotation.z;
-
-        //carModel.up = Vector3.Lerp(carModel.up, floorAngle, Time.deltaTime * 8.0f);
-        //carModel.Rotate(0, transform.eulerAngles.y, 0);
+            carModel.rotation = Quaternion.Lerp(carModel.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8.0f);
+        } else
+        {
+            inAir = true;
+        }
     }
 
     void HandleSteering()
