@@ -7,7 +7,7 @@ public class SphereCarController : MonoBehaviour
 {
     public CarAttributes carAttributes;
     public Rigidbody sphereCollider;
-    public Transform carModel;
+    public Transform model;
 
     private float horizontal;
     private float vertical;
@@ -22,6 +22,8 @@ public class SphereCarController : MonoBehaviour
     private string brakeInput;
     private string driftInput;
     private string boostInput;
+
+    [SerializeField]
     private bool inAir;
 
     [Header("Drifting Options")]
@@ -96,32 +98,46 @@ public class SphereCarController : MonoBehaviour
         vertical = Input.GetButton(accelerateInput) ? 1 : 0;
         vertical -= Input.GetButton(brakeInput) ? 0.5f : 0;
         currentBoostMultiplier = Input.GetButton(boostInput) ? boostMultiplier : 1;
+
+        HandleAnimation();
     }
 
     void FixedUpdate()
     {
         //Follow Collider
-        carModel.position = sphereCollider.position;
+        transform.position = sphereCollider.position - new Vector3(0, -0.5f, 0);
 
-        HandleMovement();
-        HandleSteering();
-        HandleAnimation();
+        if (!inAir)
+        {
+            sphereCollider.drag = carAttributes.drag;
+            HandleMovement();
+            HandleSteering();
+        }
+        else
+        {
+            sphereCollider.drag = 0.05f;
+        }
     }
 
     void HandleAnimation()
     {
+        model.transform.position = transform.position;
         //Raycast down - angle model based on normal of floor
         RaycastHit hit;
-        if (Physics.Raycast(carModel.position, Vector3.down, out hit, 3f))
+        Debug.DrawRay(transform.position, Vector3.down);
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 4f))
         {
             inAir = false;
+
             Vector3 newUp = hit.normal;
-            Vector3 oldForward = carModel.forward;
+            Vector3 oldForward = transform.forward;
 
             Vector3 newRight = Vector3.Cross(newUp, oldForward);
             Vector3 newForward = Vector3.Cross(newRight, newUp);
 
-            carModel.rotation = Quaternion.Lerp(carModel.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8.0f);
+            model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8f);
+
+            model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * currSpeed * 0.1f);
         } else
         {
             inAir = true;
@@ -144,7 +160,7 @@ public class SphereCarController : MonoBehaviour
         }
 
         float targetAngle = currAngle + (horizontal * currTurnAngle);
-        float angle = Mathf.SmoothDamp(carModel.localEulerAngles.y, targetAngle, ref turnVelocity, turnSpeed);
+        float angle = Mathf.SmoothDamp(transform.localEulerAngles.y, targetAngle, ref turnVelocity, turnSpeed);
         if (isDrifting)
         {
             currTurnAngle = driftTurnAngle;
@@ -153,8 +169,8 @@ public class SphereCarController : MonoBehaviour
         {
             currTurnAngle = normalTurnAngle;
         }
-        carModel.localEulerAngles = new Vector3(carModel.localEulerAngles.x, angle, carModel.localEulerAngles.z);
-        currAngle = carModel.localEulerAngles.y;
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, angle, transform.localEulerAngles.z);
+        currAngle = transform.localEulerAngles.y;
     }
 
     void HandleMovement()
@@ -172,12 +188,12 @@ public class SphereCarController : MonoBehaviour
         //Forward Acceleration
         if (isDrifting)
         {
-            sphereCollider.AddForce(carModel.transform.right * currSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
-            sphereCollider.AddForce(carModel.transform.forward * currSpeed * driftSideBoostMultiplier, ForceMode.Acceleration);
+            sphereCollider.AddForce(transform.transform.right * currSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
+            sphereCollider.AddForce(transform.transform.forward * currSpeed * driftSideBoostMultiplier, ForceMode.Acceleration);
         }
         else
         {
-            sphereCollider.AddForce(carModel.transform.forward * currSpeed * currentBoostMultiplier, ForceMode.Acceleration);
+            sphereCollider.AddForce(transform.transform.forward * currSpeed * currentBoostMultiplier, ForceMode.Acceleration);
         }
     }
 }
