@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:ApexDrive/Assets/Code/Scripts/Camera.meta
+guid: 47ab7009892fbb74eaafd282482ed1b6
+folderAsset: yes
+=======
 guid: 8f5342e48d54a1347a70ca81772f4731
+>>>>>>> origin/Mani:ApexDrive/Assets/Scenes/ManiScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
