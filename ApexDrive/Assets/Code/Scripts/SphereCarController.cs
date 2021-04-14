@@ -179,5 +179,8 @@ public class SphereCarController : MonoBehaviour
         {
             sphereCollider.AddForce(carModel.transform.forward * currSpeed * currentBoostMultiplier, ForceMode.Acceleration);
         }
+
+        //Reduce Speed
+        //sphereCollider.AddForce(-carModel.forward * currSpeed * friction);
     }
 }
