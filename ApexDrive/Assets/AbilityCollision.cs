@@ -34,7 +34,11 @@ public class AbilityCollision : MonoBehaviour
                 collision.gameObject.GetComponent<AbilityCollision>().carController.shieldEffectTimer = 0.0f;
             }
             else
+            {
                 collision.gameObject.GetComponent<Rigidbody>().AddForce(-normal * 10.0f, ForceMode.Impulse);
+                Debug.Log("Called");
+            }
+
         }
 
     }
