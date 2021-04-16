@@ -11,6 +11,10 @@ public class PositionUpdate : MonoBehaviour
 
     private RaceManager raceManager;
 
+    public GameObject distanceCollider;
+
+    public float distanceFromCollider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,20 +22,11 @@ public class PositionUpdate : MonoBehaviour
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //    if(gameObject.CompareTag("Player"))
-    //    {
-    //        for (int i = 0; i < raceManager.raceCars.Count; i++)
-    //        {
-    //            if (raceManager.raceCars[i].gameObject == gameObject)
-    //            {
-    //                Debug.Log("Position: " + (i + 1));
-    //            }
-    //        }
-    //    }
-        
-    //}
+    void Update()
+    {
+        if (distanceCollider != null)
+            distanceFromCollider = Vector3.Distance(transform.position, distanceCollider.transform.position);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -41,6 +36,8 @@ public class PositionUpdate : MonoBehaviour
             {
                 hitColliders.Add(other.gameObject);
                 collidersHit++;
+
+                distanceCollider = other.gameObject;
             }
             else if (hitColliders.Contains(other.gameObject) == false)
             {
@@ -56,7 +53,10 @@ public class PositionUpdate : MonoBehaviour
                     hitColliders.Clear();
                 }
 
+                distanceCollider = other.gameObject;
+
             }
+
         }
 
 
