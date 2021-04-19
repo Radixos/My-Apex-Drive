@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{cb6c86fb-fe89-44c2-8d95-982bec554bbd}">
+		<property name="name">
+			<value>Airtime</value>
+		</property>
+		<relationship name="folder">
+			<destination>{39371476-0a55-43e0-8cbc-49e86e0f1f86}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{073730e7-d119-44ac-8073-08d614cf98f4}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{073730e7-d119-44ac-8073-08d614cf98f4}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>1</value>
+		</property>
+		<property name="seekSpeedDescending">
+			<value>5</value>
+		</property>
+		<property name="seekSpeedAsymmetric">
+			<value>true</value>
+		</property>
+	</object>
+</objects>

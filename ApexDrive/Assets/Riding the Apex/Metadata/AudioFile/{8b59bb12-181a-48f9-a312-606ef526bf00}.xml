@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{8b59bb12-181a-48f9-a312-606ef526bf00}">
+		<property name="assetPath">
+			<value>Mech-007.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.0978911564625848</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3443ab58-a03c-4060-9e65-08810e25ec33}</destination>
+		</relationship>
+	</object>
+</objects>

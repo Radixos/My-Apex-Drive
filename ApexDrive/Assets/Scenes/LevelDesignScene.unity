@@ -7222,26 +7222,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &966080942 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2971141493812351153, guid: e84a0138db4cc2e46b0b730c80f88d20,
-    type: 3}
-  m_PrefabInstance: {fileID: 1843793119}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &966080946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966080942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8571d2a43c279a4f941f20c51c4d6c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laps: 0
-  collidersHit: 0
 --- !u!1 &968108655
 GameObject:
   m_ObjectHideFlags: 0
