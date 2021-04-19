@@ -57,15 +57,17 @@ public class TestDrive : MonoBehaviour
     void Update()
     {
 
-        if(isAI)
+        if (isAI)
         {
             if (timer <= lifeTime)
             {
+                // Disable movement when hit by shield and PERMANENT CODE
                 if (shieldCollTimer >= shieldCollDelay)
                 {
                     myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, AIMoveSpeed);
                 }
                 else shieldCollTimer += Time.deltaTime;
+                // END PERMANENT CODE
 
 
                 timer += Time.deltaTime;
@@ -74,28 +76,31 @@ public class TestDrive : MonoBehaviour
         }
         else
         {
+            // PERMANENT CODE
             shield.SetActive(false);
             //myRigidbody.velocity = Vector3.zero;
 
-            if(rampage.activeSelf)
+            if (rampage.activeSelf)
             {
                 if (rampageTimer >= rampageLifetime)
                     rampage.SetActive(false);
                 else
                     rampageTimer += Time.deltaTime;
-                
+
             }
+            // END PERMANENT CODE
 
             if (Input.GetKey(KeyCode.W))
             {
                 myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, playerMoveSpeed);
             }
-            else if(Input.GetKey(KeyCode.S))
+            else if (Input.GetKey(KeyCode.S))
             {
                 myRigidbody.velocity = new Vector3(myRigidbody.velocity.x, myRigidbody.velocity.y, -playerMoveSpeed);
             }
 
-            if(powerAmount > 0)
+            // PERMANENT CODE
+            if (powerAmount > 0)
             {
                 if (Input.GetKey(KeyCode.LeftShift))
                 {
@@ -103,33 +108,22 @@ public class TestDrive : MonoBehaviour
                     powerAmount -= Time.deltaTime * 0.5f;
                     powerMeter.fillAmount = powerAmount;
                 }
-                else if(Input.GetKeyDown(KeyCode.E) && powerAmount >= 0.5)
+                else if (Input.GetKeyDown(KeyCode.E) && powerAmount >= 0.5)
                 {
                     rampage.SetActive(true);
                     rampageTimer = 0.0f;
                     powerAmount -= 0.5f;
                     powerMeter.fillAmount = powerAmount;
                 }
-                
+
             }
-            
+            // END PERMANENT CODE
+
         }
 
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (isAI)
-    //    {
-
-    //        if (other.gameObject.name == "Shield")
-    //        {
-    //            myRigidbody.AddForce(-transform.forward * 10.0f, ForceMode.Impulse);
-    //            shieldCollTimer = 0.0f;
-    //        }
-    //    }
-    //}
-
+    // PERMANENT CODE
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -137,7 +131,7 @@ public class TestDrive : MonoBehaviour
             collision.gameObject.CompareTag("Player")) && rampage.activeSelf)
         {
 
-            if(rampage.activeSelf)
+            if (rampage.activeSelf)
             {
 
                 if (isAI)
@@ -155,7 +149,7 @@ public class TestDrive : MonoBehaviour
                 {
                     collision.gameObject.GetComponent<Rigidbody>().AddForce(-normal * 10.0f, ForceMode.Impulse);
                 }
-            }            
+            }
 
         }
     }
