@@ -10,7 +10,7 @@ public class MoveCube : MonoBehaviour
     {
 
         Vec = transform.localPosition;
-        Vec.y += Input.GetAxis("Jump") * Time.deltaTime * 20;
+        //Vec.y += Input.GetAxis("Jump") * Time.deltaTime * 20;
         Vec.x += Input.GetAxis("Horizontal") * Time.deltaTime * 20;
         Vec.z += Input.GetAxis("Vertical") * Time.deltaTime * 20;
         transform.localPosition = Vec;

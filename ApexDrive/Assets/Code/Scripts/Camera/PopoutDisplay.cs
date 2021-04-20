@@ -13,33 +13,26 @@ using UnityEngine;
 
 public class PopoutDisplay : MonoBehaviour
 {
-    private Collider[] objCollider;
-    private Plane[] planes;
-    private int playersCount;
+    [SerializeField] private GameObject popoutPrefab;
 
-    [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private Canvas uiCanvas;
 
-    [SerializeField] private Canvas ui;
-
-    List<GameObject> arrowPool = new List<GameObject>();
-    int arrowPoolCursor = 0;
+    List<GameObject> popoutPool = new List<GameObject>();
+    int popoutPoolCursor = 0;
 
     private RaceManager rm;
 
     void Start()
     {
         rm = FindObjectOfType<RaceManager>();
-        playersCount = rm.raceCars.Count;
-
-        planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
     }
 
     void Update()
     {
-        CameraViewUpdate();
+        PopoutUpdate();
     }
 
-    void CameraViewUpdate()
+    void PopoutUpdate()
     {
         ResetPool();
 
@@ -47,7 +40,6 @@ public class PopoutDisplay : MonoBehaviour
         {
             if (obj != rm.raceCars[0])
             {
-                Debug.Log(obj.name);
                 Vector3 screenpos = Camera.main.WorldToScreenPoint(obj.transform.position);
 
                 if (screenpos.z > 0 &&
@@ -94,10 +86,10 @@ public class PopoutDisplay : MonoBehaviour
 
                     //screenpos += screenCenter;
 
-                    GameObject arrow = GetArrow();
-                    arrow.transform.localScale = new Vector3(0.7f, 0.7f, 1f);
-                    arrow.transform.localPosition = screenpos;
-                    arrow.transform.localRotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg);
+                    GameObject popout = GetPopout();
+                    popout.transform.localScale = new Vector3(0.7f, 0.7f, 1f);
+                    popout.transform.localPosition = screenpos;
+                    popout.transform.localRotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg);
                 }
             }
         }
@@ -105,37 +97,36 @@ public class PopoutDisplay : MonoBehaviour
         CleanPool();
     }
 
-    GameObject GetArrow()
+    GameObject GetPopout()
     {
         GameObject output;
-        Debug.Log("arrowPoolCursor: " + arrowPoolCursor);
-        Debug.Log("arrowPool.Count: " + arrowPool.Count);
-        if (arrowPoolCursor < arrowPool.Count)
+
+        if (popoutPoolCursor < popoutPool.Count)
         {
-            output = arrowPool[arrowPoolCursor];
+            output = popoutPool[popoutPoolCursor];
         }
         else
         {
-            output = Instantiate(arrowPrefab) as GameObject;
+            output = Instantiate(popoutPrefab) as GameObject;
             output.transform.parent = transform;
-            arrowPool.Add(output);
+            popoutPool.Add(output);
         }
 
-        arrowPoolCursor++;
+        popoutPoolCursor++;
         return output;
     }
 
     void ResetPool()
     {
-        arrowPoolCursor = 0;
+        popoutPoolCursor = 0;
     }
 
     void CleanPool()
     {
-        while (arrowPool.Count > arrowPoolCursor)
+        while (popoutPool.Count > popoutPoolCursor)
         {
-            GameObject obj = arrowPool[arrowPool.Count - 1];
-            arrowPool.Remove(obj);
+            GameObject obj = popoutPool[popoutPool.Count - 1];
+            popoutPool.Remove(obj);
             Destroy(obj.gameObject);
         }
     }

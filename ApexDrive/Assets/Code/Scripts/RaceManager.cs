@@ -21,39 +21,15 @@ public class RaceManager : MonoBehaviour
 
     public int totalColliders;
 
-    public float eliminationTimer;
-    //private float countDownTimer;
-
-    public Text eliminationTimeDisplay;
-
     // Start is called before the first frame update
     //void Start()
     //{
-        //countDownTimer = eliminationTimer;
+
     //}
 
     // Update is called once per frame
     //private void Update()
-    //{
-    //    if(raceCars.Count > 1)
-    //    {
-    //        countDownTimer -= Time.deltaTime;
-
-    //        if (countDownTimer <= 0)
-    //        {
-    //            countDownTimer = eliminationTimer;
-    //            raceCars[raceCars.Count - 1].gameObject.SetActive(false);
-    //            raceCars.Remove(raceCars[raceCars.Count - 1]);
-    //        }
-
-    //        eliminationTimeDisplay.text = Mathf.RoundToInt(countDownTimer).ToString();
-    //    }
-    //    else
-    //    {
-    //        eliminationTimeDisplay.text = raceCars[0].name.ToString() + " wins!";
-    //    }
-        
- 
+    //{       
     //}
 
     void LateUpdate()
@@ -76,7 +52,14 @@ public class RaceManager : MonoBehaviour
                         if (raceCars[i].laps == raceCars[j].laps)
                         {
                             SwapRacers(i, j);
+                            continue;
                         }
+                    }
+
+                    if(raceCars[i].distanceCollider.GetInstanceID() == raceCars[j].distanceCollider.GetInstanceID() &&
+                        raceCars[i].distanceFromCollider > raceCars[j].distanceFromCollider)
+                    {
+                        SwapRacers(i, j);
                     }
 
                 }
