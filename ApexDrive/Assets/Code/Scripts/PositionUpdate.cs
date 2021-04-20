@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public class PositionUpdate : MonoBehaviour
 {
     public int laps;
     public int collidersHit;
+    public float offScreenTimer;
 
     private List<GameObject> hitColliders = new List<GameObject>();
 
