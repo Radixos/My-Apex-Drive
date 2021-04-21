@@ -4,26 +4,52 @@ using UnityEngine;
 
 public class EliminationScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Vector3 carCameraPos;
+    private RaceManager carManager;
     private Camera mainCamera;
+    private float waitTimer = 2.5f;
+
     void Start()
     {
         mainCamera = Camera.main;
+        carManager = this.GetComponent<RaceManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Vector3 carCameraPos = mainCamera.WorldToViewportPoint(gameObject.transform.position);
-        if ((carCameraPos.x > 1.0f || carCameraPos.x < 0.0f) || (carCameraPos.y > 1.0f || carCameraPos.y < 0.0f))
+        for (int i = 0; i < carManager.raceCars.Count; i++)
         {
-            Destroy(this);
-        }
-        Debug.Log(carCameraPos.x + "," + carCameraPos.y);
+            PositionUpdate currentCar = carManager.raceCars[i];
+            carCameraPos = mainCamera.WorldToViewportPoint(currentCar.transform.position);
+            bool boundaryCheck = checkBoundaries(carCameraPos);
+
+            if (boundaryCheck == true)
+            {
+                if (currentCar.offScreenTimer < waitTimer)
+                {
+                    currentCar.offScreenTimer += Time.deltaTime;
+                }
+                
+                if (currentCar.offScreenTimer >= waitTimer)
+                {
+                    currentCar.gameObject.SetActive(false);
+                }
+            }
+
+            else
+            {
+                currentCar.offScreenTimer = 0;
+            }
+         }
     }
 
-    void OnBecomeInvisible()
+    private bool checkBoundaries(Vector3 positionToCheck)
     {
-        Destroy(this);
+        if ((positionToCheck.x > 1.0f || positionToCheck.x < 0.0f) || (positionToCheck.y > 1.0f || positionToCheck.y < 0.0f))
+        {
+            return true;
+        }
+
+        else {return false;}
     }
 }
