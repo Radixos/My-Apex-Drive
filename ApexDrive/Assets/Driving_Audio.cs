@@ -11,6 +11,8 @@ public class Driving_Audio : MonoBehaviour
 
     FMOD.Studio.PARAMETER_DESCRIPTION Accelleration;
     FMOD.Studio.PARAMETER_ID ACE;
+
+    public Rigidbody vel;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,15 +32,19 @@ public class Driving_Audio : MonoBehaviour
     void Update()
     {
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(Engine, GetComponent<Transform>(), GetComponent <Rigidbody>());
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButtonDown(0))
         {
             Engine.setParameterByID(RPM, 1f);
             Engine.setParameterByID(ACE, 1f);
         }
-        else if(Input.GetMouseButtonUp(1))
+        else if(Input.GetMouseButtonUp(0))
         {
             Engine.setParameterByID(RPM, 0f);
             Engine.setParameterByID(ACE, 0f);
+        }
+        if(vel != null)
+        {
+            Debug.Log(vel.velocity);
         }
     }
 }
