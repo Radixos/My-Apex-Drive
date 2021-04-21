@@ -32,8 +32,13 @@ public class EliminationScript : MonoBehaviour
                 
                 if (currentCar.offScreenTimer >= waitTimer)
                 {
-                    Destroy(currentCar.gameObject);
+                    currentCar.gameObject.SetActive(false);
                 }
+            }
+
+            else
+            {
+                currentCar.offScreenTimer = 0;
             }
          }
     }
