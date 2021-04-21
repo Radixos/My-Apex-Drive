@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carAttributes: {fileID: 11400000, guid: 841c01e7a872c3a4882b4d99db6d6f80, type: 2}
   sphereCollider: {fileID: 2971141493812351311}
-  model: {fileID: 0}
+  model: {fileID: 2971141492544051670}
   currentPlayer: 1
   inAir: 0
   isDrifting: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0f38627a886b54eb644f380d72d132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vel: {fileID: 0}
 --- !u!1 &2971141493279942318
 GameObject:
   m_ObjectHideFlags: 0
