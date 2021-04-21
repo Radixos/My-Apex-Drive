@@ -901,7 +901,7 @@ GameObject:
   - component: {fileID: 491732047}
   m_Layer: 0
   m_Name: P3
-  m_TagString: Untagged
+  m_TagString: PlayerTuk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1020,6 +1020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 564065980}
   - component: {fileID: 564065979}
+  - component: {fileID: 564065981}
   m_Layer: 0
   m_Name: RaceManager
   m_TagString: Untagged
@@ -1061,6 +1062,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &564065981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564065978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c9a1a30b36663468390e163da3b9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &611814312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,7 +1659,7 @@ GameObject:
   - component: {fileID: 911943896}
   m_Layer: 0
   m_Name: P4
-  m_TagString: Untagged
+  m_TagString: PlayerTuk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1771,7 +1784,7 @@ GameObject:
   - component: {fileID: 1082260611}
   m_Layer: 0
   m_Name: P2
-  m_TagString: Untagged
+  m_TagString: PlayerTuk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1897,7 +1910,7 @@ GameObject:
   - component: {fileID: 1143381503}
   m_Layer: 0
   m_Name: P1
-  m_TagString: Untagged
+  m_TagString: PlayerTuk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2347,7 +2360,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4053627, y: 1}
+    m_SensorSize: {x: 1.622549, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -2599,6 +2612,51 @@ MonoBehaviour:
   popoutPrefab: {fileID: 5623777092373676485, guid: 016242fe83aef22449e7d70e47fe72c9,
     type: 3}
   uiCanvas: {fileID: 1723283723}
+--- !u!1 &1725225415
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1725225417}
+  - component: {fileID: 1725225416}
+  m_Layer: 0
+  m_Name: StaticLightingSky
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1725225416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725225415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 441482e8936e35048a1dffac814e3ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Profile: {fileID: 0}
+  m_StaticLightingSkyUniqueID: 0
+--- !u!4 &1725225417
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725225415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1759988216
 GameObject:
   m_ObjectHideFlags: 0
