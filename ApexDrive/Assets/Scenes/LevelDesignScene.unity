@@ -2759,7 +2759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1173694371}
-  m_PathPosition: -0.25
+  m_PathPosition: 0.25
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
@@ -2771,7 +2771,7 @@ MonoBehaviour:
   m_RollDamping: 0
   m_AutoDolly:
     m_Enabled: 1
-    m_PositionOffset: -0.25
+    m_PositionOffset: 0.25
     m_SearchRadius: 2
     m_SearchResolution: 5
 --- !u!114 &289641697
@@ -5515,8 +5515,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659313473}
-  m_LocalRotation: {x: 0.3652007, y: 0.38467392, z: -0.1691152, w: 0.8306952}
-  m_LocalPosition: {x: 1634.6979, y: 1547.82, z: -1206.1577}
+  m_LocalRotation: {x: 0.2233237, y: 0.54932714, z: -0.15526867, w: 0.7900999}
+  m_LocalPosition: {x: 1602.466, y: 1547.82, z: -1205.1182}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000002}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12001,7 +12001,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9936608, y: 1}
+    m_SensorSize: {x: 1.4053627, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -12024,8 +12024,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619206357}
-  m_LocalRotation: {x: 0.3652007, y: 0.38467392, z: -0.1691152, w: 0.8306952}
-  m_LocalPosition: {x: 1634.6979, y: 1547.82, z: -1206.1577}
+  m_LocalRotation: {x: 0.2233237, y: 0.54932714, z: -0.15526867, w: 0.7900999}
+  m_LocalPosition: {x: 1602.466, y: 1547.82, z: -1205.1182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 289641695}
