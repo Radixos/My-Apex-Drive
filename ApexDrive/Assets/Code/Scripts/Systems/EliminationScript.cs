@@ -17,30 +17,44 @@ public class EliminationScript : MonoBehaviour
 
     void Update()
     {
+        float eliminatedTotal = 0;
+
         for (int i = 0; i < carManager.raceCars.Count; i++)
         {
             PositionUpdate currentCar = carManager.raceCars[i];
             carCameraPos = mainCamera.WorldToViewportPoint(currentCar.transform.position);
             bool boundaryCheck = checkBoundaries(carCameraPos);
 
-            if (boundaryCheck == true)
+            if (boundaryCheck == true && currentCar.eliminated == false)
             {
                 if (currentCar.offScreenTimer < waitTimer)
                 {
                     currentCar.offScreenTimer += Time.deltaTime;
                 }
                 
-                if (currentCar.offScreenTimer >= waitTimer)
+                else
                 {
                     currentCar.gameObject.SetActive(false);
+                    currentCar.eliminated = true;
+                    eliminatedTotal++;
                 }
             }
 
-            else
+            else if (currentCar.eliminated == true)
+            {
+                eliminatedTotal++;
+            }
+
+            else if (boundaryCheck == false)
             {
                 currentCar.offScreenTimer = 0;
             }
-         }
+
+            if (eliminatedTotal == carManager.raceCars.Count - 1)
+            {
+                currentCar.winner = true;
+            }
+        }
     }
 
     private bool checkBoundaries(Vector3 positionToCheck)
