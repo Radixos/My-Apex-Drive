@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2971141492544051667}
   - component: {fileID: 2971141492544051668}
   - component: {fileID: 2971141492544051669}
+  - component: {fileID: 6645341640814178973}
   m_Layer: 0
   m_Name: Model
   m_TagString: Player
@@ -96,8 +97,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carAttributes: {fileID: 11400000, guid: 841c01e7a872c3a4882b4d99db6d6f80, type: 2}
   sphereCollider: {fileID: 2971141493812351311}
-  carModel: {fileID: 2971141492544051670}
+  model: {fileID: 2971141492544051670}
   currentPlayer: 1
+  inAir: 0
   isDrifting: 0
   driftSpeedThresholdPercent: 0.5
   driftSideBoostMultiplier: 0
@@ -123,6 +125,19 @@ MonoBehaviour:
   speedMultiplier: 0
   speedBoostLifeTime: 0
   speedBoostTimer: 0
+--- !u!114 &6645341640814178973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971141492544051671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0f38627a886b54eb644f380d72d132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vel: {fileID: 0}
 --- !u!1 &2971141493279942318
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laps: 0
   collidersHit: 0
+  offScreenTimer: 0
   distanceCollider: {fileID: 0}
   distanceFromCollider: 0
 --- !u!114 &3044371047714489047
