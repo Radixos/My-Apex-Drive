@@ -14,7 +14,7 @@ public class NameTagScript : MonoBehaviour
     private Camera mainCamera;
     [SerializeField] private GameObject raceManager;
     private int numberOfCars;
-    private Vector3 offset = new Vector3(0.0f, 0.0f, 0.0f);
+    private Vector3 offset = new Vector3(9.65f, -1.5f, 0.0f);
     void Start()
     {
         mainCamera = Camera.main;
@@ -44,6 +44,7 @@ public class NameTagScript : MonoBehaviour
             tagChildren[i].transform.parent = UICanvas.gameObject.transform;
             TextMeshPro tempAddText = tagChildren[i].AddComponent<TextMeshPro>();
             tempAddText.text = processedCar.name;
+            tempAddText.fontSize = 5;
             nameTags[i] = tempAddText;
         }
     }
@@ -62,7 +63,8 @@ public class NameTagScript : MonoBehaviour
                 Vector3 desiredPosition = processedCar.transform.position + offset;
                 Vector3 desiredTagPosition = mainCamera.WorldToScreenPoint(desiredPosition);
                 Vector3 viewPosition = mainCamera.WorldToScreenPoint(desiredPosition);
-                tagChildren[i].transform.position = viewPosition;
+                //tagChildren[i].transform.position = viewPosition;
+                tagChildren[i].transform.position = desiredPosition;
             }
         }
     }

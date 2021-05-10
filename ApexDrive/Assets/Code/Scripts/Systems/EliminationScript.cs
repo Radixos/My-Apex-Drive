@@ -50,7 +50,7 @@ public class EliminationScript : MonoBehaviour
                 currentCar.offScreenTimer = 0;
             }
 
-            if (eliminatedTotal == carManager.raceCars.Count - 1)
+            if (eliminatedTotal == carManager.raceCars.Count - 1 && currentCar.eliminated == false)
             {
                 currentCar.winner = true;
             }
