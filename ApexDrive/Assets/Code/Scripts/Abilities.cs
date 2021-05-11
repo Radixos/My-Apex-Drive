@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(CarInputHandler))]
 public class Abilities : MonoBehaviour
 {
+    public CarInputHandler carInputHandler;
+
     // MANI'S CODE
     [Header("Abilities Options")]
     [SerializeField]
@@ -34,7 +36,9 @@ public class Abilities : MonoBehaviour
 
 
     private void Start()
-    {        
+    {
+        carInputHandler = GetComponent<CarInputHandler>();
+
         //Abilities Initialisation
         powerAmount = 1.0f; // TEMPORARY
 
@@ -54,11 +58,6 @@ public class Abilities : MonoBehaviour
     private void Update()
     {
         AbilityLogic();
-    }
-
-    void FixedUpdate()
-    {
-
     }
 
     void AbilityLogic()
@@ -82,7 +81,7 @@ public class Abilities : MonoBehaviour
         if (powerAmount > 0)
         {
             // Activate one ability at a times
-            if (Input.GetKey(KeyCode.LeftShift) &&
+            if (Input.GetButton(carInputHandler.PowerAInput) &&
                 rampage.activeSelf == false &&
                 speedMultiplier == 1.0f)
             {

@@ -2,75 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(CarInputHandler))]
 public class SphereCarController : MonoBehaviour
 {
-    public CarAttributes carAttributes;
-    public Rigidbody sphereCollider;
+    public CarInputHandler carInputHandler;
     public Transform model;
 
     private float horizontal;
     private float vertical;
 
-    [Header("Player Options")]
-    [Tooltip("This is assigned on Start so this cannot be changed in run time!")]
-    [SerializeField]
-    [Range(1, 4)]
-    public int currentPlayer;
-    private string horizontalInput;
-    private string accelerateInput;
-    private string brakeInput;
-    private string driftInput;
-    private string boostInput;
-
-    [SerializeField]
-    private bool inAir;
-
-    [Header("Drifting Options")]
-    [SerializeField]
-    private bool isDrifting;
-    [SerializeField]
-    [Tooltip("The higher this is, the faster % of max speed the car will need to be going before you can initiate a drift (does basically nothing)")]
-    private float driftSpeedThresholdPercent;
-    [SerializeField]
-    [Tooltip("The higher this is, the faster/wider the car will swing when drifting")]
-    private float driftSideBoostMultiplier;
-
-    [Header("Boost Options")]
-    [SerializeField]
     private float currentBoostMultiplier;
-    [SerializeField]
-    [Tooltip("The higher this is, the faster car will go when drifting")]
-    private float boostMultiplier;
-
-    [Header("Turning Options")]
-    [SerializeField]
-    [Tooltip("Lowering this effectively increases the turn angle.")]
-    private float turnSpeed;
-    [SerializeField]
-    private float turnVelocity;
-    [SerializeField]
-    private float currAngle;
-    [SerializeField]
-    private float targetAngle;
-    [SerializeField]
-    [Tooltip("This determines the car's turning speed while not boosting")]
-    private float normalTurnAngle;
-    [SerializeField]
-    [Tooltip("This determines the car's turning speed while boosting")]
-    private float driftTurnAngle;
-
-    [Header("Speed Options")]
-    [SerializeField]
-    [Tooltip("This determines the car's accelerationg while not boosting")]
-    private float acceleration;
-    [SerializeField]
-    [Tooltip("This determines the car's accelerationg while boosting")]
-    private float driftingAcceleration;
-    [SerializeField]
-    private float currSpeed;
-    [SerializeField]
-    private float maxSpeed;
 
     [Header("DEBUG")]
     [SerializeField]
@@ -80,38 +21,16 @@ public class SphereCarController : MonoBehaviour
 
     private void Start()
     {
-        //Assign controller at start. Could be done in update if we want to swap player controls mid game?
-        
-        //Input clarification: 
-        //Brake is actually reverse!!! To simulate controls similar to Rocket League.
-        horizontalInput = "Horizontal " + currentPlayer;
-        accelerateInput = "Accelerate " + currentPlayer;
-        brakeInput = "Brake " + currentPlayer;
-        driftInput = "Drift " + currentPlayer;
-        boostInput = "Boost " + currentPlayer;
+        carInputHandler = GetComponent<CarInputHandler>();
 
-        //Assign car attributes
-        driftSpeedThresholdPercent = carAttributes.driftSpeedThresholdPercent;
-        driftSideBoostMultiplier = carAttributes.driftSideBoostMultiplier;
-        boostMultiplier = carAttributes.boostMultiplier;
-
-        turnSpeed = carAttributes.turnSpeed;
-
-        normalTurnAngle = carAttributes.normalTurnAngle;
-        driftTurnAngle = carAttributes.driftTurnAngle;
-
-        driftingAcceleration = carAttributes.driftingAcceleration;
-        acceleration = carAttributes.acceleration;
-
-        sphereCollider.drag = carAttributes.drag;
     }
 
     private void Update()
     {
-        horizontal = Input.GetAxisRaw(horizontalInput);
-        vertical = Input.GetButton(accelerateInput) ? 1 : 0;
-        vertical -= Input.GetButton(brakeInput) ? 0.5f : 0;
-        currentBoostMultiplier = Input.GetButton(boostInput) ? boostMultiplier : 1;
+        horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
+        vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
+        vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
+        currentBoostMultiplier = Input.GetButton(carInputHandler.BoostInput) ? boostMultipliezr : 1;
 
         HandleAnimation();
     }
@@ -166,7 +85,7 @@ public class SphereCarController : MonoBehaviour
             return;
         }
 
-        if (Input.GetButton(driftInput) && horizontal != 0 && acceleration / currSpeed >= driftSpeedThresholdPercent)
+        if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && acceleration / currSpeed >= driftSpeedThresholdPercent)
         {
             if (!isDrifting)
             {

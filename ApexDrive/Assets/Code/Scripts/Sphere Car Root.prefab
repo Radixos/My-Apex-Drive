@@ -182,7 +182,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6328636173731818728}
+  - component: {fileID: 1868983284763400731}
+  - component: {fileID: 525259638389715821}
   - component: {fileID: 6328636173731818731}
+  - component: {fileID: 2581426219721720405}
   m_Layer: 0
   m_Name: Direction
   m_TagString: Untagged
@@ -204,6 +207,31 @@ Transform:
   m_Father: {fileID: 6328636172979671955}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1868983284763400731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328636173731818729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1024dda45bdb7a94998def57e0680af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlayer: 1
+--- !u!114 &525259638389715821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328636173731818729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de32f1edc8363394f9e12a6298dc69f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6328636173731818731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,10 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e5a0c1594acc94288d8933c89da32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carInputHandler: {fileID: 0}
   carAttributes: {fileID: 11400000, guid: 841c01e7a872c3a4882b4d99db6d6f80, type: 2}
   sphereCollider: {fileID: 6328636173520479345}
   model: {fileID: 5312958557881395621}
-  currentPlayer: 1
   inAir: 0
   isDrifting: 0
   driftSpeedThresholdPercent: 0.5
@@ -238,3 +266,26 @@ MonoBehaviour:
   maxSpeed: 0
   initialDriftDirectionRight: 0
   targetMinusCurrAngle: 0
+--- !u!114 &2581426219721720405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328636173731818729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee84190f165cfeb4494a2c0f73408125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carInputHandler: {fileID: 0}
+  powerAmount: 0
+  shield: {fileID: 0}
+  shieldEffectLifetime: 0
+  shieldEffectTimer: 0
+  rampage: {fileID: 0}
+  rampageLifetime: 0
+  rampageTimer: 0
+  speedMultiplier: 0
+  speedBoostLifeTime: 0
+  speedBoostTimer: 0
