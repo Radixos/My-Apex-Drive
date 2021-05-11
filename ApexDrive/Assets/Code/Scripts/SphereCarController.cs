@@ -30,41 +30,53 @@ public class SphereCarController : MonoBehaviour
     [SerializeField]
     private bool isDrifting;
     [SerializeField]
-    [Range(0, 1)]
-    [Tooltip("The higher this is, the faster the car will need to be going before you can initiate a drift (likely does nothing)")]
+    [Tooltip("The higher this is, the faster % of max speed the car will need to be going before you can initiate a drift (does basically nothing)")]
     private float driftSpeedThresholdPercent;
     [SerializeField]
+    [Tooltip("The higher this is, the faster/wider the car will swing when drifting")]
     private float driftSideBoostMultiplier;
 
     [Header("Boost Options")]
     [SerializeField]
     private float currentBoostMultiplier;
     [SerializeField]
+    [Tooltip("The higher this is, the faster car will go when drifting")]
     private float boostMultiplier;
 
     [Header("Turning Options")]
     [SerializeField]
+    [Tooltip("Lowering this effectively increases the turn angle.")]
     private float turnSpeed;
     [SerializeField]
     private float turnVelocity;
     [SerializeField]
     private float currAngle;
     [SerializeField]
-    private float currTurnAngle;
+    private float targetAngle;
     [SerializeField]
+    [Tooltip("This determines the car's turning speed while not boosting")]
     private float normalTurnAngle;
     [SerializeField]
+    [Tooltip("This determines the car's turning speed while boosting")]
     private float driftTurnAngle;
 
     [Header("Speed Options")]
     [SerializeField]
-    private float driftingAcceleration;
-    [SerializeField]
+    [Tooltip("This determines the car's accelerationg while not boosting")]
     private float acceleration;
+    [SerializeField]
+    [Tooltip("This determines the car's accelerationg while boosting")]
+    private float driftingAcceleration;
     [SerializeField]
     private float currSpeed;
     [SerializeField]
     private float maxSpeed;
+
+    [Header("DEBUG")]
+    [SerializeField]
+    private bool initialDriftDirectionRight;
+    [SerializeField]
+    private float targetMinusCurrAngle;
 
     private void Start()
     {
@@ -82,6 +94,8 @@ public class SphereCarController : MonoBehaviour
         driftSpeedThresholdPercent = carAttributes.driftSpeedThresholdPercent;
         driftSideBoostMultiplier = carAttributes.driftSideBoostMultiplier;
         boostMultiplier = carAttributes.boostMultiplier;
+
+        turnSpeed = carAttributes.turnSpeed;
 
         normalTurnAngle = carAttributes.normalTurnAngle;
         driftTurnAngle = carAttributes.driftTurnAngle;
@@ -146,29 +160,36 @@ public class SphereCarController : MonoBehaviour
 
     void HandleSteering()
     {
+        targetMinusCurrAngle = currAngle - targetAngle;
         if (currSpeed <= 0.1f && currSpeed >= -.1f)
         {
             return;
         }
 
-        if(Input.GetButton(driftInput) && horizontal != 0 && acceleration / currSpeed >= driftSpeedThresholdPercent)
+        if (Input.GetButton(driftInput) && horizontal != 0 && acceleration / currSpeed >= driftSpeedThresholdPercent)
         {
+            if (!isDrifting)
+            {
+                initialDriftDirectionRight = horizontal > 0;
+                sphereCollider.AddForce(transform.transform.right * currSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
+            }
             isDrifting = true;
-        } else
+        }
+        else
         {
             isDrifting = false;
         }
 
-        float targetAngle = currAngle + (horizontal * currTurnAngle);
-        float angle = Mathf.SmoothDamp(transform.localEulerAngles.y, targetAngle, ref turnVelocity, turnSpeed);
         if (isDrifting)
         {
-            currTurnAngle = driftTurnAngle;
+            float bonusDriftAngle = initialDriftDirectionRight == true ? driftTurnAngle : -driftTurnAngle;
+            targetAngle = currAngle + (((horizontal * driftTurnAngle) + bonusDriftAngle) / 2);
         }
         else
         {
-            currTurnAngle = normalTurnAngle;
+            targetAngle = currAngle + (horizontal * normalTurnAngle);
         }
+        float angle = Mathf.SmoothDamp(transform.localEulerAngles.y, targetAngle, ref turnVelocity, turnSpeed);
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, angle, transform.localEulerAngles.z);
         currAngle = transform.localEulerAngles.y;
     }
@@ -188,8 +209,9 @@ public class SphereCarController : MonoBehaviour
         //Forward Acceleration
         if (isDrifting)
         {
-            sphereCollider.AddForce(transform.transform.right * currSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
-            sphereCollider.AddForce(transform.transform.forward * currSpeed * driftSideBoostMultiplier, ForceMode.Acceleration);
+            float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
+            sphereCollider.AddForce(transform.transform.right * currSpeed * oppositeDirection * driftSideBoostMultiplier, ForceMode.Acceleration);
+            sphereCollider.AddForce(transform.transform.forward * currSpeed * currentBoostMultiplier, ForceMode.Acceleration);
         }
         else
         {

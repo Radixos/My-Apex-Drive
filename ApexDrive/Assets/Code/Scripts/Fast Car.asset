@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Fast Car
   m_EditorClassIdentifier: 
   driftSpeedThresholdPercent: 0.6
-  driftSideBoostMultiplier: 1
+  driftSideBoostMultiplier: 0.5
   boostMultiplier: 1.4
+  turnSpeed: 0.6
   normalTurnAngle: 20
   driftTurnAngle: 40
-  driftingAcceleration: 70
   acceleration: 70
+  driftingAcceleration: 70
   drag: 2
