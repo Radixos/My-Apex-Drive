@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CarInputHandler))]
+[RequireComponent(typeof(CarStats))]
+[RequireComponent(typeof(SphereCarController))]
 public class Abilities : MonoBehaviour
 {
-    public CarInputHandler carInputHandler;
+    private CarInputHandler carInputHandler;
+    private CarStats carStats;
 
     // MANI'S CODE
     [Header("Abilities Options")]
@@ -38,6 +41,7 @@ public class Abilities : MonoBehaviour
     private void Start()
     {
         carInputHandler = GetComponent<CarInputHandler>();
+        carStats = GetComponent<CarStats>();
 
         //Abilities Initialisation
         powerAmount = 1.0f; // TEMPORARY
@@ -88,7 +92,7 @@ public class Abilities : MonoBehaviour
                 shield.SetActive(true);
                 powerAmount -= Time.deltaTime * 0.5f;
             }
-            else if (Input.GetKeyDown(KeyCode.E) &&
+            else if (Input.GetButton(carInputHandler.PowerBInput) &&
                 powerAmount >= 0.5f &&
                 speedMultiplier == 1.0f &&
                 shield.activeSelf == false &&
@@ -98,15 +102,13 @@ public class Abilities : MonoBehaviour
                 rampageTimer = 0.0f;
                 powerAmount -= 0.5f;
             }
-            else if (Input.GetKeyDown(KeyCode.Q) &&
+            else if (Input.GetButton(carInputHandler.BoostInput) &&
                 powerAmount >= 0.3f &&
                 shield.activeSelf == false &&
                 rampage.activeSelf == false &&
                 speedMultiplier != 1.0f)
             {
-                speedMultiplier = 2.0f;
-                speedBoostTimer = 0.0f;
-                powerAmount -= 0.3f;
+                carStats.CurrentBoostMultiplier = Input.GetButton(carInputHandler.BoostInput) ? carStats.BoostMultiplier : 1;
             }
 
         }

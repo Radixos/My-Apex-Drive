@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(CarInputHandler))]
 public class SphereCarController : MonoBehaviour
 {
-    public CarInputHandler carInputHandler;
-    public CarStats carStats;
+    private CarInputHandler carInputHandler;
+    private CarStats carStats;
     public Transform model;
 
     private float horizontal;
@@ -23,7 +23,7 @@ public class SphereCarController : MonoBehaviour
     private void Start()
     {
         carInputHandler = GetComponent<CarInputHandler>();
-
+        carStats = GetComponent<CarStats>();
     }
 
     private void Update()
@@ -31,7 +31,6 @@ public class SphereCarController : MonoBehaviour
         horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
         vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
         vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
-        carStats.CurrentBoostMultiplier = Input.GetButton(carInputHandler.BoostInput) ? carStats.BoostMultiplier : 1;
 
         HandleAnimation();
     }
@@ -118,7 +117,7 @@ public class SphereCarController : MonoBehaviour
             carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier;
         }
 
-        carStats.CurrSpeed = Mathf.SmoothStep(carStats.Acceleration, carStats.MaxSpeed, Time.deltaTime * 12f);
+        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 12f);
 
         //Forward Acceleration
         if (carStats.IsDrifting)
