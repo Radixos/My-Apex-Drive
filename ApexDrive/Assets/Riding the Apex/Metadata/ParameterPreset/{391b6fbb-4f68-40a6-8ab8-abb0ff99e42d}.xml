@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{391b6fbb-4f68-40a6-8ab8-abb0ff99e42d}">
+		<property name="name">
+			<value>elimination_count</value>
+		</property>
+		<relationship name="folder">
+			<destination>{39371476-0a55-43e0-8cbc-49e86e0f1f86}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{f72702ce-503c-424e-a026-4165c3e08efe}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{f72702ce-503c-424e-a026-4165c3e08efe}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

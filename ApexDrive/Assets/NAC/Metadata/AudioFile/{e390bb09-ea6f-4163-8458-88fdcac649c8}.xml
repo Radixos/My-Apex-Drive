@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{e390bb09-ea6f-4163-8458-88fdcac649c8}">
+		<property name="assetPath">
+			<value>bbbbb-009.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.4968934240362812</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{14d1fa06-1a67-4ef9-9589-8a0ca96b8d18}</destination>
+		</relationship>
+	</object>
+</objects>
