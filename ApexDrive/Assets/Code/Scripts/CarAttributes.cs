@@ -24,9 +24,9 @@ public class CarAttributes : ScriptableObject
     public float driftTurnAngle = 60f;
 
     [Header("Speed Options")]
-    [Tooltip("This determines the car's accelerationg while not boosting")]
+    [Tooltip("This determines the car's acceleration while not boosting")]
     public float acceleration = 70f;
-    [Tooltip("This determines the car's accelerationg while boosting")]
+    [Tooltip("This determines the car's acceleration while boosting")]
     public float driftingAcceleration = 70f;
     [Tooltip("This determines the car's drag")]
     public float drag = 2f;

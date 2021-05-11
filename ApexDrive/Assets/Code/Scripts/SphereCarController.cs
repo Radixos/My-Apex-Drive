@@ -6,12 +6,13 @@ using UnityEngine;
 public class SphereCarController : MonoBehaviour
 {
     public CarInputHandler carInputHandler;
+    public CarStats carStats;
     public Transform model;
 
     private float horizontal;
     private float vertical;
 
-    private float currentBoostMultiplier;
+    private float turnVelocity;
 
     [Header("DEBUG")]
     [SerializeField]
@@ -30,25 +31,18 @@ public class SphereCarController : MonoBehaviour
         horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
         vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
         vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
-        currentBoostMultiplier = Input.GetButton(carInputHandler.BoostInput) ? boostMultipliezr : 1;
+        carStats.CurrentBoostMultiplier = Input.GetButton(carInputHandler.BoostInput) ? carStats.BoostMultiplier : 1;
 
         HandleAnimation();
     }
 
     void FixedUpdate()
     {
-        //Follow Collider
-        transform.position = sphereCollider.position - new Vector3(0, -0.5f, 0);
 
-        if (!inAir)
+        if (!carStats.InAir)
         {
-            sphereCollider.drag = carAttributes.drag;
             HandleMovement();
             HandleSteering();
-        }
-        else
-        {
-            sphereCollider.drag = 0.05f;
         }
     }
 
@@ -60,7 +54,7 @@ public class SphereCarController : MonoBehaviour
         Debug.DrawRay(transform.position, Vector3.down);
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 4f))
         {
-            inAir = false;
+            carStats.InAir = false;
 
             Vector3 newUp = hit.normal;
             Vector3 oldForward = transform.forward;
@@ -70,71 +64,72 @@ public class SphereCarController : MonoBehaviour
 
             model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8f);
 
-            model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * currSpeed * 0.1f);
+            model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
         } else
         {
-            inAir = true;
+            carStats.InAir = true;
         }
     }
 
     void HandleSteering()
     {
-        targetMinusCurrAngle = currAngle - targetAngle;
-        if (currSpeed <= 0.1f && currSpeed >= -.1f)
+        targetMinusCurrAngle = carStats.CurrAngle - carStats.TargetAngle;
+        if (carStats.CurrSpeed <= 0.1f && carStats.CurrSpeed >= -.1f)
         {
             return;
         }
 
-        if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && acceleration / currSpeed >= driftSpeedThresholdPercent)
+        if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
         {
-            if (!isDrifting)
+            if (!carStats.IsDrifting)
             {
                 initialDriftDirectionRight = horizontal > 0;
-                sphereCollider.AddForce(transform.transform.right * currSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
+                carStats.SphereCollider.AddForce(transform.transform.right * carStats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
             }
-            isDrifting = true;
+            carStats.IsDrifting = true;
         }
         else
         {
-            isDrifting = false;
+            carStats.IsDrifting = false;
         }
 
-        if (isDrifting)
+        if (carStats.IsDrifting)
         {
-            float bonusDriftAngle = initialDriftDirectionRight == true ? driftTurnAngle : -driftTurnAngle;
-            targetAngle = currAngle + (((horizontal * driftTurnAngle) + bonusDriftAngle) / 2);
+            float bonusDriftAngle = initialDriftDirectionRight == true ? carStats.DriftTurnAngle : -carStats.DriftTurnAngle;
+            carStats.TargetAngle = carStats.CurrAngle + (((horizontal * carStats.DriftTurnAngle) + bonusDriftAngle) / 2);
         }
         else
         {
-            targetAngle = currAngle + (horizontal * normalTurnAngle);
+            carStats.TargetAngle = carStats.CurrAngle + (horizontal * carStats.NormalTurnAngle);
         }
-        float angle = Mathf.SmoothDamp(transform.localEulerAngles.y, targetAngle, ref turnVelocity, turnSpeed);
+        float angle = Mathf.SmoothDamp(transform.localEulerAngles.y, carStats.TargetAngle, ref turnVelocity, carStats.TurnSpeed);
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, angle, transform.localEulerAngles.z);
-        currAngle = transform.localEulerAngles.y;
+        carStats.CurrAngle = transform.localEulerAngles.y;
     }
 
     void HandleMovement()
     {
-        if (isDrifting)
+        if (carStats.IsDrifting)
         {
-            maxSpeed = vertical * driftingAcceleration;
-        } else
-        {
-            maxSpeed = vertical * acceleration * currentBoostMultiplier;
-        }
-
-        currSpeed = Mathf.SmoothStep(currSpeed, maxSpeed, Time.deltaTime * 12f);
-
-        //Forward Acceleration
-        if (isDrifting)
-        {
-            float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
-            sphereCollider.AddForce(transform.transform.right * currSpeed * oppositeDirection * driftSideBoostMultiplier, ForceMode.Acceleration);
-            sphereCollider.AddForce(transform.transform.forward * currSpeed * currentBoostMultiplier, ForceMode.Acceleration);
+            carStats.MaxSpeed = vertical * carStats.DriftingAcceleration;
         }
         else
         {
-            sphereCollider.AddForce(transform.transform.forward * currSpeed * currentBoostMultiplier, ForceMode.Acceleration);
+            carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier;
+        }
+
+        carStats.CurrSpeed = Mathf.SmoothStep(carStats.Acceleration, carStats.MaxSpeed, Time.deltaTime * 12f);
+
+        //Forward Acceleration
+        if (carStats.IsDrifting)
+        {
+            float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
+            carStats.SphereCollider.AddForce(transform.right * carStats.CurrSpeed * oppositeDirection * carStats.DriftSideBoostMultiplier, ForceMode.Acceleration);
+            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
+        }
+        else
+        {
+            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
         }
     }
 }
