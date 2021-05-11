@@ -36,8 +36,6 @@ public class Abilities : MonoBehaviour
     [SerializeField]
     private float speedBoostTimer;
 
-
-
     private void Start()
     {
         carInputHandler = GetComponent<CarInputHandler>();
@@ -85,13 +83,21 @@ public class Abilities : MonoBehaviour
         if (powerAmount > 0)
         {
             // Activate one ability at a times
+            // Shield power up
             if (Input.GetButton(carInputHandler.PowerAInput) &&
                 rampage.activeSelf == false &&
-                speedMultiplier == 1.0f)
+                speedMultiplier == 1.0f &&
+                powerAmount >= 0.3f
+                )
             {
+                if (shield.activeSelf == false)
+                {
+                    powerAmount -= 0.3f;
+                }
                 shield.SetActive(true);
                 powerAmount -= Time.deltaTime * 0.5f;
             }
+            // Attack power up
             else if (Input.GetButton(carInputHandler.PowerBInput) &&
                 powerAmount >= 0.5f &&
                 speedMultiplier == 1.0f &&
@@ -102,11 +108,12 @@ public class Abilities : MonoBehaviour
                 rampageTimer = 0.0f;
                 powerAmount -= 0.5f;
             }
+            // Boost power up
+            // Hold or tap?
             else if (Input.GetButton(carInputHandler.BoostInput) &&
                 powerAmount >= 0.3f &&
                 shield.activeSelf == false &&
-                rampage.activeSelf == false &&
-                speedMultiplier != 1.0f)
+                rampage.activeSelf == false)
             {
                 carStats.CurrentBoostMultiplier = Input.GetButton(carInputHandler.BoostInput) ? carStats.BoostMultiplier : 1;
             }
