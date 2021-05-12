@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityCollision : MonoBehaviour
 {
-    public SphereCarController carController;
+    public Abilities carController;
 
     private Rigidbody rigidBody;
 
