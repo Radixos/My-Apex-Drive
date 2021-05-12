@@ -2723,8 +2723,8 @@ GameObject:
   m_Component:
   - component: {fileID: 289641695}
   - component: {fileID: 289641698}
-  - component: {fileID: 289641697}
   - component: {fileID: 289641696}
+  - component: {fileID: 289641697}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -2790,12 +2790,12 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
+  m_HorizontalDamping: 2
+  m_VerticalDamping: 2
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
+  m_DeadZoneWidth: 0.1
+  m_DeadZoneHeight: 0.1
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
@@ -5521,7 +5521,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659313473}
-  m_LocalRotation: {x: 0.3652007, y: 0.38467392, z: -0.1691152, w: 0.8306952}
+  m_LocalRotation: {x: 0.36520067, y: 0.384674, z: -0.16911523, w: 0.8306952}
   m_LocalPosition: {x: 1634.6979, y: 1547.82, z: -1206.1577}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000002}
   m_Children: []
@@ -12081,7 +12081,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2334385, y: 1}
+    m_SensorSize: {x: 1.4037855, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -12104,7 +12104,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619206357}
-  m_LocalRotation: {x: 0.3652007, y: 0.38467392, z: -0.1691152, w: 0.8306952}
+  m_LocalRotation: {x: 0.36520067, y: 0.384674, z: -0.16911523, w: 0.8306952}
   m_LocalPosition: {x: 1634.6979, y: 1547.82, z: -1206.1577}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
