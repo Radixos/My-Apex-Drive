@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Base Car
   m_EditorClassIdentifier: 
   driftSpeedThresholdPercent: 0.6
-  driftSideBoostMultiplier: 1
+  driftSideBoostMultiplier: 0.5
   boostMultiplier: 1.3
-  normalTurnAngle: 25
+  turnSpeed: 0.6
+  normalTurnAngle: 40
   driftTurnAngle: 60
-  driftingAcceleration: 70
   acceleration: 70
+  driftingAcceleration: 70
   drag: 2
