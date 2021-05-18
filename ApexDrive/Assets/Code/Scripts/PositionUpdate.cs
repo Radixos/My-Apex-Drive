@@ -7,6 +7,8 @@ public class PositionUpdate : MonoBehaviour
     public int laps;
     public int collidersHit;
     public float offScreenTimer;
+    public bool eliminated;
+    public bool winner;
 
     private List<GameObject> hitColliders = new List<GameObject>();
 
