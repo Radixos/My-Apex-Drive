@@ -37,7 +37,6 @@ public class SphereCarController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         if (!carStats.InAir)
         {
             HandleMovement();
@@ -47,7 +46,7 @@ public class SphereCarController : MonoBehaviour
 
     void HandleAnimation()
     {
-        model.transform.position = transform.position;
+        model.transform.position = transform.position - new Vector3(0, 1.5f, 0);
         //Raycast down - angle model based on normal of floor
         RaycastHit hit;
         Debug.DrawRay(transform.position, Vector3.down);
