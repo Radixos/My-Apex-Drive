@@ -6,7 +6,6 @@ using TMPro;
 
 public class NameTagScript : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Canvas UICanvas;
     private RaceManager carSystem;
     private TextMeshPro[] nameTags;
@@ -14,7 +13,9 @@ public class NameTagScript : MonoBehaviour
     private Camera mainCamera;
     [SerializeField] private GameObject raceManager;
     private int numberOfCars;
-    private Vector3 offset = new Vector3(9.65f, -1.5f, 0.0f);
+    private Vector3 offset = new Vector3(0.0f, 1.5f, 8.0f);
+    //9.65f, -1.5f, 0.0f for Rad's scene
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -44,12 +45,16 @@ public class NameTagScript : MonoBehaviour
             tagChildren[i].transform.parent = UICanvas.gameObject.transform;
             TextMeshPro tempAddText = tagChildren[i].AddComponent<TextMeshPro>();
             tempAddText.text = processedCar.name;
-            tempAddText.fontSize = 5;
+            tempAddText.fontSize = 10;
+            tempAddText.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f); // leveldesign POV
+            tempAddText.outlineColor = Color.black;
+            tempAddText.outlineWidth = 0.5f;
+            //tempAddText.font = Resources.Load("Fonts & Materials/Apex SDF", typeof(TMP_FontAsset)) as TMP_FontAsset;
+            tempAddText.font.material.shader = Shader.Find("TextMeshPro/Distance Field");
             nameTags[i] = tempAddText;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Camera.WorldToScreenPoint
@@ -65,6 +70,7 @@ public class NameTagScript : MonoBehaviour
                 Vector3 viewPosition = mainCamera.WorldToScreenPoint(desiredPosition);
                 //tagChildren[i].transform.position = viewPosition;
                 tagChildren[i].transform.position = desiredPosition;
+                //tagChildren[i].transform.eulerAngles = new Vector3(0.0f, processedCar.transform.eulerAngles.y - 90.0f, 0.0f);
             }
         }
     }
