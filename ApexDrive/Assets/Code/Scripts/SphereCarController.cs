@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CarInputHandler))]
 public class SphereCarController : MonoBehaviour
 {
-    private CarInputHandler carInputHandler;
+    CarInputActions controls;
     private CarStats carStats;
     public AbilityCollision abilityCollision;
 
@@ -22,22 +22,40 @@ public class SphereCarController : MonoBehaviour
     [SerializeField]
     private float targetMinusCurrAngle;
 
+    private void OnEnable()
+    {
+        controls.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Disable();
+    }
+
     private void Start()
     {
-        carInputHandler = GetComponent<CarInputHandler>();
         carStats = GetComponent<CarStats>();
+
+    }
+
+    private void Awake()
+    {
+        controls = new CarInputActions();
+        //controls.Player.Fire.performed += context => vertical 
+    }
+    void SendMessage(string text)
+    {
+        Debug.Log(text);
     }
 
     private void Update()
     {
 
-        horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
-        vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
-        vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
+        //horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
+        //vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
+        //vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
 
         HandleAnimation();
-
-
     }
 
     void FixedUpdate()
@@ -87,19 +105,19 @@ public class SphereCarController : MonoBehaviour
             return;
         }
 
-        if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
-        {
-            if (!carStats.IsDrifting)
-            {
-                initialDriftDirectionRight = horizontal > 0;
-                carStats.SphereCollider.AddForce(transform.transform.right * carStats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
-            }
-            carStats.IsDrifting = true;
-        }
-        else
-        {
-            carStats.IsDrifting = false;
-        }
+        //if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
+        //{
+        //    if (!carStats.IsDrifting)
+        //    {
+        //        initialDriftDirectionRight = horizontal > 0;
+        //        carStats.SphereCollider.AddForce(transform.transform.right * carStats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
+        //    }
+        //    carStats.IsDrifting = true;
+        //}
+        //else
+        //{
+        //    carStats.IsDrifting = false;
+        //}
 
         if (carStats.IsDrifting)
         {
