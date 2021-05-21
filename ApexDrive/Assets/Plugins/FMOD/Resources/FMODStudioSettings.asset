@@ -145,10 +145,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: Assets/Data/Audio/Riding the Apex/Riding the Apex.fspro
-  sourceBankPath: Assets\Data\Audio\Riding the Apex\Build
+  sourceBankPath: Assets/Data/Audio/Riding the Apex/Banks/Desktop
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
   BankLoadType: 0
