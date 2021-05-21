@@ -22,10 +22,10 @@ public class RaceManager : MonoBehaviour
     public int totalColliders;
 
     // Start is called before the first frame update
-    //void Start()
-    //{
-
-    //}
+    void Start()
+    {
+        totalColliders = GameObject.FindGameObjectsWithTag("Waypoint").Length;
+    }
 
     // Update is called once per frame
     //private void Update()

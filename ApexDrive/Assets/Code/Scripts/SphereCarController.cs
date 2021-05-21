@@ -7,6 +7,8 @@ public class SphereCarController : MonoBehaviour
 {
     private CarInputHandler carInputHandler;
     private CarStats carStats;
+    public AbilityCollision abilityCollision;
+
     public Transform model;
 
     private float horizontal;
@@ -28,11 +30,14 @@ public class SphereCarController : MonoBehaviour
 
     private void Update()
     {
+
         horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
         vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
         vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
 
         HandleAnimation();
+
+
     }
 
     void FixedUpdate()
@@ -40,14 +45,17 @@ public class SphereCarController : MonoBehaviour
 
         if (!carStats.InAir)
         {
-            HandleMovement();
+            if (!abilityCollision.stunned)
+                HandleMovement();
+
             HandleSteering();
         }
+
     }
 
     void HandleAnimation()
     {
-        model.transform.position = transform.position;
+        model.transform.position = transform.position - new Vector3(0, 1.5f, 0);
         //Raycast down - angle model based on normal of floor
         RaycastHit hit;
         Debug.DrawRay(transform.position, Vector3.down);
@@ -64,7 +72,8 @@ public class SphereCarController : MonoBehaviour
             model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8f);
 
             model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
-        } else
+        }
+        else
         {
             carStats.InAir = true;
         }

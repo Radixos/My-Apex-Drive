@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// TEMPORARY
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CarInputHandler))]
 [RequireComponent(typeof(CarStats))]
@@ -18,9 +20,7 @@ public class Abilities : MonoBehaviour
 
     public GameObject shield;
     [SerializeField]
-    private float shieldEffectLifetime;
-    [SerializeField]
-    public float shieldEffectTimer;
+    private bool initialShieldPowerDepleted;
 
     public GameObject rampage;
     [SerializeField]
@@ -30,7 +30,7 @@ public class Abilities : MonoBehaviour
 
     [SerializeField]
     // Applies to both rampage and speed boost
-    private float speedMultiplier; 
+    private float speedMultiplier;
     [SerializeField]
     private float speedBoostLifeTime;
     [SerializeField]
@@ -44,8 +44,9 @@ public class Abilities : MonoBehaviour
         //Abilities Initialisation
         powerAmount = 1.0f; // TEMPORARY
 
-        shieldEffectLifetime = 0.3f;
-        shieldEffectTimer = shieldEffectLifetime;
+        //shieldEffectLifetime = 0.3f;
+        //shieldEffectTimer = shieldEffectLifetime;
+        initialShieldPowerDepleted = false;
 
         rampageLifetime = 3.0f;
         rampageTimer = rampageLifetime;
@@ -68,8 +69,8 @@ public class Abilities : MonoBehaviour
         // long as the button is pressed
         shield.SetActive(false);
 
-        if (shieldEffectTimer < shieldEffectLifetime)
-            shieldEffectTimer += Time.deltaTime;
+        if (Input.GetButtonUp(carInputHandler.PowerAInput))
+            initialShieldPowerDepleted = false;
 
         // Active time of rampage
         if (rampage.activeSelf)
@@ -90,12 +91,14 @@ public class Abilities : MonoBehaviour
                 powerAmount >= 0.3f
                 )
             {
-                if (shield.activeSelf == false)
+                if(!initialShieldPowerDepleted)
                 {
-                    powerAmount -= 0.3f;
+                    powerAmount -= 0.25f;
+                    initialShieldPowerDepleted = true;
                 }
+
                 shield.SetActive(true);
-                powerAmount -= Time.deltaTime * 0.5f;
+                powerAmount -= Time.deltaTime * 0.2f; // 0.5f
             }
             // Attack power up
             else if (Input.GetButton(carInputHandler.PowerBInput) &&
@@ -122,13 +125,5 @@ public class Abilities : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Player") && rampage.activeSelf)
-        {
-            Vector3 normal = Vector3.zero;
-            normal = collision.contacts[0].normal;
-        }
-    }
 }
 
