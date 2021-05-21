@@ -90,7 +90,6 @@ public class LobbyMenu : MonoBehaviour
             if(m_Animator != null) m_Animator.SetBool("MenuOpen", true);
             m_MenuIsVisible = true;
         }
-        if(GameManager.Instance.PlayerCount < 2) m_StartGameButton.interactable = false;
         else m_StartGameButton.interactable = true;
         if(player != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
     }
@@ -103,8 +102,6 @@ public class LobbyMenu : MonoBehaviour
             m_MenuIsVisible = false;
         }
         m_PlayersReady[player.PlayerID] = false;
-        if(GameManager.Instance.PlayerCount < 2) m_StartGameButton.interactable = false;
-        else m_StartGameButton.interactable = true;
         if(player != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", false);
     }
 }

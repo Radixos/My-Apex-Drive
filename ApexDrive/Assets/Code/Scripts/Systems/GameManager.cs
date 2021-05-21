@@ -64,14 +64,14 @@ public class GameManager : GameSystem
         return m_Players.Where(x => x.ControllerID == controllerID).FirstOrDefault();
     }
 
-    public void SubmitRoundResults()
+    public void SubmitRoundWinner(int playerID)
     {
-
+        m_Players[playerID].RoundWins ++;
     }
 
-    public void SubmitGameResults()
+    public void SubmitGameWinner(int playerID)
     {
-
+        m_Players[playerID].GameWins ++;
     }
 
     private IEnumerator RemovePlayerAtEndOfFrame(Player player)
