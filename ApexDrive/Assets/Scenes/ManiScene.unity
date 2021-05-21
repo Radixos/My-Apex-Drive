@@ -522,7 +522,7 @@ Transform:
   m_GameObject: {fileID: 363255452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 27.672, y: 1, z: 30.909248}
+  m_LocalScale: {x: 57.460907, y: 1, z: 165.21921}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -882,7 +882,7 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 2
-  m_AreaSize: {x: 1, y: 1}
+  m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
@@ -1312,6 +1312,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sphere Car Root (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6328636172979671952, guid: 55ae8337ab4615d488be878fef3ce3b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6328636172979671955, guid: 55ae8337ab4615d488be878fef3ce3b7,
         type: 3}
       propertyPath: m_RootOrder
@@ -1433,7 +1438,7 @@ PrefabInstance:
     - target: {fileID: 6328636172979671955, guid: 55ae8337ab4615d488be878fef3ce3b7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.342444
+      value: -64.2
       objectReference: {fileID: 0}
     - target: {fileID: 6328636172979671955, guid: 55ae8337ab4615d488be878fef3ce3b7,
         type: 3}
@@ -1468,6 +1473,11 @@ PrefabInstance:
     - target: {fileID: 6328636172979671955, guid: 55ae8337ab4615d488be878fef3ce3b7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115197685628837120, guid: 55ae8337ab4615d488be878fef3ce3b7,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
