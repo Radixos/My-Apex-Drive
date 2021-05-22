@@ -13,7 +13,7 @@ public class NameTagScript : MonoBehaviour
     private Camera mainCamera;
     [SerializeField] private GameObject raceManager;
     private int numberOfCars;
-    private Vector3 offset = new Vector3(0.0f, 1.5f, 8.0f);
+    private Vector3 offset = new Vector3(0.0f, 1.5f, 7.5f);
     //9.65f, -1.5f, 0.0f for Rad's scene
 
     void Start()
@@ -45,13 +45,14 @@ public class NameTagScript : MonoBehaviour
             tagChildren[i].transform.parent = UICanvas.gameObject.transform;
             TextMeshPro tempAddText = tagChildren[i].AddComponent<TextMeshPro>();
             tempAddText.text = processedCar.name;
-            tempAddText.fontSize = 10;
+            tempAddText.fontSize = 15;
             tempAddText.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f); // leveldesign POV
             tempAddText.outlineColor = Color.black;
-            tempAddText.outlineWidth = 0.5f;
+            tempAddText.outlineWidth = 0.2f;
             //tempAddText.font = Resources.Load("Fonts & Materials/Apex SDF", typeof(TMP_FontAsset)) as TMP_FontAsset;
-            tempAddText.font.material.shader = Shader.Find("TextMeshPro/Distance Field");
+            //tempAddText.font.material.shader = Shader.Find("TextMeshPro/Distance Field");
             nameTags[i] = tempAddText;
+
         }
     }
 
@@ -71,6 +72,11 @@ public class NameTagScript : MonoBehaviour
                 //tagChildren[i].transform.position = viewPosition;
                 tagChildren[i].transform.position = desiredPosition;
                 //tagChildren[i].transform.eulerAngles = new Vector3(0.0f, processedCar.transform.eulerAngles.y - 90.0f, 0.0f);
+            }
+
+            else
+            {
+                tagChildren[i].SetActive(false);
             }
         }
     }
