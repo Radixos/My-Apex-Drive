@@ -25,19 +25,6 @@ public class NameTagScript : MonoBehaviour
         nameTags = new TextMeshPro[numberOfCars];
         tagChildren = new GameObject[numberOfCars];
 
-        //for (int i = 0; i < numberOfCars; i++)
-        //{
-        //    PositionUpdate processedCar = carSystem.raceCars[i];
-
-        //    if (processedCar.eliminated == false)
-        //    {
-        //        //couldn't find a way to create TextMeshPro objects similar to others, 
-        //        //so each in list added via AddComponent
-        //        nameTags[i] = tagChildren[i].AddComponent<TextMeshPro>();
-        //        tagChildren[i].transform.parent = processedCar.gameObject.transform;
-        //    }
-        //}
-
         for (int i = 0; i < numberOfCars; i++)
         {
             PositionUpdate processedCar = carSystem.raceCars[i];
@@ -49,8 +36,6 @@ public class NameTagScript : MonoBehaviour
             tempAddText.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f); // leveldesign POV
             tempAddText.outlineColor = Color.black;
             tempAddText.outlineWidth = 0.2f;
-            //tempAddText.font = Resources.Load("Fonts & Materials/Apex SDF", typeof(TMP_FontAsset)) as TMP_FontAsset;
-            //tempAddText.font.material.shader = Shader.Find("TextMeshPro/Distance Field");
             nameTags[i] = tempAddText;
 
         }
@@ -58,8 +43,6 @@ public class NameTagScript : MonoBehaviour
 
     void Update()
     {
-        //Camera.WorldToScreenPoint
-
         for (int i = 0; i < numberOfCars; i++)
         {
             PositionUpdate processedCar = carSystem.raceCars[i];
@@ -69,9 +52,7 @@ public class NameTagScript : MonoBehaviour
                 Vector3 desiredPosition = processedCar.transform.position + offset;
                 Vector3 desiredTagPosition = mainCamera.WorldToScreenPoint(desiredPosition);
                 Vector3 viewPosition = mainCamera.WorldToScreenPoint(desiredPosition);
-                //tagChildren[i].transform.position = viewPosition;
                 tagChildren[i].transform.position = desiredPosition;
-                //tagChildren[i].transform.eulerAngles = new Vector3(0.0f, processedCar.transform.eulerAngles.y - 90.0f, 0.0f);
             }
 
             else
