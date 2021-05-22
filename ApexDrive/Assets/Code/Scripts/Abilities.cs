@@ -36,7 +36,7 @@ public class Abilities : MonoBehaviour
 
         initialShieldPowerDepleted = false;
 
-        rampageLifetime = 3.0f;
+        rampageLifetime = 4.0f;
         rampageTimer = rampageLifetime;
 
     }
