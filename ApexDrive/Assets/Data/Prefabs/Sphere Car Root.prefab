@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6328636172979671955}
   m_Layer: 0
-  m_Name: Sphere Car Root
+  m_Name: TukTuk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6328636172979671952}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -125,7 +125,7 @@ Transform:
   - {fileID: 5565435990380787472}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &6328636173520479631
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,8 +137,12 @@ GameObject:
   - component: {fileID: 6328636173520479630}
   - component: {fileID: 6328636173520479344}
   - component: {fileID: 6328636173520479345}
+<<<<<<< HEAD:ApexDrive/Assets/Prefabs/TukTuk.prefab
+  - component: {fileID: 562976833956409585}
+=======
   - component: {fileID: 8185797194509605981}
   - component: {fileID: 8216866151728395869}
+>>>>>>> dev:ApexDrive/Assets/Data/Prefabs/Sphere Car Root.prefab
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Player
@@ -189,7 +193,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+<<<<<<< HEAD:ApexDrive/Assets/Prefabs/TukTuk.prefab
+--- !u!114 &562976833956409585
+=======
 --- !u!114 &8185797194509605981
+>>>>>>> dev:ApexDrive/Assets/Data/Prefabs/Sphere Car Root.prefab
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,6 +206,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6328636173520479631}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD:ApexDrive/Assets/Prefabs/TukTuk.prefab
+  m_Script: {fileID: 11500000, guid: e4765cc0295ce28409fa49e27f3c9ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+=======
   m_Script: {fileID: 11500000, guid: 94a423a200df8204bb73b49336444fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -222,6 +235,7 @@ MonoBehaviour:
   winner: 0
   distanceCollider: {fileID: 0}
   distanceFromCollider: 0
+>>>>>>> dev:ApexDrive/Assets/Data/Prefabs/Sphere Car Root.prefab
 --- !u!1 &6328636173731818729
 GameObject:
   m_ObjectHideFlags: 0

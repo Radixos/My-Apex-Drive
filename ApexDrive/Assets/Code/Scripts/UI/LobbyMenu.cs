@@ -17,11 +17,17 @@ public class LobbyMenu : MonoBehaviour
 
     [SerializeField] private bool[] m_PlayersReady;
 
+    private FMOD.Studio.EventInstance[] m_LobbyPlayerSFX = new FMOD.Studio.EventInstance[GameManager.MaxPlayers];
+
     private bool m_MenuIsVisible = false;
 
     private void Awake()
     {
         m_Animator = GetComponent<Animator>();
+        for(int i = 0; i < m_LobbyPlayerSFX.Length; i++)
+        {
+            m_LobbyPlayerSFX[i] = FMODUnity.RuntimeManager.CreateInstance("event:/UI/Player Idle");
+        }
     }
 
     private void OnEnable()
@@ -90,9 +96,11 @@ public class LobbyMenu : MonoBehaviour
             if(m_Animator != null) m_Animator.SetBool("MenuOpen", true);
             m_MenuIsVisible = true;
         }
-        if(GameManager.Instance.PlayerCount < 2) m_StartGameButton.interactable = false;
         else m_StartGameButton.interactable = true;
         if(player != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Player Join");
+        m_LobbyPlayerSFX[player.PlayerID].start();
+
     }
 
     private void OnPlayerDisconnected(Player player)
@@ -101,10 +109,10 @@ public class LobbyMenu : MonoBehaviour
         {
             if(m_Animator != null) m_Animator.SetBool("MenuOpen", false);
             m_MenuIsVisible = false;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Player Leave");
         }
         m_PlayersReady[player.PlayerID] = false;
-        if(GameManager.Instance.PlayerCount < 2) m_StartGameButton.interactable = false;
-        else m_StartGameButton.interactable = true;
         if(player != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", false);
+        m_LobbyPlayerSFX[player.PlayerID].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }
