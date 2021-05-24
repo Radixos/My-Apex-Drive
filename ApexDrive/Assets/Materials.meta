@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 643e0073707d8f84c8214cb7dc6758b9
+<<<<<<< HEAD:ApexDrive/Assets/Data/Audio/Riding the Apex/Metadata/DAWAsset.meta
+guid: 704ef9c313bf8744697f15d3fc1b5735
+=======
+guid: 6a01c46fedc82aa4db2ab355d2a403ac
+>>>>>>> dev:ApexDrive/Assets/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
