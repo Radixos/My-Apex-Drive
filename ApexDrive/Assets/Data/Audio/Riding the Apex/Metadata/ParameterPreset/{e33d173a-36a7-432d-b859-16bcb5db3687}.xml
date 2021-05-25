@@ -19,13 +19,7 @@
 			<value>0</value>
 		</property>
 		<property name="seekSpeed">
-			<value>5</value>
-		</property>
-		<property name="seekSpeedDescending">
-			<value>8</value>
-		</property>
-		<property name="seekSpeedAsymmetric">
-			<value>true</value>
+			<value>100</value>
 		</property>
 	</object>
 </objects>
