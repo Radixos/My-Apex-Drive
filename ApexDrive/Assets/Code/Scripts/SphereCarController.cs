@@ -42,7 +42,6 @@ public class SphereCarController : MonoBehaviour
 
     void FixedUpdate()
     {
-
         if (!carStats.InAir)
         {
             if (!abilityCollision.stunned)
@@ -72,6 +71,19 @@ public class SphereCarController : MonoBehaviour
             model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8f);
 
             model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
+
+            switch (hit.collider.tag)
+            {
+                case "Offroad":
+                    carStats.Surface = 2;
+                    break;
+                case "Road":
+                    carStats.Surface = 1;
+                    break;
+                default:
+                    carStats.Surface = 1;
+                    break;
+            }
         }
         else
         {
@@ -117,13 +129,26 @@ public class SphereCarController : MonoBehaviour
 
     void HandleMovement()
     {
+        switch (carStats.Surface)
+        {
+            case 1:
+                carStats.CurrentSurfaceMultiplier = 1f;
+                break;
+            case 2:
+                carStats.CurrentSurfaceMultiplier = carStats.OffroadMultiplier;
+                break;
+            default:
+                carStats.CurrentSurfaceMultiplier = 1f;
+                break;
+        }
+
         if (carStats.IsDrifting)
         {
-            carStats.MaxSpeed = vertical * carStats.DriftingAcceleration;
+            carStats.MaxSpeed = vertical * carStats.DriftingAcceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
         }
         else
         {
-            carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier;
+            carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
         }
 
         carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 12f);
@@ -137,7 +162,7 @@ public class SphereCarController : MonoBehaviour
         }
         else
         {
-            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
+            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed, ForceMode.Acceleration);
         }
     }
 }
