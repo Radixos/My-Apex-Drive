@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Waypoint
   - PlayerTuk
+  - Wall
   layers:
   - Default
   - TransparentFX
