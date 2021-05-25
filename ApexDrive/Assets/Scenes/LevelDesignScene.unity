@@ -13252,24 +13252,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517832496}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &525428385 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1297197824813582864, guid: 476f5d37288e38c42a36d3696656e578,
-    type: 3}
-  m_PrefabInstance: {fileID: 1256874643}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8571d2a43c279a4f941f20c51c4d6c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &525428390 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6287194478189207974, guid: 476f5d37288e38c42a36d3696656e578,
-    type: 3}
-  m_PrefabInstance: {fileID: 1256874643}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &528919391
 GameObject:
   m_ObjectHideFlags: 0
@@ -16600,7 +16582,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659313473}
-  m_LocalRotation: {x: 0.33334306, y: -0.32894096, z: 0.12536871, w: 0.8746216}
+  m_LocalRotation: {x: 0.071114965, y: -0.7240934, z: 0.07552011, w: 0.68185645}
   m_LocalPosition: {x: 1643.8994, y: 1539.1613, z: -1210.0817}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000002}
   m_Children: []
@@ -19553,18 +19535,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &763672369 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1297197824813582864, guid: 476f5d37288e38c42a36d3696656e578,
-    type: 3}
-  m_PrefabInstance: {fileID: 1128924811}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8571d2a43c279a4f941f20c51c4d6c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &765708320
 GameObject:
   m_ObjectHideFlags: 0
@@ -27860,6 +27830,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 289919105830377208, guid: 476f5d37288e38c42a36d3696656e578,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerTuk
+      objectReference: {fileID: 0}
     - target: {fileID: 4728441515130372782, guid: 476f5d37288e38c42a36d3696656e578,
         type: 3}
       propertyPath: m_Name
@@ -30498,6 +30473,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 289919105830377208, guid: 476f5d37288e38c42a36d3696656e578,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerTuk
+      objectReference: {fileID: 0}
     - target: {fileID: 4728441515130372782, guid: 476f5d37288e38c42a36d3696656e578,
         type: 3}
       propertyPath: m_Name
@@ -39479,8 +39459,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 525428390}
-  m_Follow: {fileID: 525428390}
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -39513,7 +39493,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619206357}
-  m_LocalRotation: {x: 0.33334306, y: -0.32894096, z: 0.12536871, w: 0.8746216}
+  m_LocalRotation: {x: 0.3873784, y: -0.22144255, z: 0.09641444, w: 0.8897221}
   m_LocalPosition: {x: 1643.8994, y: 1539.1613, z: -1210.0817}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -47346,9 +47326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd6b6b78ff3c1644a59cb0f7d62cb2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceCars:
-  - {fileID: 525428385}
-  - {fileID: 763672369}
+  raceCars: []
   totalColliders: 3
 --- !u!4 &1964995020
 Transform:

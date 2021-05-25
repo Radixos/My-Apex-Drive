@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1297197824813582864}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: PlayerTuk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -386,6 +386,7 @@ MonoBehaviour:
   carAttributes: {fileID: 11400000, guid: 841c01e7a872c3a4882b4d99db6d6f80, type: 2}
   sphereCollider: {fileID: 6281512184417559450}
   inAir: 0
+  surface: 0
   isDrifting: 1
   driftSpeedThresholdPercent: 0
   driftSideBoostMultiplier: 0
@@ -398,6 +399,8 @@ MonoBehaviour:
   driftTurnAngle: 0
   acceleration: 0
   driftingAcceleration: 0
+  currentSurfaceMultiplier: 1
+  offroadMultiplier: 0
   currSpeed: 0
   maxSpeed: 0
 --- !u!114 &172996111640913308
