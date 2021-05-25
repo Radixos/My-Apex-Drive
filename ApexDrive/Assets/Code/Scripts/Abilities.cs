@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// TEMPORARY
-using UnityEngine.UI;
 
 [RequireComponent(typeof(CarInputHandler))]
 [RequireComponent(typeof(CarStats))]
@@ -28,14 +26,6 @@ public class Abilities : MonoBehaviour
     [SerializeField]
     private float rampageTimer;
 
-    [SerializeField]
-    // Applies to both rampage and speed boost
-    private float speedMultiplier;
-    [SerializeField]
-    private float speedBoostLifeTime;
-    [SerializeField]
-    private float speedBoostTimer;
-
     private void Start()
     {
         carInputHandler = GetComponent<CarInputHandler>();
@@ -44,30 +34,28 @@ public class Abilities : MonoBehaviour
         //Abilities Initialisation
         powerAmount = 1.0f; // TEMPORARY
 
-        //shieldEffectLifetime = 0.3f;
-        //shieldEffectTimer = shieldEffectLifetime;
         initialShieldPowerDepleted = false;
 
-        rampageLifetime = 3.0f;
+        rampageLifetime = 4.0f;
         rampageTimer = rampageLifetime;
-
-        speedBoostLifeTime = 3.0f;
-        speedBoostTimer = speedBoostLifeTime;
-
-        speedMultiplier = 1.0f;
 
     }
 
     private void Update()
     {
         AbilityLogic();
+        if(powerAmount < 0)
+        {
+            powerAmount = 0;
+        }
     }
 
     void AbilityLogic()
     {
-        // Shield only will stay active as
-        // long as the button is pressed
+        // Two abilities that stay active as
+        // long as 
         shield.SetActive(false);
+        carStats.CurrentBoostMultiplier = 1;
 
         if (Input.GetButtonUp(carInputHandler.PowerAInput))
             initialShieldPowerDepleted = false;
@@ -86,9 +74,7 @@ public class Abilities : MonoBehaviour
             // Activate one ability at a times
             // Shield power up
             if (Input.GetButton(carInputHandler.PowerAInput) &&
-                rampage.activeSelf == false &&
-                speedMultiplier == 1.0f &&
-                powerAmount >= 0.3f
+                rampage.activeSelf == false //&& powerAmount >= 0.3f
                 )
             {
                 if(!initialShieldPowerDepleted)
@@ -98,12 +84,11 @@ public class Abilities : MonoBehaviour
                 }
 
                 shield.SetActive(true);
-                powerAmount -= Time.deltaTime * 0.2f; // 0.5f
+                powerAmount -= Time.deltaTime * 0.5f;
             }
             // Attack power up
-            else if (Input.GetButton(carInputHandler.PowerBInput) &&
+            else if (Input.GetButtonDown(carInputHandler.PowerBInput) &&
                 powerAmount >= 0.5f &&
-                speedMultiplier == 1.0f &&
                 shield.activeSelf == false &&
                 rampage.activeSelf == false)
             {
@@ -113,17 +98,12 @@ public class Abilities : MonoBehaviour
             }
             // Boost power up
             // Hold or tap?
-            else if (Input.GetButton(carInputHandler.BoostInput) &&
-                powerAmount >= 0.3f &&
-                shield.activeSelf == false &&
-                rampage.activeSelf == false)
+            else if (Input.GetButton(carInputHandler.BoostInput)) //&& powerAmount >= 0.3f)
             {
-                carStats.CurrentBoostMultiplier = Input.GetButton(carInputHandler.BoostInput) ? carStats.BoostMultiplier : 1;
+                carStats.CurrentBoostMultiplier = carStats.BoostMultiplier;
+                powerAmount -= Time.deltaTime * 0.4f;
             }
-
         }
-
     }
-
 }
 
