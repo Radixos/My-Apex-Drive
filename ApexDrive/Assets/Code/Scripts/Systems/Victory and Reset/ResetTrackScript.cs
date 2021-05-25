@@ -22,7 +22,7 @@ public class ResetTrackScript : MonoBehaviour
     //reset state
 
     private bool firstPlay = true;
-    //avoids conflict with eliminaton script
+    //avoids conflict with elimination script
     private bool setResetState = false;
     public int noOfPlayers;
 
@@ -33,6 +33,7 @@ public class ResetTrackScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = Camera.main;
         carManager = this.GetComponent<RaceManager>();
         defaultPositions = new Vector3[carManager.raceCars.Count];
         defaultRotations = new Quaternion[carManager.raceCars.Count];

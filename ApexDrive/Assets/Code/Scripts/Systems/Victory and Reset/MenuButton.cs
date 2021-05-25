@@ -6,24 +6,18 @@ using UnityEngine.SceneManagement;
 public class MenuButton : MonoBehaviour
 {
 
-    [SerializeField] MainMenu canvas;
-    [SerializeField] MenuController menuController;
-    [SerializeField] Animator animator;
-    [SerializeField] AnimatorFunctions animatorFunctions;
+    private VictoryMenu canvas;
+    private MenuController menuController;
+    private Animator animator;
     [SerializeField] int thisIndex;
     public bool notClickable = false;
-
-
-    //[FMODUnity.EventRef]
-    public string MenuSelectSound;
-
-    //[FMODUnity.EventRef]
-    public string MenuChangeSound;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        canvas = GetComponentInParent<VictoryMenu>();
+        menuController = GetComponentInParent<MenuController>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -53,8 +47,7 @@ public class MenuButton : MonoBehaviour
         if (menuController.index == thisIndex)
         {
             animator.SetBool("selected", true);
-            //FMODUnity.RuntimeManager.PlayOneShot(MenuChangeSound);
-            if ((Input.GetAxis("Submit") == 1 || Input.GetAxis("Fire1") == 1) && !notClickable)
+            if ((Input.GetAxis("Submit") == 1 || Input.GetAxis("Accelerate 1") == 1) && !notClickable)
             {
                 animator.SetBool("pressed", true);
             }
@@ -62,12 +55,11 @@ public class MenuButton : MonoBehaviour
             {
                 menuTransitionOut();
             }
-            if ((Input.GetAxis("Submit") == 1 || Input.GetAxis("Fire1") == 1) && notClickable)
+            if ((Input.GetAxis("Submit") == 1 || Input.GetAxis("Accelerate 1") == 1) && notClickable)
             {
                 menuController.lockedIndex = menuController.index;
                 menuProgression();
             }
-
         }
         else
         {
@@ -77,7 +69,6 @@ public class MenuButton : MonoBehaviour
 
     public void menuTransitionOut()
     {
-        animatorFunctions.disableOnce = true;
         canvas.currentlyTransitioning = true;
         menuController.hasTransitionedOut = true;
         menuController.lockedIndex = menuController.index;
@@ -89,62 +80,20 @@ public class MenuButton : MonoBehaviour
 
         //following code occurs once the fade out transition animation has ended
         // transitioning from main menu
-        if (canvas.inMainMenu)
+        if (canvas.inVictoryMenu)
         {
             switch (menuController.lockedIndex)
             {
                 case 0:
                     //FOR AUDIO FRIENDS, this code occurs when player has pressed/clicked 'NEW GAME' (haven't made it go to new scene yet lol)
-                    Debug.Log("Play the Game");
-                    canvas.inVictoryMenu = true;
-                    canvas.inMainMenu = false;
+                    Debug.Log("Restart");
+                    canvas.inVictoryMenu = false;
                     switchMenuDisplay();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                     break;
                 case 1:
                     //FOR AUDIO FRIENDS, this code occurs when player has pressed/clicked 'OPTIONS' (less intense sfx, can be reused for the rest of the cases tbh)
-                    Debug.Log("Options Menu");
-                    canvas.inMainMenu = false;
-                    canvas.inOptionsMenu = true;
-                    switchMenuDisplay();
-                    break;
-                case 2:
-                    Debug.Log("Exiting Game");
-                    Application.Quit();
-                    break;
-            }
-        }
-        else if (canvas.inOptionsMenu)
-        {
-            switch (menuController.lockedIndex)
-            {
-                case 0:
-                    Debug.Log("Options 1");
-
-                    break;
-                case 1:
-                    Debug.Log("Options 2");
-
-                    break;
-                case 2:
-                    Debug.Log("Go back to Main Menu");
-                    canvas.inMainMenu = true;
-                    canvas.inOptionsMenu = false;
-                    switchMenuDisplay();
-                    break;
-            }
-        }
-        else if (canvas.inVictoryMenu)
-        {
-            switch (menuController.lockedIndex)
-            {
-                case 0:
-                    Debug.Log("Play the Game");
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                    break;
-                case 1:
-                    Debug.Log("Go back to Main Menu");
-                    canvas.inMainMenu = true;
+                    Debug.Log("Lobby");
                     canvas.inVictoryMenu = false;
                     switchMenuDisplay();
                     break;
@@ -153,27 +102,6 @@ public class MenuButton : MonoBehaviour
                     Application.Quit();
                     break;
             }
-        }
-        else if (canvas.inDefeatMenu)
-        {
-            switch (menuController.lockedIndex)
-            {
-                case 0:
-                    Debug.Log("Play the Game");
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                    break;
-                case 1:
-                    Debug.Log("Go back to Main Menu");
-                    canvas.inMainMenu = true;
-                    canvas.inDefeatMenu = false;
-                    switchMenuDisplay();
-                    break;
-                case 2:
-                    Debug.Log("Exiting Game");
-                    Application.Quit();
-                    break;
-            }
-
         }
     }
 
