@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Waypoint
   - PlayerTuk
+  - Offroad
   layers:
   - Default
   - TransparentFX
