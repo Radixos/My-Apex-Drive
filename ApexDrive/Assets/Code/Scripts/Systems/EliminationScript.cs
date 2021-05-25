@@ -8,6 +8,7 @@ public class EliminationScript : MonoBehaviour
     private RaceManager carManager;
     private Camera mainCamera;
     private float waitTimer = 2.5f;
+    float eliminatedTotal = 0.0f;
 
     void Start()
     {
@@ -17,8 +18,8 @@ public class EliminationScript : MonoBehaviour
 
     void Update()
     {
-        float eliminatedTotal = 0;
-
+        //float eliminatedTotal = 0;
+        Debug.Log(eliminatedTotal);
         for (int i = 0; i < carManager.raceCars.Count; i++)
         {
             PositionUpdate currentCar = carManager.raceCars[i];
@@ -40,10 +41,10 @@ public class EliminationScript : MonoBehaviour
                 }
             }
 
-            else if (currentCar.eliminated == true)
-            {
-                eliminatedTotal++;
-            }
+            //else if (currentCar.eliminated == true)
+            //{
+            //    eliminatedTotal++;
+            //}
 
             else if (boundaryCheck == false)
             {
