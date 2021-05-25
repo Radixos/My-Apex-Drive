@@ -37,7 +37,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.strings.bank
   Name: Master.strings
+<<<<<<< Updated upstream
   lastModified: 637575678522032570
+=======
+  lastModified: 637575724516084055
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -131,6 +135,26 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 5225
+--- !u!114 &-8678565751269013822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &-8554911854940170693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +405,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: -3526548902668896525}
+=======
+  - {fileID: 3783564829022153538}
+>>>>>>> Stashed changes
   MinDistance: 10
   MaxDistance: 100
   Length: 8980
@@ -533,6 +561,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6588446807912895129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-6585172397741756524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,10 +660,34 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: -4063157611991182326}
+=======
+  - {fileID: -5838282196025542532}
+>>>>>>> Stashed changes
   MinDistance: 0
   MaxDistance: 0
   Length: 0
+--- !u!114 &-6333239112985813037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-6256951062230366215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,7 +891,11 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+<<<<<<< Updated upstream
 --- !u!114 &-5790972049130514116
+=======
+--- !u!114 &-5838282196025542532
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -829,12 +905,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+<<<<<<< Updated upstream
   m_Name: parameter:/Engine/Airtime
   m_EditorClassIdentifier: 
   Name: Airtime
   Min: 0
   Max: 1
   Default: 1
+=======
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+  Default: 0
+>>>>>>> Stashed changes
   ID:
     data1: 0
     data2: 0
@@ -859,7 +944,11 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+<<<<<<< Updated upstream
 --- !u!114 &-5689264814180654983
+=======
+--- !u!114 &-5678849672488396635
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -869,6 +958,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+<<<<<<< Updated upstream
   m_Name: parameter:/Engine/Accelleration
   m_EditorClassIdentifier: 
   Name: Accelleration
@@ -879,6 +969,18 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+=======
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 90
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+>>>>>>> Stashed changes
 --- !u!114 &-5635623480958756255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1122,7 +1224,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Menu.bank
   Name: Menu
+<<<<<<< Updated upstream
   lastModified: 637575678522472652
+=======
+  lastModified: 637575724516113973
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1166,7 +1272,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: 7675477690780937848}
+=======
+  - {fileID: -2882260891696609123}
+>>>>>>> Stashed changes
   MinDistance: 1
   MaxDistance: 10000
   Length: 0
@@ -1389,7 +1499,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.bank
   Name: Master
+<<<<<<< Updated upstream
   lastModified: 637575678521987563
+=======
+  lastModified: 637575724516163843
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1553,7 +1667,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Level.bank
   Name: Level
+<<<<<<< Updated upstream
   lastModified: 637575678521002385
+=======
+  lastModified: 637575724516113973
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1801,7 +1919,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: -4458442712282858114}
+=======
+  - {fileID: 3582911433611516186}
+>>>>>>> Stashed changes
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -1848,6 +1970,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2882260891696609123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-2710781667006553684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2101,7 +2243,11 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+<<<<<<< Updated upstream
 --- !u!114 &-1736581672962425101
+=======
+--- !u!114 &-1807898144614273626
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2111,16 +2257,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+<<<<<<< Updated upstream
   m_Name: parameter:/Countdown/Interrupted
   m_EditorClassIdentifier: 
   Name: Interrupted
   Min: 0
   Max: 1
+=======
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+>>>>>>> Stashed changes
   Default: 0
   ID:
     data1: 0
     data2: 0
+<<<<<<< Updated upstream
   Exists: 0
+=======
+  Exists: 1
+>>>>>>> Stashed changes
 --- !u!114 &-1699149070378774530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2466,7 +2624,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: -6441855862870836634}
+=======
+  - {fileID: 3115130615334739658}
+>>>>>>> Stashed changes
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -2563,7 +2725,11 @@ MonoBehaviour:
   - {fileID: -4084557944344076295}
   StringsBanks:
   - {fileID: -9025116047335453708}
+<<<<<<< Updated upstream
   stringsBankWriteTime: 637575678522032570
+=======
+  stringsBankWriteTime: 637575724516084055
+>>>>>>> Stashed changes
   cacheVersion: 5
 --- !u!114 &19045008643753650
 MonoBehaviour:
@@ -3243,7 +3409,11 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+<<<<<<< Updated upstream
 --- !u!114 &3327503034424442246
+=======
+--- !u!114 &3115130615334739658
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3253,17 +3423,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+<<<<<<< Updated upstream
   m_Name: parameter:/defensive/Stop
   m_EditorClassIdentifier: 
   Name: Stop
+=======
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+>>>>>>> Stashed changes
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
+<<<<<<< Updated upstream
   Exists: 0
 --- !u!114 &3358295564087589896
+=======
+  Exists: 1
+--- !u!114 &3582911433611516186
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3273,6 +3454,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+<<<<<<< Updated upstream
   m_Name: parameter:/Jump/Airtime
   m_EditorClassIdentifier: 
   Name: Airtime
@@ -3283,6 +3465,18 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+=======
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+>>>>>>> Stashed changes
 --- !u!114 &3630985238891485348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3326,6 +3520,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3783564829022153538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &3823089446401815406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3621,7 +3835,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: -8520550116334554172}
+=======
+  - {fileID: -6333239112985813037}
+>>>>>>> Stashed changes
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
@@ -4139,6 +4357,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &8276729571338621240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &8290075663871966593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4226,11 +4464,19 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: -2581467759492945064}
   - {fileID: -1084625957958158256}
   - {fileID: -5790972049130514116}
   MinDistance: 100
   MaxDistance: 1200
+=======
+  - {fileID: 8276729571338621240}
+  - {fileID: -5678849672488396635}
+  - {fileID: -6588446807912895129}
+  MinDistance: 1
+  MaxDistance: 200
+>>>>>>> Stashed changes
   Length: 0
 --- !u!114 &8477328621681986366
 MonoBehaviour:
@@ -4355,7 +4601,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: -807601603954454517}
+=======
+  - {fileID: -1807898144614273626}
+>>>>>>> Stashed changes
   MinDistance: 1
   MaxDistance: 20
   Length: 0
