@@ -225,7 +225,7 @@ SphereCollider:
   m_GameObject: {fileID: 897456700178873886}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -293,6 +293,7 @@ MonoBehaviour:
   carAttributes: {fileID: 11400000, guid: 841c01e7a872c3a4882b4d99db6d6f80, type: 2}
   sphereCollider: {fileID: 6281512184417559450}
   inAir: 0
+  surface: 0
   isDrifting: 1
   driftSpeedThresholdPercent: 0
   driftSideBoostMultiplier: 0
@@ -305,6 +306,8 @@ MonoBehaviour:
   driftTurnAngle: 0
   acceleration: 0
   driftingAcceleration: 0
+  currentSurfaceMultiplier: 1
+  offroadMultiplier: 0
   currSpeed: 0
   maxSpeed: 0
 --- !u!114 &172996111640913308
@@ -480,6 +483,21 @@ PrefabInstance:
     - target: {fileID: 4841828537153292, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 199061620583998734, guid: 89956e675b749204c8e10395ce2b5fb9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 199147534815207922, guid: 89956e675b749204c8e10395ce2b5fb9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 199681101902524428, guid: 89956e675b749204c8e10395ce2b5fb9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
