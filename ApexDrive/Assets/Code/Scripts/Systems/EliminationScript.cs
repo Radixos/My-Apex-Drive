@@ -19,7 +19,7 @@ public class EliminationScript : MonoBehaviour
     void Update()
     {
         //float eliminatedTotal = 0;
-        Debug.Log(eliminatedTotal);
+        //Debug.Log(eliminatedTotal);
         for (int i = 0; i < carManager.raceCars.Count; i++)
         {
             PositionUpdate currentCar = carManager.raceCars[i];
@@ -54,6 +54,7 @@ public class EliminationScript : MonoBehaviour
             if (eliminatedTotal == carManager.raceCars.Count - 1 && currentCar.eliminated == false)
             {
                 currentCar.winner = true;
+                eliminatedTotal = 0;
             }
         }
     }
