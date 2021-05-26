@@ -4995,6 +4995,8 @@ GameObject:
   - component: {fileID: 696034327234795257}
   - component: {fileID: 172996111640913308}
   - component: {fileID: 5366670244643328143}
+  - component: {fileID: 2453858684063554425}
+  - component: {fileID: 9074635355637132485}
   m_Layer: 0
   m_Name: Direction
   m_TagString: Untagged
@@ -5030,7 +5032,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1024dda45bdb7a94998def57e0680af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPlayer: 1
+  m_Player:
+    m_PlayerID: 0
+    m_ControllerID: 1
+    Car: {fileID: 0}
+    RoundWins: 0
+    GameWins: 0
 --- !u!114 &696034327234795257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5097,6 +5104,34 @@ MonoBehaviour:
   rampage: {fileID: 1892673406485149845}
   rampageLifetime: 0
   rampageTimer: 0
+--- !u!114 &2453858684063554425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646619776548488429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e5a0c1594acc94288d8933c89da32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityCollision: {fileID: 628565544233810866}
+  model: {fileID: 6361700404287866032}
+  initialDriftDirectionRight: 0
+  targetMinusCurrAngle: 0
+--- !u!114 &9074635355637132485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646619776548488429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0d10508d0eb88439087f08520836a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4728441515130372782
 GameObject:
   m_ObjectHideFlags: 0
@@ -5122,7 +5157,7 @@ Transform:
   m_GameObject: {fileID: 4728441515130372782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1522.6934, y: 1474.4475, z: -1137.0259}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 2855900048039024665}
   - {fileID: 6361700404287866032}
