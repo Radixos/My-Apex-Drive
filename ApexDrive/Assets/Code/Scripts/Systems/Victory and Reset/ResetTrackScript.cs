@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResetTrackScript : MonoBehaviour
 {
@@ -62,7 +63,8 @@ public class ResetTrackScript : MonoBehaviour
 
         if (setVictoryState == true)
         {
-            //menu
+            setVictoryState = false;
+            SceneManager.LoadScene("LobbyScene");
         }
     }
 
@@ -83,7 +85,6 @@ public class ResetTrackScript : MonoBehaviour
             if (setResetState == true)
             {
                 PositionUpdate cycleThroughCars = carManager.raceCars[j];
-                setVictoryState = false;
                 //reset player positions
                 cycleThroughCars.transform.position = defaultPositions[j];
                 cycleThroughCars.transform.rotation = defaultRotations[j];
@@ -97,6 +98,7 @@ public class ResetTrackScript : MonoBehaviour
                 {
                     Debug.Log(cycleThroughCars.transform.position);
                     setResetState = false;
+                    setVictoryState = true;
                 }
             }
         }

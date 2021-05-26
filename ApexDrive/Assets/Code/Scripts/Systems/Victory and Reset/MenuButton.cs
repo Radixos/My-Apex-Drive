@@ -89,13 +89,14 @@ public class MenuButton : MonoBehaviour
                     Debug.Log("Restart");
                     canvas.inVictoryMenu = false;
                     switchMenuDisplay();
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    SceneManager.LoadScene("LevelDesignScene");
                     break;
                 case 1:
                     //FOR AUDIO FRIENDS, this code occurs when player has pressed/clicked 'OPTIONS' (less intense sfx, can be reused for the rest of the cases tbh)
                     Debug.Log("Lobby");
                     canvas.inVictoryMenu = false;
                     switchMenuDisplay();
+                    SceneManager.LoadScene("LobbyScene");
                     break;
                 case 2:
                     Debug.Log("Exiting Game");
