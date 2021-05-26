@@ -6,7 +6,6 @@ using TMPro;
 
 public class NameTagScript : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Canvas UICanvas;
     private RaceManager carSystem;
     private TextMeshPro[] nameTags;
@@ -14,7 +13,9 @@ public class NameTagScript : MonoBehaviour
     private Camera mainCamera;
     [SerializeField] private GameObject raceManager;
     private int numberOfCars;
-    private Vector3 offset = new Vector3(9.65f, -1.5f, 0.0f);
+    private Vector3 offset = new Vector3(0.0f, 1.5f, 7.5f);
+    //9.65f, -1.5f, 0.0f for Rad's scene
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -24,19 +25,6 @@ public class NameTagScript : MonoBehaviour
         nameTags = new TextMeshPro[numberOfCars];
         tagChildren = new GameObject[numberOfCars];
 
-        //for (int i = 0; i < numberOfCars; i++)
-        //{
-        //    PositionUpdate processedCar = carSystem.raceCars[i];
-
-        //    if (processedCar.eliminated == false)
-        //    {
-        //        //couldn't find a way to create TextMeshPro objects similar to others, 
-        //        //so each in list added via AddComponent
-        //        nameTags[i] = tagChildren[i].AddComponent<TextMeshPro>();
-        //        tagChildren[i].transform.parent = processedCar.gameObject.transform;
-        //    }
-        //}
-
         for (int i = 0; i < numberOfCars; i++)
         {
             PositionUpdate processedCar = carSystem.raceCars[i];
@@ -44,16 +32,17 @@ public class NameTagScript : MonoBehaviour
             tagChildren[i].transform.parent = UICanvas.gameObject.transform;
             TextMeshPro tempAddText = tagChildren[i].AddComponent<TextMeshPro>();
             tempAddText.text = processedCar.name;
-            tempAddText.fontSize = 5;
+            tempAddText.fontSize = 15;
+            tempAddText.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f); // leveldesign POV
+            tempAddText.outlineColor = Color.black;
+            tempAddText.outlineWidth = 0.2f;
             nameTags[i] = tempAddText;
+
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Camera.WorldToScreenPoint
-
         for (int i = 0; i < numberOfCars; i++)
         {
             PositionUpdate processedCar = carSystem.raceCars[i];
@@ -63,8 +52,12 @@ public class NameTagScript : MonoBehaviour
                 Vector3 desiredPosition = processedCar.transform.position + offset;
                 Vector3 desiredTagPosition = mainCamera.WorldToScreenPoint(desiredPosition);
                 Vector3 viewPosition = mainCamera.WorldToScreenPoint(desiredPosition);
-                //tagChildren[i].transform.position = viewPosition;
                 tagChildren[i].transform.position = desiredPosition;
+            }
+
+            else
+            {
+                tagChildren[i].SetActive(false);
             }
         }
     }
