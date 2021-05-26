@@ -16,7 +16,7 @@ public class VehicleColours : MonoBehaviour
         {
             PositionUpdate processedCar = vehicleManager.raceCars[i];
             Transform sphereCarRoot = processedCar.gameObject.transform.parent;
-            GameObject rickshawModel = sphereCarRoot.GetChild(2).gameObject;
+            GameObject rickshawModel = sphereCarRoot.GetChild(1).gameObject;
             Material alterMat = rickshawModel.GetComponent<Renderer>().materials[10];
 
             switch (i)
