@@ -26,15 +26,15 @@ public class VehicleColours : MonoBehaviour
                     break;
 
                 case 1:
-                    alterMat.SetColor("_BaseColor", Color.blue);
-                    break;
-
-                case 2:
                     alterMat.SetColor("_BaseColor", Color.green);
                     break;
 
-                case 3:
+                case 2:
                     alterMat.SetColor("_BaseColor", Color.yellow);
+                    break;
+
+                case 3:
+                    alterMat.SetColor("_BaseColor", Color.blue);
                     break;
             }
         }
