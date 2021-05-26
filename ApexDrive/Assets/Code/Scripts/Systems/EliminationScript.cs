@@ -37,6 +37,7 @@ public class EliminationScript : MonoBehaviour
                 {
                     currentCar.gameObject.SetActive(false);
                     currentCar.eliminated = true;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/TukTuk/Eliminatioin");
                     eliminatedTotal++;
                 }
             }
