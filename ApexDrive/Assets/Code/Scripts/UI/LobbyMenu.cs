@@ -1,8 +1,10 @@
 ﻿// Alec Gamble
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [DefaultExecutionOrder(50)]
 [RequireComponent(typeof(Animator))]
@@ -11,9 +13,9 @@ public class LobbyMenu : MonoBehaviour
     private Animator m_Animator;
     [SerializeField] private Animator[] m_PlayerPortraits;
     [SerializeField] private Transform m_MenuContainer;
-    [SerializeField] private bool[] m_PlayersReady;
+    [SerializeField] private MultiplayerButton m_StartGameButton;
 
-    private Coroutine m_LoadGameRoutine;
+    [SerializeField] private bool[] m_PlayersReady;
 
     private FMOD.Studio.EventInstance[] m_LobbyPlayerSFX = new FMOD.Studio.EventInstance[GameManager.MaxPlayers];
 
@@ -37,19 +39,6 @@ public class LobbyMenu : MonoBehaviour
         for(int i = 0; i < m_PlayersReady.Length; i++)
         {
             m_PlayersReady[i] = false;
-        }
-
-        if(GameManager.Instance.PlayerCount > 0)
-        {
-            if(!m_MenuIsVisible)
-            {
-                if(m_Animator != null) m_Animator.SetBool("MenuOpen", true);
-                m_MenuIsVisible = true;
-            }
-            foreach(Player player in GameManager.Instance.ConnectedPlayers)
-            {
-
-            }
         }
     }
 
@@ -90,7 +79,7 @@ public class LobbyMenu : MonoBehaviour
         if(x >= 2 && x >= GameManager.Instance.PlayerCount) 
         {
             m_Animator.SetBool("StartGame", true);
-            m_LoadGameRoutine = StartCoroutine(Co_LoadGameScene(3.5f));
+            Debug.Log("Load game scene in 3.5 seconds");
         }
     }
 
@@ -98,7 +87,6 @@ public class LobbyMenu : MonoBehaviour
     {
         m_PlayersReady[data.Player.PlayerID] = false;
         m_Animator.SetBool("StartGame", false);
-        StopCoroutine(m_LoadGameRoutine);
     }
 
     private void OnPlayerConnected(Player player)
@@ -108,9 +96,11 @@ public class LobbyMenu : MonoBehaviour
             if(m_Animator != null) m_Animator.SetBool("MenuOpen", true);
             m_MenuIsVisible = true;
         }
+        else m_StartGameButton.interactable = true;
         if(player != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Player Join");
         m_LobbyPlayerSFX[player.PlayerID].start();
+
     }
 
     private void OnPlayerDisconnected(Player player)
@@ -124,16 +114,5 @@ public class LobbyMenu : MonoBehaviour
         m_PlayersReady[player.PlayerID] = false;
         if(player != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", false);
         m_LobbyPlayerSFX[player.PlayerID].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-    }
-
-    private IEnumerator Co_LoadGameScene(float delay)
-    {
-        float elapsed = 0.0f;
-        while(elapsed < delay)
-        {
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        SceneManager.LoadScene("LevelDesignScene");
     }
 }

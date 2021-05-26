@@ -11,7 +11,7 @@ public class Player
     [SerializeField] private int m_ControllerID = -1;
     private bool m_IsConnected;
     private Color m_PlayerColor;
-    public CoreCarModule Car;
+    public SphereCarController CharacterController;
     public int RoundWins = 0;
     public int GameWins = 0;
 
