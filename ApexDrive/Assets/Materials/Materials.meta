@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:ApexDrive/Assets/Code/Scripts/UI/Multiplayer UI/Editor.meta
+guid: 6ed69392860b09e4faa1bbddbad51340
+=======
 guid: ae1977d441acde34aa93a1799d225686
+>>>>>>> Rad:ApexDrive/Assets/Materials/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

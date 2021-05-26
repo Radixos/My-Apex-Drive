@@ -9,8 +9,12 @@ public class CarStats : MonoBehaviour
     [SerializeField]
     private Rigidbody sphereCollider;
 
+    [Header("Car State")]
     [SerializeField]
     private bool inAir;
+    [SerializeField]
+    [Tooltip("0 = In Air, 1 = Road, 2 = Offroad")]
+    private int surface;
 
     [Header("Drifting Options")]
     [SerializeField]
@@ -22,7 +26,7 @@ public class CarStats : MonoBehaviour
 
     [Header("Boost Options")]
     [SerializeField]
-    private float currentBoostMultiplier;
+    private float currentBoostMultiplier = 1f;
     [SerializeField]
     private float boostMultiplier;
 
@@ -44,6 +48,10 @@ public class CarStats : MonoBehaviour
     [SerializeField]
     private float driftingAcceleration;
     [SerializeField]
+    private float currentSurfaceMultiplier = 1f;
+    [SerializeField]
+    private float offroadMultiplier;
+    [SerializeField]
     private float currSpeed;
     [SerializeField]
     private float maxSpeed;
@@ -64,21 +72,27 @@ public class CarStats : MonoBehaviour
     public float CurrSpeed { get => currSpeed; set => currSpeed = value; }
     public float MaxSpeed { get => maxSpeed; set => maxSpeed = value; }
     public Rigidbody SphereCollider { get => sphereCollider; set => sphereCollider = value; }
+    public CarAttributes CarAttributes { get => carAttributes; set => carAttributes = value; }
+    public int Surface { get => surface; set => surface = value; }
+    public float OffroadMultiplier { get => offroadMultiplier; set => offroadMultiplier = value; }
+    public float CurrentSurfaceMultiplier { get => currentSurfaceMultiplier; set => currentSurfaceMultiplier = value; }
 
     void Start()
     {
         //Assign car attributes
-        DriftSpeedThresholdPercent = carAttributes.driftSpeedThresholdPercent;
-        DriftSideBoostMultiplier = carAttributes.driftSideBoostMultiplier;
-        BoostMultiplier = carAttributes.boostMultiplier;
+        DriftSpeedThresholdPercent = CarAttributes.driftSpeedThresholdPercent;
+        DriftSideBoostMultiplier = CarAttributes.driftSideBoostMultiplier;
+        BoostMultiplier = CarAttributes.boostMultiplier;
 
-        TurnSpeed = carAttributes.turnSpeed;
+        TurnSpeed = CarAttributes.turnSpeed;
 
-        NormalTurnAngle = carAttributes.normalTurnAngle;
-        DriftTurnAngle = carAttributes.driftTurnAngle;
+        NormalTurnAngle = CarAttributes.normalTurnAngle;
+        DriftTurnAngle = CarAttributes.driftTurnAngle;
 
-        DriftingAcceleration = carAttributes.driftingAcceleration;
-        Acceleration = carAttributes.acceleration;
+        DriftingAcceleration = CarAttributes.driftingAcceleration;
+        Acceleration = CarAttributes.acceleration;
+
+        OffroadMultiplier = CarAttributes.offroadMultiplier;
     }
 
     private void Update()
@@ -88,7 +102,7 @@ public class CarStats : MonoBehaviour
 
         if (!inAir)
         {
-            SphereCollider.drag = carAttributes.drag;
+            SphereCollider.drag = CarAttributes.drag;
         }
         else
         {
