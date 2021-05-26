@@ -25,6 +25,9 @@ public class Abilities : MonoBehaviour
     [SerializeField]
     private float rampageTimer;
 
+    //FMOD Stuff
+    FMOD.Studio.EventInstance Ability;
+
     private void Start()
     {
         carInputHandler = GetComponent<CarInputHandler>();

@@ -22,10 +22,34 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private float targetMinusCurrAngle;
 
+    //FMOD events
+    FMOD.Studio.EventInstance engine;
+    FMOD.Studio.EventDescription control;
+
+    FMOD.Studio.PARAMETER_DESCRIPTION speed;
+    FMOD.Studio.PARAMETER_DESCRIPTION accelleration;
+
+    FMOD.Studio.PARAMETER_ID spd;
+    FMOD.Studio.PARAMETER_ID acc;
+
     private void Start()
     {
         carInputHandler = GetComponent<CarInputHandler>();
         carStats = GetComponent<CarStats>();
+
+        engine = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/engine");
+
+        control = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
+        control.getParameterDescriptionByName("RPM", out speed);
+        spd = speed.id;
+
+        control = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
+        control.getParameterDescriptionByName("Accelleration", out accelleration);
+        acc = accelleration.id;
+
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(engine, transform, GetComponent<Rigidbody>());
+
+        engine.start();
     }
 
     private void Update()
@@ -35,8 +59,12 @@ public class CarController : MonoBehaviour
         vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
         vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
 
-        HandleAnimation();
+        if(!Input.GetButton(carInputHandler.AccelerateInput))
+        {
+            engine.setParameterByID(acc, 0f);
+        }
 
+        HandleAnimation();
 
     }
 
@@ -159,10 +187,13 @@ public class CarController : MonoBehaviour
             float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
             carStats.SphereCollider.AddForce(transform.right * carStats.CurrSpeed * oppositeDirection * carStats.DriftSideBoostMultiplier, ForceMode.Acceleration);
             carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
+            engine.setParameterByID(acc, 1f);
         }
         else
         {
             carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed, ForceMode.Acceleration);
+            engine.setParameterByID(acc, 1f);
         }
+        engine.setParameterByID(spd, carStats.CurrSpeed);
     }
 }
