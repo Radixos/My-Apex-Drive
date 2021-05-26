@@ -47,7 +47,7 @@ public class MenuButton : MonoBehaviour
         if (menuController.index == thisIndex)
         {
             animator.SetBool("selected", true);
-            if ((Input.GetAxis("Submit") == 1 || Input.GetAxis("Accelerate 1") == 1) && !notClickable)
+            if ((Input.GetAxis("Submit 1") == 1 || Input.GetAxis("Accelerate 1") == 1) && !notClickable)
             {
                 animator.SetBool("pressed", true);
             }
@@ -55,7 +55,7 @@ public class MenuButton : MonoBehaviour
             {
                 menuTransitionOut();
             }
-            if ((Input.GetAxis("Submit") == 1 || Input.GetAxis("Accelerate 1") == 1) && notClickable)
+            if ((Input.GetAxis("Submit 1") == 1 || Input.GetAxis("Accelerate 1") == 1) && notClickable)
             {
                 menuController.lockedIndex = menuController.index;
                 menuProgression();
@@ -96,7 +96,7 @@ public class MenuButton : MonoBehaviour
                     Debug.Log("Lobby");
                     canvas.inVictoryMenu = false;
                     switchMenuDisplay();
-                    SceneManager.LoadScene("LobbyScene");
+                    SceneManager.LoadScene("Lobby Menu");
                     break;
                 case 2:
                     Debug.Log("Exiting Game");
