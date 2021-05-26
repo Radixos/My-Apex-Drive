@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CarInputHandler))]
-public class SphereCarController : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     private CarInputHandler carInputHandler;
     private CarStats carStats;

@@ -17,27 +17,36 @@ public class RaceManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] private GameObject m_CarPrefab;
+    [SerializeField] private Transform[] m_InitialSpawnPoints;
+    public delegate void SpawnPlayerEvents();
+    public static SpawnPlayerEvents OnSpawnPlayers;
+
+
     public List<PositionUpdate> raceCars;
 
     public int totalColliders;
 
-    // Start is called before the first frame update
     void Start()
     {
         Initialise();
     }
 
-    // Update is called once per frame
-    //private void Update()
-    //{       
-    //}
-
     void Initialise()
     {
-        foreach (PositionUpdate positionUpdate in FindObjectsOfType<PositionUpdate>())
+        for(int i = 0; i < GameManager.Instance.PlayerCount; i++)
         {
-            raceCars.Add(positionUpdate);
+            if(m_InitialSpawnPoints.Length < i) break;
+            GameObject car = GameObject.Instantiate(m_CarPrefab, m_InitialSpawnPoints[i].position, m_InitialSpawnPoints[i].rotation);
+            CoreCarModule core = car.GetComponentInChildren<CoreCarModule>();
+            core.SetPlayer(GameManager.Instance.Players[i]);
+            raceCars.Add(car.GetComponentInChildren<PositionUpdate>());
         }
+        if(OnSpawnPlayers != null) OnSpawnPlayers();
+        // foreach (PositionUpdate positionUpdate in FindObjectsOfType<PositionUpdate>())
+        // {
+        //     raceCars.Add(positionUpdate);
+        // }
 
         totalColliders = GameObject.FindGameObjectsWithTag("Waypoint").Length;
     }

@@ -37,7 +37,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.strings.bank
   Name: Master.strings
-  lastModified: 637575576555827798
+  lastModified: 637575711103397130
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -240,6 +240,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-8389905379815176641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-8236011615677279964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,7 +380,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -2948706031758132529}
+  - {fileID: 4499084613677586461}
   MinDistance: 10
   MaxDistance: 100
   Length: 8980
@@ -571,7 +591,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 676802696538065706}
+  - {fileID: -3977275119632581480}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -981,7 +1001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Menu.bank
   Name: Menu
-  lastModified: 637575576556232859
+  lastModified: 637575711103427047
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1005,7 +1025,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -6174431903716558851}
+  - {fileID: -665352376121911118}
   MinDistance: 1
   MaxDistance: 10000
   Length: 0
@@ -1208,7 +1228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.bank
   Name: Master
-  lastModified: 637575576555622754
+  lastModified: 637575711103387152
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1252,6 +1272,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-3977275119632581480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-3913603069984003949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,7 +1392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Level.bank
   Name: Level
-  lastModified: 637575576546330200
+  lastModified: 637575711103317342
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1371,6 +1411,26 @@ MonoBehaviour:
   Name: Surface
   Min: 0
   Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-3665461415555416943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
   Default: 0
   ID:
     data1: 0
@@ -1560,7 +1620,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -4083784884168486405}
+  - {fileID: 538385609971697010}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -1607,6 +1667,46 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2817126869369016697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2795871473862999213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-2710781667006553684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2023,6 +2123,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-665352376121911118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-431221143835461897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2105,7 +2225,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -4533507142212030902}
+  - {fileID: -8389905379815176641}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -2124,6 +2244,26 @@ MonoBehaviour:
   Name: Load
   Min: 0
   Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-182662665097140541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 90
   Default: 0
   ID:
     data1: 0
@@ -2200,7 +2340,7 @@ MonoBehaviour:
   - {fileID: -4084557944344076295}
   StringsBanks:
   - {fileID: -9025116047335453708}
-  stringsBankWriteTime: 637575576555827798
+  stringsBankWriteTime: 637575711103397130
   cacheVersion: 5
 --- !u!114 &19045008643753650
 MonoBehaviour:
@@ -2335,6 +2475,46 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &450821066759024358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &538385609971697010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &576720638788781699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3032,6 +3212,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4499084613677586461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &4659384717600242580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3155,7 +3355,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 3921003576239078641}
+  - {fileID: 6338116955895613191}
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
@@ -3412,6 +3612,26 @@ MonoBehaviour:
   m_Name: parameter:/Impact/Force
   m_EditorClassIdentifier: 
   Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &6338116955895613191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
   Min: 0
   Max: 1
   Default: 0
@@ -3717,9 +3937,9 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -6744335666494376858}
-  - {fileID: -4170341743100860097}
-  - {fileID: 1895314408703974262}
+  - {fileID: -2817126869369016697}
+  - {fileID: -182662665097140541}
+  - {fileID: 450821066759024358}
   MinDistance: 1
   MaxDistance: 200
   Length: 0
@@ -3826,7 +4046,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -6585172397741756524}
+  - {fileID: -2795871473862999213}
   MinDistance: 1
   MaxDistance: 20
   Length: 0

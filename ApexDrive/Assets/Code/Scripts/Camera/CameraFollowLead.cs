@@ -18,9 +18,14 @@ public class CameraFollowLead : MonoBehaviour
     private Transform objToFollow;
     private Transform objToLookAt;
 
-    void Start()
+    private void OnEnable()
     {
-        Initialise();
+        RaceManager.OnSpawnPlayers += Initialise;
+    }
+
+    private void OnDisable()
+    {
+        RaceManager.OnSpawnPlayers -= Initialise;
     }
 
     void Initialise()
@@ -39,9 +44,11 @@ public class CameraFollowLead : MonoBehaviour
 
     void UpdateLeadFollow()
     {
-        leadPlayer = temp.raceCars[0].gameObject;
-
-        gameObject.GetComponent<CinemachineVirtualCamera>().Follow = leadPlayer.transform;
-        gameObject.GetComponent<CinemachineVirtualCamera>().LookAt = leadPlayer.transform;
+        if(temp != null) leadPlayer = temp.raceCars[0].gameObject;
+        if(leadPlayer != null)
+        {
+            gameObject.GetComponent<CinemachineVirtualCamera>().Follow = leadPlayer.transform;
+            gameObject.GetComponent<CinemachineVirtualCamera>().LookAt = leadPlayer.transform;
+        }
     }
 }
