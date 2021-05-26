@@ -54,17 +54,16 @@ public class ResetTrackScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (setVictoryState == true)
+        {
+            setVictoryState = false;
+            SceneManager.LoadScene("VictoryScene");
+        }
         for (int i = 0; i < carManager.raceCars.Count; i++)
         {
             PositionUpdate currentCar = carManager.raceCars[i];
             initVictoryState(i, currentCar);
             resetPlayers(i, currentCar);
-        }
-
-        if (setVictoryState == true)
-        {
-            setVictoryState = false;
-            SceneManager.LoadScene("LobbyScene");
         }
     }
 
