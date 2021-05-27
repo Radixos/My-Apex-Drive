@@ -66,10 +66,13 @@ public class RaceManager : MonoBehaviour
                         }
                     }
 
-                    if(raceCars[i].distanceCollider.GetInstanceID() == raceCars[j].distanceCollider.GetInstanceID() &&
+                    if (raceCars[i].distanceCollider.GetInstanceID() == raceCars[j].distanceCollider.GetInstanceID() &&
                         raceCars[i].distanceFromCollider > raceCars[j].distanceFromCollider)
                     {
-                        SwapRacers(i, j);
+                        // Helping camera to focus on the car in first place
+                        // with a bit of leisure space
+                        if (raceCars[i].distanceFromCollider - raceCars[j].distanceFromCollider >= 1.0f)
+                            SwapRacers(i, j);
                     }
 
                 }
