@@ -28,6 +28,8 @@ public class CarAttributes : ScriptableObject
     public float acceleration = 70f;
     [Tooltip("This determines the car's acceleration while boosting")]
     public float driftingAcceleration = 70f;
+    [Tooltip("This determines the car's acceleration multiplier while offroad")]
+    public float offroadMultiplier = 0.4f;
     [Tooltip("This determines the car's drag")]
     public float drag = 2f;
 }

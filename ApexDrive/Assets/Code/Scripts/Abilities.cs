@@ -26,6 +26,9 @@ public class Abilities : MonoBehaviour
     [SerializeField]
     private float rampageTimer;
 
+    //FMOD Stuff
+    FMOD.Studio.EventInstance Ability;
+
     private void Start()
     {
         carInputHandler = GetComponent<CarInputHandler>();
@@ -44,6 +47,10 @@ public class Abilities : MonoBehaviour
     private void Update()
     {
         AbilityLogic();
+        if(powerAmount < 0)
+        {
+            powerAmount = 0;
+        }
     }
 
     void AbilityLogic()
@@ -70,8 +77,7 @@ public class Abilities : MonoBehaviour
             // Activate one ability at a times
             // Shield power up
             if (Input.GetButton(carInputHandler.PowerAInput) &&
-                rampage.activeSelf == false &&
-                powerAmount >= 0.3f
+                rampage.activeSelf == false //&& powerAmount >= 0.3f
                 )
             {
                 if(!initialShieldPowerDepleted)
@@ -95,8 +101,7 @@ public class Abilities : MonoBehaviour
             }
             // Boost power up
             // Hold or tap?
-            else if (Input.GetButton(carInputHandler.BoostInput) &&
-                powerAmount >= 0.3f)
+            else if (Input.GetButton(carInputHandler.BoostInput)) //&& powerAmount >= 0.3f)
             {
                 carStats.CurrentBoostMultiplier = carStats.BoostMultiplier;
                 powerAmount -= Time.deltaTime * 0.4f;
