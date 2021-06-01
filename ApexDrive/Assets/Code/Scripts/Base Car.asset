@@ -20,4 +20,5 @@ MonoBehaviour:
   driftTurnAngle: 60
   acceleration: 70
   driftingAcceleration: 70
+  offroadMultiplier: 0.4
   drag: 2

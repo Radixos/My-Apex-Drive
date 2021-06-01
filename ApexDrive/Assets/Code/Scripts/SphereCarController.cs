@@ -20,6 +20,8 @@ public class SphereCarController : MonoBehaviour
     [SerializeField]
     private bool initialDriftDirectionRight;
     [SerializeField]
+    private float actualVelocity;
+    [SerializeField]
     private float targetMinusCurrAngle;
 
     private void OnEnable()
@@ -51,9 +53,22 @@ public class SphereCarController : MonoBehaviour
     private void Update()
     {
 
+<<<<<<< Updated upstream
         //horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
         //vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
         //vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
+=======
+        horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
+        vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
+        vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
+
+        actualVelocity = carStats.SphereCollider.velocity.sqrMagnitude;
+
+        if(!Input.GetButton(carInputHandler.AccelerateInput))
+        {
+            engine.setParameterByID(acc, 0f);
+        }
+>>>>>>> Stashed changes
 
         HandleAnimation();
     }
@@ -87,9 +102,28 @@ public class SphereCarController : MonoBehaviour
             Vector3 newRight = Vector3.Cross(newUp, oldForward);
             Vector3 newForward = Vector3.Cross(newRight, newUp);
 
+            //Rotate based on the normal of the floor
             model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8f);
 
+<<<<<<< Updated upstream
             model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
+=======
+            //Left and Right tilt
+            //model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
+
+            switch (hit.collider.tag)
+            {
+                case "Offroad":
+                    carStats.Surface = 2;
+                    break;
+                case "Road":
+                    carStats.Surface = 1;
+                    break;
+                default:
+                    carStats.Surface = 1;
+                    break;
+            }
+>>>>>>> Stashed changes
         }
         else
         {
@@ -144,7 +178,8 @@ public class SphereCarController : MonoBehaviour
             carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier;
         }
 
-        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 12f);
+        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 5f);
+
 
         //Forward Acceleration
         if (carStats.IsDrifting)
