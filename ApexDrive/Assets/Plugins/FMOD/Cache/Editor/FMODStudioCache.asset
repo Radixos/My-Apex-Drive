@@ -1,207 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-<<<<<<< Updated upstream
 --- !u!114 &-9160229577997685677
-=======
---- !u!114 &-9208202019228048341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Countdown/Interrupted
-  m_EditorClassIdentifier: 
-  Name: Interrupted
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
---- !u!114 &-9093111134406223134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/defensive/Stop
-  m_EditorClassIdentifier: 
-  Name: Stop
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 0
---- !u!114 &-8869104942037864112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/UI Move
-  m_EditorClassIdentifier: 
-  Path: event:/UI/UI Move
-  guid: 7675c24b636f4c468f25453c0d2766a6
-  Banks:
-  - {fileID: 7250163760902051962}
-  - {fileID: -4387104479761541964}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 5186
---- !u!114 &-8654829880143263154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Drifting
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Drifting
-  guid: bd01bce32fbd7f49bf9777153c8d1e3d
-  Banks:
-  - {fileID: 7250163760902051962}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-8372615074642642746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Player Join
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Player Join
-  guid: 8c38d46793179542bd0d54abab5eb097
-  Banks:
-  - {fileID: 7250163760902051962}
-  - {fileID: -4387104479761541964}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 1673
---- !u!114 &-8157996228811609389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Engine/RPM
-  m_EditorClassIdentifier: 
-  Name: RPM
-  Min: 0
-  Max: 90
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-8009732232137475237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/UI Move
-  m_EditorClassIdentifier: 
-  Path: event:/UI/UI Move
-  guid: 7675c24b636f4c468f25453c0d2766a6
-  Banks:
-  - {fileID: -6043911501710511124}
-  - {fileID: -6677888824536935793}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 5186
---- !u!114 &-7878951619127548884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Level.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Level.bank
-  Name: Level
-  lastModified: 637575861250294832
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-7743210478422553797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Submit
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Submit
-  guid: 201a9d4ee6f75e48aa09f0929547271a
-  Banks:
-  - {fileID: -6043911501710511124}
-  - {fileID: -6677888824536935793}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 5186
---- !u!114 &-7635074313747821360
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -216,11 +15,7 @@ MonoBehaviour:
   Path: event:/TukTuk/Elimination
   guid: f70dc56026b3ce4da22a11d666f8cb90
   Banks:
-<<<<<<< Updated upstream
   - {fileID: -431221143835461897}
-=======
-  - {fileID: -6043911501710511124}
->>>>>>> Stashed changes
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -228,345 +23,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1500
-<<<<<<< Updated upstream
---- !u!114 &-8982917284318672901
-=======
---- !u!114 &-7072275767048012244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Break
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Break
-  guid: 9a38e1744312b94cb0d4519375ff9d18
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: 3408861518346117546}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-7026322175211557643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Countdown
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Countdown
-  guid: de23880b41a44e4fa10c02d48498fbe7
-  Banks:
-  - {fileID: -6043911501710511124}
-  - {fileID: -6677888824536935793}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -1685751305409406737}
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &-6677888824536935793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Menu.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Menu.bank
-  Name: Menu
-  lastModified: 637575602232739159
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-6500098777726585839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Player Idle
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Player Idle
-  guid: 5392ff0df7e938488885d71ff9ff73fd
-  Banks:
-  - {fileID: 7250163760902051962}
-  - {fileID: -4387104479761541964}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 5186
---- !u!114 &-6043911501710511124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.bank
-  Name: Master
-  lastModified: 637575861250394730
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-5216223015872223905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/birds
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/birds
-  guid: ec7c31bdcabef44f9298a70e0a742f65
-  Banks:
-  - {fileID: -3617557263565664909}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-5164415181209284049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Combo_Start
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Combo_Start
-  guid: 19ba88f656014f47ac5dbabfd0d678d6
-  Banks:
-  - {fileID: 7250163760902051962}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-5119044761278593394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/HUD/Abilities/aggressive
-  m_EditorClassIdentifier: 
-  Path: event:/HUD/Abilities/aggressive
-  guid: acdea352b18fe746ba11f5864d2ab8ad
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-5048259750773867002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/mountain_ambience
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/mountain_ambience
-  guid: 66f6bdc2fb988b48a8884fda214e9dc9
-  Banks:
-  - {fileID: -7878951619127548884}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 82585
---- !u!114 &-4712861051431771666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/location
-  m_EditorClassIdentifier: 
-  Name: location
-  Min: 0
-  Max: 5
-  Default: 0
-  ID:
-    data1: 3845173986
-    data2: 1298369521
-  Exists: 1
---- !u!114 &-4387104479761541964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Menu.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Menu.bank
-  Name: Menu
-  lastModified: 637575602232739159
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-4363124755276065905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Engine
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Engine
-  guid: 7c4b4118260021429ecacb961cf86d6d
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -2523874877018670790}
-  - {fileID: -8157996228811609389}
-  - {fileID: 4637317476146092823}
-  MinDistance: 100
-  MaxDistance: 1200
-  Length: 0
---- !u!114 &-4359653342005295767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Combo_Drop
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Combo_Drop
-  guid: c7b61d9bdb477d49ae3088e26eefa8df
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-4130353462476742201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/waterfall
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/waterfall
-  guid: b7bd5af18715dc47bc19ecfe425fbfb7
-  Banks:
-  - {fileID: -7878951619127548884}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-3990223886682496530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Submit
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Submit
-  guid: 201a9d4ee6f75e48aa09f0929547271a
-  Banks:
-  - {fileID: 7250163760902051962}
-  - {fileID: -4387104479761541964}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 5186
---- !u!114 &-3898972683604812498
+--- !u!114 &-9025116047335453708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -580,31 +37,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.strings.bank
   Name: Master.strings
-  lastModified: 637575861250404721
+<<<<<<< Updated upstream
+  lastModified: 637575678522032570
+=======
+  lastModified: 637575724516084055
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes:
   - Name: 
     Value: 2626
   Exists: 1
---- !u!114 &-3617557263565664909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Level.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Level.bank
-  Name: Level
-  lastModified: 637575861250294832
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-3490959586770835353
+--- !u!114 &-8982917284318672901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -614,67 +57,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/birds
+  m_Name: event:/TukTuk/Land
   m_EditorClassIdentifier: 
-  Path: event:/Environment/birds
-  guid: ec7c31bdcabef44f9298a70e0a742f65
+  Path: event:/TukTuk/Land
+  guid: b15dbbcd37cca141952ba206a244e9b5
   Banks:
-  - {fileID: -7878951619127548884}
+  - {fileID: -431221143835461897}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-3483460794354752515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Jump
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Jump
-  guid: 28f42d086628dc4f891e0c113b6b43c1
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
   Parameters:
-  - {fileID: 2001395403204444895}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2000
---- !u!114 &-3092334746306575246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Combo_Start
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Combo_Start
-  guid: 19ba88f656014f47ac5dbabfd0d678d6
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
+  - {fileID: -7184460185274765724}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-3087549765494369868
+--- !u!114 &-8952288292376759933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -694,7 +91,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-2706467350747284860
+--- !u!114 &-8916418125812033631
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -704,17 +101,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Filling
+  m_Name: parameter:/Jump/Airtime
   m_EditorClassIdentifier: 
-  Name: Filling
+  Name: Airtime
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
-    data1: 3733269648
-    data2: 1423849070
+    data1: 0
+    data2: 0
   Exists: 1
---- !u!114 &-2588630831928102751
+--- !u!114 &-8684785770774262381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -724,108 +121,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Combo_Drop
+  m_Name: event:/UI/Player Leave
   m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Combo_Drop
-  guid: c7b61d9bdb477d49ae3088e26eefa8df
+  Path: event:/UI/Player Leave
+  guid: 7af6d0a839b15944864597b2d8a22622
   Banks:
-  - {fileID: 7250163760902051962}
+  - {fileID: -4084557944344076295}
+  - {fileID: -4626808702941244732}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-2523874877018670790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Engine/Accelleration
-  m_EditorClassIdentifier: 
-  Name: Accelleration
-  Min: 0
-  Max: 1
-  Default: 1
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-2084024201775996035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Driving
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Driving
-  guid: 5eaa8ff55fcf7243a601f76872989695
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: 6691006315526004318}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-1939784465487364176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Impact/Force
-  m_EditorClassIdentifier: 
-  Name: Force
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-1687045423867431165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Jump
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Jump
-  guid: 28f42d086628dc4f891e0c113b6b43c1
-  Banks:
-  - {fileID: 7250163760902051962}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 4726967097412632565}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 2000
---- !u!114 &-1685751305409406737
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 5225
+--- !u!114 &-8678565751269013822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -844,8 +154,8 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
---- !u!114 &-1520381613615904251
+  Exists: 0
+--- !u!114 &-8554911854940170693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -855,17 +165,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/defensive/Stop
+  m_Name: parameter:/Driving/Surface
   m_EditorClassIdentifier: 
-  Name: Stop
+  Name: Surface
   Min: 0
-  Max: 1
+  Max: 10
   Default: 0
   ID:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-1174612944717597504
+--- !u!114 &-8541312371952550623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -875,12 +185,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/elimination_line
+  m_Name: event:/TukTuk/Impact
   m_EditorClassIdentifier: 
-  Path: event:/Environment/elimination_line
-  guid: 0c2e54bbc13a6940acd1f399108bdba2
+  Path: event:/TukTuk/Impact
+  guid: 38df500ddf61ce45b59a1e119808fc21
   Banks:
-  - {fileID: -7878951619127548884}
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -7047400899797328105}
+  MinDistance: 1
+  MaxDistance: 10000
+  Length: 0
+--- !u!114 &-8525071835653114349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Combo_Start
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Combo_Start
+  guid: 19ba88f656014f47ac5dbabfd0d678d6
+  Banks:
+  - {fileID: -6256951062230366215}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -888,7 +222,129 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-1055644853200320710
+--- !u!114 &-8520550116334554172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-8485155013014163785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/UI Move
+  m_EditorClassIdentifier: 
+  Path: event:/UI/UI Move
+  guid: 552b493b7915224fa37e0b2d4b266c99
+  Banks: []
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5186
+--- !u!114 &-8474251697604474796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-8236011615677279964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-7986573241691029898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-7984233935974215122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-7966254384996981195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -908,31 +364,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &-1050177962618486062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Impact
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Impact
-  guid: 38df500ddf61ce45b59a1e119808fc21
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -1939784465487364176}
-  MinDistance: 1
-  MaxDistance: 10000
-  Length: 0
---- !u!114 &-831770400907099353
+--- !u!114 &-7551660246406371931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -942,17 +374,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Engine/Accelleration
+  m_Name: parameter:/Driving/Surface
   m_EditorClassIdentifier: 
-  Name: Accelleration
+  Name: Surface
   Min: 0
-  Max: 1
-  Default: 1
+  Max: 10
+  Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
---- !u!114 &-703504487981186445
+  Exists: 0
+--- !u!114 &-7354810214011643649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/HUD/Abilities/defensive
+  m_EditorClassIdentifier: 
+  Path: event:/HUD/Abilities/defensive
+  guid: bb5dc0d95772924085e45663dfce4b97
+  Banks:
+  - {fileID: -3809526298087728390}
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+<<<<<<< Updated upstream
+  - {fileID: -3526548902668896525}
+=======
+  - {fileID: 3783564829022153538}
+>>>>>>> Stashed changes
+  MinDistance: 10
+  MaxDistance: 100
+  Length: 8980
+--- !u!114 &-7273781780984369724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -966,9 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/UI/Player Idle
   guid: 5392ff0df7e938488885d71ff9ff73fd
-  Banks:
-  - {fileID: -6043911501710511124}
-  - {fileID: -6677888824536935793}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -976,50 +435,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 5186
---- !u!114 &-269373871868987418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Drifting
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Drifting
-  guid: bd01bce32fbd7f49bf9777153c8d1e3d
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-135381253182125448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/location
-  m_EditorClassIdentifier: 
-  Name: location
-  Min: 0
-  Max: 5
-  Default: 0
-  ID:
-    data1: 3845173986
-    data2: 1298369521
-  Exists: 1
---- !u!114 &-21168171634600499
+--- !u!114 &-7184460185274765724
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1039,7 +455,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &11400000
+--- !u!114 &-7073629840890252166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1048,53 +464,1006 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Horn
   m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -3898972683604812498}
-  - {fileID: -7878951619127548884}
-  - {fileID: 7250163760902051962}
-  - {fileID: -4387104479761541964}
-  EditorEvents:
-  - {fileID: 1047270469002559005}
-  - {fileID: -1174612944717597504}
-  - {fileID: -5048259750773867002}
-  - {fileID: -4130353462476742201}
-  - {fileID: 6852519572715093014}
-  - {fileID: -3490959586770835353}
-  - {fileID: 3945008983383172370}
-  - {fileID: 1944535910700645462}
-  - {fileID: -5164415181209284049}
-  - {fileID: -3990223886682496530}
-  - {fileID: -1687045423867431165}
-  - {fileID: 2731673256441023987}
-  - {fileID: 4548155978427703877}
-  - {fileID: -6500098777726585839}
-  - {fileID: 8765944118470543437}
-  - {fileID: 3456388943808615725}
-  - {fileID: -8869104942037864112}
-  - {fileID: 2006296379022709593}
-  - {fileID: 1850170274394245998}
-  - {fileID: -8372615074642642746}
-  - {fileID: 3535411315997933197}
-  - {fileID: 1961587227003955499}
-  - {fileID: 8521696107536005586}
-  - {fileID: 8288592348269064887}
-  - {fileID: -8654829880143263154}
-  - {fileID: -2588630831928102751}
-  - {fileID: 4632154728946298816}
-  - {fileID: 8791619190920099956}
-  EditorParameters:
-  - {fileID: -2706467350747284860}
-  - {fileID: -4712861051431771666}
-  MasterBanks:
-  - {fileID: 7250163760902051962}
-  StringsBanks:
-  - {fileID: -3898972683604812498}
-  stringsBankWriteTime: 637575861250404721
-  cacheVersion: 5
---- !u!114 &380979829572473438
+  Path: event:/TukTuk/Horn
+  guid: 0324c1b1d6c2e44fb9eec0b091363a7e
+  Banks:
+  - {fileID: -431221143835461897}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7047400899797328105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6899054389778817102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Filling
+  m_EditorClassIdentifier: 
+  Name: Filling
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3733269648
+    data2: 1423849070
+  Exists: 1
+--- !u!114 &-6744335666494376858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6649759160259416523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/waterfall
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/waterfall
+  guid: b7bd5af18715dc47bc19ecfe425fbfb7
+  Banks:
+  - {fileID: -3809526298087728390}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6588446807912895129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6585172397741756524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6581365396025612675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Level.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Riding the Apex/Build/Desktop/Level.bank
+  Name: Level
+  lastModified: 637564380017805685
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-6441855862870836634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6341354323878522704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Countdown
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Countdown
+  guid: de23880b41a44e4fa10c02d48498fbe7
+  Banks:
+  - {fileID: -4084557944344076295}
+  - {fileID: -4626808702941244732}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+<<<<<<< Updated upstream
+  - {fileID: -4063157611991182326}
+=======
+  - {fileID: -5838282196025542532}
+>>>>>>> Stashed changes
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-6333239112985813037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6256951062230366215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Data/Audio/Riding the Apex/Build/Desktop/Master.bank
+  Name: Master
+  lastModified: 637572177784959955
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-6178284029230020387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-6174431903716558851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6101127046210941871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Filling
+  m_EditorClassIdentifier: 
+  Name: Filling
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3733269648
+    data2: 1423849070
+  Exists: 1
+--- !u!114 &-6062909634782472077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Drifting
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Drifting
+  guid: bd01bce32fbd7f49bf9777153c8d1e3d
+  Banks:
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6039008236568601731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-6002148756314834962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Player Leave
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Player Leave
+  guid: 7af6d0a839b15944864597b2d8a22622
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 5225
+--- !u!114 &-5940189851881129690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Riding the Apex/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  lastModified: 637564380018635828
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 2168
+  Exists: 1
+--- !u!114 &-5924599463317400519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-5877122331539801794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+<<<<<<< Updated upstream
+--- !u!114 &-5790972049130514116
+=======
+--- !u!114 &-5838282196025542532
+>>>>>>> Stashed changes
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+<<<<<<< Updated upstream
+  m_Name: parameter:/Engine/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 1
+=======
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+  Default: 0
+>>>>>>> Stashed changes
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5741986675718446047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+<<<<<<< Updated upstream
+--- !u!114 &-5689264814180654983
+=======
+--- !u!114 &-5678849672488396635
+>>>>>>> Stashed changes
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+<<<<<<< Updated upstream
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+=======
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 90
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+>>>>>>> Stashed changes
+--- !u!114 &-5635623480958756255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-5628039840588593288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/rock_fall
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/rock_fall
+  guid: f776ca23ce7cdd42b4b6322f8d33ef3b
+  Banks:
+  - {fileID: -3809526298087728390}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5598520358092254786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5468277697868728973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Jump
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Jump
+  guid: 28f42d086628dc4f891e0c113b6b43c1
+  Banks:
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3588567533315079134}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &-5362341059581162717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Countdown
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Countdown
+  guid: de23880b41a44e4fa10c02d48498fbe7
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-5327635900821264646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5221416085832726789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-5190359832387366892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5122984234315259676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4654359770292208681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-4634055550404996785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-4626808702941244732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Menu.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Menu.bank
+  Name: Menu
+<<<<<<< Updated upstream
+  lastModified: 637575678522472652
+=======
+  lastModified: 637575724516113973
+>>>>>>> Stashed changes
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-4620305731809069540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-4600566351684456890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Impact
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Impact
+  guid: 38df500ddf61ce45b59a1e119808fc21
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+<<<<<<< Updated upstream
+  - {fileID: 7675477690780937848}
+=======
+  - {fileID: -2882260891696609123}
+>>>>>>> Stashed changes
+  MinDistance: 1
+  MaxDistance: 10000
+  Length: 0
+--- !u!114 &-4533507142212030902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4511813480224318051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4470959580474639131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4458442712282858114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4401756320773022787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-4235091963716995221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4170341743100860097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 90
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4137798407455604545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4127770225348107517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Elimination
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Elimination
+  guid: f70dc56026b3ce4da22a11d666f8cb90
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
+--- !u!114 &-4112268011604492176
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1108,9 +1477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/UI/Player Join
   guid: 8c38d46793179542bd0d54abab5eb097
-  Banks:
-  - {fileID: -6043911501710511124}
-  - {fileID: -6677888824536935793}
+  Banks: []
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1118,7 +1485,49 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1673
---- !u!114 &467951397860964009
+--- !u!114 &-4084557944344076295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.bank
+  Name: Master
+<<<<<<< Updated upstream
+  lastModified: 637575678521987563
+=======
+  lastModified: 637575724516163843
+>>>>>>> Stashed changes
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-4083784884168486405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-4063157611991182326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1138,123 +1547,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &755494770413028179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Combo_Success
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Combo_Success
-  guid: 47f55571b4aed84a916113f88ac6569f
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &775584677737894438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/trees
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/trees
-  guid: 09d15d30281000458b349a38b29a9124
-  Banks:
-  - {fileID: -3617557263565664909}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &1047270469002559005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/trees
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/trees
-  guid: 09d15d30281000458b349a38b29a9124
-  Banks:
-  - {fileID: -7878951619127548884}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &1221637651442550341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Land
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Land
-  guid: b15dbbcd37cca141952ba206a244e9b5
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: 8638115782479339096}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &1306680388886366390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/rock_fall
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/rock_fall
-  guid: f776ca23ce7cdd42b4b6322f8d33ef3b
-  Banks:
-  - {fileID: -3617557263565664909}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &1590259222372190676
+--- !u!114 &-4033572738037478671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1264,132 +1557,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Filling
+  m_Name: parameter:/Break/Surface
   m_EditorClassIdentifier: 
-  Name: Filling
+  Name: Surface
   Min: 0
-  Max: 3
+  Max: 10
   Default: 0
   ID:
-    data1: 3733269648
-    data2: 1423849070
-  Exists: 1
---- !u!114 &1725715781802110429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Horn
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Horn
-  guid: 0324c1b1d6c2e44fb9eec0b091363a7e
-  Banks:
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &1850170274394245998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Engine
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Engine
-  guid: 7c4b4118260021429ecacb961cf86d6d
-  Banks:
-  - {fileID: 7250163760902051962}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -831770400907099353}
-  - {fileID: -1055644853200320710}
-  - {fileID: 6011692157016168191}
-  MinDistance: 100
-  MaxDistance: 1200
-  Length: 0
---- !u!114 &1944535910700645462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Horn
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Horn
-  guid: 0324c1b1d6c2e44fb9eec0b091363a7e
-  Banks:
-  - {fileID: 7250163760902051962}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &1961587227003955499
->>>>>>> Stashed changes
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
-  m_Name: event:/TukTuk/Land
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Land
-  guid: b15dbbcd37cca141952ba206a244e9b5
-  Banks:
-  - {fileID: -431221143835461897}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -7184460185274765724}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-7184460185274765724
-=======
-  m_Name: event:/UI/Cancel
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Cancel
-  guid: 9dffb2d004b9a843a096865926c52dd5
-  Banks:
-  - {fileID: 7250163760902051962}
-  - {fileID: -4387104479761541964}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 5186
---- !u!114 &2001395403204444895
->>>>>>> Stashed changes
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-3913603069984003949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1404,16 +1582,12 @@ MonoBehaviour:
   Name: impact_strength
   Min: 0
   Max: 1
-  Default: 1
+  Default: 0
   ID:
     data1: 0
     data2: 0
   Exists: 1
-<<<<<<< Updated upstream
---- !u!114 &-7073629840890252166
-=======
---- !u!114 &2006296379022709593
->>>>>>> Stashed changes
+--- !u!114 &-3887891910260338271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1423,251 +1597,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
-  m_Name: event:/TukTuk/Horn
+  m_Name: event:/UI/UI Move
   m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Horn
-  guid: 0324c1b1d6c2e44fb9eec0b091363a7e
+  Path: event:/UI/UI Move
+  guid: 7675c24b636f4c468f25453c0d2766a6
   Banks:
-  - {fileID: -431221143835461897}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-6899054389778817102
-=======
-  m_Name: event:/UI/Player Leave
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Player Leave
-  guid: 7af6d0a839b15944864597b2d8a22622
-  Banks:
-  - {fileID: 7250163760902051962}
-  - {fileID: -4387104479761541964}
+  - {fileID: -4084557944344076295}
+  - {fileID: -4626808702941244732}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 5225
---- !u!114 &2592512447849151271
->>>>>>> Stashed changes
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-<<<<<<< Updated upstream
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Filling
-  m_EditorClassIdentifier: 
-  Name: Filling
-  Min: 0
-  Max: 3
-  Default: 0
-  ID:
-    data1: 3733269648
-    data2: 1423849070
-  Exists: 1
---- !u!114 &-6581365396025612675
-=======
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/elimination_line
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/elimination_line
-  guid: 0c2e54bbc13a6940acd1f399108bdba2
-  Banks:
-  - {fileID: -3617557263565664909}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &2731673256441023987
->>>>>>> Stashed changes
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Level.bank
-  m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  Path: Assets/Riding the Apex/Build/Desktop/Level.bank
-  Name: Level
-  lastModified: 637564380017805685
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-5940189851881129690
-=======
-  Path: event:/TukTuk/Impact
-  guid: 38df500ddf61ce45b59a1e119808fc21
-  Banks:
-  - {fileID: 7250163760902051962}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -3087549765494369868}
-  MinDistance: 1
-  MaxDistance: 10000
-  Length: 0
---- !u!114 &2826710384418238545
->>>>>>> Stashed changes
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-<<<<<<< Updated upstream
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Riding the Apex/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  lastModified: 637564380018635828
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 2168
-  Exists: 1
---- !u!114 &-5327635900821264646
-=======
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/waterfall
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/waterfall
-  guid: b7bd5af18715dc47bc19ecfe425fbfb7
-  Banks:
-  - {fileID: -3617557263565664909}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &3009337283149839605
->>>>>>> Stashed changes
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-<<<<<<< Updated upstream
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Engine/Accelleration
-  m_EditorClassIdentifier: 
-  Name: Accelleration
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &-4511813480224318051
-=======
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.strings.bank
-  Name: Master.strings
-  lastModified: 637575861250404721
-  LoadResult: 0
-  FileSizes:
-  - Name: 
-    Value: 2626
-  Exists: 1
---- !u!114 &3408861518346117546
->>>>>>> Stashed changes
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< Updated upstream
-  m_Name: parameter:/Engine/RPM
-  m_EditorClassIdentifier: 
-  Name: RPM
-=======
-  m_Name: parameter:/Break/Surface
-  m_EditorClassIdentifier: 
-  Name: Surface
->>>>>>> Stashed changes
-  Min: 0
-  Max: 10
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
-<<<<<<< Updated upstream
---- !u!114 &-3447658556971348910
-=======
---- !u!114 &3456388943808615725
->>>>>>> Stashed changes
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
-  m_Name: event:/Environment/rock_fall
-  m_EditorClassIdentifier: 
-  Path: event:/Environment/rock_fall
-  guid: f776ca23ce7cdd42b4b6322f8d33ef3b
-  Banks:
-  - {fileID: -6581365396025612675}
-=======
-  m_Name: event:/HUD/Abilities/mobility
-  m_EditorClassIdentifier: 
-  Path: event:/HUD/Abilities/mobility
-  guid: 75a78d32352f6a4c81019d506bd19277
-  Banks:
-  - {fileID: 7250163760902051962}
->>>>>>> Stashed changes
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-<<<<<<< Updated upstream
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-2678165618123944225
-=======
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &3535411315997933197
+  Length: 5186
+--- !u!114 &-3880611349436560956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1682,17 +1626,16 @@ MonoBehaviour:
   Path: event:/TukTuk/Break
   guid: 9a38e1744312b94cb0d4519375ff9d18
   Banks:
-  - {fileID: 7250163760902051962}
+  - {fileID: -6256951062230366215}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 7253273213302149739}
+  - {fileID: -5190359832387366892}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &3765830871620871450
->>>>>>> Stashed changes
+--- !u!114 &-3832687188292452658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1701,7 +1644,384 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Menu.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Data/Audio/Riding the Apex/Build/Desktop/Menu.bank
+  Name: Menu
+  lastModified: 637565222213959779
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-3809526298087728390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Level.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Level.bank
+  Name: Level
 <<<<<<< Updated upstream
+  lastModified: 637575678521002385
+=======
+  lastModified: 637575724516113973
+>>>>>>> Stashed changes
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-3752266568212780648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-3588567533315079134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-3557841630397739101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-3526548902668896525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-3509620488898564527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Level.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Data/Audio/Riding the Apex/Build/Desktop/Level.bank
+  Name: Level
+  lastModified: 637572177783024628
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-3447658556971348910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/rock_fall
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/rock_fall
+  guid: f776ca23ce7cdd42b4b6322f8d33ef3b
+  Banks:
+  - {fileID: -6581365396025612675}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3400246175978647174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-3198746442663117714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-3159638711689782722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-3041732075897920337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-3022476485956103062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/elimination_line
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/elimination_line
+  guid: 0c2e54bbc13a6940acd1f399108bdba2
+  Banks:
+  - {fileID: -3809526298087728390}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3000438549047464836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Break
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Break
+  guid: 9a38e1744312b94cb0d4519375ff9d18
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+<<<<<<< Updated upstream
+  - {fileID: -4458442712282858114}
+=======
+  - {fileID: 3582911433611516186}
+>>>>>>> Stashed changes
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2948706031758132529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2906060850577481509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/birds
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/birds
+  guid: ec7c31bdcabef44f9298a70e0a742f65
+  Banks:
+  - {fileID: -3509620488898564527}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2882260891696609123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2710781667006553684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/birds
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/birds
+  guid: ec7c31bdcabef44f9298a70e0a742f65
+  Banks:
+  - {fileID: -3809526298087728390}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2678165618123944225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Environment/mountain_ambience
   m_EditorClassIdentifier: 
@@ -1716,21 +2036,47 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 82585
---- !u!114 &-1410877953040805633
-=======
+--- !u!114 &-2581467759492945064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/defensive/Stop
+  m_Name: parameter:/Engine/Accelleration
   m_EditorClassIdentifier: 
-  Name: Stop
+  Name: Accelleration
   Min: 0
   Max: 1
-  Default: 0
+  Default: 1
   ID:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &3945008983383172370
->>>>>>> Stashed changes
+--- !u!114 &-2558763411313986709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 90
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-2341080170909369797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1740,21 +2086,136 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
-  m_Name: event:/Environment/waterfall
+  m_Name: event:/TukTuk/Land
   m_EditorClassIdentifier: 
-  Path: event:/Environment/waterfall
-  guid: b7bd5af18715dc47bc19ecfe425fbfb7
+  Path: event:/TukTuk/Land
+  guid: b15dbbcd37cca141952ba206a244e9b5
   Banks:
-  - {fileID: -6581365396025612675}
-=======
-  m_Name: event:/Environment/rock_fall
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 2484923458261583404}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2336312626897447563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Load
   m_EditorClassIdentifier: 
-  Path: event:/Environment/rock_fall
-  guid: f776ca23ce7cdd42b4b6322f8d33ef3b
+  Name: Load
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2259872627330559455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2205929860248821693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-2131002326593758310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-2053736989100344098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-1932411000961714377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/trees
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/trees
+  guid: 09d15d30281000458b349a38b29a9124
   Banks:
-  - {fileID: -7878951619127548884}
->>>>>>> Stashed changes
+  - {fileID: -3809526298087728390}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1762,7 +2223,301 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1834379753210185619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 <<<<<<< Updated upstream
+--- !u!114 &-1736581672962425101
+=======
+--- !u!114 &-1807898144614273626
+>>>>>>> Stashed changes
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+<<<<<<< Updated upstream
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+=======
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+>>>>>>> Stashed changes
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+<<<<<<< Updated upstream
+  Exists: 0
+=======
+  Exists: 1
+>>>>>>> Stashed changes
+--- !u!114 &-1699149070378774530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Cancel
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Cancel
+  guid: 9dffb2d004b9a843a096865926c52dd5
+  Banks:
+  - {fileID: -4084557944344076295}
+  - {fileID: -4626808702941244732}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 5186
+--- !u!114 &-1550399615767806397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-1482225311257844895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Combo_Start
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Combo_Start
+  guid: 19ba88f656014f47ac5dbabfd0d678d6
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1410877953040805633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/waterfall
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/waterfall
+  guid: b7bd5af18715dc47bc19ecfe425fbfb7
+  Banks:
+  - {fileID: -6581365396025612675}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1267063745604645678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Combo_Drop
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Combo_Drop
+  guid: c7b61d9bdb477d49ae3088e26eefa8df
+  Banks:
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1084625957958158256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 90
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-1078961594548313436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Elimination
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Elimination
+  guid: f70dc56026b3ce4da22a11d666f8cb90
+  Banks:
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
+--- !u!114 &-1068697120743305324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-890577398009599162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/elimination_line
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/elimination_line
+  guid: 0c2e54bbc13a6940acd1f399108bdba2
+  Banks:
+  - {fileID: -3509620488898564527}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-828153303142850915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-807601603954454517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-740120758149228345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1806,9 +2561,6 @@ MonoBehaviour:
   FileSizes: []
   Exists: 1
 --- !u!114 &-272716132042592038
-=======
---- !u!114 &4037638139958221789
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1818,21 +2570,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
   m_Name: event:/TukTuk/Jump
   m_EditorClassIdentifier: 
   Path: event:/TukTuk/Jump
   guid: 28f42d086628dc4f891e0c113b6b43c1
   Banks:
   - {fileID: -431221143835461897}
-=======
-  m_Name: event:/HUD/Abilities/mobility
-  m_EditorClassIdentifier: 
-  Path: event:/HUD/Abilities/mobility
-  guid: 75a78d32352f6a4c81019d506bd19277
-  Banks:
-  - {fileID: -6043911501710511124}
->>>>>>> Stashed changes
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -1840,13 +2583,8 @@ MonoBehaviour:
   - {fileID: 3823089446401815406}
   MinDistance: 1
   MaxDistance: 20
-<<<<<<< Updated upstream
   Length: 2000
---- !u!114 &11400000
-=======
-  Length: 0
---- !u!114 &4377584195945390251
->>>>>>> Stashed changes
+--- !u!114 &-269084577416056731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1855,19 +2593,349 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/location
+  m_EditorClassIdentifier: 
+  Name: location
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 3845173986
+    data2: 1298369521
+  Exists: 1
+--- !u!114 &-248465355251774721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Land
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Land
+  guid: b15dbbcd37cca141952ba206a244e9b5
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
 <<<<<<< Updated upstream
+  - {fileID: -6441855862870836634}
+=======
+  - {fileID: 3115130615334739658}
+>>>>>>> Stashed changes
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-188689498264386145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-162841608848619757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Data/Audio/Riding the Apex/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  lastModified: 637572177785024979
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 2168
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
-  EditorParameters: []
-  MasterBanks: []
-  StringsBanks: []
-  stringsBankWriteTime: 0
-  cacheVersion: 5
---- !u!114 &81833435126126460
+  EditorBanks:
+  - {fileID: -9025116047335453708}
+  - {fileID: -3809526298087728390}
+  - {fileID: -4084557944344076295}
+  - {fileID: -4626808702941244732}
+  EditorEvents:
+  - {fileID: -1932411000961714377}
+  - {fileID: -3022476485956103062}
+  - {fileID: 5302091856626111099}
+  - {fileID: -6649759160259416523}
+  - {fileID: -2710781667006553684}
+  - {fileID: -5628039840588593288}
+  - {fileID: 3877026120380106273}
+  - {fileID: -1482225311257844895}
+  - {fileID: 5339284826741387903}
+  - {fileID: -4600566351684456890}
+  - {fileID: 5469383702808786142}
+  - {fileID: 9132775073676900796}
+  - {fileID: 8458653421142816573}
+  - {fileID: -3000438549047464836}
+  - {fileID: -248465355251774721}
+  - {fileID: 2060014708234418140}
+  - {fileID: 4322824894475045880}
+  - {fileID: -4127770225348107517}
+  - {fileID: 1414298093006916284}
+  - {fileID: 5713867641425800955}
+  - {fileID: -3887891910260338271}
+  - {fileID: -8684785770774262381}
+  - {fileID: 21396075752587257}
+  - {fileID: -1699149070378774530}
+  - {fileID: -6341354323878522704}
+  - {fileID: -7354810214011643649}
+  - {fileID: 1415096270135527869}
+  - {fileID: 6886538110805808595}
+  EditorParameters:
+  - {fileID: 4263970337743283195}
+  - {fileID: 7963194929118165676}
+  MasterBanks:
+  - {fileID: -4084557944344076295}
+  StringsBanks:
+  - {fileID: -9025116047335453708}
+<<<<<<< Updated upstream
+  stringsBankWriteTime: 637575678522032570
 =======
+  stringsBankWriteTime: 637575724516084055
+>>>>>>> Stashed changes
+  cacheVersion: 5
+--- !u!114 &19045008643753650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &21396075752587257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Player Join
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Player Join
+  guid: 8c38d46793179542bd0d54abab5eb097
+  Banks:
+  - {fileID: -4084557944344076295}
+  - {fileID: -4626808702941244732}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1673
+--- !u!114 &81833435126126460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Engine
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Engine
+  guid: 7c4b4118260021429ecacb961cf86d6d
+  Banks:
+  - {fileID: -431221143835461897}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -5327635900821264646}
+  - {fileID: -4511813480224318051}
+  - {fileID: 6440134086111611446}
+  MinDistance: 1
+  MaxDistance: 200
+  Length: 1000
+--- !u!114 &135815492686304764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &306012176406139520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &336797813628059283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Combo_Success
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Combo_Success
+  guid: 47f55571b4aed84a916113f88ac6569f
+  Banks:
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &576720638788781699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &588533541212712070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &593828755485300113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/waterfall
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/waterfall
+  guid: b7bd5af18715dc47bc19ecfe425fbfb7
+  Banks:
+  - {fileID: -3509620488898564527}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &676802696538065706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Countdown/Interrupted
   m_EditorClassIdentifier: 
@@ -1878,77 +2946,8 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 0
---- !u!114 &4548155978427703877
->>>>>>> Stashed changes
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
-  m_Name: event:/TukTuk/Engine
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Engine
-  guid: 7c4b4118260021429ecacb961cf86d6d
-=======
-  m_Name: event:/TukTuk/Combo_Success
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Combo_Success
-  guid: 47f55571b4aed84a916113f88ac6569f
-  Banks:
-  - {fileID: 7250163760902051962}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &4632154728946298816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Countdown
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Countdown
-  guid: de23880b41a44e4fa10c02d48498fbe7
->>>>>>> Stashed changes
-  Banks:
-  - {fileID: 7250163760902051962}
-  - {fileID: -4387104479761541964}
-  IsStream: 0
-<<<<<<< Updated upstream
-  Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -5327635900821264646}
-  - {fileID: -4511813480224318051}
-  - {fileID: 6440134086111611446}
-  MinDistance: 1
-  MaxDistance: 200
-  Length: 1000
---- !u!114 &576720638788781699
-=======
-  Is3D: 0
-  IsOneShot: 1
-  Parameters:
-  - {fileID: 467951397860964009}
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &4637317476146092823
->>>>>>> Stashed changes
+  Exists: 1
+--- !u!114 &729653089828868041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1958,30 +2957,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< Updated upstream
-  m_Name: parameter:/Break/Surface
+  m_Name: parameter:/Land/impact_strength
   m_EditorClassIdentifier: 
-  Name: Surface
-  Min: 0
-  Max: 10
-  Default: 0
-=======
-  m_Name: parameter:/Engine/Airtime
-  m_EditorClassIdentifier: 
-  Name: Airtime
+  Name: impact_strength
   Min: 0
   Max: 1
-  Default: 1
->>>>>>> Stashed changes
+  Default: 0
   ID:
     data1: 0
     data2: 0
   Exists: 1
-<<<<<<< Updated upstream
 --- !u!114 &772396630625574925
-=======
---- !u!114 &4726967097412632565
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1990,7 +2976,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/TukTuk/Combo_Success
   m_EditorClassIdentifier: 
@@ -2005,21 +2990,47 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &1273324843359349670
-=======
+--- !u!114 &785239953708249727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Jump/Airtime
+  m_Name: parameter:/Land/impact_strength
   m_EditorClassIdentifier: 
-  Name: Airtime
+  Name: impact_strength
   Min: 0
   Max: 1
-  Default: 1
+  Default: 0
   ID:
     data1: 0
     data2: 0
-  Exists: 1
---- !u!114 &4864600668319796555
->>>>>>> Stashed changes
+  Exists: 0
+--- !u!114 &865193467714273012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &1273324843359349670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2029,7 +3040,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
   m_Name: event:/TukTuk/Combo_Start
   m_EditorClassIdentifier: 
   Path: event:/TukTuk/Combo_Start
@@ -2043,25 +3053,27 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &2547196645163980240
-=======
-  m_Name: event:/HUD/Abilities/defensive
+--- !u!114 &1313282745402168612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
   m_EditorClassIdentifier: 
-  Path: event:/HUD/Abilities/defensive
-  guid: bb5dc0d95772924085e45663dfce4b97
-  Banks:
-  - {fileID: -3617557263565664909}
-  - {fileID: -6043911501710511124}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -1520381613615904251}
-  MinDistance: 10
-  MaxDistance: 100
-  Length: 8980
---- !u!114 &5044604368494989772
->>>>>>> Stashed changes
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1414298093006916284
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2071,24 +3083,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Cancel
+  m_Name: event:/UI/Submit
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  Name: location
-  Min: 0
-  Max: 5
-  Default: 0
-  ID:
-    data1: 3845173986
-    data2: 1298369521
-  Exists: 1
---- !u!114 &3739411902679695066
-=======
-  Path: event:/UI/Cancel
-  guid: 9dffb2d004b9a843a096865926c52dd5
+  Path: event:/UI/Submit
+  guid: 201a9d4ee6f75e48aa09f0929547271a
   Banks:
-  - {fileID: -6043911501710511124}
-  - {fileID: -6677888824536935793}
+  - {fileID: -4084557944344076295}
+  - {fileID: -4626808702941244732}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2096,8 +3097,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 5186
---- !u!114 &5592528482722125863
->>>>>>> Stashed changes
+--- !u!114 &1415096270135527869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2106,14 +3106,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Environment/birds
+  m_Name: event:/HUD/Abilities/mobility
   m_EditorClassIdentifier: 
-  Path: event:/Environment/birds
-  guid: ec7c31bdcabef44f9298a70e0a742f65
+  Path: event:/HUD/Abilities/mobility
+  guid: 75a78d32352f6a4c81019d506bd19277
   Banks:
-  - {fileID: -6581365396025612675}
+  - {fileID: -4084557944344076295}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2121,8 +3120,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &3823089446401815406
-=======
+--- !u!114 &1703029490408060990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1873287805105658208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Driving/Surface
   m_EditorClassIdentifier: 
@@ -2133,9 +3159,8 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
---- !u!114 &6011692157016168191
->>>>>>> Stashed changes
+  Exists: 0
+--- !u!114 &1895314408703974262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2145,24 +3170,83 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< Updated upstream
-  m_Name: parameter:/Jump/Airtime
-=======
   m_Name: parameter:/Engine/Airtime
->>>>>>> Stashed changes
   m_EditorClassIdentifier: 
   Name: Airtime
   Min: 0
   Max: 1
-  Default: 1
+  Default: 0
   ID:
     data1: 0
     data2: 0
   Exists: 1
-<<<<<<< Updated upstream
---- !u!114 &3836112391669893134
-=======
---- !u!114 &6324936834466656599
+--- !u!114 &1982492931075377058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2060014708234418140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Drifting
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Drifting
+  guid: bd01bce32fbd7f49bf9777153c8d1e3d
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2092393441180955680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/rock_fall
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/rock_fall
+  guid: f776ca23ce7cdd42b4b6322f8d33ef3b
+  Banks:
+  - {fileID: -3509620488898564527}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2125273013211779754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2177,7 +3261,7 @@ MonoBehaviour:
   Path: event:/Environment/mountain_ambience
   guid: 66f6bdc2fb988b48a8884fda214e9dc9
   Banks:
-  - {fileID: -3617557263565664909}
+  - {fileID: -3509620488898564527}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -2185,7 +3269,150 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 82585
---- !u!114 &6691006315526004318
+--- !u!114 &2186522891900952834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &2252597686271490155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &2279056674489431122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2484923458261583404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2547196645163980240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/location
+  m_EditorClassIdentifier: 
+  Name: location
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 3845173986
+    data2: 1298369521
+  Exists: 1
+--- !u!114 &2887730537672309451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &3057354474210009971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+<<<<<<< Updated upstream
+--- !u!114 &3327503034424442246
+=======
+--- !u!114 &3115130615334739658
 >>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2196,9 +3423,155 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Driving/Surface
-  m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+=======
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+>>>>>>> Stashed changes
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+<<<<<<< Updated upstream
+  Exists: 0
+--- !u!114 &3358295564087589896
+=======
+  Exists: 1
+--- !u!114 &3582911433611516186
+>>>>>>> Stashed changes
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+<<<<<<< Updated upstream
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+=======
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+>>>>>>> Stashed changes
+--- !u!114 &3630985238891485348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3739411902679695066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/birds
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/birds
+  guid: ec7c31bdcabef44f9298a70e0a742f65
+  Banks:
+  - {fileID: -6581365396025612675}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3783564829022153538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3823089446401815406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3836112391669893134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/trees
+  m_EditorClassIdentifier: 
   Path: event:/Environment/trees
   guid: 09d15d30281000458b349a38b29a9124
   Banks:
@@ -2211,17 +3584,6 @@ MonoBehaviour:
   MaxDistance: 20
   Length: 0
 --- !u!114 &3849961044174482701
-=======
-  Name: Surface
-  Min: 0
-  Max: 10
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &6852519572715093014
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2231,37 +3593,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
   m_Name: event:/TukTuk/Combo_Drop
   m_EditorClassIdentifier: 
   Path: event:/TukTuk/Combo_Drop
   guid: c7b61d9bdb477d49ae3088e26eefa8df
-=======
-  m_Name: event:/HUD/Abilities/defensive
-  m_EditorClassIdentifier: 
-  Path: event:/HUD/Abilities/defensive
-  guid: bb5dc0d95772924085e45663dfce4b97
->>>>>>> Stashed changes
   Banks:
-  - {fileID: -7878951619127548884}
-  - {fileID: 7250163760902051962}
+  - {fileID: -431221143835461897}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
-<<<<<<< Updated upstream
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &4871147625779377144
-=======
-  Parameters:
-  - {fileID: 3765830871620871450}
-  MinDistance: 10
-  MaxDistance: 100
-  Length: 8980
---- !u!114 &7138838384848784714
->>>>>>> Stashed changes
+--- !u!114 &3877026120380106273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2270,7 +3615,132 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< Updated upstream
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Horn
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Horn
+  guid: 0324c1b1d6c2e44fb9eec0b091363a7e
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3921003576239078641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &4263970337743283195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Filling
+  m_EditorClassIdentifier: 
+  Name: Filling
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3733269648
+    data2: 1423849070
+  Exists: 1
+--- !u!114 &4322824894475045880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Combo_Drop
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Combo_Drop
+  guid: c7b61d9bdb477d49ae3088e26eefa8df
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4445931053631284385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &4659384717600242580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &4871147625779377144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Driving/Surface
   m_EditorClassIdentifier: 
@@ -2282,25 +3752,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &5968286380837919194
-=======
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UI/Player Leave
-  m_EditorClassIdentifier: 
-  Path: event:/UI/Player Leave
-  guid: 7af6d0a839b15944864597b2d8a22622
-  Banks:
-  - {fileID: -6043911501710511124}
-  - {fileID: -6677888824536935793}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 5225
---- !u!114 &7250163760902051962
->>>>>>> Stashed changes
+--- !u!114 &4994331033506585633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2309,7 +3761,270 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &5026538860246608880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &5302091856626111099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/mountain_ambience
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/mountain_ambience
+  guid: 66f6bdc2fb988b48a8884fda214e9dc9
+  Banks:
+  - {fileID: -3809526298087728390}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 82585
+--- !u!114 &5339284826741387903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Jump
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Jump
+  guid: 28f42d086628dc4f891e0c113b6b43c1
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
 <<<<<<< Updated upstream
+  - {fileID: -8520550116334554172}
+=======
+  - {fileID: -6333239112985813037}
+>>>>>>> Stashed changes
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &5469383702808786142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Combo_Success
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Combo_Success
+  guid: 47f55571b4aed84a916113f88ac6569f
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5499408021546462800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Driving
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Driving
+  guid: 5eaa8ff55fcf7243a601f76872989695
+  Banks:
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 9057659058240772591}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5515938449832273605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &5656882717837375770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Submit
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Submit
+  guid: 201a9d4ee6f75e48aa09f0929547271a
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 5186
+--- !u!114 &5713867641425800955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Player Idle
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Player Idle
+  guid: 5392ff0df7e938488885d71ff9ff73fd
+  Banks:
+  - {fileID: -4084557944344076295}
+  - {fileID: -4626808702941244732}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 5186
+--- !u!114 &5757909569993045773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &5837705740154320795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &5891239724747851166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &5968286380837919194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/TukTuk/Impact
   m_EditorClassIdentifier: 
@@ -2326,18 +4041,6 @@ MonoBehaviour:
   MaxDistance: 10000
   Length: 0
 --- !u!114 &6018374010138726272
-=======
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.bank
-  Name: Master
-  lastModified: 637575861250394730
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &7253273213302149739
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2346,7 +4049,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Environment/elimination_line
   m_EditorClassIdentifier: 
@@ -2361,21 +4063,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &6440134086111611446
-=======
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Break/Surface
-  m_EditorClassIdentifier: 
-  Name: Surface
-  Min: 0
-  Max: 10
-  Default: 0
-  ID:
-    data1: 0
-    data2: 0
-  Exists: 1
---- !u!114 &8277038393418060173
->>>>>>> Stashed changes
+--- !u!114 &6266490390804645540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2385,23 +4073,104 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-<<<<<<< Updated upstream
-  m_Name: parameter:/Engine/Load
+  m_Name: parameter:/Countdown/Interrupted
   m_EditorClassIdentifier: 
-  Name: Load
-=======
-  m_Name: parameter:/defensive/Stop
-  m_EditorClassIdentifier: 
-  Name: Stop
->>>>>>> Stashed changes
+  Name: Interrupted
   Min: 0
   Max: 1
   Default: 0
   ID:
     data1: 0
     data2: 0
-<<<<<<< Updated upstream
   Exists: 1
+--- !u!114 &6334889875308400096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &6383681773050499402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Engine
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Engine
+  guid: 7c4b4118260021429ecacb961cf86d6d
+  Banks:
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3630985238891485348}
+  - {fileID: 7900479214517023789}
+  - {fileID: -188689498264386145}
+  MinDistance: 1
+  MaxDistance: 200
+  Length: 1000
+--- !u!114 &6440134086111611446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &6480188816048518208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Cancel
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Cancel
+  guid: 9dffb2d004b9a843a096865926c52dd5
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 5186
 --- !u!114 &6575082094464882572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2422,11 +4191,7 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
---- !u!114 &7214711853810812969
-=======
-  Exists: 0
---- !u!114 &8288592348269064887
->>>>>>> Stashed changes
+--- !u!114 &6886538110805808595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2436,66 +4201,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
-  m_Name: event:/TukTuk/Drifting
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Drifting
-  guid: bd01bce32fbd7f49bf9777153c8d1e3d
-  Banks:
-  - {fileID: -431221143835461897}
-=======
-  m_Name: event:/TukTuk/Land
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Land
-  guid: b15dbbcd37cca141952ba206a244e9b5
-  Banks:
-  - {fileID: 7250163760902051962}
->>>>>>> Stashed changes
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: -21168171634600499}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
-<<<<<<< Updated upstream
---- !u!114 &8443969037784858337
-=======
---- !u!114 &8521696107536005586
->>>>>>> Stashed changes
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-<<<<<<< Updated upstream
-  m_Name: event:/TukTuk/Break
-  m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Break
-  guid: 9a38e1744312b94cb0d4519375ff9d18
-  Banks:
-  - {fileID: -431221143835461897}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters:
-  - {fileID: 576720638788781699}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &9193903721061787425
-=======
   m_Name: event:/HUD/Abilities/aggressive
   m_EditorClassIdentifier: 
   Path: event:/HUD/Abilities/aggressive
   guid: acdea352b18fe746ba11f5864d2ab8ad
   Banks:
-  - {fileID: 7250163760902051962}
+  - {fileID: -4084557944344076295}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2503,7 +4214,50 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &8638115782479339096
+--- !u!114 &7166140377356679906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &7214711853810812969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Drifting
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Drifting
+  guid: bd01bce32fbd7f49bf9777153c8d1e3d
+  Banks:
+  - {fileID: -431221143835461897}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7584784009836908592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2522,8 +4276,312 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
+  Exists: 0
+--- !u!114 &7675477690780937848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
---- !u!114 &8765944118470543437
+--- !u!114 &7900479214517023789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &7963194929118165676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/location
+  m_EditorClassIdentifier: 
+  Name: location
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 3845173986
+    data2: 1298369521
+  Exists: 1
+--- !u!114 &8052303076291133155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8276729571338621240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8290075663871966593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Load
+  m_EditorClassIdentifier: 
+  Name: Load
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &8332051244546561817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Environment/trees
+  m_EditorClassIdentifier: 
+  Path: event:/Environment/trees
+  guid: 09d15d30281000458b349a38b29a9124
+  Banks:
+  - {fileID: -3509620488898564527}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8443969037784858337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Break
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Break
+  guid: 9a38e1744312b94cb0d4519375ff9d18
+  Banks:
+  - {fileID: -431221143835461897}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 576720638788781699}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8458653421142816573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Engine
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Engine
+  guid: 7c4b4118260021429ecacb961cf86d6d
+  Banks:
+  - {fileID: -4084557944344076295}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+<<<<<<< Updated upstream
+  - {fileID: -2581467759492945064}
+  - {fileID: -1084625957958158256}
+  - {fileID: -5790972049130514116}
+  MinDistance: 100
+  MaxDistance: 1200
+=======
+  - {fileID: 8276729571338621240}
+  - {fileID: -5678849672488396635}
+  - {fileID: -6588446807912895129}
+  MinDistance: 1
+  MaxDistance: 200
+>>>>>>> Stashed changes
+  Length: 0
+--- !u!114 &8477328621681986366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8782882684153355671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &8894568434345640822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Accelleration
+  m_EditorClassIdentifier: 
+  Name: Accelleration
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &9057659058240772591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &9085972481116149793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Horn
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Horn
+  guid: 0324c1b1d6c2e44fb9eec0b091363a7e
+  Banks:
+  - {fileID: -6256951062230366215}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &9132775073676900796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2538,17 +4596,20 @@ MonoBehaviour:
   Path: event:/TukTuk/Driving
   guid: 5eaa8ff55fcf7243a601f76872989695
   Banks:
-  - {fileID: 7250163760902051962}
+  - {fileID: -4084557944344076295}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 5592528482722125863}
+<<<<<<< Updated upstream
+  - {fileID: -807601603954454517}
+=======
+  - {fileID: -1807898144614273626}
+>>>>>>> Stashed changes
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &8791619190920099956
->>>>>>> Stashed changes
+--- !u!114 &9153104664606201965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2557,17 +4618,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TukTuk/Elimination
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
   m_EditorClassIdentifier: 
-  Path: event:/TukTuk/Elimination
-  guid: f70dc56026b3ce4da22a11d666f8cb90
-  Banks:
-  - {fileID: 7250163760902051962}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1500
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &9168080147590843091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &9193903721061787425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Menu.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Riding the Apex/Build/Desktop/Menu.bank
+  Name: Menu
+  lastModified: 637564380018675838
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1

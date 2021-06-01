@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CarInputHandler))]
 public class SphereCarController : MonoBehaviour
 {
-    CarInputActions controls;
+    private CarInputHandler carInputHandler;
     private CarStats carStats;
     public AbilityCollision abilityCollision;
 
@@ -20,62 +20,56 @@ public class SphereCarController : MonoBehaviour
     [SerializeField]
     private bool initialDriftDirectionRight;
     [SerializeField]
-    private float actualVelocity;
-    [SerializeField]
     private float targetMinusCurrAngle;
 
-    private void OnEnable()
-    {
-        controls.Player.Enable();
-    }
+    //FMOD events
+    FMOD.Studio.EventInstance engine;
+    FMOD.Studio.EventDescription control;
 
-    private void OnDisable()
-    {
-        controls.Player.Disable();
-    }
+    FMOD.Studio.PARAMETER_DESCRIPTION speed;
+    FMOD.Studio.PARAMETER_DESCRIPTION accelleration;
+
+    FMOD.Studio.PARAMETER_ID spd;
+    FMOD.Studio.PARAMETER_ID acc;
 
     private void Start()
     {
+        carInputHandler = GetComponent<CarInputHandler>();
         carStats = GetComponent<CarStats>();
 
-    }
+        engine = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/engine");
 
-    private void Awake()
-    {
-        controls = new CarInputActions();
-        //controls.Player.Fire.performed += context => vertical 
-    }
-    void SendMessage(string text)
-    {
-        Debug.Log(text);
+        control = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
+        control.getParameterDescriptionByName("RPM", out speed);
+        spd = speed.id;
+
+        control = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
+        control.getParameterDescriptionByName("Accelleration", out accelleration);
+        acc = accelleration.id;
+
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(engine, transform, GetComponent<Rigidbody>());
+
+        engine.start();
     }
 
     private void Update()
     {
 
-<<<<<<< Updated upstream
-        //horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
-        //vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
-        //vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
-=======
         horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
         vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
         vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
-
-        actualVelocity = carStats.SphereCollider.velocity.sqrMagnitude;
 
         if(!Input.GetButton(carInputHandler.AccelerateInput))
         {
             engine.setParameterByID(acc, 0f);
         }
->>>>>>> Stashed changes
 
         HandleAnimation();
+
     }
 
     void FixedUpdate()
     {
-
         if (!carStats.InAir)
         {
             if (!abilityCollision.stunned)
@@ -102,14 +96,9 @@ public class SphereCarController : MonoBehaviour
             Vector3 newRight = Vector3.Cross(newUp, oldForward);
             Vector3 newForward = Vector3.Cross(newRight, newUp);
 
-            //Rotate based on the normal of the floor
             model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8f);
 
-<<<<<<< Updated upstream
             model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
-=======
-            //Left and Right tilt
-            //model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
 
             switch (hit.collider.tag)
             {
@@ -123,7 +112,6 @@ public class SphereCarController : MonoBehaviour
                     carStats.Surface = 1;
                     break;
             }
->>>>>>> Stashed changes
         }
         else
         {
@@ -139,19 +127,19 @@ public class SphereCarController : MonoBehaviour
             return;
         }
 
-        //if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
-        //{
-        //    if (!carStats.IsDrifting)
-        //    {
-        //        initialDriftDirectionRight = horizontal > 0;
-        //        carStats.SphereCollider.AddForce(transform.transform.right * carStats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
-        //    }
-        //    carStats.IsDrifting = true;
-        //}
-        //else
-        //{
-        //    carStats.IsDrifting = false;
-        //}
+        if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
+        {
+            if (!carStats.IsDrifting)
+            {
+                initialDriftDirectionRight = horizontal > 0;
+                carStats.SphereCollider.AddForce(transform.transform.right * carStats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
+            }
+            carStats.IsDrifting = true;
+        }
+        else
+        {
+            carStats.IsDrifting = false;
+        }
 
         if (carStats.IsDrifting)
         {
@@ -169,17 +157,29 @@ public class SphereCarController : MonoBehaviour
 
     void HandleMovement()
     {
+        switch (carStats.Surface)
+        {
+            case 1:
+                carStats.CurrentSurfaceMultiplier = 1f;
+                break;
+            case 2:
+                carStats.CurrentSurfaceMultiplier = carStats.OffroadMultiplier;
+                break;
+            default:
+                carStats.CurrentSurfaceMultiplier = 1f;
+                break;
+        }
+
         if (carStats.IsDrifting)
         {
-            carStats.MaxSpeed = vertical * carStats.DriftingAcceleration;
+            carStats.MaxSpeed = vertical * carStats.DriftingAcceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
         }
         else
         {
-            carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier;
+            carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
         }
 
-        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 5f);
-
+        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 12f);
 
         //Forward Acceleration
         if (carStats.IsDrifting)
@@ -187,10 +187,13 @@ public class SphereCarController : MonoBehaviour
             float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
             carStats.SphereCollider.AddForce(transform.right * carStats.CurrSpeed * oppositeDirection * carStats.DriftSideBoostMultiplier, ForceMode.Acceleration);
             carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
+            engine.setParameterByID(acc, 1f);
         }
         else
         {
-            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
+            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed, ForceMode.Acceleration);
+            engine.setParameterByID(acc, 1f);
         }
+        engine.setParameterByID(spd, carStats.CurrSpeed);
     }
 }

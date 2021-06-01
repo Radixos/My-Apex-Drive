@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
 [DefaultExecutionOrder(100)]
 [RequireComponent(typeof(MultiplayerSelectionEventSystem))]
 public class MultiplayerInputModule : BaseInputModule
@@ -19,7 +20,6 @@ public class MultiplayerInputModule : BaseInputModule
 	[SerializeField] private string m_HorizontalAxisPrefix = "Horizontal ";
 	[SerializeField] private string m_SubmitButtonPrefix = "Submit ";
 	[SerializeField] private string m_CancelButtonPrefix = "Cancel ";
-
 	
 	private MultiplayerSelectionEventSystem m_MultiplayerEventSystem;
 	private MultiplayerCursor[] m_Cursors = new MultiplayerCursor[GameManager.MaxPlayers];
@@ -105,15 +105,13 @@ public class MultiplayerInputModule : BaseInputModule
 				}
 
 			}
-			if(nextSelectable == null) nextSelectable = oldSelectable;
-
-
 
 			if(nextSelectable != null)
 			{
 				m_MultiplayerEventSystem.SetSelected(i, nextSelectable);
 				UpdateCursorPositions();
 				if(axisEventData[i] != null) ExecuteEvents.Execute(oldSelectable.gameObject, axisEventData[i], ExecuteEvents.moveHandler);
+				FMODUnity.RuntimeManager.PlayOneShot("event:/UI/UI Move");
 			}
 
 			if(Input.GetButtonDown(m_SubmitButtonPrefix + player.ControllerID)){
@@ -124,11 +122,13 @@ public class MultiplayerInputModule : BaseInputModule
 					{
 						m_MultiplayerEventSystem.LockController(i);						
 					}
+					FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Submit");
 				}
 			}
 			else if(Input.GetButtonDown(m_CancelButtonPrefix + player.ControllerID)){
 				if(m_MultiplayerEventSystem.LockedController(i)){
 					m_MultiplayerEventSystem.UnlockController(i);
+					FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Cancel");
 				}
 				MultiplayerEventData data = new MultiplayerEventData(m_MultiplayerEventSystem, player);
 				IMultiplayerCancelHandler cancelHandler = m_MultiplayerEventSystem.GetSelected(i).GetComponent<IMultiplayerCancelHandler>();

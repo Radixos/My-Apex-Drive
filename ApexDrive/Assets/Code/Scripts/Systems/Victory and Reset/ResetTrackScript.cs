@@ -57,7 +57,7 @@ public class ResetTrackScript : MonoBehaviour
         if (setVictoryState == true)
         {
             setVictoryState = false;
-            //SceneManager.LoadScene("VictoryScene");
+            SceneManager.LoadScene("VictoryScene");
         }
         for (int i = 0; i < carManager.raceCars.Count; i++)
         {

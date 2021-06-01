@@ -20,6 +20,15 @@ public class CameraFollowLead : MonoBehaviour
 
     void Start()
     {
+        Initialise();
+    }
+
+    void Initialise()
+    {
+        CinemachineVirtualCamera cinemachine = GetComponent<CinemachineVirtualCamera>();
+        Transform tempSphere = GameObject.FindGameObjectWithTag("PlayerTuk").GetComponent<Transform>();
+        cinemachine.Follow = tempSphere;
+        cinemachine.LookAt = tempSphere;
         temp = FindObjectOfType<RaceManager>();
     }
 
