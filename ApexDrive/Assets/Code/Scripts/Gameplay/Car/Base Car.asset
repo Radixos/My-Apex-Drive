@@ -18,6 +18,7 @@ MonoBehaviour:
   turnSpeed: 0.6
   normalTurnAngle: 40
   driftTurnAngle: 60
-  acceleration: 70
-  driftingAcceleration: 70
-  drag: 2
+  acceleration: 40
+  driftingAcceleration: 40
+  offroadMultiplier: 0.4
+  drag: 1

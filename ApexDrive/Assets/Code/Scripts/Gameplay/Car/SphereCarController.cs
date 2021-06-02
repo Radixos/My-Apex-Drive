@@ -22,6 +22,24 @@ public class SphereCarController : MonoBehaviour
     [SerializeField]
     private float targetMinusCurrAngle;
 
+    /// <summary>
+    /// The Following options only affect the sound. These do not have any impact on gameplay.
+    /// </summary>
+    [SerializeField]
+    private bool changingGear;
+    [SerializeField]
+    private float gearSpeed;
+    [SerializeField]
+    private float timeSpentInEachGear = 4f;
+    [SerializeField]
+    private int numGears = 3;
+    [SerializeField]
+    private int currGear = 1;
+    [SerializeField]
+    private float durationOfGearChange = 1f;
+    [SerializeField]
+    private float changingGearTimer = 0;
+
     //FMOD events
     FMOD.Studio.EventInstance engine;
     FMOD.Studio.EventDescription control;
@@ -65,7 +83,7 @@ public class SphereCarController : MonoBehaviour
         }
 
         HandleAnimation();
-
+        CalculateSpeedAndGear();
     }
 
     void FixedUpdate()
@@ -82,8 +100,9 @@ public class SphereCarController : MonoBehaviour
 
     void HandleAnimation()
     {
-        model.transform.position = transform.position - new Vector3(0, 1.5f, 0);
-        //Raycast down - angle model based on normal of floor
+        model.transform.position = transform.position - new Vector3(0, .5f, 0);
+
+        // Raycast down - angle model based on normal of floor
         RaycastHit hit;
         Debug.DrawRay(transform.position, Vector3.down);
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 4f))
@@ -100,6 +119,8 @@ public class SphereCarController : MonoBehaviour
 
             model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
 
+            // Since we do a raycast down to find the angle of the model, we might as well see what surface we're on...
+            // It doesn't really make sense to do this in "HandleAnimation", but we'll figure it out later.
             switch (hit.collider.tag)
             {
                 case "Offroad":
@@ -119,18 +140,25 @@ public class SphereCarController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This function handles the steering of the car.
+    /// </summary>
     void HandleSteering()
     {
         targetMinusCurrAngle = carStats.CurrAngle - carStats.TargetAngle;
+
+        // If we're going too slow, you can't turn. (Prevents spinning motion on the spot)
         if (carStats.CurrSpeed <= 0.1f && carStats.CurrSpeed >= -.1f)
         {
             return;
         }
 
-        if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
+        // If we're going fast enough, isDrifting becomes true.
+        if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && carStats.CurrSpeed / carStats.Acceleration >= carStats.DriftSpeedThresholdPercent)
         {
+            // If we just starting a drift, add a little boost. (This could be removed.)
             if (!carStats.IsDrifting)
-            {
+            { 
                 initialDriftDirectionRight = horizontal > 0;
                 carStats.SphereCollider.AddForce(transform.transform.right * carStats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
             }
@@ -141,12 +169,13 @@ public class SphereCarController : MonoBehaviour
             carStats.IsDrifting = false;
         }
 
+        // If we're drifting, our controls should only allow the car to turn more or less in that same direction. (i.e. Do not let the car turn left, after we started drifting right)
         if (carStats.IsDrifting)
         {
             float bonusDriftAngle = initialDriftDirectionRight == true ? carStats.DriftTurnAngle : -carStats.DriftTurnAngle;
             carStats.TargetAngle = carStats.CurrAngle + (((horizontal * carStats.DriftTurnAngle) + bonusDriftAngle) / 2);
         }
-        else
+        else // Otherwise, just turn as normal.
         {
             carStats.TargetAngle = carStats.CurrAngle + (horizontal * carStats.NormalTurnAngle);
         }
@@ -155,8 +184,13 @@ public class SphereCarController : MonoBehaviour
         carStats.CurrAngle = transform.localEulerAngles.y;
     }
 
+    /// <summary>
+    /// This function handles the forward and backwards movement of the car
+    /// </summary>
     void HandleMovement()
     {
+        // The surface of the car is found in HandleAnimation() - yes I know that doesn't make sense.
+        // 2 = offroad, 1 = road
         switch (carStats.Surface)
         {
             case 1:
@@ -170,6 +204,7 @@ public class SphereCarController : MonoBehaviour
                 break;
         }
 
+        // If drifting, we could go faster.
         if (carStats.IsDrifting)
         {
             carStats.MaxSpeed = vertical * carStats.DriftingAcceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
@@ -179,9 +214,10 @@ public class SphereCarController : MonoBehaviour
             carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
         }
 
-        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 12f);
+        // Slowly accelerate/decelerate.
+        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 2f);
 
-        //Forward Acceleration
+        // If we're drifting, add force forward, and to the side so we create an arc motion.
         if (carStats.IsDrifting)
         {
             float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
@@ -189,11 +225,63 @@ public class SphereCarController : MonoBehaviour
             carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
             engine.setParameterByID(acc, 1f);
         }
-        else
+        else //Otherwise, just add force forwards.
         {
             carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed, ForceMode.Acceleration);
             engine.setParameterByID(acc, 1f);
         }
         engine.setParameterByID(spd, carStats.CurrSpeed);
+    }
+
+    /// <summary>
+    /// Yes, this is a mess. This calculates gears / changing gears.
+    /// 
+    /// 1. When the accelerate button is pressed, gearSpeed increases
+    /// 2. Once gearSpeed reaches a certain threshold (default 4 seconds), the currentGear increases.
+    ///  2a. Note that changingGear becomes true for 1 second while this happens.
+    /// 3. If the accelerate button is not pressed, the gear speed decreases at the same rate.
+    ///  3a. changingGear does not become true at all while decelerating (you don't hear the gear change while decelerating)
+    /// 
+    /// These numbers are not connected to the actual speed of the car.
+    /// 
+    /// I found that connecting them was very difficult to keep the arcade like controls of the car.
+    /// Let me know if you think this could be changed to be something better.
+    /// </summary>
+    private void CalculateSpeedAndGear()
+    {
+        if (changingGear)
+        {
+            changingGearTimer += 1f * Time.deltaTime;
+            if (changingGearTimer >= durationOfGearChange)
+            {
+                changingGear = false;
+                changingGearTimer = 0;
+            }
+        }
+        if (vertical > 0)
+        {
+            if (currGear < numGears)
+            {
+                gearSpeed += 1f * Time.deltaTime;
+                if (gearSpeed > timeSpentInEachGear)
+                {
+                    gearSpeed = 0;
+                    currGear++;
+                    changingGear = true;
+                }
+            }
+        }
+        else
+        {
+            if (currGear > 0)
+            {
+                gearSpeed -= 1f * Time.deltaTime;
+                if (gearSpeed <= 0)
+                {
+                    gearSpeed = timeSpentInEachGear;
+                    currGear--;
+                }
+            }
+        }
     }
 }
