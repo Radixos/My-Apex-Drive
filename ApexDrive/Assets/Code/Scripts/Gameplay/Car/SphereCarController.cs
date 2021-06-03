@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Jason Lui
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -276,7 +278,7 @@ public class SphereCarController : MonoBehaviour
             if (currGear > 0)
             {
                 gearSpeed -= 1f * Time.deltaTime;
-                if (gearSpeed <= 0)
+                if (gearSpeed < 0)
                 {
                     gearSpeed = timeSpentInEachGear;
                     currGear--;

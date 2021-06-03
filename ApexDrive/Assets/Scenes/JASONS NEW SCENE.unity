@@ -565,6 +565,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 172996111640913308, guid: 476f5d37288e38c42a36d3696656e578,
+        type: 3}
+      propertyPath: timeSpentInEachGear
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 289919105830377208, guid: 476f5d37288e38c42a36d3696656e578,
         type: 3}
       propertyPath: m_Layer

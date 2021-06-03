@@ -21,4 +21,4 @@ MonoBehaviour:
   acceleration: 40
   driftingAcceleration: 40
   offroadMultiplier: 0.4
-  drag: 1
+  drag: 2

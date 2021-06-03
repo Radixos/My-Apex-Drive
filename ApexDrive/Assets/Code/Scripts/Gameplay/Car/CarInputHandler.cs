@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// Jason Lui
+
 using UnityEngine;
 
 public class CarInputHandler : MonoBehaviour
