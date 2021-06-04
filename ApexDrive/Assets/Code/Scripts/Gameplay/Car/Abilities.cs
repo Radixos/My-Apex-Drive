@@ -27,7 +27,13 @@ public class Abilities : MonoBehaviour
     private float rampageTimer;
 
     //FMOD Stuff
-    FMOD.Studio.EventInstance Ability;
+    FMOD.Studio.EventInstance ability;
+    FMOD.Studio.EventDescription onOff;
+
+    FMOD.Studio.PARAMETER_DESCRIPTION stop;
+    FMOD.Studio.PARAMETER_ID stp;
+
+    FMOD.Studio.PLAYBACK_STATE pbs;
 
     private void Start()
     {
@@ -41,6 +47,12 @@ public class Abilities : MonoBehaviour
 
         rampageLifetime = 4.0f;
         rampageTimer = rampageLifetime;
+
+        ability = FMODUnity.RuntimeManager.CreateInstance("event:/HUD/Abilities/defensive");
+
+        onOff = FMODUnity.RuntimeManager.GetEventDescription("event:/HUD/Abilities/defensive");
+        onOff.getParameterDescriptionByName("stop", out stop);
+        stp = stop.id;
 
     }
 
@@ -85,8 +97,13 @@ public class Abilities : MonoBehaviour
                     powerAmount -= 0.25f;
                     initialShieldPowerDepleted = true;
                 }
-
+                
                 shield.SetActive(true);
+                ability.getPlaybackState(out pbs);
+                if (pbs != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+                {
+                    ability.start();
+                }
                 powerAmount -= Time.deltaTime * 0.5f;
             }
             // Attack power up
