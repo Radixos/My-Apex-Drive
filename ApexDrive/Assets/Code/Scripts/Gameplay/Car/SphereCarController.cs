@@ -43,33 +43,47 @@ public class SphereCarController : MonoBehaviour
     private float changingGearTimer = 0;
 
     //FMOD events
-    FMOD.Studio.EventInstance engine;
-    FMOD.Studio.EventDescription control;
+    FMOD.Studio.EventInstance sfxEngine;
+    FMOD.Studio.EventInstance sfxDrift;
 
-    FMOD.Studio.PARAMETER_DESCRIPTION speed;
-    FMOD.Studio.PARAMETER_DESCRIPTION accelleration;
+    FMOD.Studio.EventDescription sfxControl;
+    FMOD.Studio.EventDescription sfxSkid;
 
-    FMOD.Studio.PARAMETER_ID spd;
+    FMOD.Studio.PARAMETER_DESCRIPTION sfxSpeed;
+    FMOD.Studio.PARAMETER_DESCRIPTION sfxAcceleration;
+    FMOD.Studio.PARAMETER_DESCRIPTION sfxStopDrift;
+
+    FMOD.Studio.PARAMETER_ID sd;
+    FMOD.Studio.PARAMETER_ID rpm;
     FMOD.Studio.PARAMETER_ID acc;
+
+    FMOD.Studio.PLAYBACK_STATE state;
 
     private void Start()
     {
         carInputHandler = GetComponent<CarInputHandler>();
         carStats = GetComponent<CarStats>();
 
-        engine = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/engine");
+        //FMOD Instances
+        sfxEngine = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/engine");
+        sfxDrift = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/Drifting");
 
-        control = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
-        control.getParameterDescriptionByName("RPM", out speed);
-        spd = speed.id;
+        //FMOD Variables
+        sfxControl = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
+        sfxControl.getParameterDescriptionByName("RPM", out sfxSpeed);
+        rpm = sfxSpeed.id;
 
-        control = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
-        control.getParameterDescriptionByName("Accelleration", out accelleration);
-        acc = accelleration.id;
+        sfxControl.getParameterDescriptionByName("Acceleration", out sfxAcceleration);
+        acc = sfxAcceleration.id;
 
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(engine, transform, GetComponent<Rigidbody>());
+        sfxSkid = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/Drifting");
+        sfxSkid.getParameterDescriptionByName("Stop Drift", out sfxStopDrift);
+        sd = sfxStopDrift.id;
 
-        engine.start();
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxEngine, transform, carStats.SphereCollider);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxDrift, transform, GetComponent<Rigidbody>());
+
+        sfxEngine.start();
     }
 
     private void Update()
@@ -79,10 +93,7 @@ public class SphereCarController : MonoBehaviour
         vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
         vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
 
-        if(!Input.GetButton(carInputHandler.AccelerateInput))
-        {
-            engine.setParameterByID(acc, 0f);
-        }
+        carAudio();
 
         HandleAnimation();
         CalculateSpeedAndGear();
@@ -138,7 +149,7 @@ public class SphereCarController : MonoBehaviour
         }
         else
         {
-            carStats.InAir = true;
+            carStats.InAir = true; 
         }
     }
 
@@ -217,7 +228,7 @@ public class SphereCarController : MonoBehaviour
         }
 
         // Slowly accelerate/decelerate.
-        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 2f);
+        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 5f);
 
         // If we're drifting, add force forward, and to the side so we create an arc motion.
         if (carStats.IsDrifting)
@@ -225,14 +236,12 @@ public class SphereCarController : MonoBehaviour
             float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
             carStats.SphereCollider.AddForce(transform.right * carStats.CurrSpeed * oppositeDirection * carStats.DriftSideBoostMultiplier, ForceMode.Acceleration);
             carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
-            engine.setParameterByID(acc, 1f);
         }
         else //Otherwise, just add force forwards.
         {
             carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed, ForceMode.Acceleration);
-            engine.setParameterByID(acc, 1f);
+            sfxEngine.setParameterByID(acc, 1f);
         }
-        engine.setParameterByID(spd, carStats.CurrSpeed);
     }
 
     /// <summary>
@@ -253,17 +262,24 @@ public class SphereCarController : MonoBehaviour
     {
         if (changingGear)
         {
+            /*engine.setParameterByID(agc, 1f);
+            engine.setParameterByID(acc, 0f);
+            engine.setParameterByID(spd, 0f);*/
             changingGearTimer += 1f * Time.deltaTime;
             if (changingGearTimer >= durationOfGearChange)
             {
                 changingGear = false;
                 changingGearTimer = 0;
+                //engine.setParameterByID(ag, currGear);
             }
         }
         if (vertical > 0)
         {
             if (currGear < numGears)
             {
+                /*engine.setParameterByID(acc, 1f);
+                engine.setParameterByID(agc, 0f);
+                engine.setParameterByID(spd, 100f);*/
                 gearSpeed += 1f * Time.deltaTime;
                 if (gearSpeed > timeSpentInEachGear)
                 {
@@ -284,6 +300,36 @@ public class SphereCarController : MonoBehaviour
                     currGear--;
                 }
             }
+        }
+    }
+    void carAudio()
+    {
+        if (carStats.InAir)
+        {
+            sfxEngine.setParameterByID(rpm, 60f);
+        }
+        else
+        {
+            sfxEngine.setParameterByID(rpm, carStats.CurrSpeed);
+        }
+        if (!Input.GetButton(carInputHandler.AccelerateInput))
+        {
+            sfxEngine.setParameterByID(acc, 0f);
+        }
+        if(carStats.IsDrifting)
+        {
+            sfxEngine.setParameterByID(acc, 1f);
+            sfxDrift.getPlaybackState(out state);
+            if (state == FMOD.Studio.PLAYBACK_STATE.STOPPED || state == FMOD.Studio.PLAYBACK_STATE.STOPPING)
+            {
+                sfxDrift.setParameterByID(sd, 0f);
+                sfxDrift.start();
+            }
+        }
+        else if(!carStats.IsDrifting)
+        {
+            sfxDrift.setParameterByID(sd, 1f);
+            sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
     }
 }

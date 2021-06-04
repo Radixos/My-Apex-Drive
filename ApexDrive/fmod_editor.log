@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001D9F4EB5058 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000019D2EB613E8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -18,7 +18,61 @@
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::receiveLiveUpdateBank           : Received live update bank path: fmod:///remote/C:/Users/mudki/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-GwxWtv/hotswap_105.bank
+[LOG] ProfileRemoteFile::fileOpen              : Attemping to open remote file 'C:/Users/mudki/AppData/Local/FMOD Studio/UnsavedProjects/Hotswap-GwxWtv/hotswap_105.bank'
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] SoundI::release                          :  (0000019D2E3FABA8)
+[LOG] SoundI::release                          :     Medium Rev (0000019D2EBD2F38)
+[LOG] SoundI::release                          :  (0000019D2E3FC138)
+[LOG] SoundI::release                          :     Boost Rev (0000019D2EBD3278)
+[LOG] SoundI::release                          :  (0000019D2E3F8D78)
+[LOG] SoundI::release                          :     Idle (0000019D2EBD30D8)
+[LOG] SoundI::release                          : Wind Full (0000019D61C435D8)
+[LOG] SoundI::release                          :     Wind Full (0000019D555C5298)
+[LOG] SoundI::release                          :     Wind Full (0000019DB2FBD9F8)
+[LOG] SoundI::release                          :  (0000019D2E3F9788)
+[LOG] SoundI::release                          :     Drift Dirt 2 (0000019D555C5C58)
+[LOG] SoundI::release                          :  (0000019D2E3FBA08)
+[LOG] SoundI::release                          :     Drift Dirt 1 (0000019D555C5918)
+[LOG] SoundI::release                          :  (0000019D2E3FB728)
+[LOG] SoundI::release                          :     Drift slide 2 (0000019D2EBD35B8)
+[LOG] SoundI::release                          :  (0000019D2E3FAE88)
+[LOG] SoundI::release                          :     Drift end dirt-001 (0000019D555C5DF8)
+[LOG] SoundI::release                          :  (0000019D2E3FCB48)
+[LOG] SoundI::release                          :     Drift end dirt-002 (0000019D2EBD5B18)
+[LOG] SoundI::release                          :  (0000019D2E3FC2A8)
+[LOG] SoundI::release                          :     Drift end dirt-003 (0000019D2EBD2578)
+[LOG] SoundI::release                          :  (0000019D2E3FC418)
+[LOG] SoundI::release                          :     Drift end dirt-004 (0000019D2EBD2BF8)
+[LOG] SoundI::release                          :  (0000019D2E3FAA38)
+[LOG] SoundI::release                          :     Drift slide 1 (0000019D555C5AB8)
+[LOG] SoundI::release                          :  (0000019D2E3F91C8)
+[LOG] SoundI::release                          :     Defence Stop (0000019D2EBD5FF8)
+[LOG] SoundI::release                          :  (0000019D2E3F8EE8)
+[LOG] SoundI::release                          :     Defence Test (0000019D2EBD3758)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] ProfileClient::markForDead               : Closing client connection
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD profiler thread (send) finished.
+[LOG] FMOD_OS_Net_Read                         : Interrupted.[LOG] ProfileClient::recvThreadLoopFunction    : Socket disconnected
+[LOG] Thread::callback                         : FMOD profiler thread (recv) finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -26,3 +80,5 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
