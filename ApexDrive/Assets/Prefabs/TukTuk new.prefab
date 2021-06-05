@@ -4995,6 +4995,7 @@ GameObject:
   - component: {fileID: 696034327234795257}
   - component: {fileID: 172996111640913308}
   - component: {fileID: 5366670244643328143}
+  - component: {fileID: 2811008498825531218}
   m_Layer: 0
   m_Name: Direction
   m_TagString: Untagged
@@ -5047,7 +5048,7 @@ MonoBehaviour:
   sphereCollider: {fileID: 6281512184417559450}
   inAir: 0
   surface: 0
-  isDrifting: 1
+  isDrifting: 0
   driftSpeedThresholdPercent: 0
   driftSideBoostMultiplier: 0
   currentBoostMultiplier: 1
@@ -5079,6 +5080,13 @@ MonoBehaviour:
   model: {fileID: 6361700404287866032}
   initialDriftDirectionRight: 0
   targetMinusCurrAngle: 0
+  changingGear: 0
+  gearSpeed: 0
+  timeSpentInEachGear: 4
+  numGears: 3
+  currGear: 1
+  durationOfGearChange: 1
+  changingGearTimer: 0
 --- !u!114 &5366670244643328143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5097,6 +5105,20 @@ MonoBehaviour:
   rampage: {fileID: 1892673406485149845}
   rampageLifetime: 0
   rampageTimer: 0
+--- !u!114 &2811008498825531218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646619776548488429}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7fb4d352c1e3d49b83a1a4920e8a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carAttributes: {fileID: 0}
+  sphereCollider: {fileID: 0}
 --- !u!1 &4728441515130372782
 GameObject:
   m_ObjectHideFlags: 0
@@ -5121,7 +5143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4728441515130372782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1522.6934, y: 1474.4475, z: -1137.0259}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2855900048039024665}
