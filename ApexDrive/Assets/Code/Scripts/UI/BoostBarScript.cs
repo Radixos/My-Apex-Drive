@@ -75,7 +75,8 @@ public class BoostBarScript : MonoBehaviour
     void Update()
     {
         SetSliders();
-        DeterminePositions();
+        //DeterminePositions();
+        ApplyText();
 
         if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -86,7 +87,7 @@ public class BoostBarScript : MonoBehaviour
     {
         for (int i = 0; i < vehicleNum; i++)
         {
-            PositionUpdate currentVehicle = vehicleManager.raceCars[i];
+            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
             AbilityCollision abilities = currentVehicle.gameObject.GetComponent<AbilityCollision>();
             boostBarSliders[i].value = abilities.carAbilities.powerAmount;
             boostBarImages[i].color = barGradient.Evaluate(boostBarSliders[i].value);
@@ -98,7 +99,7 @@ public class BoostBarScript : MonoBehaviour
         for (int i = 0; i < vehicleNum; i++)
         {
             PositionUpdate currentVehicle = vehicleManager.raceCars[i];
-            currentVehicle.aheadOf = 0;
+            //currentVehicle.aheadOf = 0;
 
             for (int j = 0; j < vehicleNum; j++)
             {
@@ -108,11 +109,11 @@ public class BoostBarScript : MonoBehaviour
                     if ((vehicleManager.raceCars[i].collidersHit > vehicleManager.raceCars[j].collidersHit) ||
                         (vehicleManager.raceCars[i].laps > vehicleManager.raceCars[j].laps))
                     {
-                        currentVehicle.aheadOf++;
+                       // currentVehicle.aheadOf++;
                     }
                 }
 
-                Debug.Log(vehicleManager.raceCars[i].gameObject.GetInstanceID());
+                //Debug.Log(vehicleManager.raceCars[i].gameObject.GetInstanceID());
             }   
         }
         ApplyText();
@@ -122,29 +123,50 @@ public class BoostBarScript : MonoBehaviour
     {
         for (int i = 0; i < vehicleNum; i++)
         {
-            PositionUpdate currentVehicle = vehicleManager.raceCars[i];
-            
-            if (currentVehicle.aheadOf == vehicleNum - 1)
-            {
-                //currentVehicle.ranking = PositionUpdate.VehiclePosition.FIRST;
-                boostBarText[i].text = "1ST";
-            }
+            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
 
-            else if (currentVehicle.aheadOf == vehicleNum - 2)
-            {
-                boostBarText[i].text = "2ND";
-            }
+            // MANI'S UPDATE
+            // DeterminePositions() is not needed as RaceManager does all the switching
+            int pos = currentVehicle.GetPosition();
 
-            else if (currentVehicle.aheadOf == vehicleNum - 3)
+            switch (currentVehicle.GetPosition())
             {
-                boostBarText[i].text = "3RD";
+                case 1:
+                    boostBarText[i].text = "1ST";
+                    break;
+                case 2:
+                    boostBarText[i].text = "2ND";
+                    break;
+                case 3:
+                    boostBarText[i].text = "3RD";
+                    break;
+                case 4:
+                    boostBarText[i].text = "4TH";
+                    break;
             }
+            // END MANI'S UPDATE
 
-            else
-            {
-                 boostBarText[i].text = "4TH";
-            }
-            
+            //if (currentVehicle.aheadOf == vehicleNum - 1)
+            //{
+            //    //currentVehicle.ranking = PositionUpdate.VehiclePosition.FIRST;
+            //    boostBarText[i].text = "1ST";
+            //}
+
+            //else if (currentVehicle.aheadOf == vehicleNum - 2)
+            //{
+            //    boostBarText[i].text = "2ND";
+            //}
+
+            //else if (currentVehicle.aheadOf == vehicleNum - 3)
+            //{
+            //    boostBarText[i].text = "3RD";
+            //}
+
+            //else
+            //{
+            //     boostBarText[i].text = "4TH";
+            //}
+
             //switch (currentVehicle.aheadOf)
             //{ 
             //    case (vehicleNum):

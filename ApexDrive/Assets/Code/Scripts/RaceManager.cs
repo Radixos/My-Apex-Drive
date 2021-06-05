@@ -18,6 +18,7 @@ public class RaceManager : MonoBehaviour
     #endregion
 
     public List<PositionUpdate> raceCars;
+    public List<PositionUpdate> ogRaceCars; // Non-updated list
 
     public int totalColliders;
 
@@ -37,6 +38,7 @@ public class RaceManager : MonoBehaviour
         foreach (PositionUpdate positionUpdate in FindObjectsOfType<PositionUpdate>())
         {
             raceCars.Add(positionUpdate);
+            ogRaceCars.Add(positionUpdate);
         }
 
         totalColliders = GameObject.FindGameObjectsWithTag("Waypoint").Length;
@@ -89,4 +91,5 @@ public class RaceManager : MonoBehaviour
         }
 
     }
+
 }
