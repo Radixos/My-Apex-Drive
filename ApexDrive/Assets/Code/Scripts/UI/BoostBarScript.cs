@@ -8,39 +8,41 @@ public class BoostBarScript : MonoBehaviour
 {
     private Canvas UICanvas;
     [SerializeField] private RaceManager vehicleManager;
+    private int vehicleNum;
+
     private GameObject[] boostBarObjects;
-
     private Slider[] boostBarSliders;
-    private Image[] boostBarImages;
     private TextMeshProUGUI[] boostBarText;
-    private Gradient barGradient;
-    public Gradient testGradient;
-    private float colourTimer, alphaTimer;
+    private Image[] boostBarImages;
 
+    private Gradient barGradient;
+    private float colourTimer, alphaTimer;
     GradientColorKey[] colourKeys;
     GradientAlphaKey[] alphaKeys;
 
     void Start()
     {
-        //set gradients
-        //testDriveScript[i].powerAmount
         UICanvas = GetComponent<Canvas>();
-        int vehicleNum = vehicleManager.raceCars.Count;
+        vehicleNum = vehicleManager.raceCars.Count;
+        InitBarObjects();
+        InitGradient();
+    }
+
+    private void InitBarObjects()
+    {
         boostBarObjects = new GameObject[vehicleNum];
         boostBarSliders = new Slider[vehicleNum];
-        boostBarImages = new Image[vehicleNum];
         boostBarText = new TextMeshProUGUI[vehicleNum];
+        boostBarImages = new Image[vehicleNum];
 
         for (int i = 0; i < vehicleNum; i++)
         {
             boostBarObjects[i] = UICanvas.transform.GetChild(i).gameObject;
             boostBarObjects[i].SetActive(true);
             boostBarSliders[i] = boostBarObjects[i].GetComponent<Slider>();
-            boostBarImages[i] = boostBarObjects[i].transform.GetChild(0).GetComponent<Image>();
             boostBarText[i] = boostBarObjects[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            boostBarImages[i] = boostBarObjects[i].transform.GetChild(0).GetComponent<Image>();
         }
-
-        InitGradient();
     }
 
     private void InitGradient()
@@ -51,7 +53,6 @@ public class BoostBarScript : MonoBehaviour
 
         for (int j = 0; j < alphaKeys.Length; j++)
         {
-
             alphaKeys[j].alpha = 1.0f;
             alphaKeys[j].time = alphaTimer;
             alphaTimer += 0.5f;
@@ -69,13 +70,12 @@ public class BoostBarScript : MonoBehaviour
             colourTimer += 0.5f;
         }
         barGradient.SetKeys(colourKeys, alphaKeys);
-        
     }
 
     void Update()
     {
         SetSliders();
-        SetText();
+        DeterminePositions();
 
         if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -84,7 +84,7 @@ public class BoostBarScript : MonoBehaviour
     }
     void SetSliders()
     {
-        for (int i = 0; i < vehicleManager.raceCars.Count; i++)
+        for (int i = 0; i < vehicleNum; i++)
         {
             PositionUpdate currentVehicle = vehicleManager.raceCars[i];
             AbilityCollision abilities = currentVehicle.gameObject.GetComponent<AbilityCollision>();
@@ -92,11 +92,64 @@ public class BoostBarScript : MonoBehaviour
             boostBarImages[i].color = barGradient.Evaluate(boostBarSliders[i].value);
         }
     }
-    void SetText()
+
+    void DeterminePositions()
     {
-        for (int i = 0; i < vehicleManager.raceCars.Count; i++)
+        for (int i = 0; i < vehicleNum; i++)
         {
-            PositionUpdate currentvehicle = vehicleManager.raceCars[i];
+            PositionUpdate currentVehicle = vehicleManager.raceCars[i];
+            currentVehicle.aheadOf = 0;
+
+            for (int j = 0; j < vehicleNum; j++)
+            {
+                if (vehicleManager.raceCars[i].gameObject.GetInstanceID() !=
+                   vehicleManager.raceCars[j].gameObject.GetInstanceID())
+                {
+                    if ((vehicleManager.raceCars[i].collidersHit > vehicleManager.raceCars[j].collidersHit) ||
+                        (vehicleManager.raceCars[i].laps > vehicleManager.raceCars[j].laps))
+                    {
+                        currentVehicle.aheadOf++;
+                    }
+                }
+
+                Debug.Log(vehicleManager.raceCars[i].gameObject.GetInstanceID());
+            }   
+        }
+        ApplyText();
+    }
+
+    private void ApplyText()
+    {
+        for (int i = 0; i < vehicleNum; i++)
+        {
+            PositionUpdate currentVehicle = vehicleManager.raceCars[i];
+            
+            if (currentVehicle.aheadOf == vehicleNum - 1)
+            {
+                //currentVehicle.ranking = PositionUpdate.VehiclePosition.FIRST;
+                boostBarText[i].text = "1ST";
+            }
+
+            else if (currentVehicle.aheadOf == vehicleNum - 2)
+            {
+                boostBarText[i].text = "2ND";
+            }
+
+            else if (currentVehicle.aheadOf == vehicleNum - 3)
+            {
+                boostBarText[i].text = "3RD";
+            }
+
+            else
+            {
+                 boostBarText[i].text = "4TH";
+            }
+            
+            //switch (currentVehicle.aheadOf)
+            //{ 
+            //    case (vehicleNum):
+            //        break;
+            //}
         }
     }
 }

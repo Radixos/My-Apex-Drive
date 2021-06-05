@@ -9,6 +9,7 @@ public class PositionUpdate : MonoBehaviour
     public float offScreenTimer;
     public bool eliminated;
     public bool winner;
+    public int aheadOf;
 
     private List<GameObject> hitColliders = new List<GameObject>();
 
