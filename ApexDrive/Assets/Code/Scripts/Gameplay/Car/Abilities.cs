@@ -14,7 +14,7 @@ public class Abilities : MonoBehaviour
     [Header("Abilities Options")]
     [SerializeField]
     [Range(0, 1)]
-    private float powerAmount;
+    public float powerAmount;
 
     public GameObject shield;
     [SerializeField]
