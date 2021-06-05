@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{0c87b465-7628-47bf-a505-51048c76a13b}">
+		<property name="name">
+			<value>Decel_RPM</value>
+		</property>
+		<relationship name="folder">
+			<destination>{39371476-0a55-43e0-8cbc-49e86e0f1f86}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{42ca9170-0a63-47a3-8cb0-ad0171d0ed3e}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{42ca9170-0a63-47a3-8cb0-ad0171d0ed3e}">
+		<property name="maximum">
+			<value>100</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>50</value>
+		</property>
+		<property name="seekSpeedDescending">
+			<value>10</value>
+		</property>
+		<property name="seekSpeedAsymmetric">
+			<value>true</value>
+		</property>
+	</object>
+</objects>
