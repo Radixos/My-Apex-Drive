@@ -31,6 +31,16 @@ public class PositionUpdate : MonoBehaviour
             distanceFromCollider = Vector3.Distance(transform.position, distanceCollider.transform.position);
     }
 
+    public int GetPosition()
+    {
+        for(int i = 0; i < raceManager.raceCars.Count; i++)
+        {
+            if (GetInstanceID() == raceManager.raceCars[i].GetInstanceID())
+                return i + 1;
+        }
+        return 0;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Waypoint"))
