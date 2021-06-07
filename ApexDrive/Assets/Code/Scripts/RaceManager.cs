@@ -56,6 +56,7 @@ public class RaceManager : MonoBehaviour
                     if (raceCars[i].laps > raceCars[j].laps)
                     {
                         SwapRacers(i, j);
+                        Debug.Log("Debug1");
                         continue;
                     }
 
@@ -64,14 +65,19 @@ public class RaceManager : MonoBehaviour
                         if (raceCars[i].laps == raceCars[j].laps)
                         {
                             SwapRacers(i, j);
+                            Debug.Log("Debug2");
                             continue;
                         }
                     }
 
-                    if(raceCars[i].distanceCollider.GetInstanceID() == raceCars[j].distanceCollider.GetInstanceID() &&
+                    if (raceCars[i].distanceCollider.GetInstanceID() == raceCars[j].distanceCollider.GetInstanceID() &&
                         raceCars[i].distanceFromCollider > raceCars[j].distanceFromCollider)
                     {
-                        SwapRacers(i, j);
+                        if (raceCars[i].distanceFromCollider - raceCars[j].distanceFromCollider >= 1.0f)
+                        {
+                            SwapRacers(i, j);
+                            Debug.Log("Debug3");
+                        }
                     }
 
                 }

@@ -25,10 +25,13 @@ public class PositionUpdate : MonoBehaviour
     }
 
     // Update is called once per frame
+
     void Update()
     {
         if (distanceCollider != null)
-            distanceFromCollider = Vector3.Distance(transform.position, distanceCollider.transform.position);
+            distanceFromCollider = Vector3.Distance(transform.position,
+                new Vector3(distanceCollider.transform.position.x,
+                transform.position.y, distanceCollider.transform.position.z));
     }
 
     public int GetPosition()
