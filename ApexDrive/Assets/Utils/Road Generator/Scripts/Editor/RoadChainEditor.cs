@@ -37,6 +37,15 @@ public class RoadChainEditor : Editor
     private Quaternion m_OriginalCameraOrientation;
     private bool m_OriginalCameraOrthographicProjection;
 
+    private void Awake()
+    {
+        m_RoadChain = (RoadChain) target;
+        foreach(RoadSegment segment in m_RoadChain.Segments)
+        {
+            segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
+        }
+    }
+
     private void OnEnable()
     {
         Tools.hidden = true;
@@ -59,7 +68,6 @@ public class RoadChainEditor : Editor
         {
             segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
         }
-
     }
 
     private void OnDisable()
@@ -166,10 +174,15 @@ public class RoadChainEditor : Editor
             GUILayout.Label("Delete Node", height);
             GUILayout.EndHorizontal();
         GUILayout.EndVertical();
-        // DrawDefaultInspector();
 
-        GUILayout.Space(20.0f);
-        m_RoadChain.RoadPrefab = (GameObject)EditorGUILayout.ObjectField("Road Segment Prefab", m_RoadChain.RoadPrefab, typeof(GameObject), true);
+        GUILayout.Space(10.0f);
+        m_RoadChain.RoadPrefab = (GameObject)EditorGUILayout.ObjectField("Road Segment Prefab", m_RoadChain.RoadPrefab, typeof(GameObject), false);
+        m_RoadChain.mesh2D =  (Mesh2D)EditorGUILayout.ObjectField("Mesh 2D", m_RoadChain.mesh2D, typeof(Mesh2D), false);
+        m_RoadChain.loop = EditorGUILayout.Toggle("Loop", m_RoadChain.loop);
+        float initialEdgeLoopCount = m_RoadChain.edgeLoopsPerMeter;
+        m_RoadChain.edgeLoopsPerMeter = EditorGUILayout.Slider("Edge Loops Per Meter", m_RoadChain.edgeLoopsPerMeter, 0.25f, 2.0f);
+
+        if(initialEdgeLoopCount != m_RoadChain.edgeLoopsPerMeter) m_RoadChain.UpdateMeshes();
 
     }
 
@@ -325,13 +338,22 @@ public class RoadChainEditor : Editor
                 }
                 if (!Event.current.alt && Event.current.type == EventType.MouseDown && Event.current.button == 0)
                 {
-                    // GameObject g = (GameObject)PrefabUtility.InstantiatePrefab(m_RoadChain.RoadPrefab);
-                    // g.name = "Control Point";
-                    // g.transform.position = screenSpaceMousePosition;
-                    // g.transform.SetParent(m_RoadChain.transform);
-                    // if(m_AddToEnd) g.transform.SetAsLastSibling();
-                    // else g.transform.SetAsFirstSibling();
-                    m_RoadChain.UpdateMeshes();
+                    Vector2 invertedYMousePosition = screenSpaceMousePosition;
+                    invertedYMousePosition.y = SceneView.lastActiveSceneView.camera.pixelHeight - invertedYMousePosition.y;
+                    Ray ray = SceneView.lastActiveSceneView.camera.ScreenPointToRay(invertedYMousePosition);
+                    Plane horizontalPlane = new Plane(Vector3.up, m_RoadChain.transform.position);
+                    float distance = 0.0f;
+                    if(horizontalPlane.Raycast(ray, out distance)) 
+                    {
+                        GameObject g = (GameObject)PrefabUtility.InstantiatePrefab(m_RoadChain.RoadPrefab);
+                        g.name = "Control Point";
+                        g.transform.position = ray.GetPoint(distance);
+                        g.transform.SetParent(m_RoadChain.transform);
+                        if(m_AddToEnd) g.transform.SetAsLastSibling();
+                        else g.transform.SetAsFirstSibling();
+                        m_RoadChain.UpdateMeshes();
+                    }
+                    
                 }
                 if (!Event.current.alt && Event.current.type == EventType.MouseDown && Event.current.button == 1)
                 {
