@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CarStats))]
+[RequireComponent(typeof(SphereCarController))]
+[RequireComponent(typeof(Abilities))]
+[RequireComponent(typeof(ComboAnalyser))]
 public class CarInputHandler : MonoBehaviour
 {
     [Header("Player Options")]

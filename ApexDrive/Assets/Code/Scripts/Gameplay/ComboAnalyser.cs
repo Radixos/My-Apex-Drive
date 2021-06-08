@@ -12,6 +12,8 @@ public class ComboAnalyser : MonoBehaviour
     [SerializeField] private Meter m_DriftDirectionMeter;
     [SerializeField] private Meter m_ApexDistanceMeter;
     [SerializeField] private Meter m_ComboAccuracyeMeter;
+    [SerializeField] private float temp;
+
 
     private void LateUpdate()
     {
@@ -37,6 +39,7 @@ public class ComboAnalyser : MonoBehaviour
         if(m_DriftDirectionMeter != null) m_DriftDirectionMeter.SetValue(direction);
         float distanceToApex = Vector3.Distance(front, apex);
         float evaluatedDistanceToApex =  1.0f-Mathf.Clamp01((distanceToApex-2.0f)/2.0f);
+        temp = evaluatedDistanceToApex;
         if(m_ApexDistanceMeter != null) m_ApexDistanceMeter.SetValue(evaluatedDistanceToApex);
         if(m_ComboAccuracyeMeter) m_ComboAccuracyeMeter.SetValue(evaluatedDistanceToApex * direction);
     }

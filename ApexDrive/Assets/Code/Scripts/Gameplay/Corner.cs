@@ -14,7 +14,7 @@ public class Corner : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         ComboAnalyser ca = other.GetComponent<ComboAnalyser>();
-        if(ca != null) ca.SetCorner(this);
+        if (ca != null) ca.SetCorner(this);
     }
 
     private void OnTriggerExit(Collider other)
