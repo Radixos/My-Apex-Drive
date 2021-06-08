@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CarInputHandler))]
+[RequireComponent(typeof(CarStats))]
+[RequireComponent(typeof(SphereCarController))]
 public class Abilities : MonoBehaviour
 {
     private CarInputHandler carInputHandler;

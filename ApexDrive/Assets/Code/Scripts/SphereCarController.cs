@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CarInputHandler))]
 public class SphereCarController : MonoBehaviour
 {
     private CarInputHandler carInputHandler;
@@ -20,32 +21,7 @@ public class SphereCarController : MonoBehaviour
     private bool initialDriftDirectionRight;
     [SerializeField]
     private float targetMinusCurrAngle;
-    [SerializeField]
-    private float sideBoostRampUp;
 
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
-=======
-    /// <summary>
-    /// The Following options only affect the sound. These do not have any impact on gameplay.
-    /// 
-    /// CURRENTLY DEPRECATED
-    /// </summary>
-    //[SerializeField]
-    //private bool changingGear;
-    //[SerializeField]
-    //private float gearSpeed;
-    //[SerializeField]
-    //private float timeSpentInEachGear = 4f;
-    //[SerializeField]
-    //private int numGears = 3;
-    //[SerializeField]
-    //private int currGear = 1;
-    //[SerializeField]
-    //private float durationOfGearChange = 1f;
-    //[SerializeField]
-    //private float changingGearTimer = 0;
-
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
     //FMOD events
     FMOD.Studio.EventInstance engine;
     FMOD.Studio.EventDescription control;
@@ -89,19 +65,7 @@ public class SphereCarController : MonoBehaviour
         }
 
         HandleAnimation();
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
 
-=======
-        //CalculateSpeedAndGear(); DEPRECATED
-
-        if (carStats.IsDrifting && sideBoostRampUp < 1f)
-        {
-            sideBoostRampUp += 0.5f * Time.deltaTime;
-        } else if (sideBoostRampUp > 0f)
-        {
-            sideBoostRampUp -= 0.5f * Time.deltaTime;
-        }
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
     }
 
     void FixedUpdate()
@@ -118,14 +82,8 @@ public class SphereCarController : MonoBehaviour
 
     void HandleAnimation()
     {
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
         model.transform.position = transform.position - new Vector3(0, 1.5f, 0);
         //Raycast down - angle model based on normal of floor
-=======
-        model.transform.position = carStats.SphereCollider.transform.position - new Vector3(0, .5f, 0);
-
-        // Raycast down - angle model based on normal of floor
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
         RaycastHit hit;
         Debug.DrawRay(transform.position, Vector3.down);
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 4f))
@@ -221,18 +179,13 @@ public class SphereCarController : MonoBehaviour
             carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
         }
 
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
         carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 12f);
-=======
-        // Slowly accelerate/decelerate.
-        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 9f);
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
 
         //Forward Acceleration
         if (carStats.IsDrifting)
         {
             float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
-            carStats.SphereCollider.AddForce(transform.right * carStats.CurrSpeed * oppositeDirection * sideBoostRampUp, ForceMode.Acceleration);
+            carStats.SphereCollider.AddForce(transform.right * carStats.CurrSpeed * oppositeDirection * carStats.DriftSideBoostMultiplier, ForceMode.Acceleration);
             carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
             engine.setParameterByID(acc, 1f);
         }
@@ -243,62 +196,4 @@ public class SphereCarController : MonoBehaviour
         }
         engine.setParameterByID(spd, carStats.CurrSpeed);
     }
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
-=======
-
-    /// <summary>
-    /// Yes, this is a mess. This calculates gears / changing gears.
-    /// 
-    /// 1. When the accelerate button is pressed, gearSpeed increases
-    /// 2. Once gearSpeed reaches a certain threshold (default 4 seconds), the currentGear increases.
-    ///  2a. Note that changingGear becomes true for 1 second while this happens.
-    /// 3. If the accelerate button is not pressed, the gear speed decreases at the same rate.
-    ///  3a. changingGear does not become true at all while decelerating (you don't hear the gear change while decelerating)
-    /// 
-    /// These numbers are not connected to the actual speed of the car.
-    /// 
-    /// I found that connecting them was very difficult to keep the arcade like controls of the car.
-    /// Let me know if you think this could be changed to be something better.
-    /// 
-    /// CURRENTLY DEPRECATED
-    /// </summary>
-    /// 
-    //private void CalculateSpeedAndGear()
-    //{
-    //    if (changingGear)
-    //    {
-    //        changingGearTimer += 1f * Time.deltaTime;
-    //        if (changingGearTimer >= durationOfGearChange)
-    //        {
-    //            changingGear = false;
-    //            changingGearTimer = 0;
-    //        }
-    //    }
-    //    if (vertical > 0)
-    //    {
-    //        if (currGear < numGears)
-    //        {
-    //            gearSpeed += 1f * Time.deltaTime;
-    //            if (gearSpeed > timeSpentInEachGear)
-    //            {
-    //                gearSpeed = 0;
-    //                currGear++;
-    //                changingGear = true;
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (currGear > 0)
-    //        {
-    //            gearSpeed -= 1f * Time.deltaTime;
-    //            if (gearSpeed < 0)
-    //            {
-    //                gearSpeed = timeSpentInEachGear;
-    //                currGear--;
-    //            }
-    //        }
-    //    }
-    //}
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
 }
