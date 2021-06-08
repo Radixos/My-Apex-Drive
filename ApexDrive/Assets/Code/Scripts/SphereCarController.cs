@@ -23,8 +23,7 @@ public class SphereCarController : MonoBehaviour
     [SerializeField]
     private float sideBoostRampUp;
 
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
-=======
+
     /// <summary>
     /// The Following options only affect the sound. These do not have any impact on gameplay.
     /// 
@@ -45,7 +44,6 @@ public class SphereCarController : MonoBehaviour
     //[SerializeField]
     //private float changingGearTimer = 0;
 
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
     //FMOD events
     FMOD.Studio.EventInstance engine;
     FMOD.Studio.EventDescription control;
@@ -89,9 +87,6 @@ public class SphereCarController : MonoBehaviour
         }
 
         HandleAnimation();
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
-
-=======
         //CalculateSpeedAndGear(); DEPRECATED
 
         if (carStats.IsDrifting && sideBoostRampUp < 1f)
@@ -101,7 +96,6 @@ public class SphereCarController : MonoBehaviour
         {
             sideBoostRampUp -= 0.5f * Time.deltaTime;
         }
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
     }
 
     void FixedUpdate()
@@ -118,14 +112,9 @@ public class SphereCarController : MonoBehaviour
 
     void HandleAnimation()
     {
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
         model.transform.position = transform.position - new Vector3(0, 1.5f, 0);
-        //Raycast down - angle model based on normal of floor
-=======
-        model.transform.position = carStats.SphereCollider.transform.position - new Vector3(0, .5f, 0);
 
-        // Raycast down - angle model based on normal of floor
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
+        //Raycast down - angle model based on normal of floor
         RaycastHit hit;
         Debug.DrawRay(transform.position, Vector3.down);
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 4f))
@@ -220,13 +209,8 @@ public class SphereCarController : MonoBehaviour
         {
             carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
         }
-
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
-        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 12f);
-=======
         // Slowly accelerate/decelerate.
         carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 9f);
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
 
         //Forward Acceleration
         if (carStats.IsDrifting)
@@ -243,8 +227,6 @@ public class SphereCarController : MonoBehaviour
         }
         engine.setParameterByID(spd, carStats.CurrSpeed);
     }
-<<<<<<< Updated upstream:ApexDrive/Assets/Code/Scripts/SphereCarController.cs
-=======
 
     /// <summary>
     /// Yes, this is a mess. This calculates gears / changing gears.
@@ -300,5 +282,4 @@ public class SphereCarController : MonoBehaviour
     //        }
     //    }
     //}
->>>>>>> Stashed changes:ApexDrive/Assets/Code/Scripts/Gameplay/Car/SphereCarController.cs
 }
