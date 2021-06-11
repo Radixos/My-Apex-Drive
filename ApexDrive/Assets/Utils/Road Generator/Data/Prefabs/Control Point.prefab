@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2529981497757850283}
   - component: {fileID: 7878128774417971321}
   - component: {fileID: 802082952335568159}
+  - component: {fileID: 6670938987603211087}
   m_Layer: 0
   m_Name: Control Point
   m_TagString: Untagged
@@ -95,3 +96,17 @@ MonoBehaviour:
   ownerID: 21802
   tangentLength: 19.6
   rotationEasing: 0
+--- !u!64 &6670938987603211087
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751253242513910326}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

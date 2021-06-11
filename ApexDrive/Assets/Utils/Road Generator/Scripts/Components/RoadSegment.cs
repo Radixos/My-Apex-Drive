@@ -127,6 +127,18 @@ public class RoadSegment : UniqueMesh {
 		);
 	}
 
+	public Vector3 GetClosestPoint(Vector3 point, int steps)
+	{
+		steps -= 1;
+		Vector3 result = Vector3.zero;
+		OrientedCubicBezier3D bezier = GetBezierRepresentation(Space.World);
+		for(int i = 0; i <= steps; i++)
+		{
+			Debug.DrawLine(bezier.GetPoint((float)i / (float)steps), point, Color.red);
+		}
+		return result;
+	}
+
 	// Returns the up vector of either the first or last control point, in a given space
 	Vector3 GetUpVector( int i, Space space ) {
 		if( i == 0 ) {

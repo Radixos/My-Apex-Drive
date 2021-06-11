@@ -26,21 +26,28 @@ using UnityEngine;
 // We solve this by keeping track of the ID of the mesh that created it. If ownerID is from a different object,
 // it means this object was duplicated from another, and we need to create a new mesh for this copy
 [RequireComponent( typeof( MeshFilter ) )]
+[RequireComponent( typeof( MeshCollider ) )]
 public class UniqueMesh : MonoBehaviour {
 
 	[HideInInspector][SerializeField] int ownerID;
+	private MeshCollider m_MeshCollider;
+	MeshFilter MeshFilter => GetComponent<MeshFilter>();
+	MeshCollider MeshCollider => GetComponent<MeshCollider>();
 
 	protected Mesh meshCached; // The actual mesh asset to generate into
 	protected Mesh Mesh {
 		get {
 			bool isOwner = ownerID == gameObject.GetInstanceID();
 			bool filterHasMesh = MeshFilter.sharedMesh != null;
-			if( !filterHasMesh || !isOwner ) {
-				MeshFilter.sharedMesh = meshCached = new Mesh(); // Create new mesh and assign to the mesh filter
+			if(MeshCollider == null) gameObject.AddComponent<MeshCollider>();
+			bool colliderHasMesh = MeshCollider.sharedMesh != null;
+			if( !filterHasMesh || !isOwner || !colliderHasMesh || MeshCollider.sharedMesh != MeshFilter.sharedMesh ) {
+				MeshCollider.sharedMesh = MeshFilter.sharedMesh = meshCached = new Mesh(); // Create new mesh and assign to the mesh filter
 				ownerID = gameObject.GetInstanceID(); // Mark self as owner of this mesh
 				meshCached.name = "Mesh [" + ownerID + "]";
-				meshCached.hideFlags = HideFlags.HideAndDontSave; // Ensures it isn't saved in the scene. This will prevent leaks
-				meshCached.MarkDynamic(); // Only useful for real-time bending. Don't do this if you only generate one
+				// meshCached.
+				// meshCached.hideFlags = HideFlags.HideAndDontSave; // Ensures it isn't saved in the scene. This will prevent leaks
+				// meshCached.MarkDynamic(); // Only useful for real-time bending. Don't do this if you only generate one
 			} else if( isOwner && filterHasMesh && meshCached == null ) {
 				// If the mesh field lost its reference, which can happen in assembly reloads
 				meshCached = MeshFilter.sharedMesh;
@@ -49,6 +56,26 @@ public class UniqueMesh : MonoBehaviour {
 		}
 	}
 
-	MeshFilter MeshFilter => GetComponent<MeshFilter>();
+	// protected Mesh colliderMeshCached;
+	// protected Mesh ColliderMesh {
+	// 	get {
+	// 		bool isOwner = ownerID == gameObject.GetInstanceID();
+	// 		if(m_MeshCollider == null) m_MeshCollider = GetComponent<MeshCollider>();
+	// 		if(m_MeshCollider == null) m_MeshCollider = gameObject.AddComponent<MeshCollider>();
+	// 		bool colliderHasMesh = m_MeshCollider.sharedMesh != null;
+	// 		if( !colliderHasMesh || !isOwner ) {
+	// 			m_MeshCollider.sharedMesh = colliderMeshCached = new Mesh(); // Create new mesh and assign to the mesh filter
+	// 			ownerID = gameObject.GetInstanceID(); // Mark self as owner of this mesh
+	// 			meshCached.name = "Collider Mesh [" + ownerID + "]";
+	// 			// colliderMeshCached.hideFlags = HideFlags.HideAndDontSave; // Ensures it isn't saved in the scene. This will prevent leaks
+	// 			// meshCached.MarkDynamic(); // Only useful for real-time bending. Don't do this if you only generate one
+	// 		} else if( isOwner && colliderHasMesh && colliderMeshCached == null ) {
+	// 			// If the mesh field lost its reference, which can happen in assembly reloads
+	// 			colliderMeshCached = m_MeshCollider.sharedMesh;
+	// 		}
+	// 		return colliderMeshCached;
+	// 	}
+	// }
 
+	
 }

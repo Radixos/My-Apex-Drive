@@ -43,6 +43,7 @@ public class RoadChainEditor : Editor
         foreach(RoadSegment segment in m_RoadChain.Segments)
         {
             segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
+            // segment.gameObject.hideFlags = HideFlags.None;
         }
     }
 
@@ -67,6 +68,7 @@ public class RoadChainEditor : Editor
         foreach(RoadSegment segment in m_RoadChain.Segments)
         {
             segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
+            // segment.gameObject.hideFlags = HideFlags.None;
         }
     }
 
@@ -178,11 +180,25 @@ public class RoadChainEditor : Editor
         GUILayout.Space(10.0f);
         m_RoadChain.RoadPrefab = (GameObject)EditorGUILayout.ObjectField("Road Segment Prefab", m_RoadChain.RoadPrefab, typeof(GameObject), false);
         m_RoadChain.mesh2D =  (Mesh2D)EditorGUILayout.ObjectField("Mesh 2D", m_RoadChain.mesh2D, typeof(Mesh2D), false);
+        bool wasLooped = m_RoadChain.loop;
         m_RoadChain.loop = EditorGUILayout.Toggle("Loop", m_RoadChain.loop);
         float initialEdgeLoopCount = m_RoadChain.edgeLoopsPerMeter;
         m_RoadChain.edgeLoopsPerMeter = EditorGUILayout.Slider("Edge Loops Per Meter", m_RoadChain.edgeLoopsPerMeter, 0.25f, 2.0f);
 
-        if(initialEdgeLoopCount != m_RoadChain.edgeLoopsPerMeter) m_RoadChain.UpdateMeshes();
+        float initialColliderEdgeLoopCount = m_RoadChain.ColliderEdgeLoopsPerMeter;
+        m_RoadChain.GenerateColliders = EditorGUILayout.Toggle("Generate Colliders", m_RoadChain.GenerateColliders);
+        if(m_RoadChain.GenerateColliders) m_RoadChain.ColliderEdgeLoopsPerMeter = EditorGUILayout.Slider("Collider Edge Loops Per Meter", m_RoadChain.ColliderEdgeLoopsPerMeter, 0.25f, 2.0f);
+
+        m_RoadChain.TestNearestPointObject = (Transform) EditorGUILayout.ObjectField("Test Nearest Point", m_RoadChain.TestNearestPointObject, typeof(Transform), true);
+        m_RoadChain.TestNearestPointObject2 = (Transform) EditorGUILayout.ObjectField("Test Nearest Point", m_RoadChain.TestNearestPointObject2, typeof(Transform), true);
+        
+
+        if(GUILayout.Button("Generate Mesh"))
+        {
+            m_RoadChain.UpdateMeshes();
+        }
+
+        if(initialEdgeLoopCount != m_RoadChain.edgeLoopsPerMeter || (initialColliderEdgeLoopCount != m_RoadChain.ColliderEdgeLoopsPerMeter && m_RoadChain.GenerateColliders ) || m_RoadChain.loop != wasLooped) m_RoadChain.UpdateMeshes();
 
     }
 
@@ -305,7 +321,6 @@ public class RoadChainEditor : Editor
                     nearestScreenSpacePoint = screenSpaceSegmentPosition;
                     nearestPoint = m_RoadChain.Segments[i].transform.position;
                 }
-                Debug.Log(nearestPoint);
             }
         }
 
@@ -363,6 +378,17 @@ public class RoadChainEditor : Editor
                 break;
 
             case ToolMode.Split:
+                {
+                    Vector2 invertedYMousePosition = screenSpaceMousePosition;
+                        invertedYMousePosition.y = SceneView.lastActiveSceneView.camera.pixelHeight - invertedYMousePosition.y;
+                        Ray ray = SceneView.lastActiveSceneView.camera.ScreenPointToRay(invertedYMousePosition);
+                        Plane horizontalPlane = new Plane(Vector3.up, m_RoadChain.transform.position);
+                        float distance = 0.0f;
+                        if(horizontalPlane.Raycast(ray, out distance)) 
+                        {
+                            Handles.SphereHandleCap(0, ray.GetPoint(distance), Quaternion.identity, 1.0f, EventType.Repaint);
+                        }
+                }
                 break;
 
             case ToolMode.Delete:

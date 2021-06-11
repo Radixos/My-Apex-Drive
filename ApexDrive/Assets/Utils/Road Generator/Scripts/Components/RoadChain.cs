@@ -27,12 +27,26 @@ public class RoadChain : MonoBehaviour {
 	public Mesh2D mesh2D = null; // The 2D shape to be extruded
 	public bool loop = false; // Whether or not the last segment should connect to the first
 	public float edgeLoopsPerMeter = 2; // Triangle density, in loops per meter!
+	public float ColliderEdgeLoopsPerMeter = 2; // Triangle density, in loops per meter!
+	public bool GenerateColliders = true;
 	public UVMode uvMode = UVMode.TiledDeltaCompensated; // More info on what this is in the enum!
 	public RoadSegment[] Segments;
 
+	public Transform TestNearestPointObject;
+	public Transform TestNearestPointObject2;
+
 	// Regenerate mesh on instantiation.
 	// If you save the mesh in the scene you don't have to do this, but, it's pretty fast anyway so whatevs!
-	void Awake() => UpdateMeshes();
+	private void Awake() 
+	{
+		UpdateMeshes();
+	}
+
+	private void Update()
+	{
+		if(TestNearestPointObject != null) GetNearestPositionOnSpline(TestNearestPointObject.position, 100, true);
+		if(TestNearestPointObject2 != null) GetNearestPositionOnSpline(TestNearestPointObject2.position, 100, true);
+	}
 
 	// Iterates through all children / road segments, and updates their meshes!
 	public void UpdateMeshes() {
@@ -87,22 +101,32 @@ public class RoadChain : MonoBehaviour {
 	///<param name="precision">The number of subdivisions to check between road segments for the nearest point. Lower number = more performant, Higher number = more precise.</param>
 	public Vector3 GetNearestPositionOnSpline(Vector3 point, int precision, bool ignoreHeight = false)
 	{
-		float closestDistance = -1.0f;
+		if(ignoreHeight) point.y = 0.0f;
 		Vector3 result = Vector3.zero;
-		RoadSegment closestSegment = GetNearestSegmentToPoint(point, ignoreHeight);
-		RoadSegment previousSegment = closestSegment.TryGetPreviousSegment();
-		OrientedCubicBezier3D bezier = closestSegment.GetBezierRepresentation(Space.World);
-		OrientedCubicBezier3D previousBezier = closestSegment.GetBezierRepresentation(Space.World);
-
+		float lowestDistance = -1.0f;
+		RoadSegment segment = GetNearestSegmentToPoint(point);
+		OrientedCubicBezier3D bezierA = segment.GetBezierRepresentation(Space.World), bezierB = segment.TryGetPreviousSegment().GetBezierRepresentation(Space.World);
 		for(int i = 0; i < precision; i++)
 		{
-			Vector3 p = bezier.GetPoint((float)i / (float)precision);
-			if(closestDistance < 0.0f || Vector3.Distance(p, point) < closestDistance)
+			Vector3 bezierPoint = bezierA.GetPoint((float)i/(float)precision);
+			if(ignoreHeight) bezierPoint.y = 0.0f;
+			float distance = Vector3.Distance(bezierPoint, point);
+			if(lowestDistance < 0.0f || distance < lowestDistance)
 			{
-				closestDistance = Vector3.Distance(p, point);
-				result = p;
+				result = bezierPoint;
+				lowestDistance = distance;
+			}
+
+			bezierPoint = bezierB.GetPoint((float)i/(float)precision);
+			if(ignoreHeight) bezierPoint.y = 0.0f;
+			distance = Vector3.Distance(bezierPoint, point);
+			if(lowestDistance < 0.0f || distance < lowestDistance)
+			{
+				result = bezierPoint;
+				lowestDistance = distance;
 			}
 		}
+		Debug.DrawLine(result, point, Color.red);
 		return result;
 	}
 }

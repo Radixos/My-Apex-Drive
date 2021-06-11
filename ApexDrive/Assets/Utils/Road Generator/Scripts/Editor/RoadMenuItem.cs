@@ -10,4 +10,10 @@ public class RoadMenuItem
     {
         PrefabUtility.InstantiatePrefab(Resources.Load<Object>("Road"));
     }
+
+     [MenuItem("GameObject/Apex Drive/Road (Looped)")]
+    public static void InstantiateLoopedRoadPrefab()
+    {
+        PrefabUtility.InstantiatePrefab(Resources.Load<Object>("Road (Looped)"));
+    }
 }
