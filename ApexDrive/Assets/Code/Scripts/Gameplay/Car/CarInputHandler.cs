@@ -2,6 +2,10 @@
 
 using UnityEngine;
 
+[RequireComponent(typeof(CarController))]
+[RequireComponent(typeof(Abilities))]
+[RequireComponent(typeof(CarStats))]
+[RequireComponent(typeof(ComboAnalyser))]
 public class CarInputHandler : MonoBehaviour
 {
     [Header("Player Options")]

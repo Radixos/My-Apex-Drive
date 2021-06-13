@@ -11,14 +11,11 @@ public class engineAudio : MonoBehaviour
     private Rigidbody sphereCollider;
     private CarInputHandler carInputHandler;
     private CarStats carStats;
-    private SphereCarController controller;
+    private CarController controller;
 
 
     //FMOD events
     FMOD.Studio.EventInstance sfxDrift;
-
-
-
 
     private void Start()
     {

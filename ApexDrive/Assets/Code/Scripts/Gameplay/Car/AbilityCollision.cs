@@ -1,59 +1,31 @@
-﻿    using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityCollision : MonoBehaviour
 {
-    public Abilities carAbilities;
+    // DEPRECATED
+    //public CarStats carStats;
+    //public CarController sphereCarController;
 
-    public bool stunned;
+    //private void OnCollisionEnter(Collision collision)
+    //{
 
-    private float stunTimer;
+    //    // Only check collision if the car has activated rampage
+    //    if (collision.gameObject.CompareTag("Player") && carStats.Rampage.activeSelf)
+    //    {
+    //        Vector3 normal = collision.contacts[0].normal;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        stunTimer = 0.75f;
-    }
+    //        if (collision.gameObject.GetComponent<AbilityCollision>().carStats.Shield.activeSelf)
+    //        {
+    //            sphereCarController.Impact(3000, normal, 0.75f);
+    //        }
+    //        else
+    //        {
+    //            collision.gameObject.GetComponent<CarController>().Impact(3000, -normal, 0.75f);
+    //        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (stunned)
-        {
-            if (stunTimer <= 0)
-            {
-                stunned = false;
-                stunTimer = 0.75f;
-            }
-            else
-                stunTimer -= Time.deltaTime;
-        }
-    }
+    //    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-
-        // Only check collision if the car has activated rampage
-        if (collision.gameObject.CompareTag("Player") && carAbilities.rampage.activeSelf)
-        {
-            //Debug.Log(collision.gameObject.name);
-
-            Vector3 normal = Vector3.zero;
-            normal = collision.contacts[0].normal;
-
-            if (collision.gameObject.GetComponent<AbilityCollision>().carAbilities.shield.activeSelf)
-            {
-                GetComponent<Rigidbody>().AddForce(normal * 3000, ForceMode.Impulse);
-                stunned = true;
-            }
-            else
-            {
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(-normal * 3000.0f, ForceMode.Impulse);
-                collision.gameObject.GetComponent<AbilityCollision>().stunned = true;
-            }
-
-        }
-
-    }
+    //}
 }
