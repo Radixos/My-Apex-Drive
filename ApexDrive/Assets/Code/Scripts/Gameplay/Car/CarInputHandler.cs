@@ -8,7 +8,7 @@ public class CarInputHandler : MonoBehaviour
     [Tooltip("This is assigned on Start so this cannot be changed in run time!")]
     [SerializeField]
     [Range(1, 4)]
-    public int currentPlayer;
+    public int Player;
     private string horizontalInput;
     private string accelerateInput;
     private string brakeInput;
@@ -31,12 +31,12 @@ public class CarInputHandler : MonoBehaviour
 
         //Input clarification: 
         //Brake is actually reverse!!! To simulate controls similar to Rocket League.
-        HorizontalInput = "Horizontal " + currentPlayer;
-        AccelerateInput = "Accelerate " + currentPlayer;
-        BrakeInput = "Brake " + currentPlayer;
-        DriftInput = "Drift " + currentPlayer;
-        BoostInput = "Boost " + currentPlayer;
-        powerAInput = "Power A " + currentPlayer;
-        powerBInput = "Power B " + currentPlayer;
+        HorizontalInput = "Horizontal " + Player;
+        AccelerateInput = "Accelerate " + Player;
+        BrakeInput = "Brake " + Player;
+        DriftInput = "Drift " + Player;
+        BoostInput = "Boost " + Player;
+        powerAInput = "Power A " + Player;
+        powerBInput = "Power B " + Player;
     }
 }

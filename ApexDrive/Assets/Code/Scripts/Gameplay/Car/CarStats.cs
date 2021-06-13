@@ -16,6 +16,8 @@ public class CarStats : MonoBehaviour
     [SerializeField]
     [Tooltip("0 = In Air, 1 = Road, 2 = Offroad")]
     private int surface;
+    [SerializeField]
+    private bool canDrive;
 
     [Header("Drifting Options")]
     [SerializeField]
@@ -77,6 +79,7 @@ public class CarStats : MonoBehaviour
     public int Surface { get => surface; set => surface = value; }
     public float OffroadMultiplier { get => offroadMultiplier; set => offroadMultiplier = value; }
     public float CurrentSurfaceMultiplier { get => currentSurfaceMultiplier; set => currentSurfaceMultiplier = value; }
+    public bool CanDrive { get => canDrive; set => canDrive = value; }
 
     void Start()
     {
