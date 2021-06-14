@@ -172,7 +172,7 @@ public class CarController : MonoBehaviour
     {
         if (carStats.CurrSpeed <= 0.1f && carStats.CurrSpeed >= -.1f) return;
 
-        if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
+        if (Input.GetButton(carInputHandler.DriftInput) && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
         {
             if (!carStats.IsDrifting)
             {
