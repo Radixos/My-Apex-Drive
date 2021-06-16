@@ -42,8 +42,8 @@ public class RoadChainEditor : Editor
         m_RoadChain = (RoadChain) target;
         foreach(RoadSegment segment in m_RoadChain.Segments)
         {
-            segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
-            // segment.gameObject.hideFlags = HideFlags.None;
+            // segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
+            segment.gameObject.hideFlags = HideFlags.None;
         }
     }
 
@@ -67,8 +67,8 @@ public class RoadChainEditor : Editor
 
         foreach(RoadSegment segment in m_RoadChain.Segments)
         {
-            segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
-            // segment.gameObject.hideFlags = HideFlags.None;
+            // segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
+            segment.gameObject.hideFlags = HideFlags.None;
         }
     }
 
@@ -188,9 +188,6 @@ public class RoadChainEditor : Editor
         float initialColliderEdgeLoopCount = m_RoadChain.ColliderEdgeLoopsPerMeter;
         m_RoadChain.GenerateColliders = EditorGUILayout.Toggle("Generate Colliders", m_RoadChain.GenerateColliders);
         if(m_RoadChain.GenerateColliders) m_RoadChain.ColliderEdgeLoopsPerMeter = EditorGUILayout.Slider("Collider Edge Loops Per Meter", m_RoadChain.ColliderEdgeLoopsPerMeter, 0.25f, 2.0f);
-
-        m_RoadChain.TestNearestPointObject = (Transform) EditorGUILayout.ObjectField("Test Nearest Point", m_RoadChain.TestNearestPointObject, typeof(Transform), true);
-        m_RoadChain.TestNearestPointObject2 = (Transform) EditorGUILayout.ObjectField("Test Nearest Point", m_RoadChain.TestNearestPointObject2, typeof(Transform), true);
         
 
         if(GUILayout.Button("Generate Mesh"))

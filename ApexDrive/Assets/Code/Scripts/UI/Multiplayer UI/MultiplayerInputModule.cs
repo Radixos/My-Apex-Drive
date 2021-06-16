@@ -59,14 +59,15 @@ public class MultiplayerInputModule : BaseInputModule
 		AxisEventData[] axisEventData = new AxisEventData[GameManager.MaxPlayers];
 		foreach(Player player in GameManager.Instance.ConnectedPlayers)
 		{
+
 			int i = player.PlayerID;
-			if(currentRepeatDelay[i] > m_AxisRepeatDelay && ! m_MultiplayerEventSystem.LockedController(i)){
-				if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) < 0.0){
+			if(!m_MultiplayerEventSystem.LockedController(i) && currentRepeatDelay[i] >= m_AxisRepeatDelay){
+				if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) > 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Up;
 					currentRepeatDelay[i] = 0f;
 				}
-				else if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) > 0.0){
+				else if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) < 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Down;
 					currentRepeatDelay[i] = 0f;
@@ -80,6 +81,11 @@ public class MultiplayerInputModule : BaseInputModule
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Right;
 					currentRepeatDelay[i] = 0f;
+				}
+				else
+				{
+					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
+					axisEventData[i].moveDir = MoveDirection.None;
 				}
 			}
 
@@ -101,6 +107,8 @@ public class MultiplayerInputModule : BaseInputModule
 						break;
 					case MoveDirection.Right:
 						nextSelectable = oldSelectable.FindSelectableOnRight();
+						break;
+					case MoveDirection.None:
 						break;
 				}
 

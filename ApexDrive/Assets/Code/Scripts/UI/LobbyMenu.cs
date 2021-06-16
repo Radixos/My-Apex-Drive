@@ -11,6 +11,7 @@ public class LobbyMenu : MonoBehaviour
     private Animator m_Animator;
     [SerializeField] private Animator[] m_PlayerPortraits;
     [SerializeField] private Transform m_MenuContainer;
+    [SerializeField] private Animator[] m_CarAnimators;
 
     [SerializeField] private bool[] m_PlayersReady;
     private Coroutine m_LoadGameroutine;
@@ -107,9 +108,16 @@ public class LobbyMenu : MonoBehaviour
         if(!m_MenuIsVisible)
         {
             if(m_Animator != null) m_Animator.SetBool("MenuOpen", true);
+            
             m_MenuIsVisible = true;
         }
-        if(player != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
+        if(player != null && m_PlayerPortraits[player.PlayerID] != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
+        if(m_CarAnimators[player.PlayerID] != null)
+        {
+            m_CarAnimators[player.PlayerID].SetBool("IsActive", true);
+            m_CarAnimators[player.PlayerID].SetFloat("Blend", player.PlayerID);
+        }
+        
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Player Join");
         m_LobbyPlayerSFX[player.PlayerID].start();
     }
@@ -124,6 +132,10 @@ public class LobbyMenu : MonoBehaviour
         }
         m_PlayersReady[player.PlayerID] = false;
         if(player != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", false);
+        if(m_CarAnimators[player.PlayerID] != null)
+        {
+            m_CarAnimators[player.PlayerID].SetBool("IsActive", false);
+        }
         m_LobbyPlayerSFX[player.PlayerID].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 

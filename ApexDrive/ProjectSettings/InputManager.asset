@@ -13,9 +13,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
+    gravity: 1000
     dead: 0.001
-    sensitivity: 3
+    sensitivity: 1000
     snap: 1
     invert: 0
     type: 2
@@ -29,9 +29,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
+    gravity: 1000
     dead: 0.001
-    sensitivity: 3
+    sensitivity: 1000
     snap: 1
     invert: 0
     type: 2
@@ -45,9 +45,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
+    gravity: 1000
     dead: 0.001
-    sensitivity: 3
+    sensitivity: 1000
     snap: 1
     invert: 0
     type: 2
@@ -61,9 +61,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
+    gravity: 1000
     dead: 0.001
-    sensitivity: 3
+    sensitivity: 1000
     snap: 1
     invert: 0
     type: 2
@@ -77,13 +77,13 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
+    gravity: 1000
     dead: 0.25
-    sensitivity: 3
+    sensitivity: 1000
     snap: 1
     invert: 0
     type: 2
-    axis: 1
+    axis: 7
     joyNum: 1
   - serializedVersion: 3
     m_Name: Vertical 2
@@ -93,13 +93,13 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
+    gravity: 1000
     dead: 0.25
-    sensitivity: 3
+    sensitivity: 1000
     snap: 1
     invert: 0
     type: 2
-    axis: 1
+    axis: 6
     joyNum: 2
   - serializedVersion: 3
     m_Name: Vertical 3
@@ -109,14 +109,14 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
+    gravity: 1000
     dead: 0.25
-    sensitivity: 3
+    sensitivity: 1000
     snap: 1
     invert: 0
     type: 2
-    axis: 1
-    joyNum: 4
+    axis: 6
+    joyNum: 3
   - serializedVersion: 3
     m_Name: Vertical 4
     descriptiveName: 
@@ -125,13 +125,13 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 3
+    gravity: 1000
     dead: 0.25
-    sensitivity: 3
+    sensitivity: 1000
     snap: 1
     invert: 0
     type: 2
-    axis: 1
+    axis: 6
     joyNum: 4
   - serializedVersion: 3
     m_Name: Accelerate 1

@@ -19,9 +19,34 @@
 using UnityEngine;
 using UnityEditor;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer) )]
-[ExecuteInEditMode]
-public class RoadSegment : UniqueMesh {
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider)), ExecuteInEditMode]
+public class RoadSegment : MonoBehaviour {
+
+	[HideInInspector][SerializeField] int ownerID;
+
+	private MeshCollider m_Collider;
+	private MeshFilter m_Filter;
+
+	private void Awake() => ValidateComponents();
+
+
+	private Mesh meshCached; // The actual mesh asset to generate into
+	private Mesh Mesh {
+		get {
+			bool isOwner = ownerID == gameObject.GetInstanceID();
+			bool filterHasMesh = m_Filter.sharedMesh != null;
+			bool colliderHasMesh = m_Collider.sharedMesh != null;
+			if( !filterHasMesh || !isOwner || !colliderHasMesh || m_Collider.sharedMesh != m_Filter.sharedMesh ) {
+				m_Collider.sharedMesh = m_Filter.sharedMesh = meshCached = new Mesh(); // Create new mesh and assign to the mesh filter
+				ownerID = gameObject.GetInstanceID(); // Mark self as owner of this mesh
+				meshCached.name = "Mesh [" + ownerID + "]";
+			} else if( isOwner && filterHasMesh && meshCached == null ) {
+				// If the mesh field lost its reference, which can happen in assembly reloads
+				meshCached = m_Filter.sharedMesh;
+			}
+			return meshCached;
+		}
+	}	
 
 	// Serialized stuff, like settings
 	public float tangentLength = 3; // Tangent size. Note that it's only the tangent of the first point. The next segment controls the endpoint tangent length
@@ -36,11 +61,22 @@ public class RoadSegment : UniqueMesh {
 	public RoadChain RoadChain => transform.parent == null ? null : transform.parent.GetComponent<RoadChain>();
 	Mesh2D Mesh2D => RoadChain.mesh2D;
 
+	private void ValidateComponents()
+	{
+		if(m_Collider == null) m_Collider = GetComponent<MeshCollider>();
+		if(m_Collider == null) m_Collider = gameObject.AddComponent<MeshCollider>();
+
+		if(m_Filter == null) m_Filter = GetComponent<MeshFilter>();
+		if(m_Filter == null) m_Filter = gameObject.AddComponent<MeshFilter>();
+
+		if(GetComponent<MeshRenderer>() == null) gameObject.AddComponent<MeshRenderer>();
+	}
+
 	// This will regenerate the mesh!
 	// uvzStartEnd is used for the (optional) normalized coordinates along the whole track,
 	// x = start coordinate, y = end coordinate
 	public void UpdateMesh( Vector2 nrmCoordStartEnd ) {
-
+		ValidateComponents();
 		// Only generate a mesh if we've got a next control point
 		if( HasValidNextPoint ) {
 			meshExtruder.Extrude(

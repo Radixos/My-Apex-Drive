@@ -32,22 +32,6 @@ public class RoadChain : MonoBehaviour {
 	public UVMode uvMode = UVMode.TiledDeltaCompensated; // More info on what this is in the enum!
 	public RoadSegment[] Segments;
 
-	public Transform TestNearestPointObject;
-	public Transform TestNearestPointObject2;
-
-	// Regenerate mesh on instantiation.
-	// If you save the mesh in the scene you don't have to do this, but, it's pretty fast anyway so whatevs!
-	private void Awake() 
-	{
-		UpdateMeshes();
-	}
-
-	private void Update()
-	{
-		if(TestNearestPointObject != null) GetNearestPositionOnSpline(TestNearestPointObject.position, 100, true);
-		if(TestNearestPointObject2 != null) GetNearestPositionOnSpline(TestNearestPointObject2.position, 100, true);
-	}
-
 	// Iterates through all children / road segments, and updates their meshes!
 	public void UpdateMeshes() {
 
