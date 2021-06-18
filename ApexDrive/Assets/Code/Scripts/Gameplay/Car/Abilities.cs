@@ -48,7 +48,9 @@ public class Abilities : MonoBehaviour
     {
         // Two abilities that stay active as
         // long as 
-        carStats.Shield.SetActive(false);
+        if (!carStats.InitialShieldPowerDepleted)
+            carStats.Shield.SetActive(false);
+
         carStats.CurrentBoostMultiplier = 1;
 
         if (Input.GetButtonUp(carInputHandler.PowerAInput))
@@ -75,9 +77,9 @@ public class Abilities : MonoBehaviour
                 {
                     carStats.PowerAmount -= 0.25f;
                     carStats.InitialShieldPowerDepleted = true;
+                    carStats.Shield.SetActive(true);
                 }
 
-                carStats.Shield.SetActive(true);
                 ability.getPlaybackState(out pbs);
                 if (pbs != FMOD.Studio.PLAYBACK_STATE.PLAYING)
                 {
