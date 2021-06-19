@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class PositionUpdate : MonoBehaviour
 {
-    public int laps;
-    public int collidersHit;
+    public int laps, collidersHit;
     public float offScreenTimer;
-    public bool eliminated;
-    public bool winner;
+    public bool eliminated, winner;
 
     private List<GameObject> hitColliders = new List<GameObject>();
 
