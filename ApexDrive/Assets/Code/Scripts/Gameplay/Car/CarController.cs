@@ -8,6 +8,7 @@ public class CarController : MonoBehaviour
 {
     private CarInputHandler carInputHandler;
     private CarStats carStats;
+    public TrailRenderer[] trails;
 
     public Transform model;
 
@@ -87,6 +88,9 @@ public class CarController : MonoBehaviour
             {
                 HandleMovement();
                 HandleSteering();
+            } else
+            {
+                carStats.IsDrifting = false;
             }
         }
     }
@@ -120,6 +124,7 @@ public class CarController : MonoBehaviour
 
         // Used to determine if the car is in the air
         carStats.InAir = !Physics.Raycast(transform.position, Vector3.down, out hit, 4f);
+        Debug.DrawRay(transform.position, Vector3.down, Color.red);
 
         // Used to determine what surface the car is on
         if (hit.collider == null) return;
@@ -144,11 +149,11 @@ public class CarController : MonoBehaviour
     }
 
     /// <summary>
-    /// HandleAnimation handles all animations of the car such as angle.
+    /// HandleAnimation handles all animations and effecs of the car such as angle of the model.
     /// </summary>
     void HandleAnimation()
     {
-        transform.position = carStats.SphereCollider.transform.position - new Vector3(0, .5f, 0);
+        transform.position = carStats.SphereCollider.transform.position - new Vector3(0, .70f, 0);
 
         if (!carStats.InAir)
         {
@@ -162,6 +167,11 @@ public class CarController : MonoBehaviour
 
             model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
         }
+
+        foreach (TrailRenderer trail in trails)
+        {
+            trail.emitting = carStats.IsDrifting;
+        }
     }
 
     /// <summary>
@@ -172,12 +182,16 @@ public class CarController : MonoBehaviour
     {
         if (carStats.CurrSpeed <= 0.1f && carStats.CurrSpeed >= -.1f) return;
 
-        if (Input.GetButton(carInputHandler.DriftInput) && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
+        if (Input.GetButton(carInputHandler.DriftInput) && carStats.CurrSpeed / carStats.Acceleration >= carStats.DriftSpeedThresholdPercent)
         {
             if (!carStats.IsDrifting)
             {
                 initialDriftDirectionRight = horizontal > 0;
-                carStats.SphereCollider.AddForce(transform.transform.right * carStats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
+                if ((horizontal < 0) != initialDriftDirectionRight)
+                {
+                    sideBoostRamp = 0;
+                }
+                //carStats.SphereCollider.AddForce(transform.transform.right * carStats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
             }
             carStats.IsDrifting = true;
         }
@@ -225,7 +239,7 @@ public class CarController : MonoBehaviour
         carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 9f);
 
         // Used to add force in the opposite direction while turning.
-        float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
+        float oppositeDirection = initialDriftDirectionRight ? -1 : 1;
 
         // Forward Acceleration + Side Acceleration if drifting
         if (carStats.IsDrifting)
