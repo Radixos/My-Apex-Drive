@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,10 +57,9 @@ public class EliminationScript : MonoBehaviour
         if (eliminatedTotal == carManager.raceCars.Count - 1 && currentCar.eliminated == false)
         {
             currentCar.winner = true;
-            //;
-            //GameManager.Instance.SubmitRoundWinner();
+            GameManager.Instance.SubmitRoundWinner(1);
             eliminatedTotal = 0;
-            Debug.Log(GameManager.Instance.Players[currentCar.GetComponent<CarInputHandler>().currentPlayer].RoundWins);
+            //Debug.Log(GameManager.Instance.Players[currentCar.GetComponent<CarInputHandler>().currentPlayer].RoundWins);
         }
     }
 
