@@ -16,7 +16,7 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canvas = GetComponent<VictoryMenu>();
+        //canvas = GetComponent<VictoryMenu>();
     }
 
     // Update is called once per frame
