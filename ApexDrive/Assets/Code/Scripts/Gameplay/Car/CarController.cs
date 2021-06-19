@@ -4,45 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CarInputHandler))]
-public class SphereCarController : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     private CarInputHandler carInputHandler;
     private CarStats carStats;
-    public AbilityCollision abilityCollision;
 
     public Transform model;
 
-    private float horizontal;
-    private float vertical;
-
     private float turnVelocity;
 
-    [Header("DEBUG")]
+    [Header("DEBUG")] // Required for the car! Don't delete!
+    [SerializeField]
+    private float horizontal;
+    [SerializeField]
+    private float vertical;
     [SerializeField]
     private bool initialDriftDirectionRight;
     [SerializeField]
-    private float targetMinusCurrAngle;
+    private float sideBoostRamp;
     [SerializeField]
-    private float sideBoostRampUp;
-
-    /// <summary>
-    /// The Following options only affect the sound. These do not have any impact on gameplay.
-    /// </summary>
-    [SerializeField]
-    private bool changingGear;
-    [SerializeField]
-    private float gearSpeed;
-    [SerializeField]
-    private float timeSpentInEachGear = 4f;
-    [SerializeField]
-    private int numGears = 3;
-    [SerializeField]
-    private int currGear = 1;
-    [SerializeField]
-    private float durationOfGearChange = 1f;
-    [SerializeField]
-    private float changingGearTimer = 0;
+    private RaycastHit hit;
 
     //FMOD events
     FMOD.Studio.EventInstance sfxEngine;
@@ -90,52 +71,87 @@ public class SphereCarController : MonoBehaviour
 
     private void Update()
     {
-
-        horizontal = Input.GetAxisRaw(carInputHandler.HorizontalInput);
-        vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
-        vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
-
-        if(!Input.GetButton(carInputHandler.AccelerateInput))
-        {
-            sfxEngine.setParameterByID(acc, 0f);
-        }
-
+        HandleAnalogueInput();
         HandleAnimation();
-        carAudio();
-        //CalculateSpeedAndGear(); DEPRECATED
+        HandleCarState();
+        HandleCarAudio();
 
-        if (carStats.IsDrifting && sideBoostRampUp < 1f)
-        {
-            sideBoostRampUp += 0.5f * Time.deltaTime;
-        } else if (sideBoostRampUp > 0f)
-        {
-            sideBoostRampUp -= 0.5f * Time.deltaTime;
-        }
+        //CalculateSpeedAndGear(); DEPRECATED
     }
 
     void FixedUpdate()
     {
-        if (!carStats.InAir)
+        if (carStats.CanDrive && carStats.StunDuration <= 0)
         {
-            if (!abilityCollision.stunned)
+            if (!carStats.InAir)
+            {
                 HandleMovement();
-
-            HandleSteering();
+                HandleSteering();
+            }
         }
-
     }
 
+    /// <summary>
+    /// HandleAnalogueInput takes care of the vertical and horizontal inputs of the player.
+    /// This might be better in CarStats.cs
+    /// </summary>
+    void HandleAnalogueInput()
+    {
+        horizontal = Mathf.Abs(Input.GetAxisRaw(carInputHandler.HorizontalInput)) > 0.15f ? Input.GetAxisRaw(carInputHandler.HorizontalInput) : 0;
+        vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
+        vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
+    }
+
+    /// <summary>
+    /// HandleCarState calculates other variables of the car which may be useful in multiple functions,
+    /// or are otherwise not fit to go in HandleAnimation(), HandleMovement(), and HandleSteering().
+    /// </summary>
+    void HandleCarState()
+    {
+        // Used to calculate horizontal force the car while it is drifting
+        if (carStats.IsDrifting && sideBoostRamp < 1f)
+        {
+            sideBoostRamp += 0.5f * Time.deltaTime;
+        }
+        else if (sideBoostRamp > 0f)
+        {
+            sideBoostRamp -= 0.5f * Time.deltaTime;
+        }
+
+        // Used to determine if the car is in the air
+        carStats.InAir = !Physics.Raycast(transform.position, Vector3.down, out hit, 4f);
+
+        // Used to determine what surface the car is on
+        if (hit.collider == null) return;
+        switch (hit.collider.tag)
+        {
+            case "Offroad":
+                carStats.Surface = 2;
+                break;
+            case "Road":
+                carStats.Surface = 1;
+                break;
+            default:
+                carStats.Surface = 1;
+                break;
+        }
+
+        // Reduce stun timer if we are stunned :)
+        if (carStats.StunDuration >= 0)
+        {
+            carStats.StunDuration -= Time.deltaTime;
+        }
+    }
+
+    /// <summary>
+    /// HandleAnimation handles all animations of the car such as angle.
+    /// </summary>
     void HandleAnimation()
     {
         transform.position = carStats.SphereCollider.transform.position - new Vector3(0, .5f, 0);
 
-        //Raycast down - angle model based on normal of floor
-        RaycastHit hit;
-        Debug.DrawRay(transform.position, Vector3.down);
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 4f))
+        if (!carStats.InAir)
         {
-            carStats.InAir = false;
-
             Vector3 newUp = hit.normal;
             Vector3 oldForward = transform.forward;
 
@@ -145,35 +161,18 @@ public class SphereCarController : MonoBehaviour
             model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8f);
 
             model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
-
-            switch (hit.collider.tag)
-            {
-                case "Offroad":
-                    carStats.Surface = 2;
-                    break;
-                case "Road":
-                    carStats.Surface = 1;
-                    break;
-                default:
-                    carStats.Surface = 1;
-                    break;
-            }
-        }
-        else
-        {
-            carStats.InAir = true;
         }
     }
 
+    /// <summary>
+    /// HandleSteering handles all turning related controls of the car, including determining whether the car is drifting or not.
+    /// This function does not move the car while turning, rather just steers the car/directs it.
+    /// </summary>
     void HandleSteering()
     {
-        targetMinusCurrAngle = carStats.CurrAngle - carStats.TargetAngle;
-        if (carStats.CurrSpeed <= 0.1f && carStats.CurrSpeed >= -.1f)
-        {
-            return;
-        }
+        if (carStats.CurrSpeed <= 0.1f && carStats.CurrSpeed >= -.1f) return;
 
-        if (Input.GetButton(carInputHandler.DriftInput) && horizontal != 0 && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
+        if (Input.GetButton(carInputHandler.DriftInput) && carStats.Acceleration / carStats.CurrSpeed >= carStats.DriftSpeedThresholdPercent)
         {
             if (!carStats.IsDrifting)
             {
@@ -189,7 +188,7 @@ public class SphereCarController : MonoBehaviour
 
         if (carStats.IsDrifting)
         {
-            float bonusDriftAngle = initialDriftDirectionRight == true ? carStats.DriftTurnAngle : -carStats.DriftTurnAngle;
+            float bonusDriftAngle = initialDriftDirectionRight == true ? carStats.NormalTurnAngle : -carStats.NormalTurnAngle;
             carStats.TargetAngle = carStats.CurrAngle + (((horizontal * carStats.DriftTurnAngle) + bonusDriftAngle) / 2);
         }
         else
@@ -201,6 +200,9 @@ public class SphereCarController : MonoBehaviour
         carStats.CurrAngle = transform.localEulerAngles.y;
     }
 
+    /// <summary>
+    /// HandleMovement handles all movement functions of the car such as acceleration, decceleration, turning momentum, and boosting.
+    /// </summary>
     void HandleMovement()
     {
         switch (carStats.Surface)
@@ -216,88 +218,39 @@ public class SphereCarController : MonoBehaviour
                 break;
         }
 
-        if (carStats.IsDrifting)
-        {
-            carStats.MaxSpeed = vertical * carStats.DriftingAcceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
-        }
-        else
-        {
-            carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
-        }
+        // Removed, might add it back - if(isDrifting) carStats.MaxSpeed = vertical * carStats.DriftingAcceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier, else
+        carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
+
         // Slowly accelerate/decelerate.
         carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 9f);
 
-        //Forward Acceleration
+        // Used to add force in the opposite direction while turning.
+        float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
+
+        // Forward Acceleration + Side Acceleration if drifting
         if (carStats.IsDrifting)
         {
-            float oppositeDirection = initialDriftDirectionRight == true ? -1 : 1;
-            carStats.SphereCollider.AddForce(transform.right * carStats.CurrSpeed * oppositeDirection * sideBoostRampUp, ForceMode.Acceleration);
             carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
         }
         else
         {
-            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed, ForceMode.Acceleration);
+            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier * (1-sideBoostRamp), ForceMode.Acceleration);
             sfxEngine.setParameterByID(acc, 1f);
         }
+
+        carStats.SphereCollider.AddForce(transform.right * carStats.CurrSpeed * oppositeDirection * sideBoostRamp, ForceMode.Acceleration);
     }
 
     /// <summary>
-    /// Yes, this is a mess. This calculates gears / changing gears.
-    /// 
-    /// 1. When the accelerate button is pressed, gearSpeed increases
-    /// 2. Once gearSpeed reaches a certain threshold (default 4 seconds), the currentGear increases.
-    ///  2a. Note that changingGear becomes true for 1 second while this happens.
-    /// 3. If the accelerate button is not pressed, the gear speed decreases at the same rate.
-    ///  3a. changingGear does not become true at all while decelerating (you don't hear the gear change while decelerating)
-    /// 
-    /// These numbers are not connected to the actual speed of the car.
-    /// 
-    /// I found that connecting them was very difficult to keep the arcade like controls of the car.
-    /// Let me know if you think this could be changed to be something better.
-    /// 
-    /// CURRENTLY DEPRECATED
+    /// HandlecarAudio handles all sounds of the car.
     /// </summary>
-    /// 
-    //private void CalculateSpeedAndGear()
-    //{
-    //    if (changingGear)
-    //    {
-    //        changingGearTimer += 1f * Time.deltaTime;
-    //        if (changingGearTimer >= durationOfGearChange)
-    //        {
-    //            changingGear = false;
-    //            changingGearTimer = 0;
-    //        }
-    //    }
-    //    if (vertical > 0)
-    //    {
-    //        if (currGear < numGears)
-    //        {
-    //            gearSpeed += 1f * Time.deltaTime;
-    //            if (gearSpeed > timeSpentInEachGear)
-    //            {
-    //                gearSpeed = 0;
-    //                currGear++;
-    //                changingGear = true;
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (currGear > 0)
-    //        {
-    //            gearSpeed -= 1f * Time.deltaTime;
-    //            if (gearSpeed < 0)
-    //            {
-    //                gearSpeed = timeSpentInEachGear;
-    //                currGear--;
-    //            }
-    //        }
-    //    }
-    //}
-
-    void carAudio()
+    void HandleCarAudio()
     {
+        if (!Input.GetButton(carInputHandler.AccelerateInput))
+        {
+            sfxEngine.setParameterByID(acc, 0f);
+        }
+
         if (carStats.InAir)
         {
             sfxEngine.setParameterByID(rpm, 60f);
@@ -325,5 +278,17 @@ public class SphereCarController : MonoBehaviour
             sfxDrift.setParameterByID(sd, 1f);
             sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
+    }
+
+    /// <summary>
+    /// Call when need an impact! The mass of cars is 10, so take that into account when applying force.
+    /// </summary>
+    /// <param name="force"></param>
+    /// <param name="direction"></param>
+    /// <param name="stunDuration"></param>
+    public void Impact(int force, Vector3 direction, float stunDuration = 0)
+    {
+        carStats.SphereCollider.AddForce(direction * force, ForceMode.Impulse);
+        carStats.StunDuration = stunDuration;
     }
 }
