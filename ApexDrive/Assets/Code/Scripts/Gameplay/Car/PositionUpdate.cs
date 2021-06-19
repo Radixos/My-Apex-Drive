@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class PositionUpdate : MonoBehaviour
 {
-    public int laps;
-    public int collidersHit;
+    public int laps, collidersHit;
     public float offScreenTimer;
-    public bool eliminated;
-    public bool winner;
+    public bool eliminated, winner;
 
     private List<GameObject> hitColliders = new List<GameObject>();
 
@@ -29,6 +27,16 @@ public class PositionUpdate : MonoBehaviour
     {
         if (distanceCollider != null)
             distanceFromCollider = Vector3.Distance(transform.position, distanceCollider.transform.position);
+    }
+
+    public int GetPosition()
+    {
+        for(int i = 0; i < raceManager.raceCars.Count; i++)
+        {
+            if (GetInstanceID() == raceManager.raceCars[i].GetInstanceID())
+                return i + 1;
+        }
+        return 0;
     }
 
     private void OnTriggerEnter(Collider other)
