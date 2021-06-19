@@ -115,8 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a423a200df8204bb73b49336444fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carAbilities: {fileID: 5366670244643328143}
-  stunned: 0
 --- !u!114 &1297197824813582864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5031,7 +5029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1024dda45bdb7a94998def57e0680af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPlayer: 1
+  Player: 0
 --- !u!114 &696034327234795257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5046,8 +5044,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carAttributes: {fileID: 11400000, guid: 841c01e7a872c3a4882b4d99db6d6f80, type: 2}
   sphereCollider: {fileID: 6281512184417559450}
+  shield: {fileID: 0}
+  rampage: {fileID: 0}
   inAir: 0
   surface: 0
+  canDrive: 0
+  stunDuration: 0
   isDrifting: 0
   driftSpeedThresholdPercent: 0
   driftSideBoostMultiplier: 0
@@ -5064,6 +5066,10 @@ MonoBehaviour:
   offroadMultiplier: 0
   currSpeed: 0
   maxSpeed: 0
+  powerAmount: 0
+  initialShieldPowerDepleted: 0
+  rampageLifetime: 0
+  rampageTimer: 0
 --- !u!114 &172996111640913308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5076,17 +5082,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e5a0c1594acc94288d8933c89da32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityCollision: {fileID: 628565544233810866}
   model: {fileID: 6361700404287866032}
+  horizontal: 0
+  vertical: 0
   initialDriftDirectionRight: 0
-  targetMinusCurrAngle: 0
-  changingGear: 0
-  gearSpeed: 0
-  timeSpentInEachGear: 4
-  numGears: 3
-  currGear: 1
-  durationOfGearChange: 1
-  changingGearTimer: 0
+  sideBoostRamp: 0
 --- !u!114 &5366670244643328143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5099,12 +5099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee84190f165cfeb4494a2c0f73408125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerAmount: 1
-  shield: {fileID: 897456700178873886}
-  initialShieldPowerDepleted: 0
-  rampage: {fileID: 1892673406485149845}
-  rampageLifetime: 0
-  rampageTimer: 0
+  sphereCarController: {fileID: 0}
 --- !u!114 &2811008498825531218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5129,7 +5124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6034851794633938888}
   m_Layer: 0
-  m_Name: TukTuk new
+  m_Name: TukTuk_Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
