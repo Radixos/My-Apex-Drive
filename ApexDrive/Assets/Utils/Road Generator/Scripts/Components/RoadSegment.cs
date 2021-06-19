@@ -30,23 +30,49 @@ public class RoadSegment : MonoBehaviour {
 	private void Awake() => ValidateComponents();
 
 
-	private Mesh meshCached; // The actual mesh asset to generate into
+	private Mesh m_Mesh; // The actual mesh asset to generate into
 	private Mesh Mesh {
 		get {
+			if(m_Collider.sharedMesh == m_Filter.sharedMesh)
+			{
+				DestroyImmediate(m_Filter.sharedMesh);
+			}
 			bool isOwner = ownerID == gameObject.GetInstanceID();
 			bool filterHasMesh = m_Filter.sharedMesh != null;
-			bool colliderHasMesh = m_Collider.sharedMesh != null;
-			if( !filterHasMesh || !isOwner || !colliderHasMesh || m_Collider.sharedMesh != m_Filter.sharedMesh ) {
-				m_Collider.sharedMesh = m_Filter.sharedMesh = meshCached = new Mesh(); // Create new mesh and assign to the mesh filter
+			if( !filterHasMesh || !isOwner) {
+				m_Filter.sharedMesh = m_Mesh = new Mesh(); // Create new mesh and assign to the mesh filter
 				ownerID = gameObject.GetInstanceID(); // Mark self as owner of this mesh
-				meshCached.name = "Mesh [" + ownerID + "]";
-			} else if( isOwner && filterHasMesh && meshCached == null ) {
+				m_Mesh.name = "Mesh [" + ownerID + "]";
+			} else if( isOwner && filterHasMesh && m_Mesh == null ) {
 				// If the mesh field lost its reference, which can happen in assembly reloads
-				meshCached = m_Filter.sharedMesh;
+				m_Mesh = m_Filter.sharedMesh;
 			}
-			return meshCached;
+			return m_Mesh;
 		}
-	}	
+	}
+
+	private Mesh m_ColliderMesh;
+	private Mesh ColliderMesh{
+		get{
+			if(m_Collider.sharedMesh == m_Filter.sharedMesh)
+			{
+				DestroyImmediate(m_Collider.sharedMesh);
+			}
+			bool isOwner = ownerID == gameObject.GetInstanceID();
+			bool colliderHasMesh = m_Collider.sharedMesh != null;
+			if(!colliderHasMesh || !isOwner)
+			{
+				m_Collider.sharedMesh = m_ColliderMesh = new Mesh();
+				ownerID = gameObject.GetInstanceID();
+				m_ColliderMesh.name = "Collider Mesh ["+ ownerID +"]";
+			}
+			else if(isOwner && colliderHasMesh && m_ColliderMesh == null)
+			{
+				m_ColliderMesh = m_Collider.sharedMesh;
+			}
+			return m_ColliderMesh;
+		}
+	}
 
 	// Serialized stuff, like settings
 	public float tangentLength = 3; // Tangent size. Note that it's only the tangent of the first point. The next segment controls the endpoint tangent length
@@ -78,7 +104,8 @@ public class RoadSegment : MonoBehaviour {
 	public void UpdateMesh( Vector2 nrmCoordStartEnd ) {
 		ValidateComponents();
 		// Only generate a mesh if we've got a next control point
-		if( HasValidNextPoint ) {
+		if( HasValidNextPoint ) 
+		{
 			meshExtruder.Extrude(
 				mesh: Mesh,
 				mesh2D: RoadChain.mesh2D,
@@ -89,8 +116,19 @@ public class RoadSegment : MonoBehaviour {
 				edgeLoopsPerMeter: RoadChain.edgeLoopsPerMeter,
 				tilingAspectRatio: GetTextureAspectRatio()
 			);
-		} else if( meshCached != null ) {
-			DestroyImmediate( meshCached );
+
+			meshExtruder.Extrude(
+				mesh: ColliderMesh,
+				mesh2D: RoadChain.mesh2D,
+				bezier: GetBezierRepresentation(Space.Self),
+				rotationEasing: rotationEasing,
+				edgeLoopsPerMeter: RoadChain.ColliderEdgeLoopsPerMeter
+			);
+		} 
+		else 
+		{
+			if( m_Mesh != null ) DestroyImmediate( m_Mesh );
+			if( m_ColliderMesh != null ) DestroyImmediate( m_ColliderMesh );
 		}
 
 	}
