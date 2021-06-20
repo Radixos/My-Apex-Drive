@@ -66,7 +66,7 @@ public class GameManager : GameSystem
 
     public void SubmitRoundWinner(int playerID)
     {
-        m_Players[playerID].RoundWins ++;
+        m_Players[playerID].RoundWins++;
     }
 
     public void SubmitGameWinner(int playerID)

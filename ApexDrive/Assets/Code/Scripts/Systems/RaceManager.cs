@@ -9,6 +9,7 @@ public class RaceManager : Singleton<RaceManager>
     [SerializeField] private CoreCarModule m_CarPrefab;
 
     public List<PositionUpdate> raceCars;
+    public List<PositionUpdate> ogRaceCars; // Non-updated list
     public int totalColliders;
 
 
@@ -22,6 +23,7 @@ public class RaceManager : Singleton<RaceManager>
         foreach (PositionUpdate positionUpdate in FindObjectsOfType<PositionUpdate>())
         {
             raceCars.Add(positionUpdate);
+            ogRaceCars.Add(positionUpdate);
         }
 
         totalColliders = GameObject.FindGameObjectsWithTag("Waypoint").Length;
@@ -74,4 +76,5 @@ public class RaceManager : Singleton<RaceManager>
         }
 
     }
+
 }
