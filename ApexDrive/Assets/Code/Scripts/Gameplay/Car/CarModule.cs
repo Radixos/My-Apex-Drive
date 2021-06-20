@@ -14,6 +14,7 @@ public class CarModule : MonoBehaviour
     public virtual CarStats Stats { get { return Core.Stats; } }
     public virtual ComboAnalyser ComboAnalyser { get { return Core.ComboAnalyser; } }
     public virtual GameplayInput PlayerInput { get { return Core.PlayerInput; } }
+    public virtual Rigidbody Rigidbody { get { return Core.Rigidbody; } }
 
     public virtual Player Player { get { return Core.Player; } }
 

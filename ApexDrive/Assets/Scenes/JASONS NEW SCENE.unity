@@ -322,6 +322,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &70481188 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 7270525194409094009, guid: eb8e753791aa2634aa7d3d0b26322b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3731920765645425220}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &170878618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,6 +1388,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803854351}
   m_Mesh: {fileID: 1200145621}
+--- !u!1 &1818794164 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1093667332307259096, guid: eb8e753791aa2634aa7d3d0b26322b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3731920765645425220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1818794167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818794164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c764d839f6c295045b0f74833295d616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Player:
+    m_PlayerID: 0
+    m_ControllerID: 1
+    RoundWins: 0
+    GameWins: 0
+    PlayerCar: {fileID: 0}
+  m_Rigidbody: {fileID: 70481188}
 --- !u!1 &2016835315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,5 +1702,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TukTuk_New
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3624010672876679409, guid: eb8e753791aa2634aa7d3d0b26322b1a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb8e753791aa2634aa7d3d0b26322b1a, type: 3}

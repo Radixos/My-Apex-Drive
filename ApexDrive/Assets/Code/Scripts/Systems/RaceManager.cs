@@ -3,34 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RaceManager : MonoBehaviour
+public class RaceManager : Singleton<RaceManager>
 {
-    #region Singleton
-    public static RaceManager Instance { get; set; }
-
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else if (Instance != this)
-            Destroy(gameObject);
-    }
-    #endregion
+    public RoadChain ActiveTrack;
+    [SerializeField] private CoreCarModule m_CarPrefab;
 
     public List<PositionUpdate> raceCars;
-
     public int totalColliders;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         Initialise();
     }
-
-    // Update is called once per frame
-    //private void Update()
-    //{       
-    //}
 
     void Initialise()
     {
