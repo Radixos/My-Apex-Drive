@@ -71,7 +71,7 @@ public class GameManager : GameSystem
 
     public void SubmitGameWinner(int playerID)
     {
-        m_Players[playerID].GameWins ++;
+        m_Players[playerID].GameWins++;
     }
 
     private IEnumerator RemovePlayerAtEndOfFrame(Player player)

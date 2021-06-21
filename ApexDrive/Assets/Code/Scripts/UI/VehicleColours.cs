@@ -16,25 +16,25 @@ public class VehicleColours : MonoBehaviour
         {
             PositionUpdate processedCar = vehicleManager.raceCars[i];
             Transform sphereCarRoot = processedCar.gameObject.transform.parent;
-            GameObject rickshawModel = sphereCarRoot.GetChild(1).gameObject;
-            Material alterMat = rickshawModel.GetComponent<Renderer>().materials[10];
+            GameObject rickshawModel = sphereCarRoot.GetChild(1).GetChild(27).gameObject;
+            //Material alterMat = rickshawModel.GetComponent<Renderer>().materials[10];
 
             switch (i)
             {
                 case 0:
-                    alterMat.SetColor("_BaseColor", Color.red);
+                    rickshawModel.GetComponent<Material>().SetColor("_BaseColor", Color.red);
                     break;
 
                 case 1:
-                    alterMat.SetColor("_BaseColor", Color.green);
+                    rickshawModel.GetComponent<Material>().SetColor("_BaseColor", Color.green);
                     break;
 
                 case 2:
-                    alterMat.SetColor("_BaseColor", Color.yellow);
+                    rickshawModel.GetComponent<Material>().SetColor("_BaseColor", Color.yellow);
                     break;
 
                 case 3:
-                    alterMat.SetColor("_BaseColor", Color.blue);
+                    rickshawModel.GetComponent<Material>().SetColor("_BaseColor", Color.blue);
                     break;
             }
         }

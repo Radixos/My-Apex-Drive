@@ -9,11 +9,13 @@ public class EliminationScript : MonoBehaviour
     private Camera mainCamera;
     private float waitTimer = 2.5f;
     float eliminatedTotal = 0.0f;
+    private bool winnerHasBeenProcessed;
 
     void Start()
     {
         mainCamera = Camera.main;
         carManager = this.GetComponent<RaceManager>();
+        winnerHasBeenProcessed = false;
     }
 
     void Update()
@@ -27,11 +29,16 @@ public class EliminationScript : MonoBehaviour
             EliminationProcess(currentCar, boundaryCheck);
             WinnerCheck(currentCar);
         }
+
+        Debug.Log("Player 1 has won " + GameManager.Instance.Players[0].RoundWins + " rounds and " 
+            + GameManager.Instance.Players[0].GameWins + " games");
+        Debug.Log("Player 2 has won " + GameManager.Instance.Players[1].RoundWins + " rounds and "
+            + GameManager.Instance.Players[1].GameWins + " games");
     }
 
     private void EliminationProcess(PositionUpdate currentCar, bool boundaryCheck)
     {
-        if (boundaryCheck == true && currentCar.eliminated == false)
+        if (boundaryCheck == true && currentCar.eliminated == false && winnerHasBeenProcessed == false)
         {
             if (currentCar.offScreenTimer < waitTimer)
             {
@@ -57,10 +64,19 @@ public class EliminationScript : MonoBehaviour
     {
         if (eliminatedTotal == carManager.raceCars.Count - 1 && currentCar.eliminated == false)
         {
+            CoreCarModule currentCarModule = currentCar.gameObject.transform.parent.GetChild(1).GetComponent<CoreCarModule>();
+            int playerToModify = currentCarModule.Player.PlayerID - 1;
+            GameManager.Instance.SubmitRoundWinner(playerToModify);
             currentCar.winner = true;
-            GameManager.Instance.SubmitRoundWinner(1);
             eliminatedTotal = 0;
+            winnerHasBeenProcessed = true;
             //Debug.Log(GameManager.Instance.Players[currentCar.GetComponent<CarInputHandler>().currentPlayer].RoundWins);
+            //debug.log(gamemanager.instance.players[playertomodify].roundwins);
+
+            if (GameManager.Instance.Players[playerToModify].RoundWins % 3 == 0)
+            {
+                GameManager.Instance.SubmitGameWinner(playerToModify);
+            }
         }
     }
 
