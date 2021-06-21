@@ -4,10 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarController : MonoBehaviour
+public class CarController : CarModule
 {
-    private CarInputHandler carInputHandler;
-    private CarStats carStats;
     public TrailRenderer[] trails;
 
     public Transform model;
@@ -45,8 +43,6 @@ public class CarController : MonoBehaviour
 
     private void Start()
     {
-        carInputHandler = GetComponent<CarInputHandler>();
-        carStats = GetComponent<CarStats>();
 
         //FMOD Instances
         sfxEngine = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/engine");
@@ -64,7 +60,7 @@ public class CarController : MonoBehaviour
         sfxSkid.getParameterDescriptionByName("Stop Drift", out sfxStopDrift);
         sd = sfxStopDrift.id;
 
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxEngine, transform, carStats.SphereCollider);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxEngine, transform, this.Rigidbody);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxDrift, transform, GetComponent<Rigidbody>());
 
         sfxEngine.start();
@@ -82,28 +78,29 @@ public class CarController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (carStats.CanDrive && carStats.StunDuration <= 0)
+        if (Stats.CanDrive && Stats.StunDuration <= 0)
         {
-            if (!carStats.InAir)
+            if (!Stats.InAir)
             {
                 HandleMovement();
                 HandleSteering();
             } else
             {
-                carStats.IsDrifting = false;
+                Stats.IsDrifting = false;
             }
         }
     }
 
     /// <summary>
     /// HandleAnalogueInput takes care of the vertical and horizontal inputs of the player.
-    /// This might be better in CarStats.cs
+    /// This might be better in Stats.cs
     /// </summary>
     void HandleAnalogueInput()
     {
-        horizontal = Mathf.Abs(Input.GetAxisRaw(carInputHandler.HorizontalInput)) > 0.15f ? Input.GetAxisRaw(carInputHandler.HorizontalInput) : 0;
-        vertical = Input.GetButton(carInputHandler.AccelerateInput) ? 1 : 0;
-        vertical -= Input.GetButton(carInputHandler.BrakeInput) ? 0.5f : 0;
+        horizontal = Mathf.Abs(Input.GetAxisRaw(PlayerInput.HorizontalInput)) > 0.15f ? Input.GetAxisRaw(PlayerInput.HorizontalInput) : 0;
+        Debug.Log(Input.GetAxisRaw("Horizontal 1"));
+        vertical = Input.GetButton(PlayerInput.AccelerateInput) ? 1 : 0;
+        vertical -= Input.GetButton(PlayerInput.BrakeInput) ? 0.5f : 0;
     }
 
     /// <summary>
@@ -113,7 +110,7 @@ public class CarController : MonoBehaviour
     void HandleCarState()
     {
         // Used to calculate horizontal force the car while it is drifting
-        if (carStats.IsDrifting && sideBoostRamp < 1f)
+        if (Stats.IsDrifting && sideBoostRamp < 1f)
         {
             sideBoostRamp += 0.5f * Time.deltaTime;
         }
@@ -123,7 +120,7 @@ public class CarController : MonoBehaviour
         }
 
         // Used to determine if the car is in the air
-        carStats.InAir = !Physics.Raycast(transform.position, Vector3.down, out hit, 4f);
+        Stats.InAir = !Physics.Raycast(transform.position, Vector3.down, out hit, 4f);
         Debug.DrawRay(transform.position, Vector3.down, Color.red);
 
         // Used to determine what surface the car is on
@@ -131,20 +128,20 @@ public class CarController : MonoBehaviour
         switch (hit.collider.tag)
         {
             case "Offroad":
-                carStats.Surface = 2;
+                Stats.Surface = 2;
                 break;
             case "Road":
-                carStats.Surface = 1;
+                Stats.Surface = 1;
                 break;
             default:
-                carStats.Surface = 1;
+                Stats.Surface = 1;
                 break;
         }
 
         // Reduce stun timer if we are stunned :)
-        if (carStats.StunDuration >= 0)
+        if (Stats.StunDuration >= 0)
         {
-            carStats.StunDuration -= Time.deltaTime;
+            Stats.StunDuration -= Time.deltaTime;
         }
     }
 
@@ -153,9 +150,9 @@ public class CarController : MonoBehaviour
     /// </summary>
     void HandleAnimation()
     {
-        transform.position = carStats.SphereCollider.transform.position - new Vector3(0, .70f, 0);
+        transform.position = this.Rigidbody.transform.position - new Vector3(0, .70f, 0);
 
-        if (!carStats.InAir)
+        if (!Stats.InAir)
         {
             Vector3 newUp = hit.normal;
             Vector3 oldForward = transform.forward;
@@ -165,12 +162,12 @@ public class CarController : MonoBehaviour
 
             model.rotation = Quaternion.Lerp(model.rotation, Quaternion.LookRotation(newForward, newUp), Time.deltaTime * 8f);
 
-            model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * carStats.CurrSpeed * 0.1f);
+            model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * Stats.CurrSpeed * 0.1f);
         }
 
         foreach (TrailRenderer trail in trails)
         {
-            trail.emitting = carStats.IsDrifting;
+            trail.emitting = Stats.IsDrifting;
         }
     }
 
@@ -180,38 +177,38 @@ public class CarController : MonoBehaviour
     /// </summary>
     void HandleSteering()
     {
-        if (carStats.CurrSpeed <= 0.1f && carStats.CurrSpeed >= -.1f) return;
+        if (Stats.CurrSpeed <= 0.1f && Stats.CurrSpeed >= -.1f) return;
 
-        if (Input.GetButton(carInputHandler.DriftInput) && carStats.CurrSpeed / carStats.Acceleration >= carStats.DriftSpeedThresholdPercent)
+        if (Input.GetButton(PlayerInput.DriftInput) && Stats.CurrSpeed / Stats.Acceleration >= Stats.DriftSpeedThresholdPercent)
         {
-            if (!carStats.IsDrifting)
+            if (!Stats.IsDrifting)
             {
                 initialDriftDirectionRight = horizontal > 0;
                 if ((horizontal < 0) != initialDriftDirectionRight)
                 {
                     sideBoostRamp = 0;
                 }
-                //carStats.SphereCollider.AddForce(transform.transform.right * carStats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
+                //Stats.SphereCollider.AddForce(transform.transform.right * Stats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
             }
-            carStats.IsDrifting = true;
+            Stats.IsDrifting = true;
         }
         else
         {
-            carStats.IsDrifting = false;
+            Stats.IsDrifting = false;
         }
 
-        if (carStats.IsDrifting)
+        if (Stats.IsDrifting)
         {
-            float bonusDriftAngle = initialDriftDirectionRight == true ? carStats.NormalTurnAngle : -carStats.NormalTurnAngle;
-            carStats.TargetAngle = carStats.CurrAngle + (((horizontal * carStats.DriftTurnAngle) + bonusDriftAngle) / 2);
+            float bonusDriftAngle = initialDriftDirectionRight == true ? Stats.NormalTurnAngle : -Stats.NormalTurnAngle;
+            Stats.TargetAngle = Stats.CurrAngle + (((horizontal * Stats.DriftTurnAngle) + bonusDriftAngle) / 2);
         }
         else
         {
-            carStats.TargetAngle = carStats.CurrAngle + (horizontal * carStats.NormalTurnAngle);
+            Stats.TargetAngle = Stats.CurrAngle + (horizontal * Stats.NormalTurnAngle);
         }
-        float angle = Mathf.SmoothDamp(transform.localEulerAngles.y, carStats.TargetAngle, ref turnVelocity, carStats.TurnSpeed);
+        float angle = Mathf.SmoothDamp(transform.localEulerAngles.y, Stats.TargetAngle, ref turnVelocity, Stats.TurnSpeed);
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, angle, transform.localEulerAngles.z);
-        carStats.CurrAngle = transform.localEulerAngles.y;
+        Stats.CurrAngle = transform.localEulerAngles.y;
     }
 
     /// <summary>
@@ -219,40 +216,40 @@ public class CarController : MonoBehaviour
     /// </summary>
     void HandleMovement()
     {
-        switch (carStats.Surface)
+        switch (Stats.Surface)
         {
             case 1:
-                carStats.CurrentSurfaceMultiplier = 1f;
+                Stats.CurrentSurfaceMultiplier = 1f;
                 break;
             case 2:
-                carStats.CurrentSurfaceMultiplier = carStats.OffroadMultiplier;
+                Stats.CurrentSurfaceMultiplier = Stats.OffroadMultiplier;
                 break;
             default:
-                carStats.CurrentSurfaceMultiplier = 1f;
+                Stats.CurrentSurfaceMultiplier = 1f;
                 break;
         }
 
-        // Removed, might add it back - if(isDrifting) carStats.MaxSpeed = vertical * carStats.DriftingAcceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier, else
-        carStats.MaxSpeed = vertical * carStats.Acceleration * carStats.CurrentBoostMultiplier * carStats.CurrentSurfaceMultiplier;
+        // Removed, might add it back - if(isDrifting) Stats.MaxSpeed = vertical * Stats.DriftingAcceleration * Stats.CurrentBoostMultiplier * Stats.CurrentSurfaceMultiplier, else
+        Stats.MaxSpeed = vertical * Stats.Acceleration * Stats.CurrentBoostMultiplier * Stats.CurrentSurfaceMultiplier;
 
         // Slowly accelerate/decelerate.
-        carStats.CurrSpeed = Mathf.SmoothStep(carStats.CurrSpeed, carStats.MaxSpeed, Time.deltaTime * 9f);
+        Stats.CurrSpeed = Mathf.SmoothStep(Stats.CurrSpeed, Stats.MaxSpeed, Time.deltaTime * 9f);
 
         // Used to add force in the opposite direction while turning.
         float oppositeDirection = initialDriftDirectionRight ? -1 : 1;
 
         // Forward Acceleration + Side Acceleration if drifting
-        if (carStats.IsDrifting)
+        if (Stats.IsDrifting)
         {
-            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier, ForceMode.Acceleration);
+            this.Rigidbody.AddForce(transform.forward * Stats.CurrSpeed * Stats.CurrentBoostMultiplier, ForceMode.Acceleration);
         }
         else
         {
-            carStats.SphereCollider.AddForce(transform.forward * carStats.CurrSpeed * carStats.CurrentBoostMultiplier * (1-sideBoostRamp), ForceMode.Acceleration);
+            this.Rigidbody.AddForce(transform.forward * Stats.CurrSpeed * Stats.CurrentBoostMultiplier * (1-sideBoostRamp), ForceMode.Acceleration);
             sfxEngine.setParameterByID(acc, 1f);
         }
 
-        carStats.SphereCollider.AddForce(transform.right * carStats.CurrSpeed * oppositeDirection * sideBoostRamp, ForceMode.Acceleration);
+        this.Rigidbody.AddForce(transform.right * Stats.CurrSpeed * oppositeDirection * sideBoostRamp, ForceMode.Acceleration);
     }
 
     /// <summary>
@@ -260,24 +257,24 @@ public class CarController : MonoBehaviour
     /// </summary>
     void HandleCarAudio()
     {
-        if (!Input.GetButton(carInputHandler.AccelerateInput))
+        if (!Input.GetButton(PlayerInput.AccelerateInput))
         {
             sfxEngine.setParameterByID(acc, 0f);
         }
 
-        if (carStats.InAir)
+        if (Stats.InAir)
         {
             sfxEngine.setParameterByID(rpm, 60f);
         }
         else
         {
-            sfxEngine.setParameterByID(rpm, carStats.CurrSpeed);
+            sfxEngine.setParameterByID(rpm, Stats.CurrSpeed);
         }
-        if (!Input.GetButton(carInputHandler.AccelerateInput))
+        if (!Input.GetButton(PlayerInput.AccelerateInput))
         {
             sfxEngine.setParameterByID(acc, 0f);
         }
-        if(carStats.IsDrifting)
+        if(Stats.IsDrifting)
         {
             sfxEngine.setParameterByID(acc, 1f);
             sfxDrift.getPlaybackState(out state);
@@ -287,7 +284,7 @@ public class CarController : MonoBehaviour
                 sfxDrift.start();
             }
         }
-        else if(!carStats.IsDrifting)
+        else if(!Stats.IsDrifting)
         {
             sfxDrift.setParameterByID(sd, 1f);
             sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -302,7 +299,7 @@ public class CarController : MonoBehaviour
     /// <param name="stunDuration"></param>
     public void Impact(int force, Vector3 direction, float stunDuration = 0)
     {
-        carStats.SphereCollider.AddForce(direction * force, ForceMode.Impulse);
-        carStats.StunDuration = stunDuration;
+        this.Rigidbody.AddForce(direction * force, ForceMode.Impulse);
+        Stats.StunDuration = stunDuration;
     }
 }

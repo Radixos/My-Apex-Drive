@@ -1,6 +1,6 @@
 ﻿public struct GameplayInput
     {
-        public Player m_Player;
+        private Player m_Player;
 
         public string HorizontalInput { get => "Horizontal " + m_Player.ControllerID; }
         public string AccelerateInput { get => "Accelerate " + m_Player.ControllerID; }
