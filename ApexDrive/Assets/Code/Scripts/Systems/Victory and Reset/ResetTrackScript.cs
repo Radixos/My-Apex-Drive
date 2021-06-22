@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResetTrackScript : MonoBehaviour
 {
@@ -53,16 +54,16 @@ public class ResetTrackScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (setVictoryState == true)
+        {
+            setVictoryState = false;
+            SceneManager.LoadScene("VictoryScene");
+        }
         for (int i = 0; i < carManager.raceCars.Count; i++)
         {
             PositionUpdate currentCar = carManager.raceCars[i];
             initVictoryState(i, currentCar);
             resetPlayers(i, currentCar);
-        }
-
-        if (setVictoryState == true)
-        {
-            //menu
         }
     }
 
@@ -83,7 +84,6 @@ public class ResetTrackScript : MonoBehaviour
             if (setResetState == true)
             {
                 PositionUpdate cycleThroughCars = carManager.raceCars[j];
-                setVictoryState = false;
                 //reset player positions
                 cycleThroughCars.transform.position = defaultPositions[j];
                 cycleThroughCars.transform.rotation = defaultRotations[j];
@@ -97,6 +97,7 @@ public class ResetTrackScript : MonoBehaviour
                 {
                     Debug.Log(cycleThroughCars.transform.position);
                     setResetState = false;
+                    setVictoryState = true;
                 }
             }
         }

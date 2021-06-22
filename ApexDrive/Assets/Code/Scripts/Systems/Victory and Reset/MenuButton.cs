@@ -47,7 +47,7 @@ public class MenuButton : MonoBehaviour
         if (menuController.index == thisIndex)
         {
             animator.SetBool("selected", true);
-            if ((Input.GetAxis("Submit") == 1 || Input.GetAxis("Accelerate 1") == 1) && !notClickable)
+            if ((Input.GetAxis("Submit 1") == 1 || Input.GetAxis("Accelerate 1") == 1) && !notClickable)
             {
                 animator.SetBool("pressed", true);
             }
@@ -55,7 +55,7 @@ public class MenuButton : MonoBehaviour
             {
                 menuTransitionOut();
             }
-            if ((Input.GetAxis("Submit") == 1 || Input.GetAxis("Accelerate 1") == 1) && notClickable)
+            if ((Input.GetAxis("Submit 1") == 1 || Input.GetAxis("Accelerate 1") == 1) && notClickable)
             {
                 menuController.lockedIndex = menuController.index;
                 menuProgression();
@@ -89,13 +89,14 @@ public class MenuButton : MonoBehaviour
                     Debug.Log("Restart");
                     canvas.inVictoryMenu = false;
                     switchMenuDisplay();
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    SceneManager.LoadScene("LevelDesignScene");
                     break;
                 case 1:
                     //FOR AUDIO FRIENDS, this code occurs when player has pressed/clicked 'OPTIONS' (less intense sfx, can be reused for the rest of the cases tbh)
                     Debug.Log("Lobby");
                     canvas.inVictoryMenu = false;
                     switchMenuDisplay();
+                    SceneManager.LoadScene("Lobby Menu");
                     break;
                 case 2:
                     Debug.Log("Exiting Game");

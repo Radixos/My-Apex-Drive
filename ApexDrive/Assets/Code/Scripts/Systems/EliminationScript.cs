@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,44 +18,49 @@ public class EliminationScript : MonoBehaviour
 
     void Update()
     {
-        //float eliminatedTotal = 0;
-        //Debug.Log(eliminatedTotal);
         for (int i = 0; i < carManager.raceCars.Count; i++)
         {
             PositionUpdate currentCar = carManager.raceCars[i];
             carCameraPos = mainCamera.WorldToViewportPoint(currentCar.transform.position);
             bool boundaryCheck = checkBoundaries(carCameraPos);
 
-            if (boundaryCheck == true && currentCar.eliminated == false)
+            EliminationProcess(currentCar, boundaryCheck);
+            WinnerCheck(currentCar);
+        }
+    }
+
+    private void EliminationProcess(PositionUpdate currentCar, bool boundaryCheck)
+    {
+        if (boundaryCheck == true && currentCar.eliminated == false)
+        {
+            if (currentCar.offScreenTimer < waitTimer)
             {
-                if (currentCar.offScreenTimer < waitTimer)
-                {
-                    currentCar.offScreenTimer += Time.deltaTime;
-                }
-                
-                else
-                {
-                    currentCar.gameObject.SetActive(false);
-                    currentCar.eliminated = true;
-                    eliminatedTotal++;
-                }
+                currentCar.offScreenTimer += Time.deltaTime;
             }
 
-            //else if (currentCar.eliminated == true)
-            //{
-            //    eliminatedTotal++;
-            //}
-
-            else if (boundaryCheck == false)
+            else
             {
-                currentCar.offScreenTimer = 0;
+                currentCar.gameObject.SetActive(false);
+                currentCar.eliminated = true;
+                FMODUnity.RuntimeManager.PlayOneShot("event:/TukTuk/Elimination");
+                eliminatedTotal++;
             }
+        }
 
-            if (eliminatedTotal == carManager.raceCars.Count - 1 && currentCar.eliminated == false)
-            {
-                currentCar.winner = true;
-                eliminatedTotal = 0;
-            }
+        else if (boundaryCheck == false)
+        {
+            currentCar.offScreenTimer = 0;
+        }
+    }
+
+    private void WinnerCheck(PositionUpdate currentCar)
+    {
+        if (eliminatedTotal == carManager.raceCars.Count - 1 && currentCar.eliminated == false)
+        {
+            currentCar.winner = true;
+            GameManager.Instance.SubmitRoundWinner(1);
+            eliminatedTotal = 0;
+            //Debug.Log(GameManager.Instance.Players[currentCar.GetComponent<CarInputHandler>().currentPlayer].RoundWins);
         }
     }
 

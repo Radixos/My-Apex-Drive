@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{d65235cc-fc64-42b9-8020-13c04a213d20}">
+		<property name="name">
+			<value>Stop Drift</value>
+		</property>
+		<relationship name="folder">
+			<destination>{39371476-0a55-43e0-8cbc-49e86e0f1f86}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{eba14b51-dacf-41b6-a0c9-4889ff3bc9aa}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{eba14b51-dacf-41b6-a0c9-4889ff3bc9aa}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

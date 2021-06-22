@@ -11,9 +11,10 @@ public class Player
     [SerializeField] private int m_ControllerID = -1;
     private bool m_IsConnected;
     private Color m_PlayerColor;
-    public CoreCarModule Car;
     public int RoundWins = 0;
     public int GameWins = 0;
+
+    public CoreCarModule PlayerCar;
 
     public int PlayerID { get { return m_PlayerID; } }
     public int PlayerReadableID { get { return m_PlayerID + 1; } }

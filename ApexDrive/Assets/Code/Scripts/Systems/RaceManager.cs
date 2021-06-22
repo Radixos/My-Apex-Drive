@@ -3,29 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RaceManager : MonoBehaviour
+public class RaceManager : Singleton<RaceManager>
 {
-    #region Singleton
-    public static RaceManager Instance { get; set; }
-
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else if (Instance != this)
-            Destroy(gameObject);
-    }
-    #endregion
-
-    [SerializeField] private GameObject m_CarPrefab;
-    [SerializeField] private Transform[] m_InitialSpawnPoints;
-    public delegate void SpawnPlayerEvents();
-    public static SpawnPlayerEvents OnSpawnPlayers;
-
+    public RoadChain ActiveTrack;
+    [SerializeField] private CoreCarModule m_CarPrefab;
 
     public List<PositionUpdate> raceCars;
-
+    public List<PositionUpdate> ogRaceCars; // Non-updated list
     public int totalColliders;
+
 
     void Start()
     {
@@ -34,19 +20,11 @@ public class RaceManager : MonoBehaviour
 
     void Initialise()
     {
-        for(int i = 0; i < GameManager.Instance.PlayerCount; i++)
+        foreach (PositionUpdate positionUpdate in FindObjectsOfType<PositionUpdate>())
         {
-            if(m_InitialSpawnPoints.Length < i) break;
-            GameObject car = GameObject.Instantiate(m_CarPrefab, m_InitialSpawnPoints[i].position, m_InitialSpawnPoints[i].rotation);
-            CoreCarModule core = car.GetComponentInChildren<CoreCarModule>();
-            core.SetPlayer(GameManager.Instance.Players[i]);
-            raceCars.Add(car.GetComponentInChildren<PositionUpdate>());
+            raceCars.Add(positionUpdate);
+            ogRaceCars.Add(positionUpdate);
         }
-        if(OnSpawnPlayers != null) OnSpawnPlayers();
-        // foreach (PositionUpdate positionUpdate in FindObjectsOfType<PositionUpdate>())
-        // {
-        //     raceCars.Add(positionUpdate);
-        // }
 
         totalColliders = GameObject.FindGameObjectsWithTag("Waypoint").Length;
     }
@@ -98,4 +76,5 @@ public class RaceManager : MonoBehaviour
         }
 
     }
+
 }

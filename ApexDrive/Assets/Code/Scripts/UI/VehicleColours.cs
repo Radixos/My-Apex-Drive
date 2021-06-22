@@ -16,7 +16,7 @@ public class VehicleColours : MonoBehaviour
         {
             PositionUpdate processedCar = vehicleManager.raceCars[i];
             Transform sphereCarRoot = processedCar.gameObject.transform.parent;
-            GameObject rickshawModel = sphereCarRoot.GetChild(2).gameObject;
+            GameObject rickshawModel = sphereCarRoot.GetChild(1).gameObject;
             Material alterMat = rickshawModel.GetComponent<Renderer>().materials[10];
 
             switch (i)
@@ -26,15 +26,15 @@ public class VehicleColours : MonoBehaviour
                     break;
 
                 case 1:
-                    alterMat.SetColor("_BaseColor", Color.blue);
-                    break;
-
-                case 2:
                     alterMat.SetColor("_BaseColor", Color.green);
                     break;
 
-                case 3:
+                case 2:
                     alterMat.SetColor("_BaseColor", Color.yellow);
+                    break;
+
+                case 3:
+                    alterMat.SetColor("_BaseColor", Color.blue);
                     break;
             }
         }

@@ -38,9 +38,7 @@ public class VictoryMenu : MonoBehaviour
             }
             checkedState = true;
         }
-
         menuTypeConfiguration();
-
     }
 
     private void menuTypeConfiguration()
