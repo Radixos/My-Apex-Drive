@@ -49,7 +49,7 @@ public class BoostBarScript : MonoBehaviour
         for (int i = 0; i < vehicleNum; i++)
         {
             PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
-            AbilityCollision abilities = currentVehicle.gameObject.GetComponent<AbilityCollision>();
+            //AbilityCollision abilities = currentVehicle.gameObject.GetComponent<AbilityCollision>();
             //boostBarSliders[i].value = abilities.carAbilities.powerAmount;
             boostBarImages[i].color = Color.Lerp(Color.yellow, Color.red, boostBarSliders[i].value);
         }
