@@ -213,6 +213,11 @@ public class RoadSegment : MonoBehaviour {
 		return result;
 	}
 
+	public OrientedPoint Evaluate(float t, Space space)
+	{
+		return GetBezierRepresentation(space).GetOrientedPoint(t);
+	}
+
 	// Returns the up vector of either the first or last control point, in a given space
 	Vector3 GetUpVector( int i, Space space ) {
 		if( i == 0 ) {

@@ -19,6 +19,7 @@ public class LobbyMenu : MonoBehaviour
     private FMOD.Studio.EventInstance[] m_LobbyPlayerSFX = new FMOD.Studio.EventInstance[GameManager.MaxPlayers];
 
     private bool m_MenuIsVisible = false;
+    private bool m_CanCancelLoading = true;
 
 
 
@@ -54,6 +55,8 @@ public class LobbyMenu : MonoBehaviour
                 // instantiate cursor
             }
         }
+
+        m_CanCancelLoading = true;
     }
 
     private void OnDisable()
@@ -93,12 +96,13 @@ public class LobbyMenu : MonoBehaviour
         if(x >= 2 && x >= GameManager.Instance.PlayerCount) 
         {
             m_Animator.SetBool("StartGame", true);
-            Debug.Log("Load game scene in 3.5 seconds");
+            m_LoadGameroutine = StartCoroutine(Co_LoadGameScene(3.5f));
         }
     }
 
     public void CancelReady(MultiplayerEventData data)
     {
+        if(!m_CanCancelLoading) return;
         m_PlayersReady[data.Player.PlayerID] = false;
         m_Animator.SetBool("StartGame", false);
     }
@@ -141,7 +145,10 @@ public class LobbyMenu : MonoBehaviour
 
     private IEnumerator Co_LoadGameScene(float delay)
     {
-        yield return new WaitForSeconds(delay);
-        // SceneManager.LoadScene("")
+        yield return new WaitForSeconds(delay - 0.5f);
+        m_CanCancelLoading = false;
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) m_LobbyPlayerSFX[player.PlayerID].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("Scene_Demo_RoadGenerator");
     }
 }

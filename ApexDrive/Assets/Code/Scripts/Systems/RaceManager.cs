@@ -7,19 +7,41 @@ public class RaceManager : Singleton<RaceManager>
 {
     public RoadChain ActiveTrack;
     [SerializeField] private CoreCarModule m_CarPrefab;
+    private float m_TrackProgress = 0.0f;
 
     public List<PositionUpdate> raceCars;
     public List<PositionUpdate> ogRaceCars; // Non-updated list
     public int totalColliders;
 
+    public delegate void RaceEvent();
+    public static RaceEvent OnRaceSceneLoaded;
+    public static RaceEvent OnGameStart;
+    public static RaceEvent OnGameEnd;
+    public static RaceEvent PreRoundStart;
+    public static RaceEvent OnRoundStart;
+    public static RaceEvent OnRoundEnd;
 
-    void Start()
+    private void Start()
     {
         Initialise();
+        if(OnRaceSceneLoaded != null) OnRaceSceneLoaded();
+        StartCoroutine(Co_StartGame());
     }
 
-    void Initialise()
+    private void OnEnable()
     {
+        Player.OnRoundWin += GetProgressForNextSpawn;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnRoundWin -= GetProgressForNextSpawn;
+    }
+
+    private void Initialise()
+    {
+        SpawnPlayers(GameManager.Instance.ConnectedPlayers);
+
         foreach (PositionUpdate positionUpdate in FindObjectsOfType<PositionUpdate>())
         {
             raceCars.Add(positionUpdate);
@@ -29,7 +51,22 @@ public class RaceManager : Singleton<RaceManager>
         totalColliders = GameObject.FindGameObjectsWithTag("Waypoint").Length;
     }
 
-    void LateUpdate()
+    public void SpawnPlayers(Player[] players)
+    {
+        for(int i = 0; i < players.Length; i++)
+        {
+            OrientedPoint op = ActiveTrack.Evaluate(m_TrackProgress);
+            Vector3 offset = Vector3.left * (players.Length - i) * 1.5f + Vector3.right * players.Length / 2.0f * 1.5f;
+            Vector3 spawnPoint = op.pos + op.rot * offset + Vector3.up;
+            CoreCarModule car = Instantiate(m_CarPrefab, spawnPoint, op.rot);
+            car.Stats.CanDrive = false;
+            if(players[i].ControllerID <= 0 || players[i].ControllerID >= 4) players[i].AssignController(i+1); // this shouldn't be the case except for debugging in the race scene
+            car.SetPlayer(players[i]);
+            players[i].PlayerCar = car;
+        }
+    }
+
+    private void LateUpdate()
     {
         for (int i = 0; i < raceCars.Count; i++)
         {
@@ -75,6 +112,30 @@ public class RaceManager : Singleton<RaceManager>
             raceCars[a] = temp;
         }
 
+    }
+
+    private void GetProgressForNextSpawn(Player roundWinner)
+    {
+        // Get closest position on active track
+    }
+
+    private void StartRound()
+    {
+
+    }
+
+    private IEnumerator Co_StartGame()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(Co_StartRound());
+    }
+
+    private IEnumerator Co_StartRound()
+    {
+        if(PreRoundStart != null) PreRoundStart();
+        yield return new WaitForSeconds(3.25f);
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) player.PlayerCar.Stats.CanDrive = true;
+        
     }
 
 }

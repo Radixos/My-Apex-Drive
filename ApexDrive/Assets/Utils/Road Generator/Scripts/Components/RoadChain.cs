@@ -113,4 +113,18 @@ public class RoadChain : MonoBehaviour {
 		Debug.DrawLine(result, point, Color.red);
 		return result;
 	}
+
+	public OrientedPoint Evaluate(float t)
+	{
+		t = Mathf.Clamp(t, 0.0f, 0.999f);
+		int index = Mathf.FloorToInt(t * Segments.Length);
+		float t2 = (t * Segments.Length) % 1.0f;
+
+		return Segments[index].Evaluate(t2, Space.World);
+	}
+
+	// public OrientedCubicBezier3D Evaluate(float t)
+	// {
+
+	// }
 }
