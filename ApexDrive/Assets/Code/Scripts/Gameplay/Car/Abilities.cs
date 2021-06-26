@@ -41,7 +41,9 @@ public class Abilities : CarModule
     {
         // Two abilities that stay active as
         // long as 
+        if(!Stats.InitialShieldPowerDepleted)
         Stats.Shield.SetActive(false);
+
         Stats.CurrentBoostMultiplier = 1;
 
         if (Input.GetButtonUp(PlayerInput.PowerAInput))
@@ -68,9 +70,9 @@ public class Abilities : CarModule
                 {
                     Stats.PowerAmount -= 0.25f;
                     Stats.InitialShieldPowerDepleted = true;
+                    Stats.Shield.SetActive(true);
                 }
 
-                Stats.Shield.SetActive(true);
                 ability.getPlaybackState(out pbs);
                 if (pbs != FMOD.Studio.PLAYBACK_STATE.PLAYING)
                 {
@@ -102,24 +104,24 @@ public class Abilities : CarModule
     /// When colliding with a car with an ability active...
     /// </summary>
     /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
-    {
+    //private void OnCollisionEnter(Collision collision)
+    //{
 
-        // Only check collision if the car has activated rampage
-        if (collision.gameObject.CompareTag("Player") && Stats.Rampage.activeSelf)
-        {
-            Vector3 normal = collision.contacts[0].normal;
+    //    // Only check collision if the car has activated rampage
+    //    if (collision.gameObject.CompareTag("Player") && Stats.Rampage.activeSelf)
+    //    {
+    //        Vector3 normal = collision.contacts[0].normal;
             
-            CoreCarModule otherCar = collision.gameObject.GetComponent<CoreCarModule>();
+    //        CoreCarModule otherCar = collision.gameObject.GetComponent<CoreCarModule>();
 
-            if (otherCar != null && otherCar.Stats.Shield.activeSelf)
-            {
-                Controller.Impact(100, normal, 0.75f);
-            }
-            else
-            {
-                otherCar.Controller.Impact(100, -normal, 0.75f);
-            }
-        }
-    }
+    //        if (otherCar != null && otherCar.Stats.Shield.activeSelf)
+    //        {
+    //            Controller.Impact(100, normal, 0.75f);
+    //        }
+    //        else
+    //        {
+    //            otherCar.Controller.Impact(100, -normal, 0.75f);
+    //        }
+    //    }
+    //}
 }
