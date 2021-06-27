@@ -30,12 +30,12 @@ public class RaceManager : Singleton<RaceManager>
 
     private void OnEnable()
     {
-        Player.OnRoundWin += GetProgressForNextSpawn;
+        Player.OnRoundWin += EndRound;
     }
 
     private void OnDisable()
     {
-        Player.OnRoundWin -= GetProgressForNextSpawn;
+        Player.OnRoundWin -= EndRound;
     }
 
     private void Initialise()
@@ -114,14 +114,11 @@ public class RaceManager : Singleton<RaceManager>
 
     }
 
-    private void GetProgressForNextSpawn(Player roundWinner)
+    private void EndRound(Player winner)
     {
-        // Get closest position on active track
-    }
-
-    private void StartRound()
-    {
-
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) player.PlayerCar.Stats.CanDrive = false;
+        if(OnRoundEnd != null) OnRoundEnd();
+        // get progress for next spawn
     }
 
     private IEnumerator Co_StartGame()

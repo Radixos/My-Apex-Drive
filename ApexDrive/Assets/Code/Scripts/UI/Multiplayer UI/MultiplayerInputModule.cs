@@ -35,6 +35,11 @@ public class MultiplayerInputModule : BaseInputModule
 			m_Cursors[player.PlayerID].SetColor(GameManager.Instance.PlayerColors[player.PlayerID]);
 			m_Cursors[player.PlayerID].name  = "Cursor (Player " + player.PlayerReadableID + ")";
         }
+
+		foreach(Player player in GameManager.Instance.ConnectedPlayers)
+		{
+			m_Cursors[player.PlayerID].GetComponent<Animator>().SetBool("IsVisible", true);
+		}
 	}
 
 	protected override void OnEnable()
