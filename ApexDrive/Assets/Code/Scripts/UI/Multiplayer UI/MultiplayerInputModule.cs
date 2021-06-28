@@ -64,7 +64,6 @@ public class MultiplayerInputModule : BaseInputModule
 		AxisEventData[] axisEventData = new AxisEventData[GameManager.MaxPlayers];
 		foreach(Player player in GameManager.Instance.ConnectedPlayers)
 		{
-
 			int i = player.PlayerID;
 			if(!m_MultiplayerEventSystem.LockedController(i) && currentRepeatDelay[i] >= m_AxisRepeatDelay){
 				if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) > 0.0){

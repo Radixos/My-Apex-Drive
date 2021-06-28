@@ -33,7 +33,7 @@ public class RoadChainEditor : Editor
     private bool m_RotatingSegment = false;
     private bool m_ModifyingBezier = false;
 
-    private float m_EvaluationTest = 0.0f;
+    private float m_EvaluationTest;
 
     private Quaternion m_OriginalCameraOrientation;
     private bool m_OriginalCameraOrthographicProjection;
@@ -197,11 +197,7 @@ public class RoadChainEditor : Editor
         }
 
         GUILayout.EndVertical();
-
-        m_EvaluationTest = EditorGUILayout.Slider("Evaluation Test", m_EvaluationTest, 0.0f, 1.0f);
-
         if(initialEdgeLoopCount != m_RoadChain.edgeLoopsPerMeter || (initialColliderEdgeLoopCount != m_RoadChain.ColliderEdgeLoopsPerMeter && m_RoadChain.GenerateColliders ) || m_RoadChain.loop != wasLooped) m_RoadChain.UpdateMeshes();
-
     }
 
     private void DrawRoadHandles()
@@ -223,9 +219,6 @@ public class RoadChainEditor : Editor
             RoadSegment segment = m_RoadChain.Segments[i];
             Handles.DrawBezier(segment.GetControlPoint(0, Space.World),segment.GetControlPoint(3, Space.World),segment.GetControlPoint(1, Space.World),segment.GetControlPoint(2, Space.World), Color.cyan, Texture2D.whiteTexture, 2.0f);
         }
-        Handles.color = Color.magenta;
-        Handles.SphereHandleCap(handleID, m_RoadChain.Evaluate(m_EvaluationTest).pos, Quaternion.identity, 1.0f, EventType.Repaint);
-        Handles.color = Color.white;
     }
 
     private void DrawToolMenu()

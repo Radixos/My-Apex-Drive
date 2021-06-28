@@ -41,14 +41,6 @@ public class RaceManager : Singleton<RaceManager>
     private void Initialise()
     {
         SpawnPlayers(GameManager.Instance.ConnectedPlayers);
-
-        foreach (PositionUpdate positionUpdate in FindObjectsOfType<PositionUpdate>())
-        {
-            raceCars.Add(positionUpdate);
-            ogRaceCars.Add(positionUpdate);
-        }
-
-        totalColliders = GameObject.FindGameObjectsWithTag("Waypoint").Length;
     }
 
     public void SpawnPlayers(Player[] players)
@@ -64,54 +56,6 @@ public class RaceManager : Singleton<RaceManager>
             car.SetPlayer(players[i]);
             players[i].PlayerCar = car;
         }
-    }
-
-    private void LateUpdate()
-    {
-        for (int i = 0; i < raceCars.Count; i++)
-        {
-            for (int j = 0; j < raceCars.Count; j++)
-            {
-                if (raceCars[i].gameObject.GetInstanceID() !=
-                    raceCars[j].gameObject.GetInstanceID())
-                {
-                    if (raceCars[i].laps > raceCars[j].laps)
-                    {
-                        SwapRacers(i, j);
-                        continue;
-                    }
-
-                    if (raceCars[i].collidersHit > raceCars[j].collidersHit)
-                    {
-                        if (raceCars[i].laps == raceCars[j].laps)
-                        {
-                            SwapRacers(i, j);
-                            continue;
-                        }
-                    }
-
-                    if(raceCars[i].distanceCollider.GetInstanceID() == raceCars[j].distanceCollider.GetInstanceID() &&
-                        raceCars[i].distanceFromCollider > raceCars[j].distanceFromCollider)
-                    {
-                        SwapRacers(i, j);
-                    }
-
-                }
-            }
-        }
-
-    }
-
-    private void SwapRacers(int a, int b)
-    {
-
-        if (raceCars.IndexOf(raceCars[a]) > raceCars.IndexOf(raceCars[b]))
-        {
-            PositionUpdate temp = raceCars[b];
-            raceCars[b] = raceCars[a];
-            raceCars[a] = temp;
-        }
-
     }
 
     private void EndRound(Player winner)

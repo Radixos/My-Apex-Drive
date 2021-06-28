@@ -11,37 +11,37 @@ using Cinemachine;
 
 public class CameraFollowLead : MonoBehaviour
 {
-    [SerializeField] private GameObject leadPlayer;
+    // [SerializeField] private GameObject leadPlayer;
 
-    private RaceManager temp;
+    // private RaceManager temp;
 
-    private Transform objToFollow;
-    private Transform objToLookAt;
+    // private Transform objToFollow;
+    // private Transform objToLookAt;
 
-    void Start()
-    {
-        Initialise();
-    }
+    // void Start()
+    // {
+    //     Initialise();
+    // }
 
-    void Initialise()
-    {
-        CinemachineVirtualCamera cinemachine = GetComponent<CinemachineVirtualCamera>();
-        Transform tempSphere = GameObject.FindGameObjectWithTag("PlayerTuk").GetComponent<Transform>();
-        cinemachine.Follow = tempSphere;
-        cinemachine.LookAt = tempSphere;
-        temp = FindObjectOfType<RaceManager>();
-    }
+    // void Initialise()
+    // {
+    //     CinemachineVirtualCamera cinemachine = GetComponent<CinemachineVirtualCamera>();
+    //     Transform tempSphere = GameObject.FindGameObjectWithTag("PlayerTuk").GetComponent<Transform>();
+    //     cinemachine.Follow = tempSphere;
+    //     cinemachine.LookAt = tempSphere;
+    //     temp = FindObjectOfType<RaceManager>();
+    // }
 
-    void Update()
-    {
-        UpdateLeadFollow();
-    }
+    // void Update()
+    // {
+    //     UpdateLeadFollow();
+    // }
 
-    void UpdateLeadFollow()
-    {
-        leadPlayer = temp.raceCars[0].gameObject;
+    // void UpdateLeadFollow()
+    // {
+    //     leadPlayer = temp.raceCars[0].gameObject;
 
-        gameObject.GetComponent<CinemachineVirtualCamera>().Follow = leadPlayer.transform;
-        gameObject.GetComponent<CinemachineVirtualCamera>().LookAt = leadPlayer.transform;
-    }
+    //     gameObject.GetComponent<CinemachineVirtualCamera>().Follow = leadPlayer.transform;
+    //     gameObject.GetComponent<CinemachineVirtualCamera>().LookAt = leadPlayer.transform;
+    // }
 }
