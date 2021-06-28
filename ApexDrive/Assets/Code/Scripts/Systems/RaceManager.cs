@@ -13,7 +13,7 @@ public class RaceManager : Singleton<RaceManager>
     public List<PositionUpdate> ogRaceCars; // Non-updated list
     public int totalColliders;
 
-    public delegate void RaceEvent();
+    public delegate void RaceEvent(Player[] players);
     public static RaceEvent OnRaceSceneLoaded;
     public static RaceEvent OnGameStart;
     public static RaceEvent OnGameEnd;
@@ -24,7 +24,7 @@ public class RaceManager : Singleton<RaceManager>
     private void Start()
     {
         Initialise();
-        if(OnRaceSceneLoaded != null) OnRaceSceneLoaded();
+        if(OnRaceSceneLoaded != null) OnRaceSceneLoaded(GameManager.Instance.ConnectedPlayers);
         StartCoroutine(Co_StartGame());
     }
 
@@ -61,7 +61,7 @@ public class RaceManager : Singleton<RaceManager>
     private void EndRound(Player winner)
     {
         foreach(Player player in GameManager.Instance.ConnectedPlayers) player.PlayerCar.Stats.CanDrive = false;
-        if(OnRoundEnd != null) OnRoundEnd();
+        if(OnRoundEnd != null) OnRoundEnd(GameManager.Instance.ConnectedPlayers);
         // get progress for next spawn
     }
 
@@ -73,7 +73,7 @@ public class RaceManager : Singleton<RaceManager>
 
     private IEnumerator Co_StartRound()
     {
-        if(PreRoundStart != null) PreRoundStart();
+        if(PreRoundStart != null) PreRoundStart(GameManager.Instance.ConnectedPlayers);
         yield return new WaitForSeconds(3.25f);
         foreach(Player player in GameManager.Instance.ConnectedPlayers) player.PlayerCar.Stats.CanDrive = true;
         
