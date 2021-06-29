@@ -6,7 +6,7 @@ using TMPro;
 
 public class BoostBarScript : MonoBehaviour
 {
-    private Canvas UICanvas; //overarching use variables
+    private GameObject barCollection; //overarching use variables
     [SerializeField] private RaceManager vehicleManager;
     private int vehicleNum;
 
@@ -17,7 +17,7 @@ public class BoostBarScript : MonoBehaviour
 
     void Start()
     {
-        UICanvas = GetComponent<Canvas>();
+        barCollection = GetComponent<Canvas>().transform.GetChild(0).gameObject;
         vehicleNum = vehicleManager.raceCars.Count;
         InitBarObjects();
     }
@@ -31,7 +31,7 @@ public class BoostBarScript : MonoBehaviour
 
         for (int i = 0; i < vehicleNum; i++)
         {
-            boostBarObjects[i] = UICanvas.transform.GetChild(i).gameObject;
+            boostBarObjects[i] = barCollection.transform.GetChild(i).gameObject;
             boostBarObjects[i].SetActive(true);
             boostBarSliders[i] = boostBarObjects[i].GetComponent<Slider>();
             boostBarText[i] = boostBarObjects[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
