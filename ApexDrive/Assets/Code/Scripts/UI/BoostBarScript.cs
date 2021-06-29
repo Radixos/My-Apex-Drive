@@ -22,12 +22,12 @@ public class BoostBarScript : MonoBehaviour
         InitBarObjects();
     }
 
-    private void InitBarObjects()
-    {
-        boostBarObjects = new GameObject[vehicleNum]; //initialise objects and their children
-        boostBarSliders = new Slider[vehicleNum];
-        boostBarText = new TextMeshProUGUI[vehicleNum];
-        boostBarImages = new Image[vehicleNum];
+    // private void InitBarObjects()
+    // {
+    //     boostBarObjects = new GameObject[vehicleNum]; //initialise objects and their children
+    //     boostBarSliders = new Slider[vehicleNum];
+    //     boostBarText = new TextMeshProUGUI[vehicleNum];
+    //     boostBarImages = new Image[vehicleNum];
 
         for (int i = 0; i < vehicleNum; i++)
         {
@@ -39,44 +39,44 @@ public class BoostBarScript : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        SetSliders();
-        ApplyText();
-    }
-    void SetSliders()
-    {
-        for (int i = 0; i < vehicleNum; i++)
-        {
-            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
-            //AbilityCollision abilities = currentVehicle.gameObject.GetComponent<AbilityCollision>();
-            //boostBarSliders[i].value = abilities.carAbilities.powerAmount;
-            boostBarImages[i].color = Color.Lerp(Color.yellow, Color.red, boostBarSliders[i].value);
-        }
-    }
+    // void Update()
+    // {
+    //     SetSliders();
+    //     ApplyText();
+    // }
+    // void SetSliders()
+    // {
+    //     for (int i = 0; i < vehicleNum; i++)
+    //     {
+    //         PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
+    //         //AbilityCollision abilities = currentVehicle.gameObject.GetComponent<AbilityCollision>();
+    //         //boostBarSliders[i].value = abilities.carAbilities.powerAmount;
+    //         boostBarImages[i].color = Color.Lerp(Color.yellow, Color.red, boostBarSliders[i].value);
+    //     }
+    // }
 
-    private void ApplyText()
-    {
-        for (int i = 0; i < vehicleNum; i++)
-        {
-            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
-            // MANI'S UPDATE
-            int pos = currentVehicle.GetPosition();
-            switch (pos)
-            {
-                case 1:
-                    boostBarText[i].text = "1ST";
-                    break;
-                case 2:
-                    boostBarText[i].text = "2ND";
-                    break;
-                case 3:
-                    boostBarText[i].text = "3RD";
-                    break;
-                case 4:
-                    boostBarText[i].text = "4TH";
-                    break;
-            }
-        }
-    }
+    // private void ApplyText()
+    // {
+    //     for (int i = 0; i < vehicleNum; i++)
+    //     {
+    //         PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
+    //         // MANI'S UPDATE
+    //         int pos = currentVehicle.GetPosition();
+    //         switch (pos)
+    //         {
+    //             case 1:
+    //                 boostBarText[i].text = "1ST";
+    //                 break;
+    //             case 2:
+    //                 boostBarText[i].text = "2ND";
+    //                 break;
+    //             case 3:
+    //                 boostBarText[i].text = "3RD";
+    //                 break;
+    //             case 4:
+    //                 boostBarText[i].text = "4TH";
+    //                 break;
+    //         }
+    //     }
+    // }
 }

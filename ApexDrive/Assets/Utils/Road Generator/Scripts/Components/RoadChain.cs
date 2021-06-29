@@ -1,4 +1,4 @@
-﻿//
+//
 // Dedicated to all my Patrons on Patreon,
 // as a thanks for your continued support 💖
 //
@@ -32,6 +32,9 @@ public class RoadChain : MonoBehaviour {
 	public UVMode uvMode = UVMode.TiledDeltaCompensated; // More info on what this is in the enum!
 	public RoadSegment[] Segments;
 
+	public float TotalTrackLength;
+	public float[] SegmentLengths;
+
 	// Iterates through all children / road segments, and updates their meshes!
 	public void UpdateMeshes() {
 
@@ -62,55 +65,100 @@ public class RoadChain : MonoBehaviour {
 		foreach( RoadSegment seg in segmentsWithoutMesh ) {
 			seg.UpdateMesh( Vector2.zero );
 		}
+
+		TotalTrackLength = 0.0f;
+		SegmentLengths = new float[Segments.Length];
+		for(int i = 0; i < Segments.Length; i++)
+		{
+			SegmentLengths[i] = Segments[i].ArcLength;
+			Segments[i].DistanceOnTrackBeforeCurrentSegment = TotalTrackLength;
+			TotalTrackLength += Segments[i].ArcLength;
+		}
 	}
 
-	public RoadSegment GetNearestSegmentToPoint(Vector3 point, bool ignoreHeight = false)
+	public Vector3 GetNearestPositionOnSpline(Vector3 point, int steps, int depth)
 	{
-		float shortestDistance = -1.0f;
-		RoadSegment result = null;
-		if(ignoreHeight) point.y = 0.0f;
+		float shortestDistance = float.MaxValue;
+		RoadSegment nearest = null;
+
 		foreach(RoadSegment segment in Segments)
 		{
 			Vector3 position = segment.transform.position;
-			if(ignoreHeight) position.y = 0.0f;
-			if(shortestDistance < 0.0f || Vector3.Distance(position, point) < shortestDistance) 
+			float distance = Vector3.Distance(position, point);
+			if(distance < shortestDistance) 
 			{
-				shortestDistance = Vector3.Distance(segment.transform.position, point);
-				result = segment;
+				shortestDistance = distance;
+				nearest = segment;
 			} 
 		}
-		return result;
+		
+		// THIS COULD BE CLEANED UP
+		float t1 = nearest.GetBezierRepresentation(Space.World).GetClosestTimeToPoint(point, steps, depth);
+		RoadSegment previous = nearest.TryGetPreviousSegment();
+		float t2 = float.MaxValue;
+		if(previous != null) t2 = previous.GetBezierRepresentation(Space.World).GetClosestTimeToPoint(point, steps, depth);
+
+		Vector3 p1 = nearest.GetBezierRepresentation(Space.World).GetPoint(t1);
+		Vector3 p2 = previous.GetBezierRepresentation(Space.World).GetPoint(t2);
+		if(Vector3.Distance(p1, point) < Vector3.Distance(p2, point)) return p1;
+		else return p2;
 	}
 
-	///<param name="precision">The number of subdivisions to check between road segments for the nearest point. Lower number = more performant, Higher number = more precise.</param>
-	public Vector3 GetNearestPositionOnSpline(Vector3 point, int precision, bool ignoreHeight = false)
+	public float GetNearestTimeOnSpline(Vector3 point, int steps, int depth)
 	{
-		if(ignoreHeight) point.y = 0.0f;
-		Vector3 result = Vector3.zero;
-		float lowestDistance = -1.0f;
-		RoadSegment segment = GetNearestSegmentToPoint(point);
-		OrientedCubicBezier3D bezierA = segment.GetBezierRepresentation(Space.World), bezierB = segment.TryGetPreviousSegment().GetBezierRepresentation(Space.World);
-		for(int i = 0; i < precision; i++)
-		{
-			Vector3 bezierPoint = bezierA.GetPoint((float)i/(float)precision);
-			if(ignoreHeight) bezierPoint.y = 0.0f;
-			float distance = Vector3.Distance(bezierPoint, point);
-			if(lowestDistance < 0.0f || distance < lowestDistance)
-			{
-				result = bezierPoint;
-				lowestDistance = distance;
-			}
+		float shortestDistance = float.MaxValue;
+		RoadSegment nearest = null;
 
-			bezierPoint = bezierB.GetPoint((float)i/(float)precision);
-			if(ignoreHeight) bezierPoint.y = 0.0f;
-			distance = Vector3.Distance(bezierPoint, point);
-			if(lowestDistance < 0.0f || distance < lowestDistance)
+		foreach(RoadSegment segment in Segments)
+		{
+			Vector3 position = segment.transform.position;
+			float distance = Vector3.Distance(position, point);
+			if(distance < shortestDistance) 
 			{
-				result = bezierPoint;
-				lowestDistance = distance;
-			}
+				shortestDistance = distance;
+				nearest = segment;
+			} 
 		}
-		Debug.DrawLine(result, point, Color.red);
-		return result;
+
+		// THIS COULD BE CLEANED UP
+		float t1 = nearest.GetBezierRepresentation(Space.World).GetClosestTimeToPoint(point, steps, depth);
+		RoadSegment previous = nearest.TryGetPreviousSegment();
+		float t2 = float.MaxValue;
+		if(previous != null) t2 = previous.GetBezierRepresentation(Space.World).GetClosestTimeToPoint(point, steps, depth);
+
+		Vector3 p1 = nearest.GetBezierRepresentation(Space.World).GetPoint(t1);
+		Vector3 p2 = previous.GetBezierRepresentation(Space.World).GetPoint(t2);
+
+		t1 = ((t1 * nearest.ArcLength) + nearest.DistanceOnTrackBeforeCurrentSegment) / TotalTrackLength;
+		t2 = ((t2 * previous.ArcLength) + previous.DistanceOnTrackBeforeCurrentSegment) / TotalTrackLength;
+
+		if(Vector3.Distance(p1, point) < Vector3.Distance(p2, point)) return t1;
+		else return t2;
+	}
+
+
+	public float GetProgress(Vector3 point)
+	{
+		return 0.0f;
+	}
+
+	public OrientedPoint Evaluate(float t)
+	{
+		if(SegmentLengths.Length != Segments.Length) UpdateMeshes();
+		t = Mathf.Clamp01(t) % 1.0f;
+		t *= TotalTrackLength;
+
+	
+		int index = 0;
+		float x = 0;
+		while(x + SegmentLengths[index] < t)
+		{
+			x += SegmentLengths[index];
+			if(x < t) index += 1;
+		}
+
+		float remainder = t - x;
+		float t2 = (remainder / SegmentLengths[index]) % 1.0f;
+		return Segments[index].Evaluate(t2, Space.World);
 	}
 }

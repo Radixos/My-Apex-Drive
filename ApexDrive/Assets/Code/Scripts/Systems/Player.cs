@@ -11,8 +11,10 @@ public class Player
     [SerializeField] private int m_ControllerID = -1;
     private bool m_IsConnected;
     private Color m_PlayerColor;
-    public int RoundWins = 0;
-    public int GameWins = 0;
+    public int RoundWins { get; private set; }
+    public int GameWins { get; private set; }
+    public string Name { get; private set; }
+    public int Position;
 
     public CoreCarModule PlayerCar;
 
@@ -21,6 +23,11 @@ public class Player
     public int ControllerID { get { return m_ControllerID; } }
     public bool IsConnected { get { return m_IsConnected; } }
     public Color PlayerColor { get { return m_PlayerColor; } }
+
+    public delegate void PlayerEvent(Player player);
+    public static PlayerEvent OnRoundWin;
+    public static PlayerEvent OnGameWin;
+    public static PlayerEvent OnGameScoreChange;
 
 
     public Player(int playerID, Color playerColor)
@@ -39,5 +46,26 @@ public class Player
     {
         m_ControllerID = -1;
         m_IsConnected = false;
+    }
+
+    public void WinRound()
+    {
+        RoundWins ++;
+        if(OnRoundWin != null) OnRoundWin(this);
+        if(OnGameScoreChange != null) OnGameScoreChange(this);
+    }
+
+    public void WinGame()
+    {
+        GameWins ++;
+        if(OnGameWin != null) OnGameWin(this);
+        if(OnGameScoreChange != null) OnGameScoreChange(this);
+    }
+
+    public void ResetScore()
+    {
+        RoundWins = 0;
+        GameWins = 0;
+        if(OnGameScoreChange != null) OnGameScoreChange(this);
     }
 }

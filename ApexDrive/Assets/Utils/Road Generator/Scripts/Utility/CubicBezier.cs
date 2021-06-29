@@ -128,4 +128,38 @@ public class OrientedCubicBezier3D {
 	}
 	*/
 
+	public float GetClosestTimeToPoint(Vector3 point, int steps, int depth)
+	{
+		float t = ClosestTimeInSubdivision(point, 0.0f, 1.0f, 10);
+		float delta = 0.1f;
+		for(int i = 0; i < depth; i++)
+		{
+			t = ClosestTimeInSubdivision(point, t - delta, t + delta, 10);
+			delta /= 9;
+		}
+		return t;
+	}
+
+	private float ClosestTimeInSubdivision(Vector3 point, float start, float end, int steps)
+	{
+		start = Mathf.Clamp01(start);
+		end = Mathf.Clamp01(end);
+
+		float step = (end - start)  / (float)steps;
+		float result = 0;
+		float lowestDistance = float.MaxValue;
+		for(int i =0; i < steps + 1; i++)
+		{
+			float t = start + step * i;
+			float distance = (GetPoint(t) - point).sqrMagnitude;
+			if(distance < lowestDistance)
+			{
+				lowestDistance = distance;
+				result = t;
+			}
+		}
+		
+		return result;
+	}
+
 }
