@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4dd1c8cabff4f844b62e2564016b8ce, type: 3}
   m_Name: Road Shape
   m_EditorClassIdentifier: 
+  lineIndices: 0f000000000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
   vertices:
   - point: {x: 3, y: 0}
     normal: {x: 0, y: 1}
@@ -19,16 +20,16 @@ MonoBehaviour:
   - point: {x: 3, y: 0}
     normal: {x: -0.70710677, y: 0.70710677}
     u: 0.171
-  - point: {x: 4, y: 1}
+  - point: {x: 4, y: 0.5}
     normal: {x: -0.7071068, y: 0.7071068}
     u: 0.116
-  - point: {x: 4, y: 1}
+  - point: {x: 4, y: 0.5}
     normal: {x: 0, y: 1}
     u: 0.116
-  - point: {x: 5, y: 1}
+  - point: {x: 5, y: 0.5}
     normal: {x: 0, y: 1}
     u: 0.077
-  - point: {x: 5, y: 1}
+  - point: {x: 5, y: 0.5}
     normal: {x: 1, y: 0}
     u: 0.077
   - point: {x: 5, y: -1}
@@ -43,16 +44,16 @@ MonoBehaviour:
   - point: {x: -5, y: -1}
     normal: {x: -1, y: 0}
     u: 0.574
-  - point: {x: -5, y: 1}
+  - point: {x: -5, y: 0.5}
     normal: {x: -1, y: 0}
     u: 0.497
-  - point: {x: -5, y: 1}
+  - point: {x: -5, y: 0.5}
     normal: {x: 0, y: 1}
     u: 0.497
-  - point: {x: -4, y: 1}
+  - point: {x: -4, y: 0.5}
     normal: {x: 0, y: 1}
     u: 0.458
-  - point: {x: -4, y: 1}
+  - point: {x: -4, y: 0.5}
     normal: {x: 0.7071068, y: 0.7071068}
     u: 0.458
   - point: {x: -3, y: 0}
@@ -61,4 +62,3 @@ MonoBehaviour:
   - point: {x: -3, y: 0}
     normal: {x: 0, y: 1}
     u: 0.403
-  lineIndices: 0f000000000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000

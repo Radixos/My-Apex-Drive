@@ -61,7 +61,7 @@ public class CarController : CarModule
         sd = sfxStopDrift.id;
 
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxEngine, transform, this.Rigidbody);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxDrift, transform, GetComponent<Rigidbody>());
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxDrift, transform, this.Rigidbody);
 
         sfxEngine.start();
     }
@@ -98,7 +98,6 @@ public class CarController : CarModule
     void HandleAnalogueInput()
     {
         horizontal = Mathf.Abs(Input.GetAxisRaw(PlayerInput.HorizontalInput)) > 0.15f ? Input.GetAxisRaw(PlayerInput.HorizontalInput) : 0;
-        Debug.Log(Input.GetAxisRaw("Horizontal 1"));
         vertical = Input.GetButton(PlayerInput.AccelerateInput) ? 1 : 0;
         vertical -= Input.GetButton(PlayerInput.BrakeInput) ? 0.5f : 0;
     }
@@ -150,8 +149,6 @@ public class CarController : CarModule
     /// </summary>
     void HandleAnimation()
     {
-        transform.position = this.Rigidbody.transform.position - new Vector3(0, .70f, 0);
-
         if (!Stats.InAir)
         {
             Vector3 newUp = hit.normal;

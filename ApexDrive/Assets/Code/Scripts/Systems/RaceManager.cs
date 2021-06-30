@@ -7,74 +7,76 @@ public class RaceManager : Singleton<RaceManager>
 {
     public RoadChain ActiveTrack;
     [SerializeField] private CoreCarModule m_CarPrefab;
+    private float m_TrackProgress = 0.0f;
 
     public List<PositionUpdate> raceCars;
     public List<PositionUpdate> ogRaceCars; // Non-updated list
     public int totalColliders;
 
+    public delegate void RaceEvent(Player[] players);
+    public static RaceEvent OnRaceSceneLoaded;
+    public static RaceEvent OnGameStart;
+    public static RaceEvent OnGameEnd;
+    public static RaceEvent PreRoundStart;
+    public static RaceEvent OnRoundStart;
+    public static RaceEvent OnRoundEnd;
 
-    void Start()
+    private void Start()
     {
         Initialise();
+        if(OnRaceSceneLoaded != null) OnRaceSceneLoaded(GameManager.Instance.ConnectedPlayers);
+        StartCoroutine(Co_StartGame());
     }
 
-    void Initialise()
+    private void OnEnable()
     {
-        foreach (PositionUpdate positionUpdate in FindObjectsOfType<PositionUpdate>())
-        {
-            raceCars.Add(positionUpdate);
-            ogRaceCars.Add(positionUpdate);
-        }
-
-        totalColliders = GameObject.FindGameObjectsWithTag("Waypoint").Length;
+        Player.OnRoundWin += EndRound;
     }
 
-    void LateUpdate()
+    private void OnDisable()
     {
-        for (int i = 0; i < raceCars.Count; i++)
-        {
-            for (int j = 0; j < raceCars.Count; j++)
-            {
-                if (raceCars[i].gameObject.GetInstanceID() !=
-                    raceCars[j].gameObject.GetInstanceID())
-                {
-                    if (raceCars[i].laps > raceCars[j].laps)
-                    {
-                        SwapRacers(i, j);
-                        continue;
-                    }
-
-                    if (raceCars[i].collidersHit > raceCars[j].collidersHit)
-                    {
-                        if (raceCars[i].laps == raceCars[j].laps)
-                        {
-                            SwapRacers(i, j);
-                            continue;
-                        }
-                    }
-
-                    if(raceCars[i].distanceCollider.GetInstanceID() == raceCars[j].distanceCollider.GetInstanceID() &&
-                        raceCars[i].distanceFromCollider > raceCars[j].distanceFromCollider)
-                    {
-                        SwapRacers(i, j);
-                    }
-
-                }
-            }
-        }
-
+        Player.OnRoundWin -= EndRound;
     }
 
-    private void SwapRacers(int a, int b)
+    private void Initialise()
     {
+        SpawnPlayers(GameManager.Instance.ConnectedPlayers);
+    }
 
-        if (raceCars.IndexOf(raceCars[a]) > raceCars.IndexOf(raceCars[b]))
+    public void SpawnPlayers(Player[] players)
+    {
+        for(int i = 0; i < players.Length; i++)
         {
-            PositionUpdate temp = raceCars[b];
-            raceCars[b] = raceCars[a];
-            raceCars[a] = temp;
+            OrientedPoint op = ActiveTrack.Evaluate(m_TrackProgress);
+            Vector3 offset = Vector3.left * (players.Length - i) * 1.5f + Vector3.right * players.Length / 2.0f * 1.5f;
+            Vector3 spawnPoint = op.pos + op.rot * offset + Vector3.up;
+            CoreCarModule car = Instantiate(m_CarPrefab, spawnPoint, op.rot);
+            car.Stats.CanDrive = false;
+            if(players[i].ControllerID <= 0 || players[i].ControllerID >= 4) players[i].AssignController(i+1); // this shouldn't be the case except for debugging in the race scene
+            car.SetPlayer(players[i]);
+            players[i].PlayerCar = car;
         }
+    }
 
+    private void EndRound(Player winner)
+    {
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) player.PlayerCar.Stats.CanDrive = false;
+        if(OnRoundEnd != null) OnRoundEnd(GameManager.Instance.ConnectedPlayers);
+        // get progress for next spawn
+    }
+
+    private IEnumerator Co_StartGame()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(Co_StartRound());
+    }
+
+    private IEnumerator Co_StartRound()
+    {
+        if(PreRoundStart != null) PreRoundStart(GameManager.Instance.ConnectedPlayers);
+        yield return new WaitForSeconds(3.25f);
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) player.PlayerCar.Stats.CanDrive = true;
+        
     }
 
 }

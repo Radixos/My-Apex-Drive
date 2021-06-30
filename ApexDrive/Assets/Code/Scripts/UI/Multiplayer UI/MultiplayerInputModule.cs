@@ -35,6 +35,11 @@ public class MultiplayerInputModule : BaseInputModule
 			m_Cursors[player.PlayerID].SetColor(GameManager.Instance.PlayerColors[player.PlayerID]);
 			m_Cursors[player.PlayerID].name  = "Cursor (Player " + player.PlayerReadableID + ")";
         }
+
+		foreach(Player player in GameManager.Instance.ConnectedPlayers)
+		{
+			m_Cursors[player.PlayerID].GetComponent<Animator>().SetBool("IsVisible", true);
+		}
 	}
 
 	protected override void OnEnable()
@@ -59,7 +64,6 @@ public class MultiplayerInputModule : BaseInputModule
 		AxisEventData[] axisEventData = new AxisEventData[GameManager.MaxPlayers];
 		foreach(Player player in GameManager.Instance.ConnectedPlayers)
 		{
-
 			int i = player.PlayerID;
 			if(!m_MultiplayerEventSystem.LockedController(i) && currentRepeatDelay[i] >= m_AxisRepeatDelay){
 				if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) > 0.0){
