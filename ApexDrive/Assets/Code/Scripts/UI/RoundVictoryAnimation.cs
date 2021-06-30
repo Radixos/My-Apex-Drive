@@ -29,7 +29,7 @@ public class RoundVictoryAnimation : MonoBehaviour
         //case switch player is (colour/plaayer number)
         //victoryTuk.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/TukSprites/Tuk" + (InsertFunColourHere));
 
-        int starNumber = 1;
+        int starNumber = 3;
         //switch (TukWinNumber)
         //{
         //    case 1:
@@ -39,7 +39,7 @@ public class RoundVictoryAnimation : MonoBehaviour
         //    case 2:
         //        starNumber = 2;
         //        break;
-            
+
         //    case 3:
         //        starNumber = 3
         //        break;
