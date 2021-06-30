@@ -11,10 +11,12 @@ public class EliminationScript : MonoBehaviour
     float eliminatedTotal = 0.0f;
     private bool winnerHasBeenProcessed;
 
+    public RoundVictoryAnimation roundVictory;
+
     void Start()
     {
         mainCamera = Camera.main;
-        carManager = this.GetComponent<RaceManager>();
+        carManager = GetComponent<RaceManager>();
         winnerHasBeenProcessed = false;
     }
 
@@ -64,12 +66,13 @@ public class EliminationScript : MonoBehaviour
     {
         if (eliminatedTotal == carManager.raceCars.Count - 1 && currentCar.eliminated == false)
         {
-            CoreCarModule currentCarModule = currentCar.gameObject.transform.parent.GetChild(1).GetComponent<CoreCarModule>();
+            CoreCarModule currentCarModule = currentCar.gameObject.GetComponent<CoreCarModule>();
             int playerToModify = currentCarModule.Player.PlayerID - 1;
             GameManager.Instance.SubmitRoundWinner(playerToModify);
             currentCar.winner = true;
             eliminatedTotal = 0;
             winnerHasBeenProcessed = true;
+            roundVictory.AnimationEvent();
             //Debug.Log(GameManager.Instance.Players[currentCar.GetComponent<CarInputHandler>().currentPlayer].RoundWins);
             //debug.log(gamemanager.instance.players[playertomodify].roundwins);
 

@@ -1,26 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+﻿//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
+//using UnityEngine.UI;
+//using TMPro;
 
-public class BoostBarScript : MonoBehaviour
-{
-    private GameObject barCollection; //overarching use variables
-    [SerializeField] private RaceManager vehicleManager;
-    private int vehicleNum;
+//public class BoostBarScript : MonoBehaviour
+//{
+//    private GameObject barCollection; //overarching use variables
+//    [SerializeField] private RaceManager vehicleManager;
+//    private int vehicleNum;
 
-    private GameObject[] boostBarObjects; 
-    private Slider[] boostBarSliders; //object children
-    private TextMeshProUGUI[] boostBarText;
-    private Image[] boostBarImages;
+//    private GameObject[] boostBarObjects; 
+//    private Slider[] boostBarSliders; //object children
+//    private TextMeshProUGUI[] boostBarText;
+//    private Image[] boostBarImages;
 
-    void Start()
-    {
-        barCollection = GetComponent<Canvas>().transform.GetChild(0).gameObject;
-        vehicleNum = vehicleManager.raceCars.Count;
-        InitBarObjects();
-    }
+//    void Start()
+//    {
+//        barCollection = GetComponent<Canvas>().transform.GetChild(0).gameObject;
+//        vehicleNum = vehicleManager.raceCars.Count;
+//        InitBarObjects();
+//    }
 
     // private void InitBarObjects()
     // {
@@ -29,15 +29,15 @@ public class BoostBarScript : MonoBehaviour
     //     boostBarText = new TextMeshProUGUI[vehicleNum];
     //     boostBarImages = new Image[vehicleNum];
 
-        for (int i = 0; i < vehicleNum; i++)
-        {
-            boostBarObjects[i] = barCollection.transform.GetChild(i).gameObject;
-            boostBarObjects[i].SetActive(true);
-            boostBarSliders[i] = boostBarObjects[i].GetComponent<Slider>();
-            boostBarText[i] = boostBarObjects[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-            boostBarImages[i] = boostBarObjects[i].transform.GetChild(0).GetComponent<Image>();
-        }
-    }
+    //    for (int i = 0; i < vehicleNum; i++)
+    //    {
+    //        boostBarObjects[i] = barCollection.transform.GetChild(i).gameObject;
+    //        boostBarObjects[i].SetActive(true);
+    //        boostBarSliders[i] = boostBarObjects[i].GetComponent<Slider>();
+    //        boostBarText[i] = boostBarObjects[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+    //        boostBarImages[i] = boostBarObjects[i].transform.GetChild(0).GetComponent<Image>();
+    //    }
+    //}
 
     // void Update()
     // {
@@ -79,4 +79,4 @@ public class BoostBarScript : MonoBehaviour
     //         }
     //     }
     // }
-}
+//}
