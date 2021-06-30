@@ -11,7 +11,6 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -3102149461857618102}
   - {fileID: -5666344447316024637}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
@@ -86,7 +85,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: MenuOpen
+    m_ConditionEvent: IsOpen
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6150639405804188476}
@@ -145,12 +144,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 6150639405804188476}
     m_Position: {x: 550, y: 160, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1966202318607625616}
-    m_Position: {x: 1030, y: 20, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -3043486872190071720}
-    m_Position: {x: 1030, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7738320982356192867}
     m_Position: {x: 800, y: 20, z: 0}
@@ -225,13 +218,7 @@ AnimatorController:
   m_Name: Home Menu
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: MenuOpen
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: StartGame
+  - m_Name: IsOpen
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -259,7 +246,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: MenuOpen
+    m_ConditionEvent: IsOpen
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6877067618202229077}
@@ -379,7 +366,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: MenuOpen
+    m_ConditionEvent: IsOpen
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6877067618202229077}

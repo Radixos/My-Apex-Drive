@@ -16,6 +16,11 @@ public class NameTagScript : MonoBehaviour
     private Vector3 offset = new Vector3(0.0f, 1.5f, 7.5f);
     //9.65f, -1.5f, 0.0f for Rad's scene
 
+    private void OnEnable()
+    {
+        RaceManager.OnRaceSceneLoaded += AssignPlayers;
+    }
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -39,6 +44,11 @@ public class NameTagScript : MonoBehaviour
             nameTags[i] = tempAddText;
 
         }
+    }
+
+    private void AssignPlayers(Player[] players)
+    {
+
     }
 
     void Update()

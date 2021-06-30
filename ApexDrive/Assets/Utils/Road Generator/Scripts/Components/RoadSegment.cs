@@ -27,6 +27,9 @@ public class RoadSegment : MonoBehaviour {
 	private MeshCollider m_Collider;
 	private MeshFilter m_Filter;
 
+	public float ArcLength = 0.0f;
+	public float DistanceOnTrackBeforeCurrentSegment = 0.0f;
+
 	private void Awake() => ValidateComponents();
 
 
@@ -130,7 +133,7 @@ public class RoadSegment : MonoBehaviour {
 			if( m_Mesh != null ) DestroyImmediate( m_Mesh );
 			if( m_ColliderMesh != null ) DestroyImmediate( m_ColliderMesh );
 		}
-
+		ArcLength = GetBezierRepresentation(Space.Self).GetArcLength();
 	}
 
 	float GetTextureAspectRatio() {
@@ -211,6 +214,11 @@ public class RoadSegment : MonoBehaviour {
 			Debug.DrawLine(bezier.GetPoint((float)i / (float)steps), point, Color.red);
 		}
 		return result;
+	}
+
+	public OrientedPoint Evaluate(float t, Space space)
+	{
+		return GetBezierRepresentation(space).GetOrientedPoint(t);
 	}
 
 	// Returns the up vector of either the first or last control point, in a given space

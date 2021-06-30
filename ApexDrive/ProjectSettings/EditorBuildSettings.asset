@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Build Scenes/Lobby Menu.unity
     guid: ccc4197c365e3ed45a02988977f5f80e
+  - enabled: 1
+    path: Assets/Scenes/Demo Scenes/Scene_Demo_RoadGenerator.unity
+    guid: a1e807fed3cbd824c92dd26e0003b12b
   m_configObjects: {}

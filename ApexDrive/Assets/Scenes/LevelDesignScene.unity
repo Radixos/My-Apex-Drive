@@ -2405,6 +2405,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84471434}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &85628698 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 7270525194409094009, guid: eb8e753791aa2634aa7d3d0b26322b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 867696549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &88940481
 GameObject:
   m_ObjectHideFlags: 0
@@ -23704,6 +23710,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb8e753791aa2634aa7d3d0b26322b1a, type: 3}
+--- !u!1 &867696550 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1093667332307259096, guid: eb8e753791aa2634aa7d3d0b26322b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 867696549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &867696551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867696550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c764d839f6c295045b0f74833295d616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Player:
+    m_PlayerID: 2
+    m_ControllerID: 2
+    RoundWins: 0
+    GameWins: 0
+    PlayerCar: {fileID: 867696551}
+  m_Rigidbody: {fileID: 85628698}
 --- !u!1 &870094551
 GameObject:
   m_ObjectHideFlags: 0
@@ -28705,6 +28736,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066473415}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &1067781063 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 7270525194409094009, guid: eb8e753791aa2634aa7d3d0b26322b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 346216715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1071050926
 GameObject:
   m_ObjectHideFlags: 0
@@ -35029,7 +35066,7 @@ Transform:
   - {fileID: 1335935999}
   - {fileID: 2099569912}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1315571539
 GameObject:
@@ -43700,7 +43737,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -48286,7 +48323,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1787606453
 GameObject:
@@ -52228,6 +52265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd6b6b78ff3c1644a59cb0f7d62cb2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveTrack: {fileID: 0}
+  m_CarPrefab: {fileID: 0}
   raceCars: []
   ogRaceCars: []
   totalColliders: 58
@@ -52252,7 +52291,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964995018}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7c9a1a30b36663468390e163da3b9c9, type: 3}
   m_Name: 
@@ -52280,7 +52319,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964995018}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29d7b5d0d67bdc14d804b14d7d3406a0, type: 3}
   m_Name: 
@@ -56213,6 +56252,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2145750688}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2146353740 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1093667332307259096, guid: eb8e753791aa2634aa7d3d0b26322b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 346216715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2146353747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146353740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c764d839f6c295045b0f74833295d616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Player:
+    m_PlayerID: 1
+    m_ControllerID: 1
+    RoundWins: 0
+    GameWins: 0
+    PlayerCar: {fileID: 2146353747}
+  m_Rigidbody: {fileID: 1067781063}
 --- !u!1001 &5777158583893175233
 PrefabInstance:
   m_ObjectHideFlags: 0
