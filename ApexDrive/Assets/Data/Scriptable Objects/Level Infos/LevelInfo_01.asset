@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c2410b5eba72e4b8691bc8c8262088, type: 3}
   m_Name: LevelInfo_01
   m_EditorClassIdentifier: 
-  Name: Demo
-  ReferenceString: Scene_Demo_RoadGenerator
+  Name: 
+  ReferenceString: 
   Description: 
   Preview: {fileID: 2800000, guid: 2f35c71cbf072e24ca069800004be5ea, type: 3}

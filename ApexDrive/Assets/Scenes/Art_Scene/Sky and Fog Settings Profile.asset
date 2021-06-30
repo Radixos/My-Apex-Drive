@@ -51,30 +51,30 @@ MonoBehaviour:
     min: 0
   baseHeight:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 0.5
   maximumHeight:
-    m_OverrideState: 0
-    m_Value: 87.11
+    m_OverrideState: 1
+    m_Value: 1
   albedo:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
     hdr: 0
     showAlpha: 1
     showEyeDropper: 1
   meanFreePath:
-    m_OverrideState: 1
-    m_Value: 400
+    m_OverrideState: 0
+    m_Value: 1
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
   anisotropy:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
     min: -1
     max: 1
   globalLightProbeDimmer:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
     min: 0
     max: 1
@@ -119,22 +119,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b6606ef2548734bb6d11b9d160bc7e, type: 3}
   m_Name: HDRISky
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   rotation:
     m_OverrideState: 1
-    m_Value: 172
+    m_Value: 133
     min: 0
     max: 360
   skyIntensityMode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   exposure:
     m_OverrideState: 1
     m_Value: 0
   multiplier:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 10
     min: 0
   upperHemisphereLuxValue:
     m_OverrideState: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
     m_Value: {x: 0.4224537, y: 0.34445757, z: 0.5}
   desiredLuxValue:
     m_OverrideState: 1
-    m_Value: 40000
+    m_Value: 0
   updateMode:
     m_OverrideState: 0
     m_Value: 0
@@ -224,10 +224,10 @@ MonoBehaviour:
   m_AdvancedMode: 0
   skyType:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 4
   skyAmbientMode:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 1
   fogType:
     m_OverrideState: 1
     m_Value: 0
@@ -255,10 +255,10 @@ MonoBehaviour:
     m_Value: 2
   exposure:
     m_OverrideState: 1
-    m_Value: 500
+    m_Value: 0.5
   multiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.25
     min: 0
   upperHemisphereLuxValue:
     m_OverrideState: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 20000
   updateMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   updatePeriod:
     m_OverrideState: 0
@@ -281,10 +281,10 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   earthPreset:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: 0
   sphericalMode:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   seaLevel:
     m_OverrideState: 0
@@ -347,7 +347,7 @@ MonoBehaviour:
     min: 1
     max: 10
   groundTint:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {r: 0.4, g: 0.25, b: 0.15, a: 1}
     hdr: 0
     showAlpha: 0
@@ -367,14 +367,14 @@ MonoBehaviour:
     m_Value: {x: 0, y: 0, z: 0}
   spaceEmissionTexture:
     m_OverrideState: 1
-    m_Value: {fileID: 8900000, guid: 7fd4e44e4182b3048a9b7b8eadf91764, type: 3}
+    m_Value: {fileID: 8900000, guid: 9e62ad196d822394081d38285f155fd6, type: 3}
   spaceEmissionMultiplier:
     m_OverrideState: 1
-    m_Value: 100000
+    m_Value: 1.5
     min: 0
   spaceRotation:
     m_OverrideState: 1
-    m_Value: {x: 0, y: -62.26, z: 0}
+    m_Value: {x: 0, y: -379.5, z: 0}
   colorSaturation:
     m_OverrideState: 0
     m_Value: 1
@@ -391,7 +391,7 @@ MonoBehaviour:
     min: 0
     max: 1
   horizonTint:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
     hdr: 0
     showAlpha: 0
@@ -403,7 +403,7 @@ MonoBehaviour:
     showAlpha: 0
     showEyeDropper: 0
   horizonZenithShift:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.912
     min: -1
     max: 1
