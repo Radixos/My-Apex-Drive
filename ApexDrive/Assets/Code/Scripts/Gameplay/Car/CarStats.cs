@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class CarStats : CarModule
 {
@@ -76,6 +77,11 @@ public class CarStats : CarModule
     [SerializeField]
     private float rampageTimer;
 
+    [Header("FMOD Global parameters")]
+    [SerializeField]
+    [ParamRef]
+    private string powerMeter;
+
     // Getters and Setters :)
     // Car States
     public bool InAir { get => inAir; set => inAir = value; }
@@ -148,5 +154,7 @@ public class CarStats : CarModule
         {
             Rigidbody.drag = 0.05f;
         }
+
+        RuntimeManager.StudioSystem.setParameterByName(powerMeter, powerAmount);
     }
 }

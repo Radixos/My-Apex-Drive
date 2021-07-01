@@ -1761,6 +1761,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee84190f165cfeb4494a2c0f73408125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defense: event:/HUD/Abilities/defensive
+  offense: event:/HUD/Abilities/aggressive
+  boost: event:/HUD/Abilities/mobility
+  sfxStop: 0
+  fillingTest: 0
 --- !u!114 &5323998243442652427
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,33 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Abilities : CarModule
 {
     // MANI'S CODE
 
     //FMOD Stuff
-    FMOD.Studio.EventInstance ability;
-    FMOD.Studio.EventDescription onOff;
+    [SerializeField]
+    [EventRef]
+    private string defense = null;
+    FMOD.Studio.EventInstance sfxDefense;
 
-    FMOD.Studio.PARAMETER_DESCRIPTION stop;
-    FMOD.Studio.PARAMETER_ID stp;
+    [SerializeField]
+    [EventRef]
+    private string offense = null;
+    FMOD.Studio.EventInstance sfxOffense;
 
-    FMOD.Studio.PLAYBACK_STATE pbs;
+    [SerializeField]
+    [EventRef]
+    private string boost = null;
+    FMOD.Studio.EventInstance sfxBoost;
+
+    FMOD.Studio.PLAYBACK_STATE pbsdef;
+    FMOD.Studio.PLAYBACK_STATE pbsboost;
+
+    //Used to detect if any abilities are active or not to prevent the player from using more than one ability
+    private bool abilitiesActive;
+    public int sfxStop;
 
     private void Start()
     {
-        ability = FMODUnity.RuntimeManager.CreateInstance("event:/HUD/Abilities/defensive");
-
-        onOff = FMODUnity.RuntimeManager.GetEventDescription("event:/HUD/Abilities/defensive");
-        onOff.getParameterDescriptionByName("stop", out stop);
-        stp = stop.id;
-
+        sfxDefense = RuntimeManager.CreateInstance(defense);
+        sfxDefense.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject.transform));
     }
 
     private void Update()
     {
         AbilityLogic();
+        SfxAbilities();
         if (Stats.PowerAmount < 0)
         {
             Stats.PowerAmount = 0;
@@ -41,13 +53,23 @@ public class Abilities : CarModule
     {
         // Two abilities that stay active as
         // long as 
-        if(!Stats.InitialShieldPowerDepleted)
-        Stats.Shield.SetActive(false);
+        if (Stats.PowerAmount <= 0)
+        {
+            Stats.Shield.SetActive(false);
 
-        Stats.CurrentBoostMultiplier = 1;
+            Stats.CurrentBoostMultiplier = 1;
+        }
 
         if (Input.GetButtonUp(PlayerInput.PowerAInput))
+        {
             Stats.InitialShieldPowerDepleted = false;
+            Stats.Shield.SetActive(false);
+        }
+
+        if (Input.GetButtonUp(PlayerInput.BoostInput))
+        {
+            Stats.CurrentBoostMultiplier = 1;
+        }
 
         // Active time of Stats.Rampage
         if (Stats.Rampage.activeSelf)
@@ -62,21 +84,13 @@ public class Abilities : CarModule
         {
             // Activate one ability at a times
             // Shield power up
-            if (Input.GetButton(PlayerInput.PowerAInput) &&
-                Stats.Rampage.activeSelf == false //&& Stats.PowerAmount >= 0.3f
-                )
+            if (Input.GetButton(PlayerInput.PowerAInput) && abilitiesActive == false)
             {
                 if (!Stats.InitialShieldPowerDepleted)
                 {
-                    Stats.PowerAmount -= 0.25f;
+                    Stats.PowerAmount -= 0.15f;
                     Stats.InitialShieldPowerDepleted = true;
                     Stats.Shield.SetActive(true);
-                }
-
-                ability.getPlaybackState(out pbs);
-                if (pbs != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-                {
-                    ability.start();
                 }
                 Stats.PowerAmount -= Time.deltaTime * 0.5f;
             }
@@ -98,6 +112,26 @@ public class Abilities : CarModule
                 Stats.PowerAmount -= Time.deltaTime * 0.4f;
             }
         }
+    }
+
+    public void SfxAbilities()
+    {
+        sfxDefense.setParameterByName("Stop", sfxStop);
+        sfxDefense.getPlaybackState(out pbsdef);
+        if (pbsdef == FMOD.Studio.PLAYBACK_STATE.STOPPED || pbsdef == FMOD.Studio.PLAYBACK_STATE.STOPPING)
+        {
+            if (Stats.Shield.activeSelf == true)
+            {
+                sfxStop = 0;
+                sfxDefense.start();
+            }
+        }
+        if (Stats.Shield.activeSelf == false)
+        {
+            sfxStop = 1;
+            sfxDefense.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+       
     }
 
     /// <summary>
