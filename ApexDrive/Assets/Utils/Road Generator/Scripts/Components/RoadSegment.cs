@@ -19,9 +19,63 @@
 using UnityEngine;
 using UnityEditor;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer) )]
-[ExecuteInEditMode]
-public class RoadSegment : UniqueMesh {
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider)), ExecuteInEditMode]
+public class RoadSegment : MonoBehaviour {
+
+	[HideInInspector][SerializeField] int ownerID;
+
+	private MeshCollider m_Collider;
+	private MeshFilter m_Filter;
+
+	public float ArcLength = 0.0f;
+	public float DistanceOnTrackBeforeCurrentSegment = 0.0f;
+
+	private void Awake() => ValidateComponents();
+
+
+	private Mesh m_Mesh; // The actual mesh asset to generate into
+	private Mesh Mesh {
+		get {
+			if(m_Collider.sharedMesh == m_Filter.sharedMesh)
+			{
+				DestroyImmediate(m_Filter.sharedMesh);
+			}
+			bool isOwner = ownerID == gameObject.GetInstanceID();
+			bool filterHasMesh = m_Filter.sharedMesh != null;
+			if( !filterHasMesh || !isOwner) {
+				m_Filter.sharedMesh = m_Mesh = new Mesh(); // Create new mesh and assign to the mesh filter
+				ownerID = gameObject.GetInstanceID(); // Mark self as owner of this mesh
+				m_Mesh.name = "Mesh [" + ownerID + "]";
+			} else if( isOwner && filterHasMesh && m_Mesh == null ) {
+				// If the mesh field lost its reference, which can happen in assembly reloads
+				m_Mesh = m_Filter.sharedMesh;
+			}
+			return m_Mesh;
+		}
+	}
+
+	private Mesh m_ColliderMesh;
+	private Mesh ColliderMesh{
+		get{
+			if(m_Collider.sharedMesh == m_Filter.sharedMesh)
+			{
+				DestroyImmediate(m_Collider.sharedMesh);
+			}
+			bool isOwner = ownerID == gameObject.GetInstanceID();
+			bool colliderHasMesh = m_Collider.sharedMesh != null;
+			if(!colliderHasMesh || !isOwner)
+			{
+				m_Collider.sharedMesh = m_ColliderMesh = new Mesh();
+				ownerID = gameObject.GetInstanceID();
+				m_ColliderMesh.name = "Collider Mesh ["+ ownerID +"]";
+			}
+			else if(isOwner && colliderHasMesh && m_ColliderMesh == null)
+			{
+				m_ColliderMesh = m_Collider.sharedMesh;
+			}
+			return m_ColliderMesh;
+		}
+	}
 
 	// Serialized stuff, like settings
 	public float tangentLength = 3; // Tangent size. Note that it's only the tangent of the first point. The next segment controls the endpoint tangent length
@@ -36,13 +90,25 @@ public class RoadSegment : UniqueMesh {
 	public RoadChain RoadChain => transform.parent == null ? null : transform.parent.GetComponent<RoadChain>();
 	Mesh2D Mesh2D => RoadChain.mesh2D;
 
+	private void ValidateComponents()
+	{
+		if(m_Collider == null) m_Collider = GetComponent<MeshCollider>();
+		if(m_Collider == null) m_Collider = gameObject.AddComponent<MeshCollider>();
+
+		if(m_Filter == null) m_Filter = GetComponent<MeshFilter>();
+		if(m_Filter == null) m_Filter = gameObject.AddComponent<MeshFilter>();
+
+		if(GetComponent<MeshRenderer>() == null) gameObject.AddComponent<MeshRenderer>();
+	}
+
 	// This will regenerate the mesh!
 	// uvzStartEnd is used for the (optional) normalized coordinates along the whole track,
 	// x = start coordinate, y = end coordinate
 	public void UpdateMesh( Vector2 nrmCoordStartEnd ) {
-
+		ValidateComponents();
 		// Only generate a mesh if we've got a next control point
-		if( HasValidNextPoint ) {
+		if( HasValidNextPoint ) 
+		{
 			meshExtruder.Extrude(
 				mesh: Mesh,
 				mesh2D: RoadChain.mesh2D,
@@ -53,10 +119,21 @@ public class RoadSegment : UniqueMesh {
 				edgeLoopsPerMeter: RoadChain.edgeLoopsPerMeter,
 				tilingAspectRatio: GetTextureAspectRatio()
 			);
-		} else if( meshCached != null ) {
-			DestroyImmediate( meshCached );
-		}
 
+			meshExtruder.Extrude(
+				mesh: ColliderMesh,
+				mesh2D: RoadChain.mesh2D,
+				bezier: GetBezierRepresentation(Space.Self),
+				rotationEasing: rotationEasing,
+				edgeLoopsPerMeter: RoadChain.ColliderEdgeLoopsPerMeter
+			);
+		} 
+		else 
+		{
+			if( m_Mesh != null ) DestroyImmediate( m_Mesh );
+			if( m_ColliderMesh != null ) DestroyImmediate( m_ColliderMesh );
+		}
+		ArcLength = GetBezierRepresentation(Space.Self).GetArcLength();
 	}
 
 	float GetTextureAspectRatio() {
@@ -137,6 +214,11 @@ public class RoadSegment : UniqueMesh {
 			Debug.DrawLine(bezier.GetPoint((float)i / (float)steps), point, Color.red);
 		}
 		return result;
+	}
+
+	public OrientedPoint Evaluate(float t, Space space)
+	{
+		return GetBezierRepresentation(space).GetOrientedPoint(t);
 	}
 
 	// Returns the up vector of either the first or last control point, in a given space

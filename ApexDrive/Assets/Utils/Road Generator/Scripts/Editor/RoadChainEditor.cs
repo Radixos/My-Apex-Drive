@@ -15,7 +15,6 @@ public class RoadChainEditor : Editor
     private RoadSegment m_SelectedSegment;
 
     private Texture2D m_AddIcon;
-    private Texture2D m_InsertIcon;
     private Texture2D m_DeleteIcon;
     private Texture2D m_SelectIcon;
     private Texture2D m_BezierControlIcon;
@@ -24,7 +23,7 @@ public class RoadChainEditor : Editor
     private Texture2D m_BeginningIcon;
     private Texture2D m_EndIcon;
 
-    private enum ToolMode {Add, Split, Delete, Selection, BezierControl, Rotation, Move}
+    private enum ToolMode {Add, Delete, Selection, BezierControl, Rotation, Move}
     private ToolMode m_ActiveTool = ToolMode.Selection;
 
     private Tool m_PreviousEditorTool;
@@ -33,6 +32,8 @@ public class RoadChainEditor : Editor
     private bool m_MovingSegment = false;
     private bool m_RotatingSegment = false;
     private bool m_ModifyingBezier = false;
+
+    private float m_EvaluationTest;
 
     private Quaternion m_OriginalCameraOrientation;
     private bool m_OriginalCameraOrthographicProjection;
@@ -43,7 +44,6 @@ public class RoadChainEditor : Editor
         foreach(RoadSegment segment in m_RoadChain.Segments)
         {
             segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
-            // segment.gameObject.hideFlags = HideFlags.None;
         }
     }
 
@@ -56,7 +56,6 @@ public class RoadChainEditor : Editor
         m_RoadChain = (RoadChain) target;
 
         m_AddIcon = (Texture2D) EditorGUIUtility.Load("Add.png");
-        m_InsertIcon = (Texture2D) EditorGUIUtility.Load("Insert.png");
         m_DeleteIcon = (Texture2D) EditorGUIUtility.Load("Delete.png");
         m_MoveIcon = (Texture2D) EditorGUIUtility.Load("Move.png");
         m_SelectIcon = (Texture2D) EditorGUIUtility.Load("SelectNode.png");
@@ -68,7 +67,6 @@ public class RoadChainEditor : Editor
         foreach(RoadSegment segment in m_RoadChain.Segments)
         {
             segment.gameObject.hideFlags = HideFlags.HideInHierarchy;
-            // segment.gameObject.hideFlags = HideFlags.None;
         }
     }
 
@@ -166,11 +164,6 @@ public class RoadChainEditor : Editor
             GUILayout.Button(m_EndIcon, height, width);
             GUILayout.Label("Add Node At End", height);
             GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.Button(m_InsertIcon, height, width);
-            GUILayout.Label("Insert Node", height);
-            GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             GUILayout.Button(m_DeleteIcon, height, width);
             GUILayout.Label("Delete Node", height);
@@ -183,23 +176,28 @@ public class RoadChainEditor : Editor
         bool wasLooped = m_RoadChain.loop;
         m_RoadChain.loop = EditorGUILayout.Toggle("Loop", m_RoadChain.loop);
         float initialEdgeLoopCount = m_RoadChain.edgeLoopsPerMeter;
-        m_RoadChain.edgeLoopsPerMeter = EditorGUILayout.Slider("Edge Loops Per Meter", m_RoadChain.edgeLoopsPerMeter, 0.25f, 2.0f);
+        m_RoadChain.edgeLoopsPerMeter = EditorGUILayout.Slider("Edge Loops Per Meter", m_RoadChain.edgeLoopsPerMeter, 0.25f, 1.0f);
 
         float initialColliderEdgeLoopCount = m_RoadChain.ColliderEdgeLoopsPerMeter;
         m_RoadChain.GenerateColliders = EditorGUILayout.Toggle("Generate Colliders", m_RoadChain.GenerateColliders);
-        if(m_RoadChain.GenerateColliders) m_RoadChain.ColliderEdgeLoopsPerMeter = EditorGUILayout.Slider("Collider Edge Loops Per Meter", m_RoadChain.ColliderEdgeLoopsPerMeter, 0.25f, 2.0f);
-
-        m_RoadChain.TestNearestPointObject = (Transform) EditorGUILayout.ObjectField("Test Nearest Point", m_RoadChain.TestNearestPointObject, typeof(Transform), true);
-        m_RoadChain.TestNearestPointObject2 = (Transform) EditorGUILayout.ObjectField("Test Nearest Point", m_RoadChain.TestNearestPointObject2, typeof(Transform), true);
+        if(m_RoadChain.GenerateColliders) m_RoadChain.ColliderEdgeLoopsPerMeter = EditorGUILayout.Slider("Collider Edge Loops Per Meter", m_RoadChain.ColliderEdgeLoopsPerMeter, 0.25f, 1.0f);
         
 
         if(GUILayout.Button("Generate Mesh"))
         {
             m_RoadChain.UpdateMeshes();
         }
+        GUILayout.BeginVertical("Box");
+        GUILayout.Label(
+            "If collisions aren't working properly with the track try this:"
+            , ParagraphStyle);
+        if(GUILayout.Button("Force Road Colliders On"))
+        {
+            foreach(RoadSegment segment in m_RoadChain.Segments) segment.GetComponent<Collider>().enabled = true;
+        }
 
+        GUILayout.EndVertical();
         if(initialEdgeLoopCount != m_RoadChain.edgeLoopsPerMeter || (initialColliderEdgeLoopCount != m_RoadChain.ColliderEdgeLoopsPerMeter && m_RoadChain.GenerateColliders ) || m_RoadChain.loop != wasLooped) m_RoadChain.UpdateMeshes();
-
     }
 
     private void DrawRoadHandles()
@@ -215,13 +213,12 @@ public class RoadChainEditor : Editor
                 Handles.SphereHandleCap(handleID, segment.transform.position, Quaternion.identity, 1.5f, EventType.Repaint);
 
         }
-
+        
         for(int i = 0; i < m_RoadChain.Segments.Length - (m_RoadChain.loop ? 0 : 1); i++)
         {
             RoadSegment segment = m_RoadChain.Segments[i];
             Handles.DrawBezier(segment.GetControlPoint(0, Space.World),segment.GetControlPoint(3, Space.World),segment.GetControlPoint(1, Space.World),segment.GetControlPoint(2, Space.World), Color.cyan, Texture2D.whiteTexture, 2.0f);
         }
-        Handles.color = Color.white;
     }
 
     private void DrawToolMenu()
@@ -239,12 +236,6 @@ public class RoadChainEditor : Editor
         if(GUILayout.Button(m_AddIcon, activeButton ? ToggleButtonStyleToggled : ToggleButtonStyleNormal, GUILayout.Width(40), GUILayout.Height(40)))
         {
             m_ActiveTool = ToolMode.Add;
-            return;
-        }
-        activeButton = m_ActiveTool == ToolMode.Split;
-        if(GUILayout.Button(m_InsertIcon, activeButton ? ToggleButtonStyleToggled : ToggleButtonStyleNormal, GUILayout.Width(40), GUILayout.Height(40)))
-        {
-            m_ActiveTool = ToolMode.Split;
             return;
         }
         activeButton = m_ActiveTool == ToolMode.Delete;
@@ -375,20 +366,6 @@ public class RoadChainEditor : Editor
                     m_ActiveTool = ToolMode.Selection;
                 }
                 Handles.color = Color.white;
-                break;
-
-            case ToolMode.Split:
-                {
-                    Vector2 invertedYMousePosition = screenSpaceMousePosition;
-                        invertedYMousePosition.y = SceneView.lastActiveSceneView.camera.pixelHeight - invertedYMousePosition.y;
-                        Ray ray = SceneView.lastActiveSceneView.camera.ScreenPointToRay(invertedYMousePosition);
-                        Plane horizontalPlane = new Plane(Vector3.up, m_RoadChain.transform.position);
-                        float distance = 0.0f;
-                        if(horizontalPlane.Raycast(ray, out distance)) 
-                        {
-                            Handles.SphereHandleCap(0, ray.GetPoint(distance), Quaternion.identity, 1.0f, EventType.Repaint);
-                        }
-                }
                 break;
 
             case ToolMode.Delete:

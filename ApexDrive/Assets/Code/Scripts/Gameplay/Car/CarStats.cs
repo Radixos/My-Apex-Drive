@@ -4,13 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarStats : MonoBehaviour
+public class CarStats : CarModule
 {
     [Header("Car Components")]
     [SerializeField]
     private CarAttributes carAttributes;
-    [SerializeField]
-    private Rigidbody sphereCollider;
     [SerializeField]
     private GameObject shield;
     [SerializeField]
@@ -104,7 +102,6 @@ public class CarStats : MonoBehaviour
     public float CurrentSurfaceMultiplier { get => currentSurfaceMultiplier; set => currentSurfaceMultiplier = value; }
 
     // Car Components
-    public Rigidbody SphereCollider { get => sphereCollider; set => sphereCollider = value; }
     public CarAttributes CarAttributes { get => carAttributes; set => carAttributes = value; }
     public GameObject Shield { get => shield; set => shield = value; }
     public GameObject Rampage { get => rampage; set => rampage = value; }
@@ -145,11 +142,11 @@ public class CarStats : MonoBehaviour
     {
         if (!inAir)
         {
-            SphereCollider.drag = CarAttributes.drag;
+            Rigidbody.drag = CarAttributes.drag;
         }
         else
         {
-            SphereCollider.drag = 0.05f;
+            Rigidbody.drag = 0.05f;
         }
     }
 }

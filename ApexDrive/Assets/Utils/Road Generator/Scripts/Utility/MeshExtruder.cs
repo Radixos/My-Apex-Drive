@@ -30,6 +30,60 @@ public class MeshExtruder {
 	List<Vector2> uvs1 = new List<Vector2>();
 	List<int> triIndices = new List<int>();
 
+	///<summary>
+	/// Extrude mesh without texturing features (for colliders)
+	///</summary>
+	public void Extrude (Mesh mesh, Mesh2D mesh2D, OrientedCubicBezier3D bezier, Ease rotationEasing, float edgeLoopsPerMeter)
+	{
+		mesh.Clear();
+		verts.Clear();
+		normals.Clear();
+		triIndices.Clear();
+
+		float curveArcLength = bezier.GetArcLength();
+		int targetCount = Mathf.RoundToInt(curveArcLength * edgeLoopsPerMeter);
+		int edgeLoopCount = Mathf.Max(2,targetCount);
+
+		for( int ring = 0; ring < edgeLoopCount; ring++ ) {
+			float t = ring / (edgeLoopCount-1f);
+			OrientedPoint op = bezier.GetOrientedPoint( t, rotationEasing );
+
+			// Foreach vertex in the 2D shape
+			for( int i = 0; i < mesh2D.VertexCount; i++ ) {
+				verts.Add( op.LocalToWorldPos( mesh2D.vertices[i].point ) );
+				normals.Add( op.LocalToWorldVec( mesh2D.vertices[i].normal ) );
+			}
+		}
+
+		// Generate Trianges
+		// Foreach edge loop (except the last, since this looks ahead one step)
+		for( int edgeLoop = 0; edgeLoop < edgeLoopCount - 1; edgeLoop++ ) {
+			int rootIndex = edgeLoop * mesh2D.VertexCount;
+			int rootIndexNext = (edgeLoop+1) * mesh2D.VertexCount;
+
+			// Foreach pair of line indices in the 2D shape
+			for( int line = 0; line < mesh2D.LineCount; line += 2 ) {
+				int lineIndexA = mesh2D.lineIndices[line];
+				int lineIndexB = mesh2D.lineIndices[line+1];
+				int currentA = rootIndex + lineIndexA;
+				int currentB = rootIndex + lineIndexB;
+				int nextA = rootIndexNext + lineIndexA;
+				int nextB = rootIndexNext + lineIndexB;
+				triIndices.Add( currentA );
+				triIndices.Add( nextA );
+				triIndices.Add( nextB );
+				triIndices.Add( currentA );
+				triIndices.Add( nextB );
+				triIndices.Add( currentB );
+			}
+		}
+
+		// Assign it all to the mesh
+		mesh.SetVertices( verts );
+		mesh.SetNormals( normals );
+		mesh.SetTriangles( triIndices, 0 );
+	}
+
 	
 	public void Extrude( Mesh mesh, Mesh2D mesh2D, OrientedCubicBezier3D bezier, Ease rotationEasing, UVMode uvMode, Vector2 nrmCoordStartEnd, float edgeLoopsPerMeter, float tilingAspectRatio ) {
 
@@ -110,55 +164,48 @@ public class MeshExtruder {
 		mesh.SetUVs( 0, uvs0 );
 		mesh.SetUVs( 1, uvs1 );
 		mesh.SetTriangles( triIndices, 0 );
-
-		// Vector3[] colliderVertices = CalculateVertices(curveArcLength, colliderEdgeLoopsPerMeter, bezier, rotationEasing, mesh2D);
-		// int[] colliderTriangles = CalculateTriangles(curveArcLength, colliderEdgeLoopsPerMeter, mesh2D);
-
-		// colliderMesh.SetVertices(colliderVertices);
-		// colliderMesh.SetTriangles(colliderTriangles, 0); 
-
 	}
 
-	private Vector3[] CalculateVertices(float curveArcLength, float edgeLoopsPerMeter, OrientedCubicBezier3D bezier, Ease rotationEasing, Mesh2D mesh2D)
-	{
-		List<Vector3> result = new List<Vector3>();
-		int targetCount = Mathf.RoundToInt( curveArcLength * edgeLoopsPerMeter );
-		int edgeLoopCount = Mathf.Max( 2, targetCount );
-		for( int ring = 0; ring < edgeLoopCount; ring++ ) {
-			float t = ring / (edgeLoopCount-1f);
-			OrientedPoint op = bezier.GetOrientedPoint( t, rotationEasing );
-			for( int i = 0; i < mesh2D.VertexCount; i++ ) {
-				verts.Add( op.LocalToWorldPos( mesh2D.vertices[i].point ) );
-			}
-		}
-		return result.ToArray();
-	}
+	// private Vector3[] CalculateVertices(float curveArcLength, float edgeLoopsPerMeter, OrientedCubicBezier3D bezier, Ease rotationEasing, Mesh2D mesh2D)
+	// {
+	// 	List<Vector3> result = new List<Vector3>();
+	// 	int targetCount = Mathf.RoundToInt( curveArcLength * edgeLoopsPerMeter );
+	// 	int edgeLoopCount = Mathf.Max( 2, targetCount );
+	// 	for( int ring = 0; ring < edgeLoopCount; ring++ ) {
+	// 		float t = ring / (edgeLoopCount-1f);
+	// 		OrientedPoint op = bezier.GetOrientedPoint( t, rotationEasing );
+	// 		for( int i = 0; i < mesh2D.VertexCount; i++ ) {
+	// 			verts.Add( op.LocalToWorldPos( mesh2D.vertices[i].point ) );
+	// 		}
+	// 	}
+	// 	return result.ToArray();
+	// }
 
-	private int[] CalculateTriangles(float curveArcLength, float edgeLoopsPerMeter, Mesh2D mesh2D)
-	{
-		int targetCount = Mathf.RoundToInt( curveArcLength * edgeLoopsPerMeter );
-		int edgeLoopCount = Mathf.Max( 2, targetCount );
-		List<int> result = new List<int>();
-		for( int edgeLoop = 0; edgeLoop < edgeLoopCount - 1; edgeLoop++ ) {
-			int rootIndex = edgeLoop * mesh2D.VertexCount;
-			int rootIndexNext = (edgeLoop+1) * mesh2D.VertexCount;
+	// private int[] CalculateTriangles(float curveArcLength, float edgeLoopsPerMeter, Mesh2D mesh2D)
+	// {
+	// 	int targetCount = Mathf.RoundToInt( curveArcLength * edgeLoopsPerMeter );
+	// 	int edgeLoopCount = Mathf.Max( 2, targetCount );
+	// 	List<int> result = new List<int>();
+	// 	for( int edgeLoop = 0; edgeLoop < edgeLoopCount - 1; edgeLoop++ ) {
+	// 		int rootIndex = edgeLoop * mesh2D.VertexCount;
+	// 		int rootIndexNext = (edgeLoop+1) * mesh2D.VertexCount;
 
-			// Foreach pair of line indices in the 2D shape
-			for( int line = 0; line < mesh2D.LineCount; line += 2 ) {
-				int lineIndexA = mesh2D.lineIndices[line];
-				int lineIndexB = mesh2D.lineIndices[line+1];
-				int currentA = rootIndex + lineIndexA;
-				int currentB = rootIndex + lineIndexB;
-				int nextA = rootIndexNext + lineIndexA;
-				int nextB = rootIndexNext + lineIndexB;
-				triIndices.Add( currentA );
-				triIndices.Add( nextA );
-				triIndices.Add( nextB );
-				triIndices.Add( currentA );
-				triIndices.Add( nextB );
-				triIndices.Add( currentB );
-			}
-		}
-		return result.ToArray();
-	}
+	// 		// Foreach pair of line indices in the 2D shape
+	// 		for( int line = 0; line < mesh2D.LineCount; line += 2 ) {
+	// 			int lineIndexA = mesh2D.lineIndices[line];
+	// 			int lineIndexB = mesh2D.lineIndices[line+1];
+	// 			int currentA = rootIndex + lineIndexA;
+	// 			int currentB = rootIndex + lineIndexB;
+	// 			int nextA = rootIndexNext + lineIndexA;
+	// 			int nextB = rootIndexNext + lineIndexB;
+	// 			triIndices.Add( currentA );
+	// 			triIndices.Add( nextA );
+	// 			triIndices.Add( nextB );
+	// 			triIndices.Add( currentA );
+	// 			triIndices.Add( nextB );
+	// 			triIndices.Add( currentB );
+	// 		}
+	// 	}
+	// 	return result.ToArray();
+	// }
 }
