@@ -69,6 +69,7 @@ MonoBehaviour:
   initialShieldPowerDepleted: 0
   rampageLifetime: 0
   rampageTimer: 0
+  powerMeter: 
 --- !u!114 &2008426577040755906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee84190f165cfeb4494a2c0f73408125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defense: 
+  offense: 
+  boost: 
+  sfxStop: 0
 --- !u!114 &7879741993452136528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +115,7 @@ MonoBehaviour:
   m_Player:
     m_PlayerID: 0
     m_ControllerID: 1
+    Position: 0
     PlayerCar: {fileID: 0}
   m_Rigidbody: {fileID: 7270525194409094009}
 --- !u!114 &8786595705697023107
