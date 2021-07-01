@@ -21,7 +21,6 @@ public class GameManager : GameSystem
     public static PlayerEvent OnPlayerConnected;
     public static PlayerEvent OnPlayerDisconnected;
 
-
     public void Awake()
     {
         if(Instance == null) Instance = this;
@@ -66,12 +65,22 @@ public class GameManager : GameSystem
 
     public void SubmitRoundWinner(int playerID)
     {
-        m_Players[playerID].RoundWins ++;
+        m_Players[playerID].WinRound();
     }
 
     public void SubmitGameWinner(int playerID)
     {
-        m_Players[playerID].GameWins ++;
+        m_Players[playerID].WinGame();
+    }
+
+    public void SubmitRoundWinner(Player player)
+    {
+        player.WinRound();
+    }
+
+    public void SubmitGameWinner(Player player)
+    {
+        player.WinGame();
     }
 
     private IEnumerator RemovePlayerAtEndOfFrame(Player player)

@@ -20,6 +20,42 @@
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
+[LOG] SoundI::release                          :  (000002117F8F7608)
+[LOG] SoundI::release                          :     Medium Rev (00000211800FD958)
+[LOG] SoundI::release                          :  (000002117F8F8748)
+[LOG] SoundI::release                          :     Boost Rev (00000211800FFEB8)
+[LOG] SoundI::release                          :  (000002117F8F8E78)
+[LOG] SoundI::release                          :     Idle (00000211800FD7B8)
+[LOG] SoundI::release                          :  (000002117F8F8FE8)
+[LOG] SoundI::release                          :     Drift Dirt 2 (00000211800FF018)
+[LOG] SoundI::release                          :  (000002117F8F8468)
+[LOG] SoundI::release                          :     Drift Dirt 1 (00000211800FFB78)
+[LOG] SoundI::release                          :  (000002117F8F8A28)
+[LOG] SoundI::release                          :     Drift slide 2 (00000211800FECD8)
+[LOG] SoundI::release                          :  (000002117F8F78E8)
+[LOG] SoundI::release                          :     Drift end dirt-001 (00000211800FE318)
+[LOG] SoundI::release                          :  (000002117F8F92C8)
+[LOG] SoundI::release                          :     Drift end dirt-002 (00000211800FDFD8)
+[LOG] SoundI::release                          :  (000002117F8FB828)
+[LOG] SoundI::release                          :     Drift end dirt-003 (00000211800FE4B8)
+[LOG] SoundI::release                          :  (000002117F8FBDE8)
+[LOG] SoundI::release                          :     Drift end dirt-004 (00000211800FC778)
+[LOG] SoundI::release                          :  (000002117F8F7778)
+[LOG] SoundI::release                          :     Drift slide 1 (0000021180100058)
+[LOG] SoundI::release                          :  (000002117F8F6638)
+[LOG] SoundI::release                          :     Defence Stop (00000211800FF1B8)
+[LOG] SoundI::release                          :  (000002117F8F7EA8)
+[LOG] SoundI::release                          :     Defence Test (00000211800FC5D8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 

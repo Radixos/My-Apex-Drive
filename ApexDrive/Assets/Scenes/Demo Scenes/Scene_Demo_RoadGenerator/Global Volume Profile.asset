@@ -15,14 +15,14 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   shadows:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: -0.07194245}
   midtones:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0.13669065}
   highlights:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0.09352518}
   shadowsStart:
     m_OverrideState: 1
     m_Value: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
     m_Value: 2
   threshold:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 1
     min: 0
   intensity:
     m_OverrideState: 0
@@ -105,10 +105,10 @@ MonoBehaviour:
   m_Name: Global Volume Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: -497031152269807731}
   - {fileID: 3513654837225688277}
   - {fileID: 7835845116063265143}
   - {fileID: -2318087156212625179}
+  - {fileID: -497031152269807731}
 --- !u!114 &3513654837225688277
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   toeStrength:
     m_OverrideState: 0
     m_Value: 0

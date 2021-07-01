@@ -2,29 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CarInputHandler))]
-[RequireComponent(typeof(CarStats))]
-[RequireComponent(typeof(SphereCarController))]
-public class Abilities : MonoBehaviour
+public class Abilities : CarModule
 {
-    private CarInputHandler carInputHandler;
-    private CarStats carStats;
-
     // MANI'S CODE
-    [Header("Abilities Options")]
-    [SerializeField]
-    [Range(0, 1)]
-    private float powerAmount;
-
-    public GameObject shield;
-    [SerializeField]
-    private bool initialShieldPowerDepleted;
-
-    public GameObject rampage;
-    [SerializeField]
-    private float rampageLifetime;
-    [SerializeField]
-    private float rampageTimer;
 
     //FMOD Stuff
     FMOD.Studio.EventInstance ability;
@@ -37,17 +17,6 @@ public class Abilities : MonoBehaviour
 
     private void Start()
     {
-        carInputHandler = GetComponent<CarInputHandler>();
-        carStats = GetComponent<CarStats>();
-
-        //Abilities Initialisation
-        powerAmount = 1.0f; // TEMPORARY
-
-        initialShieldPowerDepleted = false;
-
-        rampageLifetime = 4.0f;
-        rampageTimer = rampageLifetime;
-
         ability = FMODUnity.RuntimeManager.CreateInstance("event:/HUD/Abilities/defensive");
 
         onOff = FMODUnity.RuntimeManager.GetEventDescription("event:/HUD/Abilities/defensive");
@@ -59,71 +28,100 @@ public class Abilities : MonoBehaviour
     private void Update()
     {
         AbilityLogic();
-        if(powerAmount < 0)
+        if (Stats.PowerAmount < 0)
         {
-            powerAmount = 0;
+            Stats.PowerAmount = 0;
         }
     }
 
+    /// <summary>
+    /// Handles ability inputs
+    /// </summary>
     void AbilityLogic()
     {
         // Two abilities that stay active as
         // long as 
-        shield.SetActive(false);
-        carStats.CurrentBoostMultiplier = 1;
+        if(!Stats.InitialShieldPowerDepleted)
+        Stats.Shield.SetActive(false);
 
-        if (Input.GetButtonUp(carInputHandler.PowerAInput))
-            initialShieldPowerDepleted = false;
+        Stats.CurrentBoostMultiplier = 1;
 
-        // Active time of rampage
-        if (rampage.activeSelf)
+        if (Input.GetButtonUp(PlayerInput.PowerAInput))
+            Stats.InitialShieldPowerDepleted = false;
+
+        // Active time of Stats.Rampage
+        if (Stats.Rampage.activeSelf)
         {
-            if (rampageTimer >= rampageLifetime)
-                rampage.SetActive(false);
+            if (Stats.RampageTimer >= Stats.RampageLifetime)
+                Stats.Rampage.SetActive(false);
             else
-                rampageTimer += Time.deltaTime;
+                Stats.RampageTimer += Time.deltaTime;
         }
 
-        if (powerAmount > 0)
+        if (Stats.PowerAmount > 0)
         {
             // Activate one ability at a times
             // Shield power up
-            if (Input.GetButton(carInputHandler.PowerAInput) &&
-                rampage.activeSelf == false //&& powerAmount >= 0.3f
+            if (Input.GetButton(PlayerInput.PowerAInput) &&
+                Stats.Rampage.activeSelf == false //&& Stats.PowerAmount >= 0.3f
                 )
             {
-                if(!initialShieldPowerDepleted)
+                if (!Stats.InitialShieldPowerDepleted)
                 {
-                    powerAmount -= 0.25f;
-                    initialShieldPowerDepleted = true;
+                    Stats.PowerAmount -= 0.25f;
+                    Stats.InitialShieldPowerDepleted = true;
+                    Stats.Shield.SetActive(true);
                 }
-                
-                shield.SetActive(true);
+
                 ability.getPlaybackState(out pbs);
                 if (pbs != FMOD.Studio.PLAYBACK_STATE.PLAYING)
                 {
                     ability.start();
                 }
-                powerAmount -= Time.deltaTime * 0.5f;
+                Stats.PowerAmount -= Time.deltaTime * 0.5f;
             }
             // Attack power up
-            else if (Input.GetButtonDown(carInputHandler.PowerBInput) &&
-                powerAmount >= 0.5f &&
-                shield.activeSelf == false &&
-                rampage.activeSelf == false)
+            else if (Input.GetButtonDown(PlayerInput.PowerBInput) &&
+                Stats.PowerAmount >= 0.5f &&
+                Stats.Shield.activeSelf == false &&
+                Stats.Rampage.activeSelf == false)
             {
-                rampage.SetActive(true);
-                rampageTimer = 0.0f;
-                powerAmount -= 0.5f;
+                Stats.Rampage.SetActive(true);
+                Stats.RampageTimer = 0.0f;
+                Stats.PowerAmount -= 0.5f;
             }
             // Boost power up
             // Hold or tap?
-            else if (Input.GetButton(carInputHandler.BoostInput)) //&& powerAmount >= 0.3f)
+            else if (Input.GetButton(PlayerInput.BoostInput)) //&& Stats.PowerAmount >= 0.3f)
             {
-                carStats.CurrentBoostMultiplier = carStats.BoostMultiplier;
-                powerAmount -= Time.deltaTime * 0.4f;
+                Stats.CurrentBoostMultiplier = Stats.BoostMultiplier;
+                Stats.PowerAmount -= Time.deltaTime * 0.4f;
             }
         }
     }
-}
 
+    /// <summary>
+    /// When colliding with a car with an ability active...
+    /// </summary>
+    /// <param name="collision"></param>
+    //private void OnCollisionEnter(Collision collision)
+    //{
+
+    //    // Only check collision if the car has activated rampage
+    //    if (collision.gameObject.CompareTag("Player") && Stats.Rampage.activeSelf)
+    //    {
+    //        Vector3 normal = collision.contacts[0].normal;
+            
+    //        CoreCarModule otherCar = collision.gameObject.GetComponent<CoreCarModule>();
+
+    //        if (otherCar != null && otherCar.Stats.Shield.activeSelf)
+    //        {
+    //            Controller.Impact(100, normal, 0.75f);
+    //        }
+    //        else
+    //        {
+    //            otherCar.Controller.Impact(100, -normal, 0.75f);
+    //        }
+    //    }
+    //}
+}

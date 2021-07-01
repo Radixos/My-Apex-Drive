@@ -4,18 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarStats : MonoBehaviour
+public class CarStats : CarModule
 {
-    public CarAttributes carAttributes;
+    [Header("Car Components")]
     [SerializeField]
-    private Rigidbody sphereCollider;
+    private CarAttributes carAttributes;
+    [SerializeField]
+    private GameObject shield;
+    [SerializeField]
+    private GameObject rampage;
 
-    [Header("Car State")]
+    [Header("Car States")]
     [SerializeField]
     private bool inAir;
     [SerializeField]
     [Tooltip("0 = In Air, 1 = Road, 2 = Offroad")]
     private int surface;
+    [SerializeField]
+    private bool canDrive;
+    [SerializeField]
+    private float stunDuration;
 
     [Header("Drifting Options")]
     [SerializeField]
@@ -57,8 +65,26 @@ public class CarStats : MonoBehaviour
     [SerializeField]
     private float maxSpeed;
 
+    [Header("Ability Options")]
+    [SerializeField]
+    [Range(0, 1)]
+    private float powerAmount;
+    [SerializeField]
+    private bool initialShieldPowerDepleted;
+    [SerializeField]
+    private float rampageLifetime;
+    [SerializeField]
+    private float rampageTimer;
+
+    // Getters and Setters :)
+    // Car States
     public bool InAir { get => inAir; set => inAir = value; }
     public bool IsDrifting { get => isDrifting; set => isDrifting = value; }
+    public int Surface { get => surface; set => surface = value; }
+    public bool CanDrive { get => canDrive; set => canDrive = value; }
+    public float StunDuration { get => stunDuration; set => stunDuration = value; }
+
+    // Car Stats
     public float DriftSpeedThresholdPercent { get => driftSpeedThresholdPercent; set => driftSpeedThresholdPercent = value; }
     public float DriftSideBoostMultiplier { get => driftSideBoostMultiplier; set => driftSideBoostMultiplier = value; }
     public float CurrentBoostMultiplier { get => currentBoostMultiplier; set => currentBoostMultiplier = value; }
@@ -72,15 +98,23 @@ public class CarStats : MonoBehaviour
     public float DriftingAcceleration { get => driftingAcceleration; set => driftingAcceleration = value; }
     public float CurrSpeed { get => currSpeed; set => currSpeed = value; }
     public float MaxSpeed { get => maxSpeed; set => maxSpeed = value; }
-    public Rigidbody SphereCollider { get => sphereCollider; set => sphereCollider = value; }
-    public CarAttributes CarAttributes { get => carAttributes; set => carAttributes = value; }
-    public int Surface { get => surface; set => surface = value; }
     public float OffroadMultiplier { get => offroadMultiplier; set => offroadMultiplier = value; }
     public float CurrentSurfaceMultiplier { get => currentSurfaceMultiplier; set => currentSurfaceMultiplier = value; }
 
+    // Car Components
+    public CarAttributes CarAttributes { get => carAttributes; set => carAttributes = value; }
+    public GameObject Shield { get => shield; set => shield = value; }
+    public GameObject Rampage { get => rampage; set => rampage = value; }
+
+    // Ability Options
+    public float PowerAmount { get => powerAmount; set => powerAmount = value; }
+    public bool InitialShieldPowerDepleted { get => initialShieldPowerDepleted; set => initialShieldPowerDepleted = value; }
+    public float RampageLifetime { get => rampageLifetime; set => rampageLifetime = value; }
+    public float RampageTimer { get => rampageTimer; set => rampageTimer = value; }
+
     void Start()
     {
-        //Assign car attributes
+        // Assign car attributes
         DriftSpeedThresholdPercent = CarAttributes.driftSpeedThresholdPercent;
         DriftSideBoostMultiplier = CarAttributes.driftSideBoostMultiplier;
         BoostMultiplier = CarAttributes.boostMultiplier;
@@ -94,20 +128,25 @@ public class CarStats : MonoBehaviour
         Acceleration = CarAttributes.acceleration;
 
         OffroadMultiplier = CarAttributes.offroadMultiplier;
+
+        // Abilities initialisation
+        PowerAmount = 1.0f; // TEMPORARY
+
+        InitialShieldPowerDepleted = false;
+
+        RampageLifetime = 4.0f;
+        RampageTimer = RampageLifetime;
     }
 
     private void Update()
     {
-        //Follow Collider
-        //transform.position = SphereCollider.position - new Vector3(0, -0.5f, 0);
-
         if (!inAir)
         {
-            SphereCollider.drag = CarAttributes.drag;
+            Rigidbody.drag = CarAttributes.drag;
         }
         else
         {
-            SphereCollider.drag = 0.05f;
+            Rigidbody.drag = 0.05f;
         }
     }
 }
