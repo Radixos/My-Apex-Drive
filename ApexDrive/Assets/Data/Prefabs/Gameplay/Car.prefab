@@ -1678,6 +1678,7 @@ GameObject:
   - component: {fileID: 5323998243442652426}
   - component: {fileID: 5323998243442652421}
   - component: {fileID: 5323998243442652420}
+  - component: {fileID: 2802525283631715713}
   m_Layer: 2
   m_Name: Car
   m_TagString: PlayerTuk
@@ -1857,6 +1858,20 @@ MonoBehaviour:
   vertical: 0
   initialDriftDirectionRight: 0
   sideBoostRamp: 0
+--- !u!114 &2802525283631715713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5323998243442652423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a423a200df8204bb73b49336444fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carStats: {fileID: 0}
+  sphereCarController: {fileID: 0}
 --- !u!1 &5613556434436658793
 GameObject:
   m_ObjectHideFlags: 0
