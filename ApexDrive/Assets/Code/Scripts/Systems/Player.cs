@@ -14,7 +14,6 @@ public class Player
     public int RoundWins { get; private set; }
     public int GameWins { get; private set; }
     public string Name { get; private set; }
-    public int Position;
 
     public CoreCarModule Car;
 

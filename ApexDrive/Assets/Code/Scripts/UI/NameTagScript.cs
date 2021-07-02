@@ -17,10 +17,6 @@ public class NameTagScript : MonoBehaviour
     //9.65f, -1.5f, 0.0f for Rad's scene
     //0.0f, 1.5f, 7.5f for LD-Old Scene
 
-    private void OnEnable()
-    {
-        RaceManager.OnRaceSceneLoaded += AssignPlayers;
-    }
 
     void Start()
     {
@@ -45,11 +41,6 @@ public class NameTagScript : MonoBehaviour
             nameTags[i] = tempAddText;
 
         }
-    }
-
-    private void AssignPlayers(Player[] players)
-    {
-
     }
 
     void Update()

@@ -64,12 +64,14 @@ MonoBehaviour:
   mesh2D: {fileID: 11400000, guid: c7f145972bfc1cc44b6ac516778881d5, type: 2}
   loop: 0
   edgeLoopsPerMeter: 1
-  ColliderEdgeLoopsPerMeter: 2
+  ColliderEdgeLoopsPerMeter: 1
   GenerateColliders: 1
   uvMode: 2
   Segments:
   - {fileID: 9141520874342984930}
   - {fileID: 230548017767276531}
+  TotalTrackLength: 0
+  SegmentLengths: []
 --- !u!64 &4551304888203622857
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -252,7 +254,12 @@ PrefabInstance:
     - target: {fileID: 802082952335568159, guid: f7b5af17c04006c45bf72616d1016e3c,
         type: 3}
       propertyPath: ownerID
-      value: 49402
+      value: 55304
+      objectReference: {fileID: 0}
+    - target: {fileID: 802082952335568159, guid: f7b5af17c04006c45bf72616d1016e3c,
+        type: 3}
+      propertyPath: ArcLength
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1751253242513910326, guid: f7b5af17c04006c45bf72616d1016e3c,
         type: 3}
@@ -260,6 +267,11 @@ PrefabInstance:
       value: Control Point
       objectReference: {fileID: 0}
     - target: {fileID: 2529981497757850283, guid: f7b5af17c04006c45bf72616d1016e3c,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6670938987603211087, guid: f7b5af17c04006c45bf72616d1016e3c,
         type: 3}
       propertyPath: m_Mesh
       value: 
