@@ -789,6 +789,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &75409940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5326399234784757212, guid: 1c3a1c7061e820e40b357b0ab802b406,
+    type: 3}
+  m_PrefabInstance: {fileID: 1006431941}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd6b6b78ff3c1644a59cb0f7d62cb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &95769543
 Mesh:
   m_ObjectHideFlags: 0
@@ -1467,6 +1479,18 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &301315369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6910713540244531695, guid: 1dd1995881902e842863d46047162eed,
+    type: 3}
+  m_PrefabInstance: {fileID: 35216628}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8571d2a43c279a4f941f20c51c4d6c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &301454286
 Mesh:
   m_ObjectHideFlags: 0
@@ -4148,7 +4172,7 @@ PrefabInstance:
     - target: {fileID: 5326399234784757208, guid: 1c3a1c7061e820e40b357b0ab802b406,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5326399234784757209, guid: 1c3a1c7061e820e40b357b0ab802b406,
         type: 3}
@@ -4236,6 +4260,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5323998243442652421, guid: 1dd1995881902e842863d46047162eed,
         type: 3}
+    - target: {fileID: 5326399234784757212, guid: 1c3a1c7061e820e40b357b0ab802b406,
+        type: 3}
+      propertyPath: raceCars.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5326399234784757212, guid: 1c3a1c7061e820e40b357b0ab802b406,
+        type: 3}
+      propertyPath: raceCars.Array.data[0]
+      value: 
+      objectReference: {fileID: 1548342448}
+    - target: {fileID: 5326399234784757212, guid: 1c3a1c7061e820e40b357b0ab802b406,
+        type: 3}
+      propertyPath: raceCars.Array.data[1]
+      value: 
+      objectReference: {fileID: 301315369}
     - target: {fileID: 5326399234784757212, guid: 1c3a1c7061e820e40b357b0ab802b406,
         type: 3}
       propertyPath: m_DebugPlayersToInstantiate
@@ -5578,6 +5617,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1548342448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6910713540244531695, guid: 1dd1995881902e842863d46047162eed,
+    type: 3}
+  m_PrefabInstance: {fileID: 600799811}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8571d2a43c279a4f941f20c51c4d6c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1573912685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5800,6 +5851,7 @@ GameObject:
   - component: {fileID: 1662083241}
   - component: {fileID: 1662083240}
   - component: {fileID: 1662083239}
+  - component: {fileID: 1662083244}
   m_Layer: 5
   m_Name: Game HUD
   m_TagString: Untagged
@@ -5905,6 +5957,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1662083244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662083238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffa739300d0035488c0f0b272f95d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barCollection: {fileID: 882104287}
+  vehicleManager: {fileID: 75409940}
 --- !u!1 &1699129229
 GameObject:
   m_ObjectHideFlags: 0
