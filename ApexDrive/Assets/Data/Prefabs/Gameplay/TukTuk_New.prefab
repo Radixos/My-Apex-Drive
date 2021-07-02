@@ -110,7 +110,10 @@ MonoBehaviour:
   m_Player:
     m_PlayerID: 0
     m_ControllerID: 1
-    PlayerCar: {fileID: 0}
+    Car: {fileID: 0}
+    TrackProgress: 0
+    Position: 0
+    Laps: 0
   m_Rigidbody: {fileID: 7270525194409094009}
 --- !u!114 &8786595705697023107
 MonoBehaviour:

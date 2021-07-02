@@ -11,12 +11,17 @@ public class TestRoadChainNearestPoint : MonoBehaviour
 
     [SerializeField] private int m_Itterations;
 
+    private enum NearestPointQualifier {Time, Position}
+    [SerializeField] private NearestPointQualifier Qualifier;
+
     private void Update()
     {
+        if(m_Track == null) return;
+        
         m_Itterations = m_Depth * m_Precision;
-        m_Track.GetNearestTimeOnSpline(transform.position, m_Precision, m_Depth);
-        // Debug.DrawLine(transform.position, m_Track.GetNearestPositionOnSpline(transform.position, m_Precision, m_Depth), Color.red);
-        // Debug.DrawLine(transform.position, m_Track.Evaluate(m_Track.GetNearestTimeOnSpline(transform.position, m_Precision, m_Depth)).pos, Color.green);
-        // if(m_Track != null) Debug.DrawLine(transform.position, m_Track.GetNearestPositionOnSpline(transform.position, 10, 5));
+        Vector3 point = Vector3.zero;
+        if(Qualifier == NearestPointQualifier.Time) point = m_Track.Evaluate(m_Track.GetNearestTimeOnSpline(transform.position, m_Precision, m_Depth)).pos;
+        else if (Qualifier == NearestPointQualifier.Position) point = m_Track.GetNearestPositionOnSpline(transform.position, m_Precision, m_Depth);
+        Debug.DrawLine(transform.position, point, Color.red);
     }
 }

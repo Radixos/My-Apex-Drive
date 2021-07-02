@@ -204,18 +204,6 @@ public class RoadSegment : MonoBehaviour {
 		);
 	}
 
-	public Vector3 GetClosestPoint(Vector3 point, int steps)
-	{
-		steps -= 1;
-		Vector3 result = Vector3.zero;
-		OrientedCubicBezier3D bezier = GetBezierRepresentation(Space.World);
-		for(int i = 0; i <= steps; i++)
-		{
-			Debug.DrawLine(bezier.GetPoint((float)i / (float)steps), point, Color.red);
-		}
-		return result;
-	}
-
 	public OrientedPoint Evaluate(float t, Space space)
 	{
 		return GetBezierRepresentation(space).GetOrientedPoint(t);
@@ -230,6 +218,11 @@ public class RoadSegment : MonoBehaviour {
 			return space == Space.World ? wUp : transform.InverseTransformVector( wUp );
 		}
 		return default;
+	}
+
+	public float GetClosestTimeToPoint(Vector3 point,  Space space, int steps, int depth)
+	{
+		return GetBezierRepresentation(space).GetClosestTimeToPoint(point, steps, depth);
 	}
 
 }

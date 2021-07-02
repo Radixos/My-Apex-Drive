@@ -27,6 +27,9 @@ public class CoreCarModule : CarModule
     private GameplayInput m_Input;
     public override GameplayInput PlayerInput { get { return m_Input; } }
 
+    public Vector3 Position { get { return transform.position; } }
+    public Quaternion Rotation { get { return transform.rotation; } }
+
     protected override void Awake()
     {
         base.Awake();
