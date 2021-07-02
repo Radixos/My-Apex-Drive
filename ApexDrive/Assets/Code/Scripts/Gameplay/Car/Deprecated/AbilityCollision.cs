@@ -7,6 +7,17 @@ public class AbilityCollision : MonoBehaviour
     public CarStats carStats;
     public CarController sphereCarController;
 
+    private void Start()
+    {
+        // If the variables are not manually set, then they are
+        // attached to this GameObject
+        if(carStats == null || sphereCarController == null)
+        {
+            carStats = GetComponent<CarStats>();
+            sphereCarController = GetComponent<CarController>();
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
 

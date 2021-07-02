@@ -71,8 +71,9 @@ public class ResetTrackScript : MonoBehaviour
     {
         if (currentCar.winner == true && setResetState == false)
         {
+            //currentCar.gameObject.transform.parent.GetChild(1).GetComponent<CoreCarModule>().GetComponent<CarController>().enabled = false;
             setResetState = true;
-            playerWins[i] = playerWins[i]+1;
+            playerWins[i] = playerWins[i] + 1;
             firstPlay = false;
         }
     }
