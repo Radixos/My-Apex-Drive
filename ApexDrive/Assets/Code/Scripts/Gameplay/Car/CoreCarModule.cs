@@ -30,6 +30,8 @@ public class CoreCarModule : CarModule
     public Vector3 Position { get { return transform.position; } }
     public Quaternion Rotation { get { return transform.rotation; } }
 
+    [HideInInspector] public Checkpoint LastCheckpoint;
+
     protected override void Awake()
     {
         base.Awake();

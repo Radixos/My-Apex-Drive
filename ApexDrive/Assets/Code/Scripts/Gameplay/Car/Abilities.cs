@@ -134,28 +134,24 @@ public class Abilities : CarModule
        
     }
 
-    /// <summary>
-    /// When colliding with a car with an ability active...
-    /// </summary>
-    /// <param name="collision"></param>
-    //private void OnCollisionEnter(Collision collision)
-    //{
+    private void OnCollisionEnter(Collision collision)
+    {
 
-    //    // Only check collision if the car has activated rampage
-    //    if (collision.gameObject.CompareTag("Player") && Stats.Rampage.activeSelf)
-    //    {
-    //        Vector3 normal = collision.contacts[0].normal;
-            
-    //        CoreCarModule otherCar = collision.gameObject.GetComponent<CoreCarModule>();
+        // Only check collision if the car has activated rampage
+        if (collision.gameObject.CompareTag("PlayerTuk") && Stats.Rampage.activeSelf)
+        {
+            Vector3 normal = collision.contacts[0].normal;
 
-    //        if (otherCar != null && otherCar.Stats.Shield.activeSelf)
-    //        {
-    //            Controller.Impact(100, normal, 0.75f);
-    //        }
-    //        else
-    //        {
-    //            otherCar.Controller.Impact(100, -normal, 0.75f);
-    //        }
-    //    }
-    //}
+            // if (collision.gameObject.GetComponent<AbilityCollision>().Stats.Shield.activeSelf)
+            // {
+            //     Controller.Impact(200, normal, 0.75f);
+            // }
+            // else
+            // {
+                // collision.gameObject.GetComponent<AbilityCollision>().sphereCarController.Impact(200, -normal, 0.75f);
+            // }
+
+        }
+
+    }
 }

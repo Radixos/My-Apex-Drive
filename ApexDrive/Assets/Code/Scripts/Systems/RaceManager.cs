@@ -9,8 +9,8 @@ public class RaceManager : Singleton<RaceManager>
     public static RaceState State;
 
     public RoadChain ActiveTrack;
-    [SerializeField] private CoreCarModule m_CarPrefab;
-    public float m_TrackProgress = 0.0f;
+    [SerializeField] private CoreCarModule[] m_CarPrefabs;
+    public float m_TrackProgress = 0.01f;
     public Player FirstPlayer
     {
         get 
@@ -65,8 +65,8 @@ public class RaceManager : Singleton<RaceManager>
         {
             OrientedPoint op = ActiveTrack.Evaluate(m_TrackProgress);
             Vector3 offset = Vector3.left * (players.Length - i) * 1.5f + Vector3.right * players.Length / 2.0f * 1.5f;
-            Vector3 spawnPoint = op.pos + op.rot * offset + Vector3.up;
-            CoreCarModule car = Instantiate(m_CarPrefab, spawnPoint, op.rot);
+            Vector3 spawnPoint = op.pos + op.rot * offset + Vector3.up * 1.05f;
+            CoreCarModule car = Instantiate(m_CarPrefabs[players[i].PlayerID], spawnPoint, op.rot);
             car.Stats.CanDrive = false;
             if(players[i].ControllerID <= 0 || players[i].ControllerID >= 4) players[i].AssignController(i+1); // this shouldn't be the case except for debugging in the race scene
             car.SetPlayer(players[i]);
@@ -103,11 +103,33 @@ public class RaceManager : Singleton<RaceManager>
         }
 
         Player[] players = GameManager.Instance.ConnectedPlayers;
-        Array.Sort(players, (x,y) => y.TrackProgress.CompareTo(x.TrackProgress));
+        Array.Sort(players, (x,y) => 
+        {
+            if(x.Laps.CompareTo(y.Laps) != 0) return x.Laps.CompareTo(y.Laps);
+            return y.TrackProgress.CompareTo(x.TrackProgress);
+        });
 
         for(int i = 0; i < players.Length; i++)
         {
             players[i].Position = i + 1;
         }
+    }
+
+    [ContextMenu("Spawn Test Car")]
+	private void SpawnTestCar()
+	{
+        if(GameManager.Instance.PlayerCount >= 4) return;
+		Player player  = GameManager.Instance.AddPlayer(GameManager.Instance.PlayerCount + 1);
+	}
+
+    public void SpawnPlayer(Player player, bool canDrive = false)
+    {
+        OrientedPoint op = ActiveTrack.Evaluate(m_TrackProgress);
+        Vector3 spawnPoint = op.pos + Vector3.up * 1.05f;
+        CoreCarModule car = Instantiate(m_CarPrefabs[player.PlayerID], spawnPoint, op.rot);
+        car.Stats.CanDrive = canDrive;
+        if(player.ControllerID < 0 || player.ControllerID >= 4) player.AssignController(1); // this shouldn't be the case except for debugging in the race scene
+        car.SetPlayer(player);
+        player.Car = car;
     }
 }
