@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: 024f5477c64da214aae44092a2f55323
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Light_M
+    second: {fileID: 474907612712217631, guid: c92072792fad4e44ba60e906b105e962, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Light_M1
+    second: {fileID: 2983311910838779275, guid: c92072792fad4e44ba60e906b105e962,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Seat_M
+    second: {fileID: 2100000, guid: 6d46a24af9232754f936b1fec216912e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Wheel_Container_L_M
+    second: {fileID: 2100000, guid: dfc2912f45a78244b8bf830147cd0c9c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Wheel_Container_R_M
+    second: {fileID: 2100000, guid: 61c2ec5308d31ae4b9ac509c684a3709, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Wheel_Cylinder1_M
+    second: {fileID: 2100000, guid: 04834455e3a8fd145b0d2391e28155d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Wheel_Cylinder_M
+    second: {fileID: 2100000, guid: ecb7bab68f5aeef4abf2ed383d625872, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Wheel_Cylinder_R_M
+    second: {fileID: 2100000, guid: 61c2ec5308d31ae4b9ac509c684a3709, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Wheel_Guard_L_M
+    second: {fileID: 2100000, guid: 27e44bbd9415c6e42a9a0a86e2d638da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Wheel_L_M
+    second: {fileID: 2100000, guid: 09d670611b21fc047968018942856663, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back_Wheel_R_M
+    second: {fileID: 2100000, guid: 0a8600f73b86e524f9922361bb773fc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_Back_M
+    second: {fileID: 2100000, guid: 323dfb20bdeefc64d88de2a6c29c7225, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Center_Pole_1_M
+    second: {fileID: 2100000, guid: 2517e7a82e2a0ad4fa62786d0ad9ed3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Center_Pole_2_M
+    second: {fileID: 2100000, guid: e935633b554868f418b65d70cd11e6e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Center_Pole_3_M
+    second: {fileID: 2100000, guid: 62248ce401f194f49a3b350ad8b061c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Center_Pole_4_M
+    second: {fileID: 2100000, guid: 63a245e8674ffb94592ae8f5eddde220, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_Light_L_M
+    second: {fileID: 2100000, guid: f17ad9226c3b929479f7af8096f9730b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_Light_R_M
+    second: {fileID: -8025786805676256390, guid: c92072792fad4e44ba60e906b105e962,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_Seat_M
+    second: {fileID: 2100000, guid: 2a45c1f5b615e4144aee1d09272bd9c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_Section_M
+    second: {fileID: 2100000, guid: 40925cb62911e0c468e08f1cebadf98f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_Wheel_Connector_M
+    second: {fileID: 2100000, guid: a373e9f5eecb9284ba9a5af2bc0fa5bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_Wheel_Container_M
+    second: {fileID: 2100000, guid: 3042eabf2a92a484980f1e8b1ccc037c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_Wheel_Cylinder_M
+    second: {fileID: 2100000, guid: ecb7bab68f5aeef4abf2ed383d625872, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_Wheel_Guard_M
+    second: {fileID: 2100000, guid: e3aa4ef6e01fc724a8a54a616887e128, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front_Wheel_M
+    second: {fileID: 2100000, guid: 9ebf96cec086fe145a65437d62197aad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Middle_Seat_Panel_M
+    second: {fileID: 2100000, guid: 7f6590890124dcd4cafc7c4a4a1bed06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Steering_Wheel_M
+    second: {fileID: 2100000, guid: 976d3b7ad915b6d449bfc44abf30b380, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Top_Hood_M
+    second: {fileID: 2100000, guid: 422fae42369997247aae8eb16519413a, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.02
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.02
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

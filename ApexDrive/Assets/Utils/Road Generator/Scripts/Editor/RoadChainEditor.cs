@@ -38,6 +38,8 @@ public class RoadChainEditor : Editor
     private Quaternion m_OriginalCameraOrientation;
     private bool m_OriginalCameraOrthographicProjection;
 
+    private bool m_ViewStats = false;
+
     private void Awake()
     {
         m_RoadChain = (RoadChain) target;
@@ -185,7 +187,7 @@ public class RoadChainEditor : Editor
 
         if(GUILayout.Button("Generate Mesh"))
         {
-            m_RoadChain.UpdateMeshes();
+            UpdateMeshes();
         }
         GUILayout.BeginVertical("Box");
         GUILayout.Label(
@@ -197,7 +199,24 @@ public class RoadChainEditor : Editor
         }
 
         GUILayout.EndVertical();
-        if(initialEdgeLoopCount != m_RoadChain.edgeLoopsPerMeter || (initialColliderEdgeLoopCount != m_RoadChain.ColliderEdgeLoopsPerMeter && m_RoadChain.GenerateColliders ) || m_RoadChain.loop != wasLooped) m_RoadChain.UpdateMeshes();
+
+        EditorGUILayout.BeginFoldoutHeaderGroup(m_ViewStats, "Extra Info");
+        EditorGUI.BeginDisabledGroup(true);
+        EditorGUILayout.FloatField(m_RoadChain.TotalTrackLength);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("SegmentLengths"));
+        foreach(RoadSegment segment in m_RoadChain.Segments) EditorGUILayout.FloatField(segment.DistanceOnTrackBeforeCurrentSegment);
+        EditorGUI.EndDisabledGroup();
+
+        EditorGUILayout.EndFoldoutHeaderGroup();
+        if(initialEdgeLoopCount != m_RoadChain.edgeLoopsPerMeter || (initialColliderEdgeLoopCount != m_RoadChain.ColliderEdgeLoopsPerMeter && m_RoadChain.GenerateColliders ) || m_RoadChain.loop != wasLooped) UpdateMeshes();
+        
+    }
+
+    private void UpdateMeshes()
+    {
+        m_RoadChain.UpdateMeshes();
+        EditorUtility.SetDirty(m_RoadChain);
+        foreach(RoadSegment segment in m_RoadChain.Segments) EditorUtility.SetDirty(segment);
     }
 
     private void DrawRoadHandles()
@@ -357,7 +376,7 @@ public class RoadChainEditor : Editor
                         g.transform.SetParent(m_RoadChain.transform);
                         if(m_AddToEnd) g.transform.SetAsLastSibling();
                         else g.transform.SetAsFirstSibling();
-                        m_RoadChain.UpdateMeshes();
+                        UpdateMeshes();
                     }
                     
                 }
@@ -379,7 +398,7 @@ public class RoadChainEditor : Editor
                         {
                             DestroyImmediate(nearestSegment.gameObject);
                         }
-                        m_RoadChain.UpdateMeshes();
+                        UpdateMeshes();
                     }
                 }
                 break;
@@ -407,7 +426,7 @@ public class RoadChainEditor : Editor
                     {
                         Vector3 startingPos = m_SelectedSegment.transform.position;
                         m_SelectedSegment.transform.position = Handles.PositionHandle(m_SelectedSegment.transform.position, Quaternion.identity);
-                        if(m_SelectedSegment.transform.position != startingPos) m_RoadChain.UpdateMeshes();
+                        if(m_SelectedSegment.transform.position != startingPos) UpdateMeshes();
                     }
                     if(nearestSegment != m_SelectedSegment && Vector2.Distance(nearestScreenSpacePoint, screenSpaceMousePosition) < 100.0f)
                     {
@@ -429,7 +448,7 @@ public class RoadChainEditor : Editor
                     {
                         Quaternion startRot = m_SelectedSegment.transform.rotation;
                         m_SelectedSegment.transform.rotation = Handles.RotationHandle(m_SelectedSegment.transform.rotation, m_SelectedSegment.transform.position);
-                        if(startRot != m_SelectedSegment.transform.rotation) m_RoadChain.UpdateMeshes();
+                        if(startRot != m_SelectedSegment.transform.rotation) UpdateMeshes();
                     }
                     if(nearestSegment != m_SelectedSegment && Vector2.Distance(nearestScreenSpacePoint, screenSpaceMousePosition) < 100.0f)
                     {
@@ -473,7 +492,7 @@ public class RoadChainEditor : Editor
                     // If any of the two were changed, assign the new distance to the tangent length!
                     if( changedFrw || changedBack ) {
                         m_SelectedSegment.tangentLength = newDistance;
-                        m_RoadChain.UpdateMeshes();
+                        UpdateMeshes();
                     }
                 }
                 break;

@@ -2944,6 +2944,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Car
       objectReference: {fileID: 0}
+    - target: {fileID: 5323998243442652427, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: powerMeter
+      value: Filling
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323998243442652427, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: powerAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dd1995881902e842863d46047162eed, type: 3}
 --- !u!114 &600799812 stripped

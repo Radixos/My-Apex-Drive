@@ -119,18 +119,24 @@ public class RoadChain : MonoBehaviour {
 				nearest = segment;
 			} 
 		}
+		RoadSegment previous = nearest.TryGetPreviousSegment();
 
 		// THIS COULD BE CLEANED UP
 		float t1 = nearest.GetBezierRepresentation(Space.World).GetClosestTimeToPoint(point, steps, depth);
-		RoadSegment previous = nearest.TryGetPreviousSegment();
 		float t2 = float.MaxValue;
 		if(previous != null) t2 = previous.GetBezierRepresentation(Space.World).GetClosestTimeToPoint(point, steps, depth);
 
 		Vector3 p1 = nearest.GetBezierRepresentation(Space.World).GetPoint(t1);
 		Vector3 p2 = previous.GetBezierRepresentation(Space.World).GetPoint(t2);
+		
+		t1 *= nearest.ArcLength;
+		t2 *= previous.ArcLength;
 
-		t1 = ((t1 * nearest.ArcLength) + nearest.DistanceOnTrackBeforeCurrentSegment) / TotalTrackLength;
-		t2 = ((t2 * previous.ArcLength) + previous.DistanceOnTrackBeforeCurrentSegment) / TotalTrackLength;
+		t1 += nearest.DistanceOnTrackBeforeCurrentSegment;
+		t2 += previous.DistanceOnTrackBeforeCurrentSegment;
+
+		t1 /= TotalTrackLength;
+		t2 /= TotalTrackLength;
 
 		if(Vector3.Distance(p1, point) < Vector3.Distance(p2, point)) return t1;
 		else return t2;

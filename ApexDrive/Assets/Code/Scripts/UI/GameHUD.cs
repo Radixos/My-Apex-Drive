@@ -19,17 +19,17 @@ public class GameHUD : MonoBehaviour
         RaceManager.PreRoundStart -= Countdown;
     }
 
-    private void FadeInScene(Player[] players)
+    private void FadeInScene()
     {
         m_FaderAnimator.SetTrigger("FadeIn");
     }
 
-    private void FadeOutScene(Player[] players)
+    private void FadeOutScene()
     {
         m_FaderAnimator.SetTrigger("FadeOut");
     }
 
-    private void Countdown(Player[] players)
+    private void Countdown()
     {
         m_TimerAnimator.SetTrigger("Countdown");
     }

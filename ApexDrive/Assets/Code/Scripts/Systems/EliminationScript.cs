@@ -32,10 +32,13 @@ public class EliminationScript : MonoBehaviour
             WinnerCheck(currentCar);
         }
 
-        Debug.Log("Player 1 has won " + GameManager.Instance.Players[0].RoundWins + " rounds and " 
-            + GameManager.Instance.Players[0].GameWins + " games");
-        Debug.Log("Player 2 has won " + GameManager.Instance.Players[1].RoundWins + " rounds and "
-            + GameManager.Instance.Players[1].GameWins + " games");
+        // Alec
+        // ! Commented this out because it causes errors when testing with less than 2 players
+
+        // Debug.Log("Player 1 has won " + GameManager.Instance.Players[0].RoundWins + " rounds and " 
+        //     + GameManager.Instance.Players[0].GameWins + " games");
+        // Debug.Log("Player 2 has won " + GameManager.Instance.Players[1].RoundWins + " rounds and "
+        //     + GameManager.Instance.Players[1].GameWins + " games");
     }
 
     private void EliminationProcess(PositionUpdate currentCar, bool boundaryCheck)

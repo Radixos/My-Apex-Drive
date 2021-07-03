@@ -12,7 +12,7 @@ public class PositionUpdate : MonoBehaviour
 
     private RaceManager raceManager;
 
-    public GameObject distanceCollider;
+    public Transform distanceCollider;
 
     public float distanceFromCollider;
 
@@ -20,13 +20,16 @@ public class PositionUpdate : MonoBehaviour
     void Start()
     {
         raceManager = FindObjectOfType<RaceManager>();
+
+        distanceFromCollider = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (distanceCollider != null)
-            distanceFromCollider = Vector3.Distance(transform.position, distanceCollider.transform.position);
+            distanceFromCollider = Vector3.Distance(transform.position,
+                new Vector3(distanceCollider.position.x, transform.position.y, distanceCollider.position.z));
     }
 
     public int GetPosition()
@@ -48,7 +51,7 @@ public class PositionUpdate : MonoBehaviour
                 hitColliders.Add(other.gameObject);
                 collidersHit++;
 
-                distanceCollider = other.gameObject;
+                distanceCollider = other.gameObject.transform;
             }
             else if (hitColliders.Contains(other.gameObject) == false)
             {
@@ -64,7 +67,7 @@ public class PositionUpdate : MonoBehaviour
                     hitColliders.Clear();
                 }
 
-                distanceCollider = other.gameObject;
+                distanceCollider = other.gameObject.transform;
 
             }
 

@@ -14,9 +14,8 @@ public class Player
     public int RoundWins { get; private set; }
     public int GameWins { get; private set; }
     public string Name { get; private set; }
-    public int Position;
 
-    public CoreCarModule PlayerCar;
+    public CoreCarModule Car;
 
     public int PlayerID { get { return m_PlayerID; } }
     public int PlayerReadableID { get { return m_PlayerID + 1; } }
@@ -28,6 +27,11 @@ public class Player
     public static PlayerEvent OnRoundWin;
     public static PlayerEvent OnGameWin;
     public static PlayerEvent OnGameScoreChange;
+
+    // Race Time Variables
+    public float TrackProgress = 0.0f;
+    public int Position = 0;
+    public int Laps = 0;
 
 
     public Player(int playerID, Color playerColor)
