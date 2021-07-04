@@ -7,7 +7,6 @@ using TMPro;
 public class BoostBarScript : MonoBehaviour
 {
     [SerializeField] private GameObject barCollection; //overarching use variables
-    [SerializeField] private RaceManager vehicleManager;
     private int vehicleNum;
 
     private GameObject[] boostBarObjects;
@@ -17,8 +16,7 @@ public class BoostBarScript : MonoBehaviour
 
     void Start()
     {
-        //barCollection = GetComponent<Canvas>().transform.GetChild(0).gameObject;
-        vehicleNum = vehicleManager.raceCars.Count;
+        vehicleNum = GameManager.Instance.PlayerCount;
         InitBarObjects();
     }
 
@@ -42,41 +40,41 @@ public class BoostBarScript : MonoBehaviour
     void Update()
     {
         SetSliders();
-        ApplyText();
+        //ApplyText();
     }
     void SetSliders()
     {
         for (int i = 0; i < vehicleNum; i++)
         {
-            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
+            CoreCarModule currentVehicle = GameManager.Instance.ConnectedPlayers[i].Car;
             CarStats vehicleStats = currentVehicle.gameObject.GetComponent<CarStats>();
             boostBarSliders[i].value = vehicleStats.PowerAmount;
             boostBarImages[i].color = Color.Lerp(Color.yellow, Color.red, boostBarSliders[i].value);
         }
     }
 
-    private void ApplyText()
-    {
-        for (int i = 0; i < vehicleNum; i++)
-        {
-            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
-            // mani's update
-            int pos = currentVehicle.GetPosition();
-            switch (pos)
-            {
-                case 1:
-                    boostBarText[i].text = "1st";
-                    break;
-                case 2:
-                    boostBarText[i].text = "2nd";
-                    break;
-                case 3:
-                    boostBarText[i].text = "3rd";
-                    break;
-                case 4:
-                    boostBarText[i].text = "4th";
-                    break;
-            }
-        }
-    }
+    //private void ApplyText()
+    //{
+    //    for (int i = 0; i < vehicleNum; i++)
+    //    {
+    //        CoreCarModule currentVehicle = GameManager.Instance.ConnectedPlayers[i].Car;
+    //        // mani's update
+    //        int pos = currentVehicle.GetPosition();
+    //        switch (pos)
+    //        {
+    //            case 1:
+    //                boostBarText[i].text = "1st";
+    //                break;
+    //            case 2:
+    //                boostBarText[i].text = "2nd";
+    //                break;
+    //            case 3:
+    //                boostBarText[i].text = "3rd";
+    //                break;
+    //            case 4:
+    //                boostBarText[i].text = "4th";
+    //                break;
+    //        }
+    //    }
+    //}
 }

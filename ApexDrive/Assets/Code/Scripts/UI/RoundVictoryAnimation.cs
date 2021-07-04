@@ -21,29 +21,35 @@ public class RoundVictoryAnimation : MonoBehaviour
         tukAnim = victoryTuk.GetComponent<Animator>();
     }
 
-    public void AnimationEvent()
+    public void AnimationEvent(CoreCarModule winningPlayer)
     {
         //called from resettrackscript/eliminationscript/racemanager (endround) to get player winner information?
         //(if player winner is true, perhaps?)
 
         //case switch player is (colour/plaayer number)
-        //victoryTuk.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/TukSprites/Tuk" + (InsertFunColourHere));
+
+        switch (winningPlayer.Player.PlayerID)
+        {
+            case 1:
+                //victoryTuk.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/TukSprites/Tuk" + (InsertFunColourHere));
+                break;
+        }
 
         int starNumber = 1;
-        //switch (TukWinNumber)
-        //{
-        //    case 1:
-        //        starNumber = 1;
-        //        break;
+        switch (winningPlayer.Player.RoundWins)
+        {
+            case 1:
+                starNumber = 1;
+                break;
 
-        //    case 2:
-        //        starNumber = 2;
-        //        break;
-            
-        //    case 3:
-        //        starNumber = 3
-        //        break;
-        //}
+            case 2:
+                starNumber = 2;
+                break;
+
+            case 3:
+                starNumber = 3;
+                break;
+        }
         victoryStars.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/StarSprites/Stars" + (starNumber));
 
         //if (InsertCorrectContextHere)

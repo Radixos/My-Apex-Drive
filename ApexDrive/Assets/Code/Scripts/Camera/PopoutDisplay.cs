@@ -36,11 +36,11 @@ public class PopoutDisplay : MonoBehaviour
     {
         ResetPool();
 
-        foreach (var obj in rm.raceCars)
+        foreach (var obj in GameManager.Instance.ConnectedPlayers)
         {
-            if (obj != rm.raceCars[0])
+            if (obj != GameManager.Instance.ConnectedPlayers[0])
             {
-                Vector3 screenpos = Camera.main.WorldToScreenPoint(obj.transform.position);
+                Vector3 screenpos = Camera.main.WorldToScreenPoint(obj.Car.transform.position);
 
                 if (screenpos.z > 0 &&
                     screenpos.x > 0 && screenpos.x < Screen.width &&

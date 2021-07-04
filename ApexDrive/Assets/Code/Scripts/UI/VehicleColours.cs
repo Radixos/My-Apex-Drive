@@ -4,37 +4,30 @@ using UnityEngine;
 
 public class VehicleColours : MonoBehaviour
 {
-    private RaceManager vehicleManager;
-    private int numberOfCars;
-
     void Start()
     {
-        vehicleManager = this.GetComponent<RaceManager>();
-        numberOfCars = vehicleManager.raceCars.Count;
-
-        for (int i = 0; i < numberOfCars; i++)
+        for (int i = 0; i < GameManager.Instance.PlayerCount; i++)
         {
-            PositionUpdate processedCar = vehicleManager.raceCars[i];
-            GameObject rickshawModel = processedCar.transform.GetChild(0).GetChild(27).gameObject;
-            //Material alterMat = rickshawModel.GetComponent<Renderer>().materials[10];
-            Material rickshawMat = rickshawModel.GetComponent<Material>();
+            CoreCarModule processedCar = GameManager.Instance.ConnectedPlayers[i].Car;
+            GameObject rickshawTop = processedCar.transform.GetChild(0).GetChild(27).gameObject;
+            Material rickshawColour = rickshawTop.GetComponent<Material>();
 
             switch (i)
             {
                 case 0:
-                    rickshawMat.SetColor("_BaseColor", Color.red);
+                    rickshawColour.SetColor("_BaseColor", Color.red);
                     break;
 
                 case 1:
-                    rickshawMat.SetColor("_BaseColor", Color.green);
+                    rickshawColour.SetColor("_BaseColor", Color.green);
                     break;
 
                 case 2:
-                    rickshawMat.SetColor("_BaseColor", Color.yellow);
+                    rickshawColour.SetColor("_BaseColor", Color.yellow);
                     break;
 
                 case 3:
-                    rickshawMat.SetColor("_BaseColor", Color.blue);
+                    rickshawColour.SetColor("_BaseColor", Color.blue);
                     break;
             }
         }
