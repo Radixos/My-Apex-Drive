@@ -16,7 +16,8 @@ public class BoostBarScript : MonoBehaviour
 
     void Start()
     {
-        vehicleNum = GameManager.Instance.PlayerCount;
+        //vehicleNum = GameManager.Instance.PlayerCount;
+        vehicleNum = 4; //temporary!!!
         InitBarObjects();
     }
 
@@ -40,7 +41,7 @@ public class BoostBarScript : MonoBehaviour
     void Update()
     {
         SetSliders();
-        //ApplyText();
+        ApplyText();
     }
     void SetSliders()
     {
@@ -53,28 +54,28 @@ public class BoostBarScript : MonoBehaviour
         }
     }
 
-    //private void ApplyText()
-    //{
-    //    for (int i = 0; i < vehicleNum; i++)
-    //    {
-    //        CoreCarModule currentVehicle = GameManager.Instance.ConnectedPlayers[i].Car;
-    //        // mani's update
-    //        int pos = currentVehicle.GetPosition();
-    //        switch (pos)
-    //        {
-    //            case 1:
-    //                boostBarText[i].text = "1st";
-    //                break;
-    //            case 2:
-    //                boostBarText[i].text = "2nd";
-    //                break;
-    //            case 3:
-    //                boostBarText[i].text = "3rd";
-    //                break;
-    //            case 4:
-    //                boostBarText[i].text = "4th";
-    //                break;
-    //        }
-    //    }
-    //}
+    private void ApplyText()
+    {
+        for (int i = 0; i < vehicleNum; i++)
+        {
+            CoreCarModule currentVehicle = GameManager.Instance.ConnectedPlayers[i].Car;
+            // mani's update
+            int pos = currentVehicle.Player.Position;
+            switch (pos)
+            {
+                case 1:
+                    boostBarText[i].text = "1st";
+                    break;
+                case 2:
+                    boostBarText[i].text = "2nd";
+                    break;
+                case 3:
+                    boostBarText[i].text = "3rd";
+                    break;
+                case 4:
+                    boostBarText[i].text = "4th";
+                    break;
+            }
+        }
+    }
 }

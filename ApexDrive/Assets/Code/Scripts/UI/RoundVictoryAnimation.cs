@@ -23,17 +23,26 @@ public class RoundVictoryAnimation : MonoBehaviour
 
     public void AnimationEvent(CoreCarModule winningPlayer)
     {
-        //called from resettrackscript/eliminationscript/racemanager (endround) to get player winner information?
-        //(if player winner is true, perhaps?)
-
-        //case switch player is (colour/plaayer number)
-
+        string winningColour = "";
         switch (winningPlayer.Player.PlayerID)
         {
+            case 0:
+                winningColour = "Blue";
+                break;
+
             case 1:
-                //victoryTuk.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/TukSprites/Tuk" + (InsertFunColourHere));
+                winningColour = "Red";
+                break;
+
+            case 2:
+                winningColour = "Green";
+                break;
+
+            case 3:
+                winningColour = "Yellow";
                 break;
         }
+        victoryTuk.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/TukSprites/Tuk" + winningColour);
 
         int starNumber = 1;
         switch (winningPlayer.Player.RoundWins)
@@ -51,11 +60,7 @@ public class RoundVictoryAnimation : MonoBehaviour
                 break;
         }
         victoryStars.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/StarSprites/Stars" + (starNumber));
-
-        //if (InsertCorrectContextHere)
-        //{
         StartCoroutine("Toggles");
-        //}
     }
     private IEnumerator Toggles()
     {
