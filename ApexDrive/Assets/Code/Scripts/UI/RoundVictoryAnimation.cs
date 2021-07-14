@@ -7,7 +7,7 @@ public class RoundVictoryAnimation : MonoBehaviour
 {
     private Transform animContent;
     private Animator bannerAnim, tukAnim, starsAnim;
-    private GameObject victoryTuk, victoryStars;
+    private GameObject victoryTuk, victoryStars, boostBars;
 
     private float animationTimer;
 
@@ -19,10 +19,12 @@ public class RoundVictoryAnimation : MonoBehaviour
         starsAnim = victoryStars.GetComponent<Animator>();
         victoryTuk = animContent.GetChild(2).gameObject;
         tukAnim = victoryTuk.GetComponent<Animator>();
+        boostBars = animContent.parent.GetChild(animContent.GetSiblingIndex() + 1).gameObject;
     }
 
     public void AnimationEvent(CoreCarModule winningPlayer)
     {
+        boostBars.SetActive(false);
         string winningColour = "";
         switch (winningPlayer.Player.PlayerID)
         {
@@ -60,9 +62,9 @@ public class RoundVictoryAnimation : MonoBehaviour
                 break;
         }
         victoryStars.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/StarSprites/Stars" + (starNumber));
-        StartCoroutine("Toggles");
+        StartCoroutine(Toggles(winningPlayer));
     }
-    private IEnumerator Toggles()
+    private IEnumerator Toggles(CoreCarModule winner)
     {
         bannerAnim.SetBool("WinAnimation", true);
         tukAnim.SetBool("WinAnimation", true);
@@ -71,5 +73,6 @@ public class RoundVictoryAnimation : MonoBehaviour
         bannerAnim.SetBool("WinAnimation", false);
         tukAnim.SetBool("WinAnimation", false);
         starsAnim.SetBool("WinAnimation", false);
+        boostBars.SetActive(true);
     }
 }
