@@ -57,7 +57,11 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
+<<<<<<< Updated upstream
   - {fileID: 2100000, guid: f717718d04aa0e74f81e601a75507faa, type: 2}
+=======
+  - {fileID: 2100000, guid: 20983d92ae7c1df46a8f583af17d1437, type: 2}
+>>>>>>> Stashed changes
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

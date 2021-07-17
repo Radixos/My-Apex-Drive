@@ -83,7 +83,31 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+<<<<<<< Updated upstream
 --- !u!114 &-8485813365500883802
+=======
+--- !u!114 &-8394867894746476941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-8323552164659598980
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/TukTuk/Drifting
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   Path: event:/TukTuk/Drifting
   guid: bd01bce32fbd7f49bf9777153c8d1e3d
   Banks:
@@ -109,6 +134,35 @@ MonoBehaviour:
   MaxDistance: 400
   Length: 5342
 --- !u!114 &-8421468441172399420
+=======
+  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Menu.bank
+  Name: Menu
+  lastModified: 637612624432536169
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-8276604854462978220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Acceleration
+  m_EditorClassIdentifier: 
+  Name: Acceleration
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-7189604296790928900
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,15 +240,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Break/Surface
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   Name: Surface
   Min: 0
   Max: 10
   Default: 0
+=======
+  Path: event:/TukTuk/Combo_Drop
+  guid: c7b61d9bdb477d49ae3088e26eefa8df
+  Banks:
+  - {fileID: -2279294869571256023}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6661587531146382597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Impact
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Impact
+  guid: 38df500ddf61ce45b59a1e119808fc21
+  Banks:
+  - {fileID: -2279294869571256023}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 3442934040072212100}
+  MinDistance: 1
+  MaxDistance: 10000
+  Length: 0
+--- !u!114 &-6488340471016219116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine Deceleration/Acceleration
+  m_EditorClassIdentifier: 
+  Name: Acceleration
+  Min: 0
+  Max: 1
+  Default: 1
+>>>>>>> Stashed changes
   ID:
     data1: 0
     data2: 0
   Exists: 1
+<<<<<<< Updated upstream
 --- !u!114 &-7586362747054672340
+=======
+--- !u!114 &-6374648933719776808
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,7 +340,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+<<<<<<< Updated upstream
   m_Name: event:/UI/Player Idle
+=======
+  m_Name: event:/TukTuk/Drifting
+>>>>>>> Stashed changes
   m_EditorClassIdentifier: 
   Path: event:/UI/Player Idle
   guid: 5392ff0df7e938488885d71ff9ff73fd
@@ -236,6 +352,7 @@ MonoBehaviour:
   - {fileID: 3255367569105962168}
   - {fileID: -5557791261246238958}
   IsStream: 0
+<<<<<<< Updated upstream
   Is3D: 0
   IsOneShot: 0
   Parameters: []
@@ -243,6 +360,17 @@ MonoBehaviour:
   MaxDistance: 0
   Length: 5186
 --- !u!114 &-6830743050050850412
+=======
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -1196360021144824993}
+  - {fileID: -2469698487401923487}
+  MinDistance: 55
+  MaxDistance: 400
+  Length: 5342
+--- !u!114 &-6050095467145662151
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,11 +390,39 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: 2558580354344697840}
   MinDistance: 1
   MaxDistance: 10000
   Length: 0
 --- !u!114 &-6697288136840495234
+=======
+  - {fileID: -3929566863761399394}
+  MinDistance: 10
+  MaxDistance: 100
+  Length: 8980
+--- !u!114 &-5824563032404261432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/RPM
+  m_EditorClassIdentifier: 
+  Name: RPM
+  Min: 0
+  Max: 60
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5264556834748931851
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,10 +442,37 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters: []
+<<<<<<< Updated upstream
   MinDistance: 1
   MaxDistance: 20
   Length: 0
 --- !u!114 &-6324670651028263214
+=======
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 5225
+--- !u!114 &-4693821547366790927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.strings.bank
+  Name: Master.strings
+  lastModified: 637612624432527040
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 2890
+  Exists: 1
+--- !u!114 &-4513868665449733159
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,7 +516,51 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+<<<<<<< Updated upstream
 --- !u!114 &-6112944584778194267
+=======
+--- !u!114 &-4040106731033184397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Gearchange
+  m_EditorClassIdentifier: 
+  Name: Gearchange
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-3929566863761399394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/defensive/Stop
+  m_EditorClassIdentifier: 
+  Name: Stop
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-3862399875587042473
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,7 +640,74 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+<<<<<<< Updated upstream
 --- !u!114 &-5557791261246238958
+=======
+--- !u!114 &-2904839119714081567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TukTuk/Horn
+  m_EditorClassIdentifier: 
+  Path: event:/TukTuk/Horn
+  guid: 0324c1b1d6c2e44fb9eec0b091363a7e
+  Banks:
+  - {fileID: -2279294869571256023}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2814861983821655742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine Deceleration/Gearchange
+  m_EditorClassIdentifier: 
+  Name: Gearchange
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2469698487401923487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Drifting/Stop Drift
+  m_EditorClassIdentifier: 
+  Name: Stop Drift
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2279294869571256023
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -425,9 +719,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Menu.bank
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Menu.bank
   Name: Menu
   lastModified: 637590365865784090
+=======
+  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Master.bank
+  Name: Master
+  lastModified: 637617810454222090
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -474,7 +774,74 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+<<<<<<< Updated upstream
 --- !u!114 &-5368181481027647341
+=======
+--- !u!114 &-1421388198677570755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/HUD/Abilities/aggressive
+  m_EditorClassIdentifier: 
+  Path: event:/HUD/Abilities/aggressive
+  guid: acdea352b18fe746ba11f5864d2ab8ad
+  Banks:
+  - {fileID: -2279294869571256023}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1196360021144824993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Drifting/SForce
+  m_EditorClassIdentifier: 
+  Name: SForce
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-982115988988476471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Driving/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-908279580310588256
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -497,8 +864,13 @@ MonoBehaviour:
   - {fileID: -2581743650072645184}
   MinDistance: 1
   MaxDistance: 20
+<<<<<<< Updated upstream
   Length: 2000
 --- !u!114 &-5257692448462249695
+=======
+  Length: 0
+--- !u!114 &-890660880046117699
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -507,6 +879,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/UI/Player Idle
   m_EditorClassIdentifier: 
@@ -523,6 +896,20 @@ MonoBehaviour:
   MaxDistance: 0
   Length: 5186
 --- !u!114 &-5095297556954508205
+=======
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Jump/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-626116868194056122
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,11 +973,19 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: 7627826490057278444}
   - {fileID: -8750877148561962385}
   - {fileID: 1836449928517767174}
   - {fileID: 4268005790381657384}
   - {fileID: -3538471726220326872}
+=======
+  - {fileID: 7456363730443653049}
+  - {fileID: 4734510072630024437}
+  - {fileID: -6488340471016219116}
+  - {fileID: 843738135704473603}
+  - {fileID: -2814861983821655742}
+>>>>>>> Stashed changes
   MinDistance: 100
   MaxDistance: 1200
   Length: 0
@@ -606,6 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/TukTuk/Drifting
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   Path: event:/TukTuk/Drifting
   guid: bd01bce32fbd7f49bf9777153c8d1e3d
   Banks:
@@ -620,6 +1016,53 @@ MonoBehaviour:
   MaxDistance: 400
   Length: 5342
 --- !u!114 &-4611072669222754341
+=======
+  EditorBanks:
+  - {fileID: -4693821547366790927}
+  - {fileID: 5708688051035296229}
+  - {fileID: -2279294869571256023}
+  - {fileID: -8323552164659598980}
+  EditorEvents:
+  - {fileID: -4513868665449733159}
+  - {fileID: -908279580310588256}
+  - {fileID: -6374648933719776808}
+  - {fileID: 298822777283552045}
+  - {fileID: -2146139534932229636}
+  - {fileID: -51705185207402249}
+  - {fileID: -6050095467145662151}
+  - {fileID: -7035298263320518728}
+  - {fileID: 8589412283408486633}
+  - {fileID: -2904839119714081567}
+  - {fileID: -8971059032247938081}
+  - {fileID: 4805339361622153845}
+  - {fileID: 3839302851679330657}
+  - {fileID: 5289719514546505902}
+  - {fileID: 771019078686377541}
+  - {fileID: 1451707804241983111}
+  - {fileID: 3394979340797058326}
+  - {fileID: 6377713624551007773}
+  - {fileID: 3782416705791692023}
+  - {fileID: -5264556834748931851}
+  - {fileID: 304609649283651137}
+  - {fileID: 1170849454182819638}
+  - {fileID: -3691130200227184282}
+  - {fileID: -6082141951793533876}
+  - {fileID: -6692603325419966219}
+  - {fileID: -7107565893928673413}
+  - {fileID: 1717599096739061493}
+  - {fileID: -6661587531146382597}
+  - {fileID: -1421388198677570755}
+  EditorParameters:
+  - {fileID: 4276606777024148279}
+  - {fileID: 4160733197400169614}
+  MasterBanks:
+  - {fileID: -2279294869571256023}
+  StringsBanks:
+  - {fileID: -4693821547366790927}
+  stringsBankWriteTime: 637612624432527040
+  cacheVersion: 5
+--- !u!114 &298822777283552045
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -640,11 +1083,22 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: 2095613835579324490}
   MinDistance: 10
   MaxDistance: 100
   Length: 8980
 --- !u!114 &-4498887279447604940
+=======
+  - {fileID: -4040106731033184397}
+  - {fileID: -8276604854462978220}
+  - {fileID: -5824563032404261432}
+  - {fileID: 8450817195419350321}
+  MinDistance: 100
+  MaxDistance: 600
+  Length: 0
+--- !u!114 &304609649283651137
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -696,15 +1150,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Engine Deceleration/Gearchange
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   Name: Gearchange
   Min: 0
   Max: 1
+=======
+  Path: event:/TukTuk/Combo_Success
+  guid: 47f55571b4aed84a916113f88ac6569f
+  Banks:
+  - {fileID: -2279294869571256023}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &843738135704473603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine Deceleration/Decel_RPM
+  m_EditorClassIdentifier: 
+  Name: Decel_RPM
+  Min: 0
+  Max: 100
+>>>>>>> Stashed changes
   Default: 0
   ID:
     data1: 0
     data2: 0
   Exists: 1
+<<<<<<< Updated upstream
 --- !u!114 &-4371124062621140734
+=======
+--- !u!114 &1170849454182819638
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -723,7 +1210,12 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
+<<<<<<< Updated upstream
   Parameters: []
+=======
+  Parameters:
+  - {fileID: 3634046541709463442}
+>>>>>>> Stashed changes
   MinDistance: 1
   MaxDistance: 20
   Length: 0
@@ -766,9 +1258,16 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
+<<<<<<< Updated upstream
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
+=======
+  Parameters:
+  - {fileID: 6671557609642583736}
+  MinDistance: 0
+  MaxDistance: 0
+>>>>>>> Stashed changes
   Length: 0
 --- !u!114 &-4191335340481893344
 MonoBehaviour:
@@ -3133,7 +3632,31 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+<<<<<<< Updated upstream
 --- !u!114 &7946134623928676343
+=======
+--- !u!114 &2346299239106234201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Land/impact_strength
+  m_EditorClassIdentifier: 
+  Name: impact_strength
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &2915638439819098882
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3173,11 +3696,59 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: -3211458306715666934}
   MinDistance: 1
   MaxDistance: 20
   Length: 0
 --- !u!114 &7996133939682598851
+=======
+  - {fileID: -982115988988476471}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3442934040072212100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Impact/Force
+  m_EditorClassIdentifier: 
+  Name: Force
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3634046541709463442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Break/Surface
+  m_EditorClassIdentifier: 
+  Name: Surface
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &3655786488500500491
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3303,7 +3874,11 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
+<<<<<<< Updated upstream
   - {fileID: -1974114244253206204}
+=======
+  - {fileID: -890660880046117699}
+>>>>>>> Stashed changes
   MinDistance: 1
   MaxDistance: 20
   Length: 2000
@@ -3342,6 +3917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/TukTuk/Land
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   Path: event:/TukTuk/Land
   guid: b15dbbcd37cca141952ba206a244e9b5
   Banks:
@@ -3355,6 +3931,37 @@ MonoBehaviour:
   MaxDistance: 20
   Length: 0
 --- !u!114 &8502597990003214361
+=======
+  Name: Filling
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3733269648
+    data2: 1423849070
+  Exists: 1
+--- !u!114 &4734510072630024437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine Deceleration/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 1000
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &4805339361622153845
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3427,7 +4034,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+<<<<<<< Updated upstream
   m_Name: event:/UI/Cancel
+=======
+  m_Name: event:/TukTuk/Land
+>>>>>>> Stashed changes
   m_EditorClassIdentifier: 
   Path: event:/UI/Cancel
   guid: 9dffb2d004b9a843a096865926c52dd5
@@ -3437,11 +4048,20 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
+<<<<<<< Updated upstream
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
   Length: 5186
 --- !u!114 &8778382871962579565
+=======
+  Parameters:
+  - {fileID: 2346299239106234201}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5375246207695495224
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3473,6 +4093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/Drifting/Stop Drift
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   Name: Stop Drift
   Min: 0
   Max: 1
@@ -3480,6 +4101,13 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
+=======
+  Path: Assets/Data/Audio/Riding the Apex/Banks/Desktop/Level.bank
+  Name: Level
+  lastModified: 637617810454192080
+  LoadResult: 0
+  FileSizes: []
+>>>>>>> Stashed changes
   Exists: 1
 --- !u!114 &8916135720274344700
 MonoBehaviour:
@@ -3542,10 +4170,77 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters: []
+<<<<<<< Updated upstream
   MinDistance: 0
   MaxDistance: 0
   Length: 5186
 --- !u!114 &9083228208908100421
+=======
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6671557609642583736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Countdown/Interrupted
+  m_EditorClassIdentifier: 
+  Name: Interrupted
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &7456363730443653049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine Deceleration/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8450817195419350321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Engine/Airtime
+  m_EditorClassIdentifier: 
+  Name: Airtime
+  Min: 0
+  Max: 1
+  Default: 1
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8589412283408486633
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
