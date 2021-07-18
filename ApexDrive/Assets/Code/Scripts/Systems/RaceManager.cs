@@ -101,7 +101,7 @@ public class RaceManager : Singleton<RaceManager>
         Player[] players = GameManager.Instance.ConnectedPlayers;
         Array.Sort(players, (x,y) => 
         {
-            if(x.Laps.CompareTo(y.Laps) != 0) return x.Laps.CompareTo(y.Laps);
+            if(y.Laps.CompareTo(x.Laps) != 0) return y.Laps.CompareTo(x.Laps);
             return y.TrackProgress.CompareTo(x.TrackProgress);
         });
 
