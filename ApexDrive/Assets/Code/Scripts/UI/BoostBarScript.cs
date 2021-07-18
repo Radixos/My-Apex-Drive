@@ -15,8 +15,8 @@ public class BoostBarScript : MonoBehaviour
 
     void Start()
     {
-        //vehicleNum = GameManager.Instance.PlayerCount;
-        vehicleNum = 4; //temporary!!!
+        vehicleNum = GameManager.Instance.PlayerCount;
+        //vehicleNum = 4; //temporary!!!
         InitBarObjects();
     }
 
