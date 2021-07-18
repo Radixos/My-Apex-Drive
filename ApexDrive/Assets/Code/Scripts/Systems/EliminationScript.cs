@@ -5,10 +5,9 @@ using UnityEngine;
 public class EliminationScript : MonoBehaviour
 {
     private Vector3 carCameraPos;
-    private RaceManager carManager;
     private Camera mainCamera;
     private float waitTimer = 2.5f;
-    float eliminatedTotal = 0.0f;
+    int eliminatedTotal = 0;
     private bool winnerHasBeenProcessed;
 
     public RoundVictoryAnimation roundVictory;
@@ -16,44 +15,36 @@ public class EliminationScript : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        carManager = GetComponent<RaceManager>();
         winnerHasBeenProcessed = false;
+        //GameManager instance connected players --> core carmodule
     }
 
     void Update()
     {
-        for (int i = 0; i < carManager.raceCars.Count; i++)
+        for (int i = 0; i < GameManager.Instance.PlayerCount; i++)
         {
-            PositionUpdate currentCar = carManager.raceCars[i];
+            CoreCarModule currentCar = GameManager.Instance.ConnectedPlayers[i].Car;
             carCameraPos = mainCamera.WorldToViewportPoint(currentCar.transform.position);
             bool boundaryCheck = checkBoundaries(carCameraPos);
 
             EliminationProcess(currentCar, boundaryCheck);
             WinnerCheck(currentCar);
         }
-
-        // Alec
-        // ! Commented this out because it causes errors when testing with less than 2 players
-
-        // Debug.Log("Player 1 has won " + GameManager.Instance.Players[0].RoundWins + " rounds and " 
-        //     + GameManager.Instance.Players[0].GameWins + " games");
-        // Debug.Log("Player 2 has won " + GameManager.Instance.Players[1].RoundWins + " rounds and "
-        //     + GameManager.Instance.Players[1].GameWins + " games");
     }
 
-    private void EliminationProcess(PositionUpdate currentCar, bool boundaryCheck)
+    private void EliminationProcess(CoreCarModule currentCar, bool boundaryCheck)
     {
-        if (boundaryCheck == true && currentCar.eliminated == false && winnerHasBeenProcessed == false)
+        if (boundaryCheck == true && currentCar.Player.PlayerEliminated == false && winnerHasBeenProcessed == false)
         {
-            if (currentCar.offScreenTimer < waitTimer)
+            if (currentCar.Player.OffScreenTimer < waitTimer)
             {
-                currentCar.offScreenTimer += Time.deltaTime;
+                currentCar.Player.SetOffScreenTimer(currentCar.Player.OffScreenTimer + Time.deltaTime);
             }
 
             else
             {
                 currentCar.gameObject.SetActive(false);
-                currentCar.eliminated = true;
+                currentCar.Player.EliminatePlayer(true);
                 FMODUnity.RuntimeManager.PlayOneShot("event:/TukTuk/Elimination");
                 eliminatedTotal++;
             }
@@ -61,27 +52,26 @@ public class EliminationScript : MonoBehaviour
 
         else if (boundaryCheck == false)
         {
-            currentCar.offScreenTimer = 0;
+            currentCar.Player.SetOffScreenTimer(0);
         }
     }
 
-    private void WinnerCheck(PositionUpdate currentCar)
+    private void WinnerCheck(CoreCarModule currentCar)
     {
-        if (eliminatedTotal == carManager.raceCars.Count - 1 && currentCar.eliminated == false)
+        if (eliminatedTotal == GameManager.Instance.PlayerCount - 1 && currentCar.Player.PlayerEliminated == false)
         {
-            CoreCarModule currentCarModule = currentCar.gameObject.GetComponent<CoreCarModule>();
-            int playerToModify = currentCarModule.Player.PlayerID - 1;
-            GameManager.Instance.SubmitRoundWinner(playerToModify);
-            currentCar.winner = true;
+            int playerToModify = currentCar.Player.PlayerID - 1;
+            //GameManager.Instance.SubmitRoundWinner(playerToModify);
+            currentCar.Player.WinRound();
+            //currentCar.winner = true;
             eliminatedTotal = 0;
             winnerHasBeenProcessed = true;
-            roundVictory.AnimationEvent();
-            //Debug.Log(GameManager.Instance.Players[currentCar.GetComponent<CarInputHandler>().currentPlayer].RoundWins);
-            //debug.log(gamemanager.instance.players[playertomodify].roundwins);
+            roundVictory.AnimationEvent(currentCar);
 
-            if (GameManager.Instance.Players[playerToModify].RoundWins % 3 == 0)
+            if (currentCar.Player.RoundWins % 3 == 0)
             {
-                GameManager.Instance.SubmitGameWinner(playerToModify);
+                //GameManager.Instance.SubmitGameWinner(playerToModify);
+                currentCar.Player.WinGame();
             }
         }
     }

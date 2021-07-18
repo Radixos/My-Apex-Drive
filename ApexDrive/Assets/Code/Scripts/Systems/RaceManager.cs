@@ -20,10 +20,6 @@ public class RaceManager : Singleton<RaceManager>
         }
     }
 
-    public List<PositionUpdate> raceCars;
-    public List<PositionUpdate> ogRaceCars; // Non-updated list
-    public int totalColliders;
-
     public delegate void RaceEvent();
     public static RaceEvent OnRaceSceneLoaded;
     public static RaceEvent OnGameStart;

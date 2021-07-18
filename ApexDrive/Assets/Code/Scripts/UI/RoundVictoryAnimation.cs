@@ -7,7 +7,7 @@ public class RoundVictoryAnimation : MonoBehaviour
 {
     private Transform animContent;
     private Animator bannerAnim, tukAnim, starsAnim;
-    private GameObject victoryTuk, victoryStars;
+    private GameObject victoryTuk, victoryStars, boostBars;
 
     private float animationTimer;
 
@@ -19,39 +19,52 @@ public class RoundVictoryAnimation : MonoBehaviour
         starsAnim = victoryStars.GetComponent<Animator>();
         victoryTuk = animContent.GetChild(2).gameObject;
         tukAnim = victoryTuk.GetComponent<Animator>();
+        boostBars = animContent.parent.GetChild(animContent.GetSiblingIndex() + 1).gameObject;
     }
 
-    public void AnimationEvent()
+    public void AnimationEvent(CoreCarModule winningPlayer)
     {
-        //called from resettrackscript/eliminationscript/racemanager (endround) to get player winner information?
-        //(if player winner is true, perhaps?)
+        boostBars.SetActive(false);
+        string winningColour = "";
+        switch (winningPlayer.Player.PlayerID)
+        {
+            case 0:
+                winningColour = "Blue";
+                break;
 
-        //case switch player is (colour/plaayer number)
-        //victoryTuk.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/TukSprites/Tuk" + (InsertFunColourHere));
+            case 1:
+                winningColour = "Red";
+                break;
+
+            case 2:
+                winningColour = "Green";
+                break;
+
+            case 3:
+                winningColour = "Yellow";
+                break;
+        }
+        victoryTuk.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/TukSprites/Tuk" + winningColour);
 
         int starNumber = 1;
-        //switch (TukWinNumber)
-        //{
-        //    case 1:
-        //        starNumber = 1;
-        //        break;
+        switch (winningPlayer.Player.RoundWins)
+        {
+            case 1:
+                starNumber = 1;
+                break;
 
-        //    case 2:
-        //        starNumber = 2;
-        //        break;
-            
-        //    case 3:
-        //        starNumber = 3
-        //        break;
-        //}
+            case 2:
+                starNumber = 2;
+                break;
+
+            case 3:
+                starNumber = 3;
+                break;
+        }
         victoryStars.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/StarSprites/Stars" + (starNumber));
-
-        //if (InsertCorrectContextHere)
-        //{
-        StartCoroutine("Toggles");
-        //}
+        StartCoroutine(Toggles(winningPlayer));
     }
-    private IEnumerator Toggles()
+    private IEnumerator Toggles(CoreCarModule winner)
     {
         bannerAnim.SetBool("WinAnimation", true);
         tukAnim.SetBool("WinAnimation", true);
@@ -60,5 +73,6 @@ public class RoundVictoryAnimation : MonoBehaviour
         bannerAnim.SetBool("WinAnimation", false);
         tukAnim.SetBool("WinAnimation", false);
         starsAnim.SetBool("WinAnimation", false);
+        boostBars.SetActive(true);
     }
 }
