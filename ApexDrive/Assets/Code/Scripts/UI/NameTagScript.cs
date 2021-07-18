@@ -7,30 +7,26 @@ using TMPro;
 public class NameTagScript : MonoBehaviour
 {
     private Canvas UICanvas;
-    private RaceManager carSystem;
     private TextMeshPro[] nameTags;
     private GameObject[] tagChildren;
     private Camera mainCamera;
-    [SerializeField] private GameObject raceManager;
     private int numberOfCars;
     private Vector3 offset = new Vector3(0.0f, 1.5f, 7.5f);
     //9.65f, -1.5f, 0.0f for Rad's scene
     //0.0f, 1.5f, 7.5f for LD-Old Scene
 
-
     void Start()
     {
         mainCamera = Camera.main;
         UICanvas = this.GetComponent<Canvas>();
-        carSystem = raceManager.GetComponent<RaceManager>();
-        numberOfCars = carSystem.raceCars.Count;
+        numberOfCars = GameManager.Instance.PlayerCount;
         nameTags = new TextMeshPro[numberOfCars];
         tagChildren = new GameObject[numberOfCars];
 
         for (int i = 0; i < numberOfCars; i++)
         {
-            PositionUpdate processedCar = carSystem.raceCars[i];
-            tagChildren[i] = new GameObject(processedCar.name + " NAMETAG");
+            CoreCarModule processedCar = GameManager.Instance.ConnectedPlayers[i].Car;
+            tagChildren[i] = new GameObject(processedCar.gameObject.name + " NAMETAG");
             tagChildren[i].transform.parent = UICanvas.gameObject.transform;
             TextMeshPro tempAddText = tagChildren[i].AddComponent<TextMeshPro>();
             tempAddText.text = processedCar.name;
@@ -39,7 +35,6 @@ public class NameTagScript : MonoBehaviour
             tempAddText.outlineColor = Color.black;
             tempAddText.outlineWidth = 0.2f;
             nameTags[i] = tempAddText;
-
         }
     }
 
@@ -47,9 +42,9 @@ public class NameTagScript : MonoBehaviour
     {
         for (int i = 0; i < numberOfCars; i++)
         {
-            PositionUpdate processedCar = carSystem.raceCars[i];
+            CoreCarModule processedCar = GameManager.Instance.ConnectedPlayers[i].Car;
             
-            if (processedCar.eliminated == false)
+            if (processedCar.Player.PlayerEliminated == false)
             {
                 Vector3 desiredPosition = processedCar.transform.position + offset;
                 Vector3 desiredTagPosition = mainCamera.WorldToScreenPoint(desiredPosition);

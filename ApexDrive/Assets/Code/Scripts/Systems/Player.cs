@@ -22,6 +22,8 @@ public class Player
     public int ControllerID { get { return m_ControllerID; } }
     public bool IsConnected { get { return m_IsConnected; } }
     public Color PlayerColor { get { return m_PlayerColor; } }
+    public bool PlayerEliminated { get; private set; }
+    public float OffScreenTimer { get; private set; }
 
     public delegate void PlayerEvent(Player player);
     public static PlayerEvent OnRoundWin;
@@ -50,6 +52,16 @@ public class Player
     {
         m_ControllerID = -1;
         m_IsConnected = false;
+    }
+
+    public void SetOffScreenTimer(float newFloat)
+    {
+        OffScreenTimer = newFloat;
+    }
+
+    public void EliminatePlayer(bool newEliminate)
+    {
+        PlayerEliminated = newEliminate;
     }
 
     public void WinRound()

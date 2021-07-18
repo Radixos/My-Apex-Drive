@@ -7,76 +7,68 @@ using TMPro;
 public class BoostBarScript : MonoBehaviour
 {
     [SerializeField] private GameObject barCollection; //overarching use variables
-    [SerializeField] private RaceManager vehicleManager;
     private int vehicleNum;
 
     private GameObject[] boostBarObjects;
-    private Slider[] boostBarSliders; //object children
+    private Image[] boostBarMeters;
     private TextMeshProUGUI[] boostBarText;
-    private Image[] boostBarImages;
 
     void Start()
     {
-        //barCollection = GetComponent<Canvas>().transform.GetChild(0).gameObject;
-        vehicleNum = vehicleManager.raceCars.Count;
+        vehicleNum = GameManager.Instance.PlayerCount;
+        //vehicleNum = 4; //temporary!!!
         InitBarObjects();
     }
 
     private void InitBarObjects()
     {
         boostBarObjects = new GameObject[vehicleNum]; //initialise objects and their children
-        boostBarSliders = new Slider[vehicleNum];
+        boostBarMeters = new Image[vehicleNum];
         boostBarText = new TextMeshProUGUI[vehicleNum];
-        boostBarImages = new Image[vehicleNum];
 
         for (int i = 0; i < vehicleNum; i++)
         {
             boostBarObjects[i] = barCollection.transform.GetChild(i).gameObject;
             boostBarObjects[i].SetActive(true);
-            boostBarSliders[i] = boostBarObjects[i].GetComponent<Slider>();
-            boostBarText[i] = boostBarObjects[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-            boostBarImages[i] = boostBarObjects[i].transform.GetChild(0).GetComponent<Image>();
+            boostBarMeters[i] = boostBarObjects[i].transform.GetChild(0).GetComponent<Image>();
+            boostBarText[i] = boostBarObjects[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         }
     }
 
     void Update()
     {
-        SetSliders();
-        ApplyText();
-    }
-    void SetSliders()
-    {
         for (int i = 0; i < vehicleNum; i++)
         {
-            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
-            CarStats vehicleStats = currentVehicle.gameObject.GetComponent<CarStats>();
-            boostBarSliders[i].value = vehicleStats.PowerAmount;
-            boostBarImages[i].color = Color.Lerp(Color.yellow, Color.red, boostBarSliders[i].value);
+            CoreCarModule currentVehicle = GameManager.Instance.ConnectedPlayers[i].Car;
+            SetSliders(currentVehicle, i);
+            ApplyText(currentVehicle, i);
         }
+       
+    }
+    void SetSliders(CoreCarModule vehicle, int index)
+    {
+        CarStats vehicleStats = vehicle.gameObject.GetComponent<CarStats>();
+        boostBarMeters[index].fillAmount = vehicleStats.PowerAmount;
+        boostBarMeters[index].color = Color.Lerp(Color.yellow, Color.red, boostBarMeters[index].fillAmount);
     }
 
-    private void ApplyText()
+    private void ApplyText(CoreCarModule vehicle, int index)
     {
-        for (int i = 0; i < vehicleNum; i++)
-        {
-            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
-            // mani's update
-            int pos = currentVehicle.GetPosition();
+            int pos = vehicle.Player.Position;
             switch (pos)
             {
                 case 1:
-                    boostBarText[i].text = "1st";
+                    boostBarText[index].text = "1st";
                     break;
                 case 2:
-                    boostBarText[i].text = "2nd";
+                    boostBarText[index].text = "2nd";
                     break;
                 case 3:
-                    boostBarText[i].text = "3rd";
+                    boostBarText[index].text = "3rd";
                     break;
                 case 4:
-                    boostBarText[i].text = "4th";
+                    boostBarText[index].text = "4th";
                     break;
             }
-        }
     }
 }
