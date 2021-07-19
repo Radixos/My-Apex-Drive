@@ -10,8 +10,6 @@ public class EliminationScript : MonoBehaviour
     int eliminatedTotal = 0;
     private bool winnerHasBeenProcessed;
 
-    public RoundVictoryAnimation roundVictory;
-
     void Start()
     {
         mainCamera = Camera.main;
@@ -66,7 +64,6 @@ public class EliminationScript : MonoBehaviour
             //currentCar.winner = true;
             eliminatedTotal = 0;
             winnerHasBeenProcessed = true;
-            roundVictory.AnimationEvent(currentCar);
 
             if (currentCar.Player.RoundWins % 3 == 0)
             {

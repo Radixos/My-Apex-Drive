@@ -47,9 +47,7 @@ public class BoostBarScript : MonoBehaviour
     }
     void SetSliders(CoreCarModule vehicle, int index)
     {
-        CarStats vehicleStats = vehicle.gameObject.GetComponent<CarStats>();
-        boostBarMeters[index].fillAmount = vehicleStats.PowerAmount;
-        boostBarMeters[index].color = Color.Lerp(Color.yellow, Color.red, boostBarMeters[index].fillAmount);
+        boostBarMeters[index].fillAmount = vehicle.Stats.PowerAmount;
     }
 
     private void ApplyText(CoreCarModule vehicle, int index)

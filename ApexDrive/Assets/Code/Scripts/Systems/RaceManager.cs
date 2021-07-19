@@ -62,8 +62,13 @@ public class RaceManager : Singleton<RaceManager>
             OrientedPoint op = ActiveTrack.Evaluate(m_TrackProgress);
             Vector3 offset = Vector3.left * (players.Length - i) * 1.5f + Vector3.right * players.Length / 2.0f * 1.5f;
             Vector3 spawnPoint = op.pos + op.rot * offset + Vector3.up * 1.05f;
-            CoreCarModule car = Instantiate(m_CarPrefabs[players[i].PlayerID], spawnPoint, op.rot);
+
+            CoreCarModule car = m_CarPrefabs[players[i].PlayerID];
+            car.gameObject.SetActive(true);
+            car.transform.position = spawnPoint;
+            car.transform.rotation = op.rot;
             car.Stats.CanDrive = false;
+
             if(players[i].ControllerID <= 0 || players[i].ControllerID >= 4) players[i].AssignController(i+1); // this shouldn't be the case except for debugging in the race scene
             car.SetPlayer(players[i]);
             players[i].Car = car;
@@ -73,8 +78,8 @@ public class RaceManager : Singleton<RaceManager>
     private void EndRound(Player winner)
     {
         foreach(Player player in GameManager.Instance.ConnectedPlayers) player.Car.Stats.CanDrive = false;
+        m_TrackProgress = winner.TrackProgress;
         if(OnRoundEnd != null) OnRoundEnd();
-        // get progress for next spawn
     }
 
     private IEnumerator Co_StartGame()
