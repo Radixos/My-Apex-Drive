@@ -44,7 +44,7 @@ public class NameTagScript : MonoBehaviour
         {
             CoreCarModule processedCar = GameManager.Instance.ConnectedPlayers[i].Car;
             
-            if (processedCar.Player.PlayerEliminated == false)
+            if (processedCar.Player.State != Player.PlayerState.Eliminated)
             {
                 Vector3 desiredPosition = processedCar.transform.position + offset;
                 Vector3 desiredTagPosition = mainCamera.WorldToScreenPoint(desiredPosition);

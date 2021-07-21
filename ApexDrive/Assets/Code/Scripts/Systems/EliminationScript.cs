@@ -4,82 +4,78 @@ using UnityEngine;
 
 public class EliminationScript : MonoBehaviour
 {
-    private Vector3 carCameraPos;
-    private Camera mainCamera;
-    private float waitTimer = 2.5f;
-    int eliminatedTotal = 0;
-    private bool winnerHasBeenProcessed;
+    private float grace = 0.0f;
 
-    void Start()
+    private Coroutine[] m_GraceRoutines = new Coroutine[4];
+    private List<Player> m_ActivePlayers = new List<Player>();
+    private List<Player> m_OffscreenPlayers = new List<Player>();
+
+    private void OnEnable()
     {
-        mainCamera = Camera.main;
-        winnerHasBeenProcessed = false;
-        //GameManager instance connected players --> core carmodule
+        RaceManager.OnRoundStart += OnRoundStart;
+        RaceManager.OnRoundEnd += OnRoundEnd;
     }
 
-    void Update()
+    private void OnDisable()
     {
-        for (int i = 0; i < GameManager.Instance.PlayerCount; i++)
-        {
-            CoreCarModule currentCar = GameManager.Instance.ConnectedPlayers[i].Car;
-            carCameraPos = mainCamera.WorldToViewportPoint(currentCar.transform.position);
-            bool boundaryCheck = checkBoundaries(carCameraPos);
-
-            EliminationProcess(currentCar, boundaryCheck);
-            WinnerCheck(currentCar);
-        }
+        RaceManager.OnRoundStart -= OnRoundStart;
+        RaceManager.OnRoundEnd -= OnRoundEnd;
     }
 
-    private void EliminationProcess(CoreCarModule currentCar, bool boundaryCheck)
+    private void OnRoundStart()
     {
-        if (boundaryCheck == true && currentCar.Player.PlayerEliminated == false && winnerHasBeenProcessed == false)
+        m_ActivePlayers.Clear();
+        m_OffscreenPlayers.Clear();
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) m_ActivePlayers.Add(player);
+        StartCoroutine(Co_CheckEliminations());
+    }
+
+    private void OnRoundEnd()
+    {
+        m_ActivePlayers.Clear();
+        m_OffscreenPlayers.Clear();
+    }
+
+    private IEnumerator Co_CheckEliminations()
+    {
+        while(RaceManager.State == RaceManager.RaceState.Racing)
         {
-            if (currentCar.Player.OffScreenTimer < waitTimer)
+            List<Player> noLongerVisiblePlayers = new List<Player>();
+
+            foreach(Player player in m_ActivePlayers)
             {
-                currentCar.Player.SetOffScreenTimer(currentCar.Player.OffScreenTimer + Time.deltaTime);
+                bool visiblePlayer = IsPointInsideCameraFrustum(player.Car.Position);
+                if(!visiblePlayer && !m_OffscreenPlayers.Contains(player)) noLongerVisiblePlayers.Add(player);
             }
-
-            else
-            {
-                currentCar.gameObject.SetActive(false);
-                currentCar.Player.EliminatePlayer(true);
-                FMODUnity.RuntimeManager.PlayOneShot("event:/TukTuk/Elimination");
-                eliminatedTotal++;
-            }
+            foreach(Player player in noLongerVisiblePlayers) StartCoroutine(Co_Eliminate(player.Car));
+            if(m_ActivePlayers.Count == 1) m_ActivePlayers[0].WinRound();
+            yield return null;
         }
-
-        else if (boundaryCheck == false)
-        {
-            currentCar.Player.SetOffScreenTimer(0);
-        }
+        
     }
 
-    private void WinnerCheck(CoreCarModule currentCar)
+    private bool IsPointInsideCameraFrustum(Vector3 point)
     {
-        if (eliminatedTotal == GameManager.Instance.PlayerCount - 1 && currentCar.Player.PlayerEliminated == false)
-        {
-            int playerToModify = currentCar.Player.PlayerID - 1;
-            //GameManager.Instance.SubmitRoundWinner(playerToModify);
-            currentCar.Player.WinRound();
-            //currentCar.winner = true;
-            eliminatedTotal = 0;
-            winnerHasBeenProcessed = true;
-
-            if (currentCar.Player.RoundWins % 3 == 0)
-            {
-                //GameManager.Instance.SubmitGameWinner(playerToModify);
-                currentCar.Player.WinGame();
-            }
-        }
+        Vector3 viewportPosition = Camera.main.WorldToViewportPoint(point);
+        if ((viewportPosition.x > 1.0f || viewportPosition.x < 0.0f) || (viewportPosition.y > 1.0f || viewportPosition.y < 0.0f)) return false;
+        return true;
     }
 
-    private bool checkBoundaries(Vector3 positionToCheck)
+    private IEnumerator Co_Eliminate(CoreCarModule car)
     {
-        if ((positionToCheck.x > 1.0f || positionToCheck.x < 0.0f) || (positionToCheck.y > 1.0f || positionToCheck.y < 0.0f))
+        float elapsed = 0.0f;
+
+        while(elapsed < grace)
         {
-            return true;
+            if(IsPointInsideCameraFrustum(car.Position))
+            {
+                // save player
+            }
+            yield return null;
         }
 
-        else {return false;}
+        car.gameObject.SetActive(false);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/TukTuk/Elimination");
+        m_ActivePlayers.Remove(car.Player);
     }
 }

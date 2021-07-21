@@ -14,18 +14,23 @@ public class GameHUD : MonoBehaviour
     [SerializeField] private GameObject[] m_Avatars; // stupid way to handle this but it will do for now
     [SerializeField] private Animator m_AvatarAnimator;
 
+    // [SerializeField] private CanvasGroup[] m_PortraitGroups;
+    // [SerializeField] private Image[] m_PowerMeters;
+
     private void OnEnable()
     {
         RaceManager.OnRaceSceneLoaded += FadeInScene;
-        RaceManager.PreRoundStart += Countdown;
+        RaceManager.CountdownStart += Countdown;
         Player.OnRoundWin += RoundTransition;
+        RaceManager.OnGameEnd += FadeOutScene;
     }
 
     private void OnDisable()
     {
         RaceManager.OnRaceSceneLoaded -= FadeInScene;
-        RaceManager.PreRoundStart -= Countdown;
+        RaceManager.CountdownStart -= Countdown;
         Player.OnRoundWin -= RoundTransition;
+        RaceManager.OnGameEnd -= FadeOutScene;
     }
 
     private void FadeInScene()

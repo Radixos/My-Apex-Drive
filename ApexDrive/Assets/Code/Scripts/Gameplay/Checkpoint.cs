@@ -19,7 +19,6 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other);
         CoreCarModule car = other.GetComponent<CoreCarModule>();
         if(car != null)
         {

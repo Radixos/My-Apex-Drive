@@ -13,6 +13,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField, Range(0.0f, 2.0f)] private float m_Position;
     [SerializeField, Range(0.0f, 1.0f)] private float m_Smoothing = 0.125f;
 
+    private Vector3 targetPosition = Vector3.zero;
+
     [SerializeField] private Transform m_OverrideFollowTarget;
 
 
@@ -21,7 +23,7 @@ public class CameraManager : MonoBehaviour
         if(m_Camera == null) m_Camera = GetComponent<Camera>();
         if(m_Camera == null || m_Track == null) return;
 
-        Vector3 targetPosition = Vector3.zero;
+
         if(RaceManager.State == RaceManager.RaceState.Racing) 
         {
             Player leadPlayer = RaceManager.Instance.FirstPlayer;

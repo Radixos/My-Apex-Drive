@@ -1,72 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class BoostBarScript : MonoBehaviour
 {
-    [SerializeField] private GameObject barCollection; //overarching use variables
-    private int vehicleNum;
-
     private GameObject[] boostBarObjects;
-    private Image[] boostBarMeters;
-    private TextMeshProUGUI[] boostBarText;
+    [SerializeField] private Image[] m_Meters;
+    [SerializeField] private GameObject[] m_HUDs;
 
-    void Start()
+    private void Start()
     {
-        vehicleNum = GameManager.Instance.PlayerCount;
-        //vehicleNum = 4; //temporary!!!
-        InitBarObjects();
+        UpdateUIElements(null);
     }
 
-    private void InitBarObjects()
+    private void OnEnable()
     {
-        boostBarObjects = new GameObject[vehicleNum]; //initialise objects and their children
-        boostBarMeters = new Image[vehicleNum];
-        boostBarText = new TextMeshProUGUI[vehicleNum];
+        GameManager.OnPlayerConnected += UpdateUIElements;
+        GameManager.OnPlayerDisconnected += UpdateUIElements;
+    }
 
-        for (int i = 0; i < vehicleNum; i++)
+    private void OnDisable()
+    {
+        GameManager.OnPlayerConnected -= UpdateUIElements;
+        GameManager.OnPlayerDisconnected -= UpdateUIElements;
+    }
+
+    private void UpdateUIElements(Player player)
+    {
+        for(int i = 0; i < 4; i++)
         {
-            boostBarObjects[i] = barCollection.transform.GetChild(i).gameObject;
-            boostBarObjects[i].SetActive(true);
-            boostBarMeters[i] = boostBarObjects[i].transform.GetChild(0).GetComponent<Image>();
-            boostBarText[i] = boostBarObjects[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            if(i < GameManager.Instance.PlayerCount) m_HUDs[i].SetActive(true);
+            else m_HUDs[i].SetActive(false);
         }
     }
 
-    void Update()
+    private void Update()
     {
-        for (int i = 0; i < vehicleNum; i++)
+        for(int i = 0; i < GameManager.Instance.PlayerCount; i++)
         {
-            CoreCarModule currentVehicle = GameManager.Instance.ConnectedPlayers[i].Car;
-            SetSliders(currentVehicle, i);
-            ApplyText(currentVehicle, i);
+            if(GameManager.Instance.ConnectedPlayers[i].Car != null) m_Meters[i].fillAmount = GameManager.Instance.ConnectedPlayers[i].Car.Stats.PowerAmount;
         }
-       
-    }
-    void SetSliders(CoreCarModule vehicle, int index)
-    {
-        boostBarMeters[index].fillAmount = vehicle.Stats.PowerAmount;
-    }
-
-    private void ApplyText(CoreCarModule vehicle, int index)
-    {
-            int pos = vehicle.Player.Position;
-            switch (pos)
-            {
-                case 1:
-                    boostBarText[index].text = "1st";
-                    break;
-                case 2:
-                    boostBarText[index].text = "2nd";
-                    break;
-                case 3:
-                    boostBarText[index].text = "3rd";
-                    break;
-                case 4:
-                    boostBarText[index].text = "4th";
-                    break;
-            }
     }
 }

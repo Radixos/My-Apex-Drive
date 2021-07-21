@@ -44,12 +44,13 @@ public class LobbyMenu : MonoBehaviour
             m_PlayersReady[i] = false;
         }
 
+        m_FaderAnimator.SetTrigger("FadeIn");
         if(GameManager.Instance.PlayerCount > 0)
         {
             if(m_MenuIsVisible)
             {
                 m_MenuAnimator.SetBool("IsOpen", true);
-                m_MenuIsVisible = true;
+                // m_MenuIsVisible = true;
             }
             foreach(Player player in GameManager.Instance.ConnectedPlayers)
             {

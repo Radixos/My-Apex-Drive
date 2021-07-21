@@ -9,6 +9,7 @@ public class GameManager : GameSystem
 {
     public static GameManager Instance;
     public const int MaxPlayers = 4;
+    public const int Rounds = 3;
 
     [SerializeField] private Player[] m_Players;
     [SerializeField] private List<Player> m_ConnectedPlayers;

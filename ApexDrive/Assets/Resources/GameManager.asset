@@ -12,8 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6637cb1f331918d419316b483fc49d44, type: 3}
   m_Name: GameManager
   m_EditorClassIdentifier: 
+  m_Players:
+  - State: 0
+    m_PlayerID: 0
+    m_ControllerID: -1
+    Car: {fileID: 0}
+    TrackProgress: 0
+    Position: 0
+    Laps: 0
+  - State: 0
+    m_PlayerID: 1
+    m_ControllerID: -1
+    Car: {fileID: 0}
+    TrackProgress: 0
+    Position: 0
+    Laps: 0
+  - State: 0
+    m_PlayerID: 2
+    m_ControllerID: -1
+    Car: {fileID: 0}
+    TrackProgress: 0
+    Position: 0
+    Laps: 0
+  - State: 0
+    m_PlayerID: 3
+    m_ControllerID: -1
+    Car: {fileID: 0}
+    TrackProgress: 0
+    Position: 0
+    Laps: 0
+  m_ConnectedPlayers: []
   PlayerColors:
-  - {r: 0.8980392, g: 0.3137255, b: 0.22352941, a: 1}
   - {r: 0.2901961, g: 0.4117647, b: 0.7411765, a: 1}
+  - {r: 0.8980392, g: 0.3137255, b: 0.22352941, a: 1}
   - {r: 0.47058824, g: 0.8784314, b: 0.56078434, a: 1}
   - {r: 0.9647059, g: 0.7254902, b: 0.23137255, a: 1}

@@ -7,6 +7,10 @@ using UnityEngine;
 [System.Serializable]
 public class Player
 {
+    public enum PlayerState {Menu, Racing, Eliminated}
+    public PlayerState State = PlayerState.Menu;
+
+
     [SerializeField] private int m_PlayerID;
     [SerializeField] private int m_ControllerID = -1;
     private bool m_IsConnected;
@@ -22,13 +26,12 @@ public class Player
     public int ControllerID { get { return m_ControllerID; } }
     public bool IsConnected { get { return m_IsConnected; } }
     public Color PlayerColor { get { return m_PlayerColor; } }
-    public bool PlayerEliminated { get; private set; }
-    public float OffScreenTimer { get; private set; }
 
     public delegate void PlayerEvent(Player player);
     public static PlayerEvent OnRoundWin;
     public static PlayerEvent OnGameWin;
     public static PlayerEvent OnGameScoreChange;
+
 
     // Race Time Variables
     public float TrackProgress = 0.0f;
@@ -52,16 +55,6 @@ public class Player
     {
         m_ControllerID = -1;
         m_IsConnected = false;
-    }
-
-    public void SetOffScreenTimer(float newFloat)
-    {
-        OffScreenTimer = newFloat;
-    }
-
-    public void EliminatePlayer(bool newEliminate)
-    {
-        PlayerEliminated = newEliminate;
     }
 
     public void WinRound()
