@@ -2165,7 +2165,6 @@ GameObject:
   m_Component:
   - component: {fileID: 441075826}
   - component: {fileID: 441075825}
-  - component: {fileID: 441075824}
   - component: {fileID: 441075827}
   - component: {fileID: 441075828}
   - component: {fileID: 441075829}
@@ -2176,14 +2175,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &441075824
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 441075822}
-  m_Enabled: 1
 --- !u!20 &441075825
 Camera:
   m_ObjectHideFlags: 0
@@ -3443,7 +3434,6 @@ GameObject:
   m_Component:
   - component: {fileID: 777244183}
   - component: {fileID: 777244186}
-  - component: {fileID: 777244185}
   - component: {fileID: 777244184}
   m_Layer: 0
   m_Name: Camera
@@ -3497,14 +3487,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &777244185
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777244182}
-  m_Enabled: 1
 --- !u!20 &777244186
 Camera:
   m_ObjectHideFlags: 0
@@ -23787,7 +23769,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2071976469}
   - component: {fileID: 2071976472}
-  - component: {fileID: 2071976471}
   - component: {fileID: 2071976470}
   m_Layer: 0
   m_Name: Victory Camera
@@ -23841,14 +23822,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &2071976471
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071976468}
-  m_Enabled: 1
 --- !u!20 &2071976472
 Camera:
   m_ObjectHideFlags: 0

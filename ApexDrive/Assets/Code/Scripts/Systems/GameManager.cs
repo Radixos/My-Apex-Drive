@@ -33,6 +33,16 @@ public class GameManager : GameSystem
         }
     }
 
+    private void OnEnable()
+    {
+        Player.OnGameWin += ResetRoundScores;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnGameWin = ResetRoundScores;
+    }
+
     ///<returns>Returns the PlayerID of the newly created player. Returns null if controller is already in use.</returns>
     public Player AddPlayer(int controllerID)
     {
@@ -64,26 +74,6 @@ public class GameManager : GameSystem
         return m_Players.Where(x => x.ControllerID == controllerID).FirstOrDefault();
     }
 
-    public void SubmitRoundWinner(int playerID)
-    {
-        m_Players[playerID].WinRound();
-    }
-
-    public void SubmitGameWinner(int playerID)
-    {
-        m_Players[playerID].WinGame();
-    }
-
-    public void SubmitRoundWinner(Player player)
-    {
-        player.WinRound();
-    }
-
-    public void SubmitGameWinner(Player player)
-    {
-        player.WinGame();
-    }
-
     private IEnumerator RemovePlayerAtEndOfFrame(Player player)
     {
         yield return null;
@@ -93,5 +83,10 @@ public class GameManager : GameSystem
             m_ConnectedPlayers.Remove(player);
             if(OnPlayerDisconnected != null) OnPlayerDisconnected(player);
         }
+    }
+
+    private void ResetRoundScores(Player winner)
+    {
+        foreach(Player player in m_Players) player.ResetRoundScore();
     }
 }

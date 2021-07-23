@@ -100,6 +100,7 @@ public class RaceManager : Singleton<RaceManager>
     {
         yield return new WaitForSeconds(delay);
         SpawnPlayers(GameManager.Instance.ConnectedPlayers);
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) player.Car.Stats.CanDrive = false;
         if(PreRoundStart != null) PreRoundStart();
         yield return StartCoroutine(Co_Countdown());
 

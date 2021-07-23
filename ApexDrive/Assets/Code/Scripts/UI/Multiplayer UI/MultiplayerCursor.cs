@@ -11,6 +11,7 @@ public class MultiplayerCursor : MonoBehaviour
     private Image m_Image;
     private RectTransform m_RectTransform;
     public bool IsLocked = false;
+    public bool IsActive = false;
     private Color m_Color;
     [SerializeField] private Color m_LockedColor;
     [SerializeField] private float m_TransitionDuration = 0.1f;

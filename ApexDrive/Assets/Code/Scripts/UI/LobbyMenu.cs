@@ -3,10 +3,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 [DefaultExecutionOrder(50)]
 public class LobbyMenu : MonoBehaviour
 {
+    private enum MenuState {Closed, Open}
+    private MenuState m_State = MenuState.Closed;
+
     // private Animator m_Animator;
     [SerializeField] private Animator m_TimerAnimator;
     [SerializeField] private Animator m_FaderAnimator;
@@ -19,8 +23,6 @@ public class LobbyMenu : MonoBehaviour
     private Coroutine m_LoadGameroutine;
 
     private FMOD.Studio.EventInstance[] m_LobbyPlayerSFX = new FMOD.Studio.EventInstance[GameManager.MaxPlayers];
-
-    private bool m_MenuIsVisible = false;
     private bool m_CanCancelLoading = true;
 
 
@@ -31,6 +33,14 @@ public class LobbyMenu : MonoBehaviour
         {
             m_LobbyPlayerSFX[i] = FMODUnity.RuntimeManager.CreateInstance("event:/UI/Player Idle");
         }
+
+        if(GameManager.Instance.PlayerCount > 0) m_State = MenuState.Open;
+        else m_State = MenuState.Closed;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(Co_InitialiseMenu());
     }
 
     private void OnEnable()
@@ -39,25 +49,9 @@ public class LobbyMenu : MonoBehaviour
         GameManager.OnPlayerDisconnected += OnPlayerDisconnected;
 
         m_PlayersReady = new bool[GameManager.MaxPlayers];
-        for(int i = 0; i < m_PlayersReady.Length; i++)
-        {
-            m_PlayersReady[i] = false;
-        }
+        for(int i = 0; i < m_PlayersReady.Length; i++) m_PlayersReady[i] = false;
 
         m_FaderAnimator.SetTrigger("FadeIn");
-        if(GameManager.Instance.PlayerCount > 0)
-        {
-            if(m_MenuIsVisible)
-            {
-                m_MenuAnimator.SetBool("IsOpen", true);
-                // m_MenuIsVisible = true;
-            }
-            foreach(Player player in GameManager.Instance.ConnectedPlayers)
-            {
-                // instantiate cursor
-            }
-        }
-
         m_CanCancelLoading = true;
     }
 
@@ -76,6 +70,7 @@ public class LobbyMenu : MonoBehaviour
                 if(Input.GetButtonDown("Submit " + (i)))
                 {
                     Player player = GameManager.Instance.AddPlayer(i);
+                    MultiplayerEventSystem.Current.AddPlayer(player.PlayerID);
                 }
             }
         }
@@ -84,6 +79,7 @@ public class LobbyMenu : MonoBehaviour
     public void DisconnectPlayer(MultiplayerEventData data)
     {
         m_PlayersReady[data.Player.PlayerID] = false;
+        MultiplayerEventSystem.Current.RemovePlayer(data.Player.PlayerID);
         GameManager.Instance.RemovePlayerByID(data.Player.PlayerID);
     }
 
@@ -112,10 +108,10 @@ public class LobbyMenu : MonoBehaviour
 
     private void OnPlayerConnected(Player player)
     {
-        if(!m_MenuIsVisible)
+        if(m_State != MenuState.Open)
         {
+            m_State = MenuState.Open;
             m_MenuAnimator.SetBool("IsOpen", true);
-            m_MenuIsVisible = true;
         }
         if(player != null && m_PlayerPortraits[player.PlayerID] != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
         if(m_CarAnimators[player.PlayerID] != null)
@@ -132,8 +128,8 @@ public class LobbyMenu : MonoBehaviour
     {
         if(GameManager.Instance.PlayerCount == 0) 
         {
+            m_State = MenuState.Closed;
             m_MenuAnimator.SetBool("IsOpen", false);
-            m_MenuIsVisible = false;
             FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Player Leave");
         }
         m_PlayersReady[player.PlayerID] = false;
@@ -153,5 +149,17 @@ public class LobbyMenu : MonoBehaviour
         m_FaderAnimator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Scene_Demo_RoadGenerator");
+    }
+
+    private IEnumerator Co_InitialiseMenu()
+    {
+        if(m_State == MenuState.Closed) m_MenuAnimator.SetBool("IsOpen", false);
+        if(m_State == MenuState.Open) m_MenuAnimator.SetBool("IsOpen", true);
+        foreach(Player player in GameManager.Instance.ConnectedPlayers)
+        {
+            MultiplayerEventSystem.Current.AddPlayer(player.PlayerID);
+        }
+        yield return null;
+        MultiplayerEventSystem.Current.UpdateCursorPositions();
     }
 }

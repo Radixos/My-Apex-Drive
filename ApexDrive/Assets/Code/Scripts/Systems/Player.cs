@@ -61,20 +61,23 @@ public class Player
     {
         RoundWins ++;
         if(OnRoundWin != null) OnRoundWin(this);
-        if(OnGameScoreChange != null) OnGameScoreChange(this);
+        if(RoundWins >= GameManager.Rounds && OnGameWin != null) OnGameWin(this);
     }
 
     public void WinGame()
     {
         GameWins ++;
         if(OnGameWin != null) OnGameWin(this);
-        if(OnGameScoreChange != null) OnGameScoreChange(this);
     }
 
     public void ResetScore()
     {
         RoundWins = 0;
         GameWins = 0;
-        if(OnGameScoreChange != null) OnGameScoreChange(this);
+    }
+
+    public void ResetRoundScore()
+    {
+        RoundWins = 0;
     }
 }

@@ -9,8 +9,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(MultiplayerInputModule))]
-public class MultiplayerSelectionEventSystem : EventSystem
+public class MultiplayerEventSystem : EventSystem
 {	
+	public static MultiplayerEventSystem Current;
 	private MultiplayerInputModule m_InputModule;
 	private Selectable[] m_CurrentSelectedObjects = new Selectable[GameManager.MaxPlayers];
 	private bool[] m_ControllerLocked = new bool[GameManager.MaxPlayers];
@@ -18,34 +19,21 @@ public class MultiplayerSelectionEventSystem : EventSystem
 	protected override void Awake()
 	{
 		base.Awake();
+		Current = this;
 		m_InputModule = GetComponent<MultiplayerInputModule>();
 	}
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-		GameManager.OnPlayerConnected += OnPlayerConnected;
-		GameManager.OnPlayerDisconnected += OnPlayerDisconnected;
-
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-		GameManager.OnPlayerConnected -= OnPlayerConnected;
-		GameManager.OnPlayerDisconnected -= OnPlayerDisconnected;
-    }
-
-	private void OnPlayerConnected(Player player)
+	public void AddPlayer(int playerID)
 	{
-		SetSelected(player.PlayerID, firstSelectedGameObject.GetComponent<Selectable>());
-		m_InputModule.UpdateCursorPositions();
+		SetSelected(playerID, firstSelectedGameObject.GetComponent<Selectable>());
+		m_InputModule.AddPlayerCursor(playerID);
 	}
 
-	private void OnPlayerDisconnected(Player player)
+	public void RemovePlayer(int playerID)
 	{
-		m_CurrentSelectedObjects[player.PlayerID] = null;
-		m_ControllerLocked[player.PlayerID] = false;
+		m_InputModule.RemovePlayerCursor(playerID);
+		m_CurrentSelectedObjects[playerID] = null;
+		m_ControllerLocked[playerID] = false;
 	}
 
 	public void SetSelected(int playerID, Selectable selected){
@@ -68,6 +56,11 @@ public class MultiplayerSelectionEventSystem : EventSystem
 
 	public bool LockedController(int playerID){
 		return m_ControllerLocked[playerID];
+	}
+
+	public void UpdateCursorPositions()
+	{
+		m_InputModule.UpdateCursorPositions();
 	}
 }
 
