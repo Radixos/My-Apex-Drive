@@ -149,7 +149,7 @@ public class LobbyMenu : MonoBehaviour
         m_FaderAnimator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(0.5f);
         // SceneManager.LoadScene("Scene_Demo_RoadGenerator");
-        SceneManager.LoadScene("Scene_Art");
+        SceneManager.LoadScene("Scene_Level_01");
     }
 
     private IEnumerator Co_InitialiseMenu()
