@@ -148,7 +148,8 @@ public class LobbyMenu : MonoBehaviour
         foreach(Player player in GameManager.Instance.ConnectedPlayers) m_LobbyPlayerSFX[player.PlayerID].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         m_FaderAnimator.SetTrigger("FadeOut");
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("Scene_Demo_RoadGenerator");
+        // SceneManager.LoadScene("Scene_Demo_RoadGenerator");
+        SceneManager.LoadScene("Scene_Art");
     }
 
     private IEnumerator Co_InitialiseMenu()
