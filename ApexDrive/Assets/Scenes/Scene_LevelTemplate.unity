@@ -1240,6 +1240,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa28781fe5e2a8a4ab8d67278f6f2cc7, type: 3}
+--- !u!114 &342665741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4839753783270093509, guid: aa28781fe5e2a8a4ab8d67278f6f2cc7,
+    type: 3}
+  m_PrefabInstance: {fileID: 342665740}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d892635dc02cbb6479f8a31208984702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &370048892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1711,7 +1723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441075822}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 13, z: -13}
+  m_LocalPosition: {x: -20, y: 20, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1743,10 +1755,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7b26f93842fa14695828ffe65ecda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Track: {fileID: 0}
+  m_Track: {fileID: 342665741}
   m_Offset: {x: 0, y: 20, z: -12.5}
   m_Position: 0
   m_Smoothing: 0.125
+  m_TrackProgress: 0
   m_OverrideFollowTarget: {fileID: 0}
 --- !u!114 &441075829
 MonoBehaviour:
@@ -7437,7 +7450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2108057315
 Transform:
   m_ObjectHideFlags: 0

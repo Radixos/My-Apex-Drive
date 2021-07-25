@@ -41,7 +41,7 @@ public class CameraManager : MonoBehaviour
 
     private void Update()
     {
-        if(!Application.isPlaying)
+        if(!Application.isPlaying && m_Track != null)
         {
             transform.position = m_Track.Evaluate(m_TrackProgress).pos + m_Offset;
         }
