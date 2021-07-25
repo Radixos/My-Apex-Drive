@@ -13,6 +13,7 @@ public class Player
 
     [SerializeField] private int m_PlayerID;
     [SerializeField] private int m_ControllerID = -1;
+    [SerializeField] private ControllerType m_ControllerType = ControllerType.None;
     private bool m_IsConnected;
     private Color m_PlayerColor;
     public int RoundWins { get; private set; }
