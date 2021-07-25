@@ -32,7 +32,7 @@ public class CameraManager : MonoBehaviour
                 Player leadPlayer = RaceManager.Instance.FirstPlayer;
                 if(leadPlayer != null) targetPosition = m_Track.GetNearestPositionOnSpline(leadPlayer.Car.Position, 10, 5);
             }
-            else if(m_OverrideFollowTarget != null) targetPosition = m_Track.GetNearestPositionOnSpline(m_OverrideFollowTarget.position, 10, 5);
+            if(m_OverrideFollowTarget != null) targetPosition = m_Track.GetNearestPositionOnSpline(m_OverrideFollowTarget.position, 10, 5);
             Vector3 desiredPosition =  targetPosition + m_Offset;
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, m_Smoothing);
             transform.position = smoothedPosition;

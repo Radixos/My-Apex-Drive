@@ -26,6 +26,10 @@ public class Abilities : CarModule
     FMOD.Studio.PLAYBACK_STATE pbsdef;
     FMOD.Studio.PLAYBACK_STATE pbsboost;
 
+    [SerializeField] private ParticleSystem m_BoostVFX;
+    [SerializeField] private ParticleSystem m_AttackVFX;
+    [SerializeField] private ParticleSystem m_ShieldVFX;
+
     //Used to detect if any abilities are active or not to prevent the player from using more than one ability
     private bool abilitiesActive;
     public int sfxStop;
@@ -46,29 +50,17 @@ public class Abilities : CarModule
         }
     }
 
-    /// <summary>
-    /// Handles ability inputs
-    /// </summary>
-    void AbilityLogic()
+    private void AbilityLogic()
     {
-        // Two abilities that stay active as
-        // long as 
         if (Stats.PowerAmount <= 0)
         {
             Stats.Shield.SetActive(false);
-
-            Stats.CurrentBoostMultiplier = 1;
         }
 
         if (Input.GetButtonUp(PlayerInput.PowerAInput))
         {
             Stats.InitialShieldPowerDepleted = false;
             Stats.Shield.SetActive(false);
-        }
-
-        if (Input.GetButtonUp(PlayerInput.BoostInput))
-        {
-            Stats.CurrentBoostMultiplier = 1;
         }
 
         // Active time of Stats.Rampage
@@ -104,12 +96,12 @@ public class Abilities : CarModule
                 Stats.RampageTimer = 0.0f;
                 Stats.PowerAmount -= 0.5f;
             }
-            // Boost power up
-            // Hold or tap?
-            else if (Input.GetButton(PlayerInput.BoostInput)) //&& Stats.PowerAmount >= 0.3f)
+
+            if(Input.GetButtonDown(PlayerInput.BoostInput) && Stats.PowerAmount >= 0.25f)
             {
-                Stats.CurrentBoostMultiplier = Stats.BoostMultiplier;
-                Stats.PowerAmount -= Time.deltaTime * 0.4f;
+                Rigidbody.AddForce(transform.forward * 10000.0f);
+                if(m_BoostVFX != null) m_BoostVFX.Play();
+                Stats.PowerAmount -= 0.25f;
             }
         }
     }
