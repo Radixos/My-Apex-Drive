@@ -99,7 +99,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 5
+    axis: 6
     joyNum: 1
   - serializedVersion: 3
     m_Name: PS4 Vertical Axis Controller 1
@@ -179,7 +179,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 5
+    axis: 6
     joyNum: 2
   - serializedVersion: 3
     m_Name: PS4 Vertical Axis Controller 2
@@ -259,7 +259,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 5
+    axis: 6
     joyNum: 3
   - serializedVersion: 3
     m_Name: PS4 Vertical Axis Controller 3
@@ -273,7 +273,7 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 1
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 3
@@ -339,7 +339,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 5
+    axis: 6
     joyNum: 4
   - serializedVersion: 3
     m_Name: PS4 Vertical Axis Controller 4
@@ -1425,7 +1425,7 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 1
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 1
@@ -1441,9 +1441,9 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 1
-    invert: 1
+    invert: 0
     type: 2
-    axis: 7
+    axis: 6
     joyNum: 1
   - serializedVersion: 3
     m_Name: '[ Controller 2 ]'
@@ -1505,7 +1505,7 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 1
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 2
@@ -1523,7 +1523,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 7
+    axis: 6
     joyNum: 2
   - serializedVersion: 3
     m_Name: '[ Controller 3 ]'
@@ -1585,7 +1585,7 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 1
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 3
@@ -1603,7 +1603,7 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 7
+    axis: 6
     joyNum: 3
   - serializedVersion: 3
     m_Name: '[ Controller 4 ]'
@@ -1681,9 +1681,9 @@ InputManager:
     dead: 0.2
     sensitivity: 1
     snap: 1
-    invert: 1
+    invert: 0
     type: 2
-    axis: 7
+    axis: 6
     joyNum: 4
   - serializedVersion: 3
     m_Name: ' '
@@ -2449,9 +2449,9 @@ InputManager:
     dead: 0.2
     sensitivity: 10
     snap: 0
-    invert: 1
+    invert: 0
     type: 2
-    axis: 4
+    axis: 8
     joyNum: 1
   - serializedVersion: 3
     m_Name: Xbox Shoulder Axis 2 Controller 1
@@ -2465,9 +2465,9 @@ InputManager:
     dead: 0.2
     sensitivity: 10
     snap: 0
-    invert: 1
+    invert: 0
     type: 2
-    axis: 5
+    axis: 9
     joyNum: 1
   - serializedVersion: 3
     m_Name: '[ Controller 2 ]'
@@ -2497,9 +2497,9 @@ InputManager:
     dead: 0.2
     sensitivity: 10
     snap: 0
-    invert: 1
+    invert: 0
     type: 2
-    axis: 4
+    axis: 8
     joyNum: 2
   - serializedVersion: 3
     m_Name: Xbox Shoulder Axis 2 Controller 2
@@ -2513,9 +2513,9 @@ InputManager:
     dead: 0.2
     sensitivity: 10
     snap: 0
-    invert: 1
+    invert: 0
     type: 2
-    axis: 5
+    axis: 9
     joyNum: 2
   - serializedVersion: 3
     m_Name: '[ Controller 3 ]'
@@ -2545,9 +2545,9 @@ InputManager:
     dead: 0.2
     sensitivity: 10
     snap: 0
-    invert: 1
+    invert: 0
     type: 2
-    axis: 4
+    axis: 8
     joyNum: 3
   - serializedVersion: 3
     m_Name: Xbox Shoulder Axis 2 Controller 3
@@ -2561,9 +2561,9 @@ InputManager:
     dead: 0.2
     sensitivity: 10
     snap: 0
-    invert: 1
+    invert: 0
     type: 2
-    axis: 5
+    axis: 9
     joyNum: 3
   - serializedVersion: 3
     m_Name: '[ Controller 4 ]'
@@ -2593,9 +2593,9 @@ InputManager:
     dead: 0.2
     sensitivity: 10
     snap: 0
-    invert: 1
+    invert: 0
     type: 2
-    axis: 4
+    axis: 8
     joyNum: 4
   - serializedVersion: 3
     m_Name: Xbox Shoulder Axis 2 Controller 4
@@ -2609,9 +2609,9 @@ InputManager:
     dead: 0.2
     sensitivity: 10
     snap: 0
-    invert: 1
+    invert: 0
     type: 2
-    axis: 5
+    axis: 9
     joyNum: 4
   - serializedVersion: 3
     m_Name: Enable Debug Button 1
