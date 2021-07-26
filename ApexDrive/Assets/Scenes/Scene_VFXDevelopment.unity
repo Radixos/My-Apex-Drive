@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 4283ccacb714da4499902ea19eddb5d7,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2300,6 +2300,7 @@ MonoBehaviour:
     State: 0
     m_PlayerID: 0
     m_ControllerID: 1
+    m_ControllerType: 1
     Car: {fileID: 0}
     TrackProgress: 0
     Position: 0

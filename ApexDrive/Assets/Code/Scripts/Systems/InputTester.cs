@@ -35,10 +35,10 @@ public class InputTester : MonoBehaviour
                 Debug.Log("[InputTester::ProcessInputs()] Controller " + i + " ("+ m_Controllers[i-1].ToString()+") just submitted a "+ InputManager.GetReadableAction(m_Controllers[i-1],InputAction.Button_Shoulder_1)+" event.");
             if(Input.GetButtonDown(InputManager.GetInputManagerString(m_Controllers[i-1], InputAction.Button_Shoulder_2, i))) 
                 Debug.Log("[InputTester::ProcessInputs()] Controller " + i + " ("+ m_Controllers[i-1].ToString()+") just submitted a "+ InputManager.GetReadableAction(m_Controllers[i-1],InputAction.Button_Shoulder_2)+" event.");
-            if(Input.GetButtonDown(InputManager.GetInputManagerString(m_Controllers[i-1], InputAction.Button_Shoulder_3, i))) 
-                Debug.Log("[InputTester::ProcessInputs()] Controller " + i + " ("+ m_Controllers[i-1].ToString()+") just submitted a "+ InputManager.GetReadableAction(m_Controllers[i-1],InputAction.Button_Shoulder_3)+" event.");
-            if(Input.GetButtonDown(InputManager.GetInputManagerString(m_Controllers[i-1], InputAction.Button_Shoulder_4, i))) 
-                Debug.Log("[InputTester::ProcessInputs()] Controller " + i + " ("+ m_Controllers[i-1].ToString()+") just submitted a "+ InputManager.GetReadableAction(m_Controllers[i-1],InputAction.Button_Shoulder_4)+" event.");
+            // if(Input.GetButtonDown(InputManager.GetInputManagerString(m_Controllers[i-1], InputAction.Button_Shoulder_3, i))) 
+            //     Debug.Log("[InputTester::ProcessInputs()] Controller " + i + " ("+ m_Controllers[i-1].ToString()+") just submitted a "+ InputManager.GetReadableAction(m_Controllers[i-1],InputAction.Button_Shoulder_3)+" event.");
+            // if(Input.GetButtonDown(InputManager.GetInputManagerString(m_Controllers[i-1], InputAction.Button_Shoulder_4, i))) 
+            //     Debug.Log("[InputTester::ProcessInputs()] Controller " + i + " ("+ m_Controllers[i-1].ToString()+") just submitted a "+ InputManager.GetReadableAction(m_Controllers[i-1],InputAction.Button_Shoulder_4)+" event.");
 
 
             if(Mathf.Abs(Input.GetAxis(InputManager.GetInputManagerString(m_Controllers[i-1], InputAction.Axis_Horizontal, i))) >= 0.2) 

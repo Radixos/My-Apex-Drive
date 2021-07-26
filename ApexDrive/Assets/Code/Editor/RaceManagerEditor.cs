@@ -20,8 +20,15 @@ public class RaceManagerEditor : Editor
             Handles.BeginGUI();
             if(GUILayout.Button("Spawn Test Car"))
             {
-                if(GameManager.Instance == null || GameManager.Instance.PlayerCount >= 4) return;
-		        Player player  = GameManager.Instance.AddPlayer(GameManager.Instance.PlayerCount + 1);
+                if(GameManager.Instance == null || GameManager.Instance.PlayerCount >= GameManager.MaxPlayers) return;
+
+                string[] controllerNames = Input.GetJoystickNames();
+                if(GameManager.Instance.PlayerCount >= controllerNames.Length) return;
+
+                ControllerType controllerType = ControllerType.Playstation;
+                if(controllerNames[GameManager.Instance.PlayerCount].ToLower().Contains("xbox")) controllerType = ControllerType.Xbox;
+
+		        Player player  = GameManager.Instance.AddPlayer(GameManager.Instance.PlayerCount + 1, controllerType);
                 m_RaceManager.SpawnPlayer(player, true);
             }
             Handles.EndGUI();

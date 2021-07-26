@@ -98,7 +98,7 @@ public class CarController : CarModule
     void HandleAnalogueInput()
     {
         horizontal = Mathf.Abs(Input.GetAxisRaw(PlayerInput.HorizontalInput)) > 0.15f ? Input.GetAxisRaw(PlayerInput.HorizontalInput) : 0;
-        vertical = Input.GetButton(PlayerInput.AccelerateInput) ? 1 : 0;
+        vertical = Input.GetAxis(PlayerInput.AccelerateInput) > 0.5f ? 1 : 0;
         vertical -= Input.GetButton(PlayerInput.BrakeInput) ? 0.5f : 0;
     }
 
