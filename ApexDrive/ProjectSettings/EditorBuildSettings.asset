@@ -8,12 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/VictoryScene.unity
-    guid: a6cf28cc6791db84a972953071f29c3a
   - enabled: 0
-    path: Assets/Scenes/LevelDesignScene.unity
-    guid: 51aebb995b6c807478640e16fefe774e
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Build Scenes/Scene_Menu.unity
     guid: ccc4197c365e3ed45a02988977f5f80e
@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Build Scenes/Scene_Level_01.unity
     guid: b153108968db2444c99a77c75797d73e
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/Scene_Level_02.unity
+    guid: 81436d91a3cdcbf419628de63b92f41e
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/Scene_Level_03.unity
+    guid: b10c3dcc8f4b2284dbc1835eae88870f
   m_configObjects: {}
