@@ -9,6 +9,7 @@ public class GameManager : GameSystem
 {
     public static GameManager Instance;
     public const int MaxPlayers = 4;
+    public const int Rounds = 3;
 
     [SerializeField] private Player[] m_Players;
     [SerializeField] private List<Player> m_ConnectedPlayers;
@@ -32,14 +33,24 @@ public class GameManager : GameSystem
         }
     }
 
+    private void OnEnable()
+    {
+        Player.OnGameWin += ResetRoundScores;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnGameWin = ResetRoundScores;
+    }
+
     ///<returns>Returns the PlayerID of the newly created player. Returns null if controller is already in use.</returns>
-    public Player AddPlayer(int controllerID)
+    public Player AddPlayer(int controllerID, ControllerType controllerType)
     {
         if(m_Players.Where(x => x.ControllerID == controllerID).FirstOrDefault() != null) return null; // controller already in use
         Player player = m_Players.Where(x => !x.IsConnected).FirstOrDefault();
-        player.AssignController(controllerID);   
+        player.AssignController(controllerID, controllerType);   
         m_ConnectedPlayers.Add(player);
-        Debug.Log("Player " + player.PlayerReadableID + " joined the lobby using controller " + player.ControllerID);
+        Debug.Log("Player " + player.PlayerReadableID + " joined the lobby using controller " + player.ControllerID + " (" + controllerType.ToString() + ")");
         if(OnPlayerConnected != null) OnPlayerConnected(player);
         return player;
     }
@@ -63,26 +74,6 @@ public class GameManager : GameSystem
         return m_Players.Where(x => x.ControllerID == controllerID).FirstOrDefault();
     }
 
-    public void SubmitRoundWinner(int playerID)
-    {
-        m_Players[playerID].WinRound();
-    }
-
-    public void SubmitGameWinner(int playerID)
-    {
-        m_Players[playerID].WinGame();
-    }
-
-    public void SubmitRoundWinner(Player player)
-    {
-        player.WinRound();
-    }
-
-    public void SubmitGameWinner(Player player)
-    {
-        player.WinGame();
-    }
-
     private IEnumerator RemovePlayerAtEndOfFrame(Player player)
     {
         yield return null;
@@ -92,5 +83,20 @@ public class GameManager : GameSystem
             m_ConnectedPlayers.Remove(player);
             if(OnPlayerDisconnected != null) OnPlayerDisconnected(player);
         }
+    }
+
+    private void ResetRoundScores(Player winner)
+    {
+        foreach(Player player in m_Players) player.ResetRoundScore();
+    }
+
+    private void OnControllerConnected()
+    {
+
+    }
+
+    private void OnControllerDisconnected()
+    {
+        
     }
 }

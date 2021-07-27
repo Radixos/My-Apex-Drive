@@ -7,13 +7,19 @@ using UnityEngine;
 [System.Serializable]
 public class Player
 {
+    public enum PlayerState {Menu, Racing, Eliminated}
+    public PlayerState State = PlayerState.Menu;
+
+
     [SerializeField] private int m_PlayerID;
     [SerializeField] private int m_ControllerID = -1;
+    [SerializeField] private ControllerType m_ControllerType = ControllerType.None;
     private bool m_IsConnected;
     private Color m_PlayerColor;
     public int RoundWins { get; private set; }
     public int GameWins { get; private set; }
     public string Name { get; private set; }
+    public ControllerType ControllerType { get { return m_ControllerType; } }
 
     public CoreCarModule Car;
 
@@ -28,6 +34,7 @@ public class Player
     public static PlayerEvent OnGameWin;
     public static PlayerEvent OnGameScoreChange;
 
+
     // Race Time Variables
     public float TrackProgress = 0.0f;
     public int Position = 0;
@@ -40,9 +47,10 @@ public class Player
         m_PlayerColor = playerColor;
     }
 
-    public void AssignController(int controllerID)
+    public void AssignController(int controllerID, ControllerType controllerType)
     {
         m_ControllerID = controllerID;
+        m_ControllerType = controllerType;
         m_IsConnected = true;
     }
 
@@ -56,20 +64,23 @@ public class Player
     {
         RoundWins ++;
         if(OnRoundWin != null) OnRoundWin(this);
-        if(OnGameScoreChange != null) OnGameScoreChange(this);
+        if(RoundWins >= GameManager.Rounds && OnGameWin != null) OnGameWin(this);
     }
 
     public void WinGame()
     {
         GameWins ++;
         if(OnGameWin != null) OnGameWin(this);
-        if(OnGameScoreChange != null) OnGameScoreChange(this);
     }
 
     public void ResetScore()
     {
         RoundWins = 0;
         GameWins = 0;
-        if(OnGameScoreChange != null) OnGameScoreChange(this);
+    }
+
+    public void ResetRoundScore()
+    {
+        RoundWins = 0;
     }
 }

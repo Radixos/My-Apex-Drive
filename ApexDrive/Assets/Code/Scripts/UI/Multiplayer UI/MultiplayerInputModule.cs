@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 
 [DefaultExecutionOrder(100)]
-[RequireComponent(typeof(MultiplayerSelectionEventSystem))]
+[RequireComponent(typeof(MultiplayerEventSystem))]
 public class MultiplayerInputModule : BaseInputModule
 {
     [SerializeField] private MultiplayerCursor m_CursorPrefab;
@@ -16,47 +16,44 @@ public class MultiplayerInputModule : BaseInputModule
 	[SerializeField] private Vector2 m_CursorStagger = new Vector2(-30.0f, 0.0f);
     [SerializeField] private float m_AxisRepeatDelay = 0.25f;
 
-	[SerializeField] private string m_VerticalAxisPrefix = "Vertical ";
-	[SerializeField] private string m_HorizontalAxisPrefix = "Horizontal ";
-	[SerializeField] private string m_SubmitButtonPrefix = "Submit ";
-	[SerializeField] private string m_CancelButtonPrefix = "Cancel ";
+	[SerializeField] private InputAction m_VerticalAxisAction = InputAction.Axis_Vertical;
+	[SerializeField] private InputAction m_HorizontalAxisAction = InputAction.Axis_Horizontal;
+	[SerializeField] private InputAction m_SubmitAction = InputAction.Button_Face_1;
+	[SerializeField] private InputAction m_CancelAction = InputAction.Button_Face_2;
 	
-	private MultiplayerSelectionEventSystem m_MultiplayerEventSystem;
-	private MultiplayerCursor[] m_Cursors = new MultiplayerCursor[GameManager.MaxPlayers];
-	private float[] currentRepeatDelay = new float[GameManager.MaxPlayers];
+	private MultiplayerEventSystem m_MultiplayerEventSystem;
+	private MultiplayerCursor[] m_Cursors;
+	private float[] m_RepeatDelay;
 
 	protected override void Awake()
-    {
-        if(m_CursorPool == null) Debug.LogWarning("[MultiplayerInputModule] :: Please assign a rect transform to be the pool for cursors");
-		m_MultiplayerEventSystem = GetComponent<MultiplayerSelectionEventSystem>();
+	{
+		base.Awake();
+		Initialise();
+	}
+
+	private void Initialise()
+	{
+		if(m_CursorPool == null) Debug.LogWarning("[MultiplayerInputModule::Initialise()] Please assign a rect transform to be the pool for cursors");
+		m_MultiplayerEventSystem = GetComponent<MultiplayerEventSystem>();
+
+		foreach(Transform cursor in m_CursorPool)
+		{
+			Destroy(cursor);
+		}
+
+		m_Cursors = new MultiplayerCursor[GameManager.MaxPlayers];
+		m_RepeatDelay = new float[GameManager.MaxPlayers];
+
 		foreach(Player player in GameManager.Instance.Players)
         {
             m_Cursors[player.PlayerID] = Instantiate(m_CursorPrefab, m_CursorPool);
 			m_Cursors[player.PlayerID].SetColor(GameManager.Instance.PlayerColors[player.PlayerID]);
 			m_Cursors[player.PlayerID].name  = "Cursor (Player " + player.PlayerReadableID + ")";
         }
-
-		foreach(Player player in GameManager.Instance.ConnectedPlayers)
-		{
-			m_Cursors[player.PlayerID].GetComponent<Animator>().SetBool("IsVisible", true);
-		}
 	}
 
-	protected override void OnEnable()
+	public MultiplayerCursor GetCursor(int index)
 	{
-		base.OnEnable();
-		GameManager.OnPlayerConnected += OnPlayerConnected;
-		GameManager.OnPlayerDisconnected += OnPlayerDisconnected;
-	}
-
-	protected override void OnDisable()
-	{
-		base.OnDisable();
-		GameManager.OnPlayerConnected -= OnPlayerConnected;
-		GameManager.OnPlayerDisconnected -= OnPlayerDisconnected;
-	}
-
-	public MultiplayerCursor GetCursor(int index){
 		return m_Cursors[index];
 	}
 
@@ -65,26 +62,26 @@ public class MultiplayerInputModule : BaseInputModule
 		foreach(Player player in GameManager.Instance.ConnectedPlayers)
 		{
 			int i = player.PlayerID;
-			if(!m_MultiplayerEventSystem.LockedController(i) && currentRepeatDelay[i] >= m_AxisRepeatDelay){
-				if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) > 0.0){
+			if(!m_MultiplayerEventSystem.LockedController(i) && m_RepeatDelay[i] >= m_AxisRepeatDelay){
+				if(Input.GetAxis(InputManager.GetInputManagerString(player.ControllerType, m_VerticalAxisAction, player.ControllerID)) > 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Up;
-					currentRepeatDelay[i] = 0f;
+					m_RepeatDelay[i] = 0f;
 				}
-				else if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) < 0.0){
+				else if(Input.GetAxis(InputManager.GetInputManagerString(player.ControllerType, m_VerticalAxisAction, player.ControllerID)) < 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Down;
-					currentRepeatDelay[i] = 0f;
+					m_RepeatDelay[i] = 0f;
 				}
-				else if(Input.GetAxis(m_HorizontalAxisPrefix + player.ControllerID) < 0.0){
+				else if(Input.GetAxis(InputManager.GetInputManagerString(player.ControllerType, m_HorizontalAxisAction, player.ControllerID)) < 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Left;
-					currentRepeatDelay[i] = 0f;
+					m_RepeatDelay[i] = 0f;
 				}
-				else if(Input.GetAxis(m_HorizontalAxisPrefix + player.ControllerID) > 0.0){
+				else if(Input.GetAxis(InputManager.GetInputManagerString(player.ControllerType, m_HorizontalAxisAction, player.ControllerID)) > 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Right;
-					currentRepeatDelay[i] = 0f;
+					m_RepeatDelay[i] = 0f;
 				}
 				else
 				{
@@ -126,7 +123,7 @@ public class MultiplayerInputModule : BaseInputModule
 				FMODUnity.RuntimeManager.PlayOneShot("event:/UI/UI Move");
 			}
 
-			if(Input.GetButtonDown(m_SubmitButtonPrefix + player.ControllerID)){
+			if(Input.GetButtonDown(InputManager.GetInputManagerString(player.ControllerType, m_SubmitAction, player.ControllerID))){
 				if(!m_MultiplayerEventSystem.LockedController(i)){
 					MultiplayerEventData data = new MultiplayerEventData(m_MultiplayerEventSystem, player);
 					IMultiplayerSubmitHandler submitHandler = m_MultiplayerEventSystem.GetSelected(i).GetComponent<IMultiplayerSubmitHandler>();
@@ -137,7 +134,7 @@ public class MultiplayerInputModule : BaseInputModule
 					FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Submit");
 				}
 			}
-			else if(Input.GetButtonDown(m_CancelButtonPrefix + player.ControllerID)){
+			else if(Input.GetButtonDown(InputManager.GetInputManagerString(player.ControllerType, m_SubmitAction, player.ControllerID))){
 				if(m_MultiplayerEventSystem.LockedController(i)){
 					m_MultiplayerEventSystem.UnlockController(i);
 					FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Cancel");
@@ -146,36 +143,43 @@ public class MultiplayerInputModule : BaseInputModule
 				IMultiplayerCancelHandler cancelHandler = m_MultiplayerEventSystem.GetSelected(i).GetComponent<IMultiplayerCancelHandler>();
 				if(cancelHandler != null) cancelHandler.OnCancel(data);
 			}
-			currentRepeatDelay[i] += Time.deltaTime;
+			m_RepeatDelay[i] += Time.deltaTime;
 		}
 	}
 
 	public void UpdateCursorPositions()
 	{
-		foreach(Player player in GameManager.Instance.ConnectedPlayers)
-		{	int playerID = player.PlayerID;
-			Selectable selection = m_MultiplayerEventSystem.GetSelected(playerID);
-			Vector2 offset = m_CursorOffsetFromSelection;
-			for(int i = 0; i < GameManager.MaxPlayers; i++)
+		for(int i = 0; i < m_Cursors.Length; i++)
+		{
+			if(m_Cursors[i].IsActive)
 			{
-				if(i < playerID && GameManager.Instance.Players[i].IsConnected && m_MultiplayerEventSystem.GetSelected(i) == selection) offset += m_CursorStagger;
-			}
-			RectTransform cursorRT = m_Cursors[playerID].transform as RectTransform;
-			RectTransform selectionRT = selection.transform as RectTransform;
+				Selectable selection = m_MultiplayerEventSystem.GetSelected(i);
+				Vector2 offset = m_CursorOffsetFromSelection;
+				for(int j = 0; j < m_Cursors.Length; j++)
+				{
+					if(j < i && m_Cursors[j].IsActive && m_MultiplayerEventSystem.GetSelected(j) == selection) offset += m_CursorStagger;
+				}
 
-			cursorRT.position = new Vector3(selectionRT.position.x + offset.x - selectionRT.sizeDelta.x / 2.0f, selectionRT.position.y + offset.y);
+				RectTransform cursorRT = m_Cursors[i].transform as RectTransform;
+				RectTransform selectionRT = selection.transform as RectTransform;
+				cursorRT.position = new Vector3(selectionRT.position.x + offset.x - selectionRT.sizeDelta.x / 2.0f, selectionRT.position.y + offset.y);
+			}
 		}
 	}
 
-	public void OnPlayerConnected(Player player)
+	public void AddPlayerCursor(int playerID)
 	{
-		MultiplayerCursor cursor = m_Cursors[player.PlayerID];
+		MultiplayerCursor cursor = m_Cursors[playerID];
 		cursor.GetComponent<Animator>().SetBool("IsVisible", true);
+		cursor.IsActive = true;
+		UpdateCursorPositions();
 	}
 
-	public void OnPlayerDisconnected(Player player)
+	public void RemovePlayerCursor(int playerID)
 	{
-		MultiplayerCursor cursor = m_Cursors[player.PlayerID];
+		MultiplayerCursor cursor = m_Cursors[playerID];
 		cursor.GetComponent<Animator>().SetBool("IsVisible", false);
+		cursor.IsActive = false;
+		UpdateCursorPositions();
 	}
 }

@@ -98,7 +98,7 @@ public class CarController : CarModule
     void HandleAnalogueInput()
     {
         horizontal = Mathf.Abs(Input.GetAxisRaw(PlayerInput.HorizontalInput)) > 0.15f ? Input.GetAxisRaw(PlayerInput.HorizontalInput) : 0;
-        vertical = Input.GetButton(PlayerInput.AccelerateInput) ? 1 : 0;
+        vertical = Input.GetAxis(PlayerInput.AccelerateInput) > 0.5f ? 1 : 0;
         vertical -= Input.GetButton(PlayerInput.BrakeInput) ? 0.5f : 0;
     }
 
@@ -227,7 +227,7 @@ public class CarController : CarModule
         }
 
         // Removed, might add it back - if(isDrifting) Stats.MaxSpeed = vertical * Stats.DriftingAcceleration * Stats.CurrentBoostMultiplier * Stats.CurrentSurfaceMultiplier, else
-        Stats.MaxSpeed = vertical * Stats.Acceleration * Stats.CurrentBoostMultiplier * Stats.CurrentSurfaceMultiplier;
+        Stats.MaxSpeed = vertical * Stats.Acceleration * Stats.CurrentSurfaceMultiplier;
 
         // Slowly accelerate/decelerate.
         Stats.CurrSpeed = Mathf.SmoothStep(Stats.CurrSpeed, Stats.MaxSpeed, Time.deltaTime * 9f);
@@ -238,11 +238,11 @@ public class CarController : CarModule
         // Forward Acceleration + Side Acceleration if drifting
         if (Stats.IsDrifting)
         {
-            this.Rigidbody.AddForce(transform.forward * Stats.CurrSpeed * Stats.CurrentBoostMultiplier, ForceMode.Acceleration);
+            this.Rigidbody.AddForce(transform.forward * Stats.CurrSpeed , ForceMode.Acceleration);
         }
         else
         {
-            this.Rigidbody.AddForce(transform.forward * Stats.CurrSpeed * Stats.CurrentBoostMultiplier * (1-sideBoostRamp), ForceMode.Acceleration);
+            this.Rigidbody.AddForce(transform.forward * Stats.CurrSpeed * (1-sideBoostRamp), ForceMode.Acceleration);
             sfxEngine.setParameterByID(acc, 1f);
         }
 

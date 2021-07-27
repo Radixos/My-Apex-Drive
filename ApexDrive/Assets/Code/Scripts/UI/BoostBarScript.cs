@@ -1,82 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class BoostBarScript : MonoBehaviour
 {
-    [SerializeField] private GameObject barCollection; //overarching use variables
-    [SerializeField] private RaceManager vehicleManager;
-    private int vehicleNum;
-
     private GameObject[] boostBarObjects;
-    private Slider[] boostBarSliders; //object children
-    private TextMeshProUGUI[] boostBarText;
-    private Image[] boostBarImages;
+    [SerializeField] private Image[] m_Meters;
+    [SerializeField] private GameObject[] m_HUDs;
 
-    void Start()
+    private void Start()
     {
-        //barCollection = GetComponent<Canvas>().transform.GetChild(0).gameObject;
-        vehicleNum = vehicleManager.raceCars.Count;
-        InitBarObjects();
+        UpdateUIElements(null);
     }
 
-    private void InitBarObjects()
+    private void OnEnable()
     {
-        boostBarObjects = new GameObject[vehicleNum]; //initialise objects and their children
-        boostBarSliders = new Slider[vehicleNum];
-        boostBarText = new TextMeshProUGUI[vehicleNum];
-        boostBarImages = new Image[vehicleNum];
+        GameManager.OnPlayerConnected += UpdateUIElements;
+        GameManager.OnPlayerDisconnected += UpdateUIElements;
+    }
 
-        for (int i = 0; i < vehicleNum; i++)
+    private void OnDisable()
+    {
+        GameManager.OnPlayerConnected -= UpdateUIElements;
+        GameManager.OnPlayerDisconnected -= UpdateUIElements;
+    }
+
+    private void UpdateUIElements(Player player)
+    {
+        for(int i = 0; i < 4; i++)
         {
-            boostBarObjects[i] = barCollection.transform.GetChild(i).gameObject;
-            boostBarObjects[i].SetActive(true);
-            boostBarSliders[i] = boostBarObjects[i].GetComponent<Slider>();
-            boostBarText[i] = boostBarObjects[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-            boostBarImages[i] = boostBarObjects[i].transform.GetChild(0).GetComponent<Image>();
+            if(i < GameManager.Instance.PlayerCount) m_HUDs[i].SetActive(true);
+            else m_HUDs[i].SetActive(false);
         }
     }
 
-    void Update()
+    private void Update()
     {
-        SetSliders();
-        ApplyText();
-    }
-    void SetSliders()
-    {
-        for (int i = 0; i < vehicleNum; i++)
+        for(int i = 0; i < GameManager.Instance.PlayerCount; i++)
         {
-            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
-            CarStats vehicleStats = currentVehicle.gameObject.GetComponent<CarStats>();
-            boostBarSliders[i].value = vehicleStats.PowerAmount;
-            boostBarImages[i].color = Color.Lerp(Color.yellow, Color.red, boostBarSliders[i].value);
-        }
-    }
-
-    private void ApplyText()
-    {
-        for (int i = 0; i < vehicleNum; i++)
-        {
-            PositionUpdate currentVehicle = vehicleManager.ogRaceCars[i];
-            // mani's update
-            int pos = currentVehicle.GetPosition();
-            switch (pos)
-            {
-                case 1:
-                    boostBarText[i].text = "1st";
-                    break;
-                case 2:
-                    boostBarText[i].text = "2nd";
-                    break;
-                case 3:
-                    boostBarText[i].text = "3rd";
-                    break;
-                case 4:
-                    boostBarText[i].text = "4th";
-                    break;
-            }
+            if(GameManager.Instance.ConnectedPlayers[i].Car != null) m_Meters[i].fillAmount = GameManager.Instance.ConnectedPlayers[i].Car.Stats.PowerAmount;
         }
     }
 }
