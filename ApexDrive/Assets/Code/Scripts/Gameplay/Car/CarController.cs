@@ -119,8 +119,8 @@ public class CarController : CarModule
         }
 
         // Used to determine if the car is in the air
-        Stats.InAir = !Physics.Raycast(transform.position, Vector3.down, out hit, 4f);
-        Debug.DrawRay(transform.position, Vector3.down, Color.red);
+        Stats.InAir = !Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 1.5f);
+        Debug.DrawRay(transform.position + Vector3.up, Vector3.down * 1.5f, Color.red);
 
         // Used to determine what surface the car is on
         if (hit.collider == null) return;
@@ -162,10 +162,10 @@ public class CarController : CarModule
             model.localEulerAngles = new Vector3(model.localEulerAngles.x, model.localEulerAngles.y, horizontal * Stats.CurrSpeed * 0.1f);
         }
 
-        foreach (TrailRenderer trail in trails)
-        {
-            trail.emitting = Stats.IsDrifting;
-        }
+        // foreach (TrailRenderer trail in trails)
+        // {
+        //     trail.emitting = Stats.IsDrifting;
+        // }
     }
 
     /// <summary>

@@ -134,7 +134,7 @@ public class MultiplayerInputModule : BaseInputModule
 					FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Submit");
 				}
 			}
-			else if(Input.GetButtonDown(InputManager.GetInputManagerString(player.ControllerType, m_SubmitAction, player.ControllerID))){
+			else if(Input.GetButtonDown(InputManager.GetInputManagerString(player.ControllerType, m_CancelAction, player.ControllerID))){
 				if(m_MultiplayerEventSystem.LockedController(i)){
 					m_MultiplayerEventSystem.UnlockController(i);
 					FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Cancel");

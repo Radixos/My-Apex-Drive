@@ -44,6 +44,7 @@ public class Abilities : CarModule
     {
         AbilityLogic();
         SfxAbilities();
+        if(Stats.CanDrive) Stats.PowerAmount += 0.05f * Time.deltaTime;
         if (Stats.PowerAmount < 0)
         {
             Stats.PowerAmount = 0;
@@ -52,52 +53,49 @@ public class Abilities : CarModule
 
     private void AbilityLogic()
     {
-        if (Stats.PowerAmount <= 0)
-        {
-            Stats.Shield.SetActive(false);
-        }
-
-        if (Input.GetButtonUp(PlayerInput.PowerAInput))
-        {
-            Stats.InitialShieldPowerDepleted = false;
-            Stats.Shield.SetActive(false);
-        }
+        // if (Input.GetButtonUp(PlayerInput.ShieldInput))
+        // {
+        //     Stats.InitialShieldPowerDepleted = false;
+        //     Stats.Shield.SetActive(false);
+        // }
 
         // Active time of Stats.Rampage
-        if (Stats.Rampage.activeSelf)
-        {
-            if (Stats.RampageTimer >= Stats.RampageLifetime)
-                Stats.Rampage.SetActive(false);
-            else
-                Stats.RampageTimer += Time.deltaTime;
-        }
+        // if (Stats.Rampage.activeSelf)
+        // {
+        //     if (Stats.RampageTimer >= Stats.RampageLifetime)
+        //         Stats.Rampage.SetActive(false);
+        //     else
+        //         Stats.RampageTimer += Time.deltaTime;
+        // }
 
         if (Stats.PowerAmount > 0)
         {
             // Activate one ability at a times
             // Shield power up
-            if (Input.GetButton(PlayerInput.PowerAInput) && abilitiesActive == false)
-            {
-                if (!Stats.InitialShieldPowerDepleted)
-                {
-                    Stats.PowerAmount -= 0.15f;
-                    Stats.InitialShieldPowerDepleted = true;
-                    Stats.Shield.SetActive(true);
-                }
-                Stats.PowerAmount -= Time.deltaTime * 0.5f;
-            }
-            // Attack power up
-            else if (Input.GetButtonDown(PlayerInput.PowerBInput) &&
-                Stats.PowerAmount >= 0.5f &&
-                Stats.Shield.activeSelf == false &&
-                Stats.Rampage.activeSelf == false)
-            {
-                Stats.Rampage.SetActive(true);
-                Stats.RampageTimer = 0.0f;
-                Stats.PowerAmount -= 0.5f;
-            }
+            // if (Input.GetButton(PlayerInput.PowerAInput) && abilitiesActive == false)
+            // {
+            //     if (!Stats.InitialShieldPowerDepleted)
+            //     {
+            //         Stats.PowerAmount -= 0.15f;
+            //         Stats.InitialShieldPowerDepleted = true;
+            //         Stats.Shield.SetActive(true);
+            //     }
+            //     Stats.PowerAmount -= Time.deltaTime * 0.5f;
+            // }
 
-            if(Input.GetButtonDown(PlayerInput.BoostInput) && Stats.PowerAmount >= 0.25f)
+
+            // Attack power up
+            // else if (Input.GetButtonDown(PlayerInput.PowerBInput) &&
+            //     Stats.PowerAmount >= 0.5f &&
+            //     Stats.Shield.activeSelf == false &&
+            //     Stats.Rampage.activeSelf == false)
+            // {
+            //     Stats.Rampage.SetActive(true);
+            //     Stats.RampageTimer = 0.0f;
+            //     Stats.PowerAmount -= 0.5f;
+            // }
+
+            if(Stats.CanDrive && Input.GetButtonDown(PlayerInput.BoostInput) && Stats.PowerAmount >= 0.25f)
             {
                 Rigidbody.AddForce(transform.forward * 10000.0f);
                 if(m_BoostVFX != null) m_BoostVFX.Play();
@@ -112,17 +110,17 @@ public class Abilities : CarModule
         sfxDefense.getPlaybackState(out pbsdef);
         if (pbsdef == FMOD.Studio.PLAYBACK_STATE.STOPPED || pbsdef == FMOD.Studio.PLAYBACK_STATE.STOPPING)
         {
-            if (Stats.Shield.activeSelf == true)
-            {
-                sfxStop = 0;
-                sfxDefense.start();
-            }
+            // if (Stats.Shield.activeSelf == true)
+            // {
+            //     sfxStop = 0;
+            //     sfxDefense.start();
+            // }
         }
-        if (Stats.Shield.activeSelf == false)
-        {
-            sfxStop = 1;
-            sfxDefense.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
+        // if (Stats.Shield.activeSelf == false)
+        // {
+        //     sfxStop = 1;
+        //     sfxDefense.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        // }
        
     }
 
@@ -130,9 +128,9 @@ public class Abilities : CarModule
     {
 
         // Only check collision if the car has activated rampage
-        if (collision.gameObject.CompareTag("PlayerTuk") && Stats.Rampage.activeSelf)
-        {
-            Vector3 normal = collision.contacts[0].normal;
+        // if (collision.gameObject.CompareTag("PlayerTuk") && Stats.Rampage.activeSelf)
+        // {
+        //     Vector3 normal = collision.contacts[0].normal;
 
             // if (collision.gameObject.GetComponent<AbilityCollision>().Stats.Shield.activeSelf)
             // {
@@ -143,7 +141,7 @@ public class Abilities : CarModule
                 // collision.gameObject.GetComponent<AbilityCollision>().sphereCarController.Impact(200, -normal, 0.75f);
             // }
 
-        }
+        // }
 
     }
 }
