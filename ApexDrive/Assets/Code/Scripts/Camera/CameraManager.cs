@@ -18,6 +18,14 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] private Transform m_OverrideFollowTarget;
 
+    private void OnEnable()
+    {
+        if(m_Track != null)
+        {
+            transform.position = m_Track.Evaluate(m_TrackProgress).pos + m_Offset;
+        }
+    }
+
 
     private void FixedUpdate()
     {
