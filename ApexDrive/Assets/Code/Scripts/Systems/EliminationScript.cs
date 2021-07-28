@@ -11,6 +11,9 @@ public class EliminationScript : MonoBehaviour
     private List<Player> m_ActivePlayers = new List<Player>();
     private List<Player> m_OffscreenPlayers = new List<Player>();
 
+    public delegate void EliminationEvent(Player[] activePlayers);
+    public static EliminationEvent OnPlayerEliminated;
+
     private void OnEnable()
     {
         deathPlane = GameObject.FindGameObjectWithTag("Offroad");
@@ -84,5 +87,9 @@ public class EliminationScript : MonoBehaviour
         car.gameObject.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot("event:/TukTuk/Elimination");
         m_ActivePlayers.Remove(car.Player);
+        if (OnPlayerEliminated != null)
+        {
+            OnPlayerEliminated(m_ActivePlayers.ToArray());
+        }
     }
 }
