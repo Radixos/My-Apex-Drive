@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:ApexDrive/Assets/Data/Audio/Riding the Apex/Metadata/EffectPreset.meta
+guid: c766faa425a954044945ccf277f290cc
+folderAsset: yes
+=======
 guid: 2640dc86aafe14c4fa8be0fb08a83708
+>>>>>>> dev:ApexDrive/Assets/Data/Art/Textures/skybox.afphoto.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

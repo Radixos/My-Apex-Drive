@@ -5,13 +5,18 @@ using UnityEngine;
 public class EliminationScript : MonoBehaviour
 {
     private float grace = 0.0f;
+    public GameObject deathPlane;
 
     private Coroutine[] m_GraceRoutines = new Coroutine[4];
     private List<Player> m_ActivePlayers = new List<Player>();
     private List<Player> m_OffscreenPlayers = new List<Player>();
 
+    public delegate void EliminationEvent(Player[] activePlayers);
+    public static EliminationEvent OnPlayerEliminated;
+
     private void OnEnable()
     {
+        deathPlane = GameObject.FindGameObjectWithTag("Offroad");
         RaceManager.OnRoundStart += OnRoundStart;
         RaceManager.OnRoundEnd += OnRoundEnd;
     }
@@ -45,9 +50,14 @@ public class EliminationScript : MonoBehaviour
             foreach(Player player in m_ActivePlayers)
             {
                 bool visiblePlayer = IsPointInsideCameraFrustum(player.Car.Position);
-                if(!visiblePlayer && !m_OffscreenPlayers.Contains(player)) noLongerVisiblePlayers.Add(player);
+                if (!visiblePlayer && !m_OffscreenPlayers.Contains(player)) noLongerVisiblePlayers.Add(player);
+                //else if (player.Car.GetComponent<SphereCollider>().bounds.Intersects(deathPlane.GetComponent<BoxCollider>().bounds)
+                    //&& !m_OffscreenPlayers.Contains(player)) noLongerVisiblePlayers.Add(player); Debug.Log("Death");
+                //else for (int i = 0; i < deathPlane.Length; i++) if (player.Car.GetComponent<SphereCollider>().bounds.Intersects
+                //(deathPlane[i].GetComponent<BoxCollider>().bounds)
+                //&& !m_OffscreenPlayers.Contains(player)) noLongerVisiblePlayers.Add(player); Debug.Log("Death");
             }
-            foreach(Player player in noLongerVisiblePlayers) StartCoroutine(Co_Eliminate(player.Car));
+            foreach (Player player in noLongerVisiblePlayers) StartCoroutine(Co_Eliminate(player.Car));
             if(m_ActivePlayers.Count == 1) m_ActivePlayers[0].WinRound();
             yield return null;
         }
@@ -77,5 +87,9 @@ public class EliminationScript : MonoBehaviour
         car.gameObject.SetActive(false);
         FMODUnity.RuntimeManager.PlayOneShot("event:/TukTuk/Elimination");
         m_ActivePlayers.Remove(car.Player);
+        if (OnPlayerEliminated != null)
+        {
+            OnPlayerEliminated(m_ActivePlayers.ToArray());
+        }
     }
 }
