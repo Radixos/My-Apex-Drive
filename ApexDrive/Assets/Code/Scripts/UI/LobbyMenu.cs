@@ -180,9 +180,15 @@ public class LobbyMenu : MonoBehaviour
     {
         if(m_State == MenuState.Closed) m_MenuAnimator.SetBool("IsOpen", false);
         if(m_State == MenuState.Open) m_MenuAnimator.SetBool("IsOpen", true);
-        foreach(Player player in GameManager.Instance.ConnectedPlayers)
+
+        for(int i = 0; i < GameManager.Instance.PlayerCount; i++)
         {
-            MultiplayerEventSystem.Current.AddPlayer(player.PlayerID);
+            Player player = GameManager.Instance.ConnectedPlayers[i];
+            if(player != null)
+            {
+                if(m_PlayerPortraits[player.PlayerID] != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
+                MultiplayerEventSystem.Current.AddPlayer(player.PlayerID);
+            }
         }
         yield return null;
         MultiplayerEventSystem.Current.UpdateCursorPositions();
