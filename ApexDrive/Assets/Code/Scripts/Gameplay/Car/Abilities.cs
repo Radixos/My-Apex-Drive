@@ -44,6 +44,7 @@ public class Abilities : CarModule
     {
         AbilityLogic();
         SfxAbilities();
+        if(Stats.CanDrive) Stats.PowerAmount += 0.05f * Time.deltaTime;
         if (Stats.PowerAmount < 0)
         {
             Stats.PowerAmount = 0;
@@ -94,7 +95,7 @@ public class Abilities : CarModule
             //     Stats.PowerAmount -= 0.5f;
             // }
 
-            if(Input.GetButtonDown(PlayerInput.BoostInput) && Stats.PowerAmount >= 0.25f)
+            if(Stats.CanDrive && Input.GetButtonDown(PlayerInput.BoostInput) && Stats.PowerAmount >= 0.25f)
             {
                 Rigidbody.AddForce(transform.forward * 10000.0f);
                 if(m_BoostVFX != null) m_BoostVFX.Play();
@@ -127,9 +128,9 @@ public class Abilities : CarModule
     {
 
         // Only check collision if the car has activated rampage
-        if (collision.gameObject.CompareTag("PlayerTuk") && Stats.Rampage.activeSelf)
-        {
-            Vector3 normal = collision.contacts[0].normal;
+        // if (collision.gameObject.CompareTag("PlayerTuk") && Stats.Rampage.activeSelf)
+        // {
+        //     Vector3 normal = collision.contacts[0].normal;
 
             // if (collision.gameObject.GetComponent<AbilityCollision>().Stats.Shield.activeSelf)
             // {
@@ -140,7 +141,7 @@ public class Abilities : CarModule
                 // collision.gameObject.GetComponent<AbilityCollision>().sphereCarController.Impact(200, -normal, 0.75f);
             // }
 
-        }
+        // }
 
     }
 }

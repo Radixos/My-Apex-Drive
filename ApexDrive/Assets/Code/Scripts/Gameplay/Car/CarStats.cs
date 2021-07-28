@@ -136,7 +136,7 @@ public class CarStats : CarModule
         OffroadMultiplier = CarAttributes.offroadMultiplier;
 
         // Abilities initialisation
-        PowerAmount = 1.0f; // TEMPORARY
+        PowerAmount = 0.0f; // TEMPORARY
 
         InitialShieldPowerDepleted = false;
 
