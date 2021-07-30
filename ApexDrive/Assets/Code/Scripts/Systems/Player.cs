@@ -13,11 +13,13 @@ public class Player
 
     [SerializeField] private int m_PlayerID;
     [SerializeField] private int m_ControllerID = -1;
+    [SerializeField] private ControllerType m_ControllerType = ControllerType.None;
     private bool m_IsConnected;
     private Color m_PlayerColor;
     public int RoundWins { get; private set; }
     public int GameWins { get; private set; }
     public string Name { get; private set; }
+    public ControllerType ControllerType { get { return m_ControllerType; } }
 
     public CoreCarModule Car;
 
@@ -45,9 +47,10 @@ public class Player
         m_PlayerColor = playerColor;
     }
 
-    public void AssignController(int controllerID)
+    public void AssignController(int controllerID, ControllerType controllerType)
     {
         m_ControllerID = controllerID;
+        m_ControllerType = controllerType;
         m_IsConnected = true;
     }
 

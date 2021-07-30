@@ -65,7 +65,7 @@ public class RaceManager : Singleton<RaceManager>
             car.transform.rotation = op.rot;
             car.Player.Laps = 0;
 
-            if(players[i].ControllerID <= 0 || players[i].ControllerID >= 4) players[i].AssignController(i+1); // this shouldn't be the case except for debugging in the race scene
+            // if(players[i].ControllerID <= 0 || players[i].ControllerID >= 4) players[i].AssignController(i+1); // this shouldn't be the case except for debugging in the race scene
             car.SetPlayer(players[i]);
             players[i].Car = car;
         }
@@ -132,8 +132,15 @@ public class RaceManager : Singleton<RaceManager>
     [ContextMenu("Spawn Test Car")]
 	private void SpawnTestCar()
 	{
-        if(GameManager.Instance.PlayerCount >= 4) return;
-		Player player  = GameManager.Instance.AddPlayer(GameManager.Instance.PlayerCount + 1);
+        if(GameManager.Instance.PlayerCount >= GameManager.MaxPlayers) return;
+
+        string[] controllerNames = Input.GetJoystickNames();
+        if(GameManager.Instance.PlayerCount >= controllerNames.Length) return;
+
+        ControllerType controllerType = ControllerType.Playstation;
+        if(controllerNames[GameManager.Instance.PlayerCount].ToLower().Contains("xbox")) controllerType = ControllerType.Xbox;
+
+		Player player  = GameManager.Instance.AddPlayer(GameManager.Instance.PlayerCount + 1, controllerType);
 	}
 
     public void SpawnPlayer(Player player, bool canDrive = false)
@@ -142,7 +149,7 @@ public class RaceManager : Singleton<RaceManager>
         Vector3 spawnPoint = op.pos + Vector3.up * 1.05f;
         CoreCarModule car = Instantiate(m_CarPrefabs[player.PlayerID], spawnPoint, op.rot);
         car.Stats.CanDrive = canDrive;
-        if(player.ControllerID < 0 || player.ControllerID >= 4) player.AssignController(1); // this shouldn't be the case except for debugging in the race scene
+        // if(player.ControllerID < 0 || player.ControllerID >= 4) player.AssignController(1); // this shouldn't be the case except for debugging in the race scene
         car.SetPlayer(player);
         player.Car = car;
     }

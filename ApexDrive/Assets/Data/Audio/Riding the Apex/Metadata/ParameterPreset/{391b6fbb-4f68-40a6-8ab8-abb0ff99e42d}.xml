@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="ParameterPreset" id="{391b6fbb-4f68-40a6-8ab8-abb0ff99e42d}">
 		<property name="name">
-			<value>elimination_count</value>
+			<value>PlayersRemaining</value>
 		</property>
 		<relationship name="folder">
 			<destination>{39371476-0a55-43e0-8cbc-49e86e0f1f86}</destination>
@@ -16,10 +16,10 @@
 			<value>1</value>
 		</property>
 		<property name="maximum">
-			<value>4</value>
+			<value>5</value>
 		</property>
 		<property name="initialValue">
-			<value>0</value>
+			<value>4</value>
 		</property>
 	</object>
 </objects>

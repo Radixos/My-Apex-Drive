@@ -16,10 +16,10 @@ public class MultiplayerInputModule : BaseInputModule
 	[SerializeField] private Vector2 m_CursorStagger = new Vector2(-30.0f, 0.0f);
     [SerializeField] private float m_AxisRepeatDelay = 0.25f;
 
-	[SerializeField] private string m_VerticalAxisPrefix = "Vertical ";
-	[SerializeField] private string m_HorizontalAxisPrefix = "Horizontal ";
-	[SerializeField] private string m_SubmitButtonPrefix = "Submit ";
-	[SerializeField] private string m_CancelButtonPrefix = "Cancel ";
+	[SerializeField] private InputAction m_VerticalAxisAction = InputAction.Axis_Vertical;
+	[SerializeField] private InputAction m_HorizontalAxisAction = InputAction.Axis_Horizontal;
+	[SerializeField] private InputAction m_SubmitAction = InputAction.Button_Face_1;
+	[SerializeField] private InputAction m_CancelAction = InputAction.Button_Face_2;
 	
 	private MultiplayerEventSystem m_MultiplayerEventSystem;
 	private MultiplayerCursor[] m_Cursors;
@@ -63,22 +63,22 @@ public class MultiplayerInputModule : BaseInputModule
 		{
 			int i = player.PlayerID;
 			if(!m_MultiplayerEventSystem.LockedController(i) && m_RepeatDelay[i] >= m_AxisRepeatDelay){
-				if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) > 0.0){
+				if(Input.GetAxis(InputManager.GetInputManagerString(player.ControllerType, m_VerticalAxisAction, player.ControllerID)) > 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Up;
 					m_RepeatDelay[i] = 0f;
 				}
-				else if(Input.GetAxis(m_VerticalAxisPrefix + player.ControllerID) < 0.0){
+				else if(Input.GetAxis(InputManager.GetInputManagerString(player.ControllerType, m_VerticalAxisAction, player.ControllerID)) < 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Down;
 					m_RepeatDelay[i] = 0f;
 				}
-				else if(Input.GetAxis(m_HorizontalAxisPrefix + player.ControllerID) < 0.0){
+				else if(Input.GetAxis(InputManager.GetInputManagerString(player.ControllerType, m_HorizontalAxisAction, player.ControllerID)) < 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Left;
 					m_RepeatDelay[i] = 0f;
 				}
-				else if(Input.GetAxis(m_HorizontalAxisPrefix + player.ControllerID) > 0.0){
+				else if(Input.GetAxis(InputManager.GetInputManagerString(player.ControllerType, m_HorizontalAxisAction, player.ControllerID)) > 0.0){
 					axisEventData[i] = new AxisEventData(m_MultiplayerEventSystem);
 					axisEventData[i].moveDir = MoveDirection.Right;
 					m_RepeatDelay[i] = 0f;
@@ -123,7 +123,7 @@ public class MultiplayerInputModule : BaseInputModule
 				FMODUnity.RuntimeManager.PlayOneShot("event:/UI/UI Move");
 			}
 
-			if(Input.GetButtonDown(m_SubmitButtonPrefix + player.ControllerID)){
+			if(Input.GetButtonDown(InputManager.GetInputManagerString(player.ControllerType, m_SubmitAction, player.ControllerID))){
 				if(!m_MultiplayerEventSystem.LockedController(i)){
 					MultiplayerEventData data = new MultiplayerEventData(m_MultiplayerEventSystem, player);
 					IMultiplayerSubmitHandler submitHandler = m_MultiplayerEventSystem.GetSelected(i).GetComponent<IMultiplayerSubmitHandler>();
@@ -134,7 +134,7 @@ public class MultiplayerInputModule : BaseInputModule
 					FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Submit");
 				}
 			}
-			else if(Input.GetButtonDown(m_CancelButtonPrefix + player.ControllerID)){
+			else if(Input.GetButtonDown(InputManager.GetInputManagerString(player.ControllerType, m_CancelAction, player.ControllerID))){
 				if(m_MultiplayerEventSystem.LockedController(i)){
 					m_MultiplayerEventSystem.UnlockController(i);
 					FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Cancel");

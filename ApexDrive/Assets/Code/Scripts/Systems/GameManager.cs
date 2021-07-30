@@ -44,13 +44,13 @@ public class GameManager : GameSystem
     }
 
     ///<returns>Returns the PlayerID of the newly created player. Returns null if controller is already in use.</returns>
-    public Player AddPlayer(int controllerID)
+    public Player AddPlayer(int controllerID, ControllerType controllerType)
     {
         if(m_Players.Where(x => x.ControllerID == controllerID).FirstOrDefault() != null) return null; // controller already in use
         Player player = m_Players.Where(x => !x.IsConnected).FirstOrDefault();
-        player.AssignController(controllerID);   
+        player.AssignController(controllerID, controllerType);   
         m_ConnectedPlayers.Add(player);
-        Debug.Log("Player " + player.PlayerReadableID + " joined the lobby using controller " + player.ControllerID);
+        Debug.Log("Player " + player.PlayerReadableID + " joined the lobby using controller " + player.ControllerID + " (" + controllerType.ToString() + ")");
         if(OnPlayerConnected != null) OnPlayerConnected(player);
         return player;
     }
@@ -88,5 +88,15 @@ public class GameManager : GameSystem
     private void ResetRoundScores(Player winner)
     {
         foreach(Player player in m_Players) player.ResetRoundScore();
+    }
+
+    private void OnControllerConnected()
+    {
+
+    }
+
+    private void OnControllerDisconnected()
+    {
+        
     }
 }

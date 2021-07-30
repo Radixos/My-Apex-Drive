@@ -1,6 +1,7 @@
 ﻿// Alec Gamble
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
@@ -25,7 +26,7 @@ public class LobbyMenu : MonoBehaviour
     private FMOD.Studio.EventInstance[] m_LobbyPlayerSFX = new FMOD.Studio.EventInstance[GameManager.MaxPlayers];
     private bool m_CanCancelLoading = true;
 
-
+    private ControllerType[] m_Controllers;
 
     private void Awake()
     {
@@ -33,6 +34,15 @@ public class LobbyMenu : MonoBehaviour
         {
             m_LobbyPlayerSFX[i] = FMODUnity.RuntimeManager.CreateInstance("event:/UI/Player Idle");
         }
+
+        string[] controllerNames = Input.GetJoystickNames();
+        m_Controllers = new ControllerType[controllerNames.Length];
+        for(int i = 0; i < controllerNames.Length; i++)
+        {
+            if(controllerNames[i].ToLower().Contains("xbox")) m_Controllers[i] = ControllerType.Xbox;
+            else m_Controllers[i] = ControllerType.Playstation;
+        }
+
 
         if(GameManager.Instance.PlayerCount > 0) m_State = MenuState.Open;
         else m_State = MenuState.Closed;
@@ -63,13 +73,27 @@ public class LobbyMenu : MonoBehaviour
 
     public void Update()
     {
+        string[] controllerNames = Input.GetJoystickNames();
+        if(m_Controllers.Length != controllerNames.Length)
+        {
+            m_Controllers = new ControllerType[controllerNames.Length];
+            for(int i = 0; i < controllerNames.Length; i++)
+            {
+                if(controllerNames[i].ToLower().Contains("xbox")) m_Controllers[i] = ControllerType.Xbox;
+                else m_Controllers[i] = ControllerType.Playstation;
+            }
+        }
+
         for (int i = 1; i <= GameManager.MaxPlayers; i++)
         {
+            if(i > m_Controllers.Length) break;
+
             if(GameManager.Instance.GetPlayerByController(i) == null)
             {
-                if(Input.GetButtonDown("Submit " + (i)))
+                if(Input.GetButtonDown(InputManager.GetInputManagerString(m_Controllers[i-1], InputAction.Button_Face_1, i)))
                 {
-                    Player player = GameManager.Instance.AddPlayer(i);
+                    // Debug.Log("[LobbyMenu::ProcessInputs()] Controller " + i + " ("+ m_Controllers[i-1].ToString()+") just submitted a "+ InputManager.GetReadableAction(m_Controllers[i-1],InputAction.Button_Face_1)+" event.");
+                    Player player = GameManager.Instance.AddPlayer(i, m_Controllers[i-1]);
                     MultiplayerEventSystem.Current.AddPlayer(player.PlayerID);
                 }
             }
