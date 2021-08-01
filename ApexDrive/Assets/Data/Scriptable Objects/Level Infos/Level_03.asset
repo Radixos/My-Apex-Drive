@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55c2410b5eba72e4b8691bc8c8262088, type: 3}
-  m_Name: LevelInfo_01
+  m_Name: Level_03
   m_EditorClassIdentifier: 
-  Name: Demo
-  ReferenceString: Scene_Demo_RoadGenerator
-  Description: 
-  Preview: {fileID: 2800000, guid: 2f35c71cbf072e24ca069800004be5ea, type: 3}
+  Name: Apex Drive
+  ReferenceString: Scene_Level_01
+  Description: An advanced track with sharp turns!
+  Preview: {fileID: 21300000, guid: 2d91dc1ccf2077c4f80d606f776e01df, type: 3}

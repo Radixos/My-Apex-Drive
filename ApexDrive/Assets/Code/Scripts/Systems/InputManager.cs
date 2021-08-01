@@ -138,4 +138,31 @@ public static class InputManager
         }
         return "";
     }
+
+    
+
+    public static float GetAxis(ControllerType controllerType, InputAction action, int controllerID)
+    {
+        return Input.GetAxis(GetInputManagerString(controllerType, action, controllerID));
+    }
+
+    public static float GetAxisRaw(ControllerType controllerType, InputAction action, int controllerID)
+    {
+        return Input.GetAxisRaw(GetInputManagerString(controllerType, action, controllerID));
+    }
+
+    public static bool GetButton(ControllerType controllerType, InputAction action, int controllerID)
+    {
+        return Input.GetButton(GetInputManagerString(controllerType, action, controllerID));
+    }
+
+    public static bool GetButtonDown(ControllerType controllerType, InputAction action, int controllerID)
+    {
+        return Input.GetButton(GetInputManagerString(controllerType, action, controllerID));
+    }
+
+    public static bool GetButtonUp(ControllerType controllerType, InputAction action, int controllerID)
+    {
+        return Input.GetButton(GetInputManagerString(controllerType, action, controllerID));
+    }
 }

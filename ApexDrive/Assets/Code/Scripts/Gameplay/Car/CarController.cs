@@ -12,16 +12,10 @@ public class CarController : CarModule
 
     private float turnVelocity;
 
-    [Header("DEBUG")] // Required for the car! Don't delete!
-    [SerializeField]
     private float horizontal;
-    [SerializeField]
-    private float vertical;
-    [SerializeField]
+    private float acceleration;
     private bool initialDriftDirectionRight;
-    [SerializeField]
     private float sideBoostRamp;
-    [SerializeField]
     private RaycastHit hit;
 
     //FMOD events
@@ -40,6 +34,11 @@ public class CarController : CarModule
     FMOD.Studio.PARAMETER_ID acc;
 
     FMOD.Studio.PLAYBACK_STATE state;
+
+    [SerializeField] private InputAction m_AccelerateInput;
+    [SerializeField] private InputAction m_HorizontalInput;
+    [SerializeField] private InputAction m_BreakInput;
+    [SerializeField] private InputAction m_DriftInput;
 
     private void Start()
     {
@@ -92,14 +91,14 @@ public class CarController : CarModule
     }
 
     /// <summary>
-    /// HandleAnalogueInput takes care of the vertical and horizontal inputs of the player.
+    /// HandleAnalogueInput takes care of the acceleration and horizontal inputs of the player.
     /// This might be better in Stats.cs
     /// </summary>
     void HandleAnalogueInput()
     {
-        horizontal = Mathf.Abs(Input.GetAxisRaw(PlayerInput.HorizontalInput)) > 0.15f ? Input.GetAxisRaw(PlayerInput.HorizontalInput) : 0;
-        vertical = Input.GetAxis(PlayerInput.AccelerateInput) > 0.5f ? 1 : 0;
-        vertical -= Input.GetButton(PlayerInput.BrakeInput) ? 0.5f : 0;
+        horizontal = InputManager.GetAxis(Player.ControllerType, m_HorizontalInput, Player.ControllerID);
+        acceleration = InputManager.GetAxis(Player.ControllerType, m_AccelerateInput, Player.ControllerID) > 0.5f ? 1 : 0;
+        acceleration -= InputManager.GetButton(Player.ControllerType, m_BreakInput, Player.ControllerID) ? 0.5f : 0;
     }
 
     /// <summary>
@@ -176,7 +175,7 @@ public class CarController : CarModule
     {
         if (Stats.CurrSpeed <= 0.1f && Stats.CurrSpeed >= -.1f) return;
 
-        if (Input.GetButton(PlayerInput.DriftInput) && Stats.CurrSpeed / Stats.Acceleration >= Stats.DriftSpeedThresholdPercent)
+        if (InputManager.GetButton(Player.ControllerType, m_DriftInput, Player.ControllerID) && Stats.CurrSpeed / Stats.Acceleration >= Stats.DriftSpeedThresholdPercent)
         {
             if (!Stats.IsDrifting)
             {
@@ -226,8 +225,8 @@ public class CarController : CarModule
                 break;
         }
 
-        // Removed, might add it back - if(isDrifting) Stats.MaxSpeed = vertical * Stats.DriftingAcceleration * Stats.CurrentBoostMultiplier * Stats.CurrentSurfaceMultiplier, else
-        Stats.MaxSpeed = vertical * Stats.Acceleration * Stats.CurrentSurfaceMultiplier;
+        // Removed, might add it back - if(isDrifting) Stats.MaxSpeed = acceleration * Stats.DriftingAcceleration * Stats.CurrentBoostMultiplier * Stats.CurrentSurfaceMultiplier, else
+        Stats.MaxSpeed = acceleration * Stats.Acceleration * Stats.CurrentSurfaceMultiplier;
 
         // Slowly accelerate/decelerate.
         Stats.CurrSpeed = Mathf.SmoothStep(Stats.CurrSpeed, Stats.MaxSpeed, Time.deltaTime * 9f);
@@ -254,7 +253,7 @@ public class CarController : CarModule
     /// </summary>
     void HandleCarAudio()
     {
-        if (!Input.GetButton(PlayerInput.AccelerateInput))
+        if (!InputManager.GetButton(Player.ControllerType, m_AccelerateInput, Player.ControllerID))
         {
             sfxEngine.setParameterByID(acc, 0f);
         }
@@ -267,7 +266,7 @@ public class CarController : CarModule
         {
             sfxEngine.setParameterByID(rpm, Stats.CurrSpeed);
         }
-        if (!Input.GetButton(PlayerInput.AccelerateInput))
+        if (!InputManager.GetButton(Player.ControllerType, m_AccelerateInput, Player.ControllerID))
         {
             sfxEngine.setParameterByID(acc, 0f);
         }
