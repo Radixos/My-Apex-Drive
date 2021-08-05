@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class CarController : CarModule
 {
@@ -19,6 +20,11 @@ public class CarController : CarModule
     private RaycastHit hit;
 
     //FMOD events
+    [SerializeField]
+    [EventRef]
+    private string impactPath;
+    private FMOD.Studio.EventInstance sfxImpact;
+
     FMOD.Studio.EventInstance sfxEngine;
     FMOD.Studio.EventInstance sfxDrift;
 
@@ -40,12 +46,15 @@ public class CarController : CarModule
     [SerializeField] private InputAction m_BreakInput;
     [SerializeField] private InputAction m_DriftInput;
 
+    private float impactForce;
+
     private void Start()
     {
 
         //FMOD Instances
         sfxEngine = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/engine");
         sfxDrift = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/Drifting");
+        sfxImpact = RuntimeManager.CreateInstance(impactPath);
 
         //FMOD Variables
         sfxControl = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
@@ -61,6 +70,7 @@ public class CarController : CarModule
 
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxEngine, transform, this.Rigidbody);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxDrift, transform, this.Rigidbody);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxImpact, transform, this.Rigidbody);
 
         sfxEngine.start();
     }
@@ -297,5 +307,22 @@ public class CarController : CarModule
     {
         this.Rigidbody.AddForce(direction * force, ForceMode.Impulse);
         Stats.StunDuration = stunDuration;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        impactForce = collision.relativeVelocity.magnitude;
+        if (collision.rigidbody != null)
+        {
+            sfxImpact.setParameterByName("Force", impactForce);
+            sfxImpact.start();
+        }
+    }
+
+    private void OnDisable()
+    {
+        sfxEngine.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        sfxImpact.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }

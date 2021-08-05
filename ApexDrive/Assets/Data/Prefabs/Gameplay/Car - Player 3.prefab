@@ -4864,13 +4864,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee84190f165cfeb4494a2c0f73408125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defense: event:/HUD/Abilities/defensive
-  offense: event:/HUD/Abilities/aggressive
-  boost: event:/HUD/Abilities/mobility
+  m_BoostInput: 0
+  m_BoostSFXPath: 
   m_BoostVFX: {fileID: 5418775223285827390}
   m_AttackVFX: {fileID: 0}
   m_ShieldVFX: {fileID: 0}
-  sfxStop: 0
 --- !u!114 &5323998243442652427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4965,10 +4963,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   model: {fileID: 3401614124111428572}
-  horizontal: 0
-  vertical: 0
-  initialDriftDirectionRight: 0
-  sideBoostRamp: 0
+  impactPath: event:/TukTuk/Impact
+  m_AccelerateInput: 0
+  m_HorizontalInput: 0
+  m_BreakInput: 0
+  m_DriftInput: 0
 --- !u!1 &8798568861018112832
 GameObject:
   m_ObjectHideFlags: 0
