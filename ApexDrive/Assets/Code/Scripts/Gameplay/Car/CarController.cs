@@ -41,6 +41,8 @@ public class CarController : CarModule
 
     FMOD.Studio.PLAYBACK_STATE state;
 
+
+
     private void Start()
     {
 
@@ -64,6 +66,8 @@ public class CarController : CarModule
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxDrift, transform, this.Rigidbody);
 
         sfxEngine.start();
+
+        EliminationScript.OnPlayerEliminated += OnElimination;
     }
 
     private void Update()
@@ -298,5 +302,20 @@ public class CarController : CarModule
     {
         this.Rigidbody.AddForce(direction * force, ForceMode.Impulse);
         Stats.StunDuration = stunDuration;
+    }
+
+    private void OnElimination(Player[] activePlayers)
+    {
+        sfxEngine.setParameterByID(rpm, 0f);
+        sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+
+    private void OnDisable()
+    {
+        sfxEngine.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        sfxEngine.release();
+        sfxDrift.release();
     }
 }
