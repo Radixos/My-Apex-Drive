@@ -15,10 +15,10 @@ MonoBehaviour:
   driftSpeedThresholdPercent: 0.6
   driftSideBoostMultiplier: 0.5
   boostMultiplier: 1.5
-  turnSpeed: 1
-  normalTurnAngle: 100
+  turnSpeed: 0.5
+  normalTurnAngle: 60
   driftTurnAngle: 150
-  acceleration: 40
-  driftingAcceleration: 40
+  acceleration: 45
+  driftingAcceleration: 45
   offroadMultiplier: 0.4
   drag: 2

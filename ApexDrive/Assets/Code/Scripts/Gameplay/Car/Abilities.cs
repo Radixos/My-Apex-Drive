@@ -5,69 +5,38 @@ using FMODUnity;
 
 public class Abilities : CarModule
 {
-    // MANI'S CODE
-
-    //FMOD Stuff
-    [SerializeField]
-    [EventRef]
-    private string defense = null;
-    FMOD.Studio.EventInstance sfxDefense;
+    [SerializeField] private InputAction m_BoostInput;
 
     [SerializeField]
     [EventRef]
-    private string offense = null;
-    FMOD.Studio.EventInstance sfxOffense;
-
-    [SerializeField]
-    [EventRef]
-    private string boost = null;
-    FMOD.Studio.EventInstance sfxBoost;
-
-    FMOD.Studio.PLAYBACK_STATE pbsdef;
-    FMOD.Studio.PLAYBACK_STATE pbsboost;
+    private string m_BoostSFXPath = null;
+    FMOD.Studio.EventInstance m_BoostSFX;
+    FMOD.Studio.PLAYBACK_STATE m_BoostState;
 
     [SerializeField] private ParticleSystem m_BoostVFX;
     [SerializeField] private ParticleSystem m_AttackVFX;
     [SerializeField] private ParticleSystem m_ShieldVFX;
 
-    //Used to detect if any abilities are active or not to prevent the player from using more than one ability
-    private bool abilitiesActive;
-    public int sfxStop;
-
     private void Start()
     {
-        sfxDefense = RuntimeManager.CreateInstance(defense);
-        sfxDefense.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject.transform));
+        
     }
 
     private void Update()
     {
-        AbilityLogic();
-        SfxAbilities();
         if(Stats.CanDrive) Stats.PowerAmount += 0.05f * Time.deltaTime;
-        if (Stats.PowerAmount < 0)
+
+        if(Stats.CanDrive && InputManager.GetButtonDown(Player.ControllerType, m_BoostInput, Player.ControllerID) && Stats.PowerAmount >= 0.25f)
         {
-            Stats.PowerAmount = 0;
+            Rigidbody.AddForce(transform.forward * 10000.0f, ForceMode.Impulse);
+            if(m_BoostVFX != null) m_BoostVFX.Play();
+            Stats.PowerAmount -= 0.25f;
         }
+        if (Stats.PowerAmount < 0) Stats.PowerAmount = 0;
     }
 
     private void AbilityLogic()
     {
-        // if (Input.GetButtonUp(PlayerInput.ShieldInput))
-        // {
-        //     Stats.InitialShieldPowerDepleted = false;
-        //     Stats.Shield.SetActive(false);
-        // }
-
-        // Active time of Stats.Rampage
-        // if (Stats.Rampage.activeSelf)
-        // {
-        //     if (Stats.RampageTimer >= Stats.RampageLifetime)
-        //         Stats.Rampage.SetActive(false);
-        //     else
-        //         Stats.RampageTimer += Time.deltaTime;
-        // }
-
         if (Stats.PowerAmount > 0)
         {
             // Activate one ability at a times
@@ -95,53 +64,8 @@ public class Abilities : CarModule
             //     Stats.PowerAmount -= 0.5f;
             // }
 
-            if(Stats.CanDrive && Input.GetButtonDown(PlayerInput.BoostInput) && Stats.PowerAmount >= 0.25f)
-            {
-                Rigidbody.AddForce(transform.forward * 10000.0f);
-                if(m_BoostVFX != null) m_BoostVFX.Play();
-                Stats.PowerAmount -= 0.25f;
-            }
+            
         }
     }
 
-    public void SfxAbilities()
-    {
-        sfxDefense.setParameterByName("Stop", sfxStop);
-        sfxDefense.getPlaybackState(out pbsdef);
-        if (pbsdef == FMOD.Studio.PLAYBACK_STATE.STOPPED || pbsdef == FMOD.Studio.PLAYBACK_STATE.STOPPING)
-        {
-            // if (Stats.Shield.activeSelf == true)
-            // {
-            //     sfxStop = 0;
-            //     sfxDefense.start();
-            // }
-        }
-        // if (Stats.Shield.activeSelf == false)
-        // {
-        //     sfxStop = 1;
-        //     sfxDefense.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        // }
-       
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-
-        // Only check collision if the car has activated rampage
-        // if (collision.gameObject.CompareTag("PlayerTuk") && Stats.Rampage.activeSelf)
-        // {
-        //     Vector3 normal = collision.contacts[0].normal;
-
-            // if (collision.gameObject.GetComponent<AbilityCollision>().Stats.Shield.activeSelf)
-            // {
-            //     Controller.Impact(200, normal, 0.75f);
-            // }
-            // else
-            // {
-                // collision.gameObject.GetComponent<AbilityCollision>().sphereCarController.Impact(200, -normal, 0.75f);
-            // }
-
-        // }
-
-    }
 }

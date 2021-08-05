@@ -3,30 +3,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 
 [DefaultExecutionOrder(50)]
 public class LobbyMenu : MonoBehaviour
 {
-    private enum MenuState {Closed, Open}
+    private enum MenuState {Closed, Home, Settings, Controls, Loading}
     private MenuState m_State = MenuState.Closed;
 
-    // private Animator m_Animator;
-    [SerializeField] private Animator m_TimerAnimator;
     [SerializeField] private Animator m_FaderAnimator;
+    [SerializeField] private Animator m_ControlsAnimator;
     [SerializeField] private Animator m_MenuAnimator;
     [SerializeField] private Animator[] m_PlayerPortraits;
     [SerializeField] private Transform m_MenuContainer;
     [SerializeField] private Animator[] m_CarAnimators;
 
-    [SerializeField] private bool[] m_PlayersReady;
+    [SerializeField] private CanvasGroup m_MenuCanvasGroup;
+    [SerializeField] private Image[] m_ControllerReadyCursors;
+
+    private bool[] m_PlayersReady;
     private Coroutine m_LoadGameroutine;
 
     private FMOD.Studio.EventInstance[] m_LobbyPlayerSFX = new FMOD.Studio.EventInstance[GameManager.MaxPlayers];
     private bool m_CanCancelLoading = true;
-
     private ControllerType[] m_Controllers;
+
+    private List<LevelInfo> m_LevelVotes = new List<LevelInfo>();
+
+    private LevelInfo m_SelectedLevel;
+    private AsyncOperation m_AsynchronousSceneLoad;
 
     private void Awake()
     {
@@ -42,9 +48,7 @@ public class LobbyMenu : MonoBehaviour
             if(controllerNames[i].ToLower().Contains("xbox")) m_Controllers[i] = ControllerType.Xbox;
             else m_Controllers[i] = ControllerType.Playstation;
         }
-
-
-        if(GameManager.Instance.PlayerCount > 0) m_State = MenuState.Open;
+        if(GameManager.Instance.PlayerCount > 0) m_State = MenuState.Home;
         else m_State = MenuState.Closed;
     }
 
@@ -84,17 +88,53 @@ public class LobbyMenu : MonoBehaviour
             }
         }
 
-        for (int i = 1; i <= GameManager.MaxPlayers; i++)
+        // Connect new players by controller input if the menu is closed or on the home page
+        if(m_State == MenuState.Closed || m_State == MenuState.Home)
         {
-            if(i > m_Controllers.Length) break;
-
-            if(GameManager.Instance.GetPlayerByController(i) == null)
+            for (int i = 1; i <= GameManager.MaxPlayers; i++)
             {
-                if(Input.GetButtonDown(InputManager.GetInputManagerString(m_Controllers[i-1], InputAction.Button_Face_1, i)))
+                if(i > m_Controllers.Length) break;
+
+                if(GameManager.Instance.GetPlayerByController(i) == null)
                 {
-                    // Debug.Log("[LobbyMenu::ProcessInputs()] Controller " + i + " ("+ m_Controllers[i-1].ToString()+") just submitted a "+ InputManager.GetReadableAction(m_Controllers[i-1],InputAction.Button_Face_1)+" event.");
-                    Player player = GameManager.Instance.AddPlayer(i, m_Controllers[i-1]);
-                    MultiplayerEventSystem.Current.AddPlayer(player.PlayerID);
+                    if(InputManager.GetButtonDown(m_Controllers[i-1], InputAction.Button_Face_1, i))
+                    {
+                        Player player = GameManager.Instance.AddPlayer(i, m_Controllers[i-1]);
+                        MultiplayerEventSystem.Current.AddPlayer(player.PlayerID);
+                    }
+                }
+            }
+        }
+
+        // Ready check for all players
+        if(m_State == MenuState.Controls)
+        {
+            for(int i = 0; i < GameManager.Instance.PlayerCount; i++)
+            {
+                if(!m_PlayersReady[i])
+                {
+                    Player player = GameManager.Instance.ConnectedPlayers[i];
+                    if(InputManager.GetButtonDown(player.ControllerType, InputAction.Button_Face_1, player.ControllerID)) 
+                    {
+                        m_PlayersReady[i] = true;
+
+                        int readyPlayerCount = 0;
+
+                        for(int j = 0; j < GameManager.Instance.PlayerCount; j++)
+                        {
+                            if(m_PlayersReady[j])
+                            {
+                                readyPlayerCount++;
+                                m_ControllerReadyCursors[j].fillAmount = (float)readyPlayerCount / (float) GameManager.Instance.PlayerCount;
+                            }
+                        }
+
+                        if(readyPlayerCount == GameManager.Instance.PlayerCount)
+                        {
+                            m_State = MenuState.Loading;
+                            StartCoroutine(Co_DismissControlsPage());
+                        }
+                    }
                 }
             }
         }
@@ -109,32 +149,53 @@ public class LobbyMenu : MonoBehaviour
 
     public void Ready(MultiplayerEventData data)
     {
-        m_PlayersReady[data.Player.PlayerID] = true;
-        int x = 0;
-        for(int i = 0; i < GameManager.MaxPlayers; i++)
+        if(m_State == MenuState.Home)
         {
-            if(m_PlayersReady[i]) x++;
+            m_PlayersReady[data.Player.PlayerID] = true;
+
+            int x = 0;
+
+            for(int i = 0; i < GameManager.MaxPlayers; i++)
+            {
+                if(m_PlayersReady[i]) x++;
+            }
+
+            if(x >= 2 && x >= GameManager.Instance.PlayerCount) 
+            {
+                m_State = MenuState.Loading;
+                m_MenuCanvasGroup.interactable = false;
+                StartCoroutine(Co_LoadControlsPage());
+                for(int i = 0; i < m_PlayersReady.Length; i++) m_PlayersReady[i] = false;
+                foreach(Player player in GameManager.Instance.ConnectedPlayers) m_LobbyPlayerSFX[player.PlayerID].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
         }
-        if(x >= 2 && x >= GameManager.Instance.PlayerCount) 
-        {
-            m_TimerAnimator.SetTrigger("Countdown");
-            m_LoadGameroutine = StartCoroutine(Co_LoadGameScene(3.5f));
-        }
+    }
+
+    public void SubmitVoteForLevel(LevelInfo level)
+    {
+        m_LevelVotes.Add(level);
+    }
+
+    public void RemoveVoteForLevel(LevelInfo level)
+    {
+        m_LevelVotes.Remove(level);
     }
 
     public void CancelReady(MultiplayerEventData data)
     {
-        if(!m_CanCancelLoading || m_LoadGameroutine == null) return;
-        m_PlayersReady[data.Player.PlayerID] = false;
-        m_TimerAnimator.SetTrigger("CancelCountdown");
-        if(m_LoadGameroutine != null) StopCoroutine(m_LoadGameroutine);
+        if(m_State == MenuState.Home)
+        {
+            if(!m_CanCancelLoading || m_LoadGameroutine == null) return;
+            m_PlayersReady[data.Player.PlayerID] = false;
+            if(m_LoadGameroutine != null) StopCoroutine(m_LoadGameroutine);
+        }
     }
 
     private void OnPlayerConnected(Player player)
     {
-        if(m_State != MenuState.Open)
+        if(m_State == MenuState.Closed)
         {
-            m_State = MenuState.Open;
+            m_State = MenuState.Home;
             m_MenuAnimator.SetBool("IsOpen", true);
         }
         if(player != null && m_PlayerPortraits[player.PlayerID] != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
@@ -165,24 +226,53 @@ public class LobbyMenu : MonoBehaviour
         m_LobbyPlayerSFX[player.PlayerID].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
-    private IEnumerator Co_LoadGameScene(float delay)
+    private IEnumerator Co_LoadControlsPage()
     {
-        yield return new WaitForSeconds(delay - 0.5f);
-        m_CanCancelLoading = false;
-        foreach(Player player in GameManager.Instance.ConnectedPlayers) m_LobbyPlayerSFX[player.PlayerID].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        m_FaderAnimator.SetTrigger("FadeOut");
+        
+        m_FaderAnimator.SetBool("Visible", true);
+        yield return new WaitForSeconds(1.0f);
+
+        m_SelectedLevel = m_LevelVotes[Random.Range(0, m_LevelVotes.Count)];
+        m_AsynchronousSceneLoad = SceneManager.LoadSceneAsync(m_SelectedLevel.ReferenceString);
+        m_AsynchronousSceneLoad.allowSceneActivation = false;   
+
         yield return new WaitForSeconds(0.5f);
-        // SceneManager.LoadScene("Scene_Demo_RoadGenerator");
-        SceneManager.LoadScene("Scene_Level_01");
+
+
+        m_ControlsAnimator.SetBool("Visible", true);
+        yield return new WaitForSeconds (0.5f);
+
+        m_State = MenuState.Controls;
+
+    }
+
+
+    private IEnumerator Co_DismissControlsPage()
+    {
+        m_ControlsAnimator.SetBool("Visible", false);
+        yield return new WaitForSeconds(0.5f);
+
+        // trigger scene load now
+        while(m_AsynchronousSceneLoad.progress < 0.9f)
+        {
+            yield return null;
+        }
+        m_AsynchronousSceneLoad.allowSceneActivation = true;
     }
 
     private IEnumerator Co_InitialiseMenu()
     {
         if(m_State == MenuState.Closed) m_MenuAnimator.SetBool("IsOpen", false);
-        if(m_State == MenuState.Open) m_MenuAnimator.SetBool("IsOpen", true);
-        foreach(Player player in GameManager.Instance.ConnectedPlayers)
+        if(m_State == MenuState.Home) m_MenuAnimator.SetBool("IsOpen", true);
+
+        for(int i = 0; i < GameManager.Instance.PlayerCount; i++)
         {
-            MultiplayerEventSystem.Current.AddPlayer(player.PlayerID);
+            Player player = GameManager.Instance.ConnectedPlayers[i];
+            if(player != null)
+            {
+                if(m_PlayerPortraits[player.PlayerID] != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
+                MultiplayerEventSystem.Current.AddPlayer(player.PlayerID);
+            }
         }
         yield return null;
         MultiplayerEventSystem.Current.UpdateCursorPositions();

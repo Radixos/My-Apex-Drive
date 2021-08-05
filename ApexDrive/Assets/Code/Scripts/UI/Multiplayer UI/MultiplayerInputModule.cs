@@ -162,7 +162,7 @@ public class MultiplayerInputModule : BaseInputModule
 
 				RectTransform cursorRT = m_Cursors[i].transform as RectTransform;
 				RectTransform selectionRT = selection.transform as RectTransform;
-				cursorRT.position = new Vector3(selectionRT.position.x + offset.x - selectionRT.sizeDelta.x / 2.0f, selectionRT.position.y + offset.y);
+				cursorRT.position = new Vector3(selectionRT.position.x + offset.x, selectionRT.position.y + offset.y);
 			}
 		}
 	}
