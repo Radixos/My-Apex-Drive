@@ -27,7 +27,7 @@ public class CarController : CarModule
     private RaycastHit hit;
 
     //FMOD events
-    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath m_ImpactSFXPath;
+    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath, m_ImpactSFXPath;
     private FMOD.Studio.EventInstance m_BoostSFX;
     private FMOD.Studio.EventInstance sfxImpact;
 
@@ -60,7 +60,7 @@ public class CarController : CarModule
         //FMOD Instances
         sfxEngine = FMODUnity.RuntimeManager.CreateInstance(m_EngineSFXPath);
         sfxDrift = FMODUnity.RuntimeManager.CreateInstance(m_DriftSFXPath);
-        sfxImpact = RuntimeManager.CreateInstance(impactPath);
+        sfxImpact = RuntimeManager.CreateInstance(m_ImpactSFXPath);
 
         //FMOD Variables
         sfxControl = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
