@@ -109,14 +109,9 @@ public class CarStats : CarModule
 
     // Car Components
     public CarAttributes CarAttributes { get => carAttributes; set => carAttributes = value; }
-    public GameObject Shield { get => shield; set => shield = value; }
-    public GameObject Rampage { get => rampage; set => rampage = value; }
 
     // Ability Options
     public float PowerAmount { get => powerAmount; set => powerAmount = value; }
-    public bool InitialShieldPowerDepleted { get => initialShieldPowerDepleted; set => initialShieldPowerDepleted = value; }
-    public float RampageLifetime { get => rampageLifetime; set => rampageLifetime = value; }
-    public float RampageTimer { get => rampageTimer; set => rampageTimer = value; }
 
     void Start()
     {
@@ -137,11 +132,6 @@ public class CarStats : CarModule
 
         // Abilities initialisation
         PowerAmount = 0.0f; // TEMPORARY
-
-        InitialShieldPowerDepleted = false;
-
-        RampageLifetime = 4.0f;
-        RampageTimer = RampageLifetime;
     }
 
     private void Update()

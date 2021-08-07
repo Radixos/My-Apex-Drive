@@ -6,6 +6,13 @@ using UnityEngine;
 
 public class CarController : CarModule
 {
+    // Inputs
+    [SerializeField] private InputAction m_AccelerateInput;
+    [SerializeField] private InputAction m_HorizontalInput;
+    [SerializeField] private InputAction m_BreakInput;
+    [SerializeField] private InputAction m_DriftInput;
+    [SerializeField] private InputAction m_BoostInput;
+
     public TrailRenderer[] trails;
 
     public Transform model;
@@ -19,6 +26,9 @@ public class CarController : CarModule
     private RaycastHit hit;
 
     //FMOD events
+    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath;
+    // [SerializeField, FMODUnity.EventRef] private string m_EngineSFXPath = null;
+    FMOD.Studio.EventInstance m_BoostSFX;
     FMOD.Studio.EventInstance sfxEngine;
     FMOD.Studio.EventInstance sfxDrift;
 
@@ -35,17 +45,17 @@ public class CarController : CarModule
 
     FMOD.Studio.PLAYBACK_STATE state;
 
-    [SerializeField] private InputAction m_AccelerateInput;
-    [SerializeField] private InputAction m_HorizontalInput;
-    [SerializeField] private InputAction m_BreakInput;
-    [SerializeField] private InputAction m_DriftInput;
+    // VFX
+    [SerializeField] private ParticleSystem m_BoostVFX;
+
+
 
     private void Start()
     {
 
         //FMOD Instances
-        sfxEngine = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/engine");
-        sfxDrift = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/Drifting");
+        sfxEngine = FMODUnity.RuntimeManager.CreateInstance(m_EngineSFXPath);
+        sfxDrift = FMODUnity.RuntimeManager.CreateInstance(m_DriftSFXPath);
 
         //FMOD Variables
         sfxControl = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
@@ -72,10 +82,20 @@ public class CarController : CarModule
         HandleCarState();
         HandleCarAudio();
 
+        if(Stats.CanDrive) Stats.PowerAmount += 0.05f * Time.deltaTime;
+
+        if(Stats.CanDrive && InputManager.GetButtonDown(Player.ControllerType, m_BoostInput, Player.ControllerID) && Stats.PowerAmount >= 0.25f)
+        {
+            Rigidbody.AddForce(transform.forward * 10000.0f, ForceMode.Impulse);
+            if(m_BoostVFX != null) m_BoostVFX.Play();
+            Stats.PowerAmount -= 0.25f;
+        }
+        if (Stats.PowerAmount < 0) Stats.PowerAmount = 0;
+
         //CalculateSpeedAndGear(); DEPRECATED
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Stats.CanDrive && Stats.StunDuration <= 0)
         {

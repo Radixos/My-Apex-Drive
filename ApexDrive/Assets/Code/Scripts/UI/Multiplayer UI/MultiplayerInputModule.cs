@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 
 [DefaultExecutionOrder(100)]
@@ -44,7 +45,7 @@ public class MultiplayerInputModule : BaseInputModule
 		m_Cursors = new MultiplayerCursor[GameManager.MaxPlayers];
 		m_RepeatDelay = new float[GameManager.MaxPlayers];
 
-		foreach(Player player in GameManager.Instance.Players)
+		foreach(Player player in GameManager.Instance.Players.Reverse())
         {
             m_Cursors[player.PlayerID] = Instantiate(m_CursorPrefab, m_CursorPool);
 			m_Cursors[player.PlayerID].SetColor(GameManager.Instance.PlayerColors[player.PlayerID]);
@@ -126,12 +127,17 @@ public class MultiplayerInputModule : BaseInputModule
 			if(Input.GetButtonDown(InputManager.GetInputManagerString(player.ControllerType, m_SubmitAction, player.ControllerID))){
 				if(!m_MultiplayerEventSystem.LockedController(i)){
 					MultiplayerEventData data = new MultiplayerEventData(m_MultiplayerEventSystem, player);
-					IMultiplayerSubmitHandler submitHandler = m_MultiplayerEventSystem.GetSelected(i).GetComponent<IMultiplayerSubmitHandler>();
-					if(submitHandler != null && submitHandler.OnSubmit(data))
+					Selectable selection = m_MultiplayerEventSystem.GetSelected(i);
+					if(selection != null && selection.IsInteractable())
 					{
-						m_MultiplayerEventSystem.LockController(i);						
+						IMultiplayerSubmitHandler submitHandler = m_MultiplayerEventSystem.GetSelected(i).GetComponent<IMultiplayerSubmitHandler>();
+
+						if(submitHandler != null && submitHandler.OnSubmit(data))
+						{
+							m_MultiplayerEventSystem.LockController(i);						
+						}
+						FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Submit");
 					}
-					FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Submit");
 				}
 			}
 			else if(Input.GetButtonDown(InputManager.GetInputManagerString(player.ControllerType, m_CancelAction, player.ControllerID))){
@@ -154,15 +160,24 @@ public class MultiplayerInputModule : BaseInputModule
 			if(m_Cursors[i].IsActive)
 			{
 				Selectable selection = m_MultiplayerEventSystem.GetSelected(i);
-				Vector2 offset = m_CursorOffsetFromSelection;
+				float fillAmount = i + 1.0f;
+				// Vector2 offset = m_CursorOffsetFromSelection;
+				// for(int j = 0; j < m_Cursors.Length; j++)
+				// {
+				// 	if(j < i && m_Cursors[j].IsActive && m_MultiplayerEventSystem.GetSelected(j) == selection) offset += m_CursorStagger;
+				// }
+
+				// RectTransform cursorRT = m_Cursors[i].transform as RectTransform;
+				RectTransform selectionRT = selection.transform as RectTransform;
+				// cursorRT.position = new Vector3(selectionRT.position.x + offset.x, selectionRT.position.y + offset.y);
+				int sameSelectionCount = 0;
 				for(int j = 0; j < m_Cursors.Length; j++)
 				{
-					if(j < i && m_Cursors[j].IsActive && m_MultiplayerEventSystem.GetSelected(j) == selection) offset += m_CursorStagger;
+					if(m_Cursors[j].IsActive && m_MultiplayerEventSystem.GetSelected(j) == selection) sameSelectionCount ++;
 				}
 
-				RectTransform cursorRT = m_Cursors[i].transform as RectTransform;
-				RectTransform selectionRT = selection.transform as RectTransform;
-				cursorRT.position = new Vector3(selectionRT.position.x + offset.x, selectionRT.position.y + offset.y);
+				fillAmount /= (float)sameSelectionCount;
+				m_Cursors[i].MoveTo(selectionRT, fillAmount);
 			}
 		}
 	}
@@ -170,15 +185,16 @@ public class MultiplayerInputModule : BaseInputModule
 	public void AddPlayerCursor(int playerID)
 	{
 		MultiplayerCursor cursor = m_Cursors[playerID];
-		cursor.GetComponent<Animator>().SetBool("IsVisible", true);
+		cursor.gameObject.SetActive(true);
 		cursor.IsActive = true;
+		cursor.Unlock();
 		UpdateCursorPositions();
 	}
 
 	public void RemovePlayerCursor(int playerID)
 	{
 		MultiplayerCursor cursor = m_Cursors[playerID];
-		cursor.GetComponent<Animator>().SetBool("IsVisible", false);
+		cursor.gameObject.SetActive(false);
 		cursor.IsActive = false;
 		UpdateCursorPositions();
 	}

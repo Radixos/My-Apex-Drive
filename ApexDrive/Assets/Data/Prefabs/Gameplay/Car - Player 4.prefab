@@ -9801,13 +9801,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee84190f165cfeb4494a2c0f73408125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defense: event:/HUD/Abilities/defensive
-  offense: event:/HUD/Abilities/aggressive
-  boost: event:/HUD/Abilities/mobility
+  m_BoostInput: 0
+  m_BoostSFXPath: 
   m_BoostVFX: {fileID: 3727770314059792855}
   m_AttackVFX: {fileID: 0}
   m_ShieldVFX: {fileID: 0}
-  sfxStop: 0
 --- !u!114 &5323998243442652427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9902,10 +9900,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   model: {fileID: 9072775089405485706}
-  horizontal: 0
-  vertical: 0
-  initialDriftDirectionRight: 0
-  sideBoostRamp: 0
+  m_AccelerateInput: 3
+  m_HorizontalInput: 0
+  m_BreakInput: 2
+  m_DriftInput: 5
 --- !u!1001 &8818683187434325345
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -22,6 +22,8 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] private CanvasGroup m_MenuCanvasGroup;
     [SerializeField] private Image[] m_ControllerReadyCursors;
 
+    [SerializeField] private TMPro.TMP_Text m_LoadingMessage;
+
     private bool[] m_PlayersReady;
     private Coroutine m_LoadGameroutine;
 
@@ -33,6 +35,9 @@ public class LobbyMenu : MonoBehaviour
 
     private LevelInfo m_SelectedLevel;
     private AsyncOperation m_AsynchronousSceneLoad;
+
+    //VFX
+    [SerializeField] private ParticleSystem m_BoostVFX;
 
     private void Awake()
     {
@@ -142,9 +147,13 @@ public class LobbyMenu : MonoBehaviour
 
     public void DisconnectPlayer(MultiplayerEventData data)
     {
-        m_PlayersReady[data.Player.PlayerID] = false;
-        MultiplayerEventSystem.Current.RemovePlayer(data.Player.PlayerID);
-        GameManager.Instance.RemovePlayerByID(data.Player.PlayerID);
+        Player player = data.Player;
+        m_PlayersReady[player.PlayerID] = false;
+
+        MultiplayerEventSystem.Current.RemovePlayer(player.PlayerID);
+        m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", false);
+
+        StartCoroutine(Co_DisconnectPlayer(player));
     }
 
     public void Ready(MultiplayerEventData data)
@@ -196,7 +205,7 @@ public class LobbyMenu : MonoBehaviour
         if(m_State == MenuState.Closed)
         {
             m_State = MenuState.Home;
-            m_MenuAnimator.SetBool("IsOpen", true);
+            StartCoroutine(Co_OpenMenu());
         }
         if(player != null && m_PlayerPortraits[player.PlayerID] != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", true);
         if(m_CarAnimators[player.PlayerID] != null)
@@ -218,7 +227,6 @@ public class LobbyMenu : MonoBehaviour
             FMODUnity.RuntimeManager.PlayOneShot("event:/UI/Player Leave");
         }
         m_PlayersReady[player.PlayerID] = false;
-        if(player != null) m_PlayerPortraits[player.PlayerID].SetBool("IsVisible", false);
         if(m_CarAnimators[player.PlayerID] != null)
         {
             m_CarAnimators[player.PlayerID].SetBool("IsActive", false);
@@ -228,24 +236,28 @@ public class LobbyMenu : MonoBehaviour
 
     private IEnumerator Co_LoadControlsPage()
     {
-        
+        m_LoadingMessage.text = "Loading...";
         m_FaderAnimator.SetBool("Visible", true);
         yield return new WaitForSeconds(1.0f);
 
-        m_SelectedLevel = m_LevelVotes[Random.Range(0, m_LevelVotes.Count)];
-        m_AsynchronousSceneLoad = SceneManager.LoadSceneAsync(m_SelectedLevel.ReferenceString);
-        m_AsynchronousSceneLoad.allowSceneActivation = false;   
-
-        yield return new WaitForSeconds(0.5f);
-
 
         m_ControlsAnimator.SetBool("Visible", true);
-        yield return new WaitForSeconds (0.5f);
+        yield return new WaitForSeconds (1.0f);
+
+        m_SelectedLevel = m_LevelVotes[Random.Range(0, m_LevelVotes.Count)];
+        m_AsynchronousSceneLoad = SceneManager.LoadSceneAsync(m_SelectedLevel.SceneName);
+        m_AsynchronousSceneLoad.allowSceneActivation = false;   
+
+        while(m_AsynchronousSceneLoad.progress < 0.9f)
+        {
+            yield return null;
+        }
+
+        m_LoadingMessage.text = "Ready";
 
         m_State = MenuState.Controls;
 
     }
-
 
     private IEnumerator Co_DismissControlsPage()
     {
@@ -276,5 +288,31 @@ public class LobbyMenu : MonoBehaviour
         }
         yield return null;
         MultiplayerEventSystem.Current.UpdateCursorPositions();
+
+        yield return new WaitForSeconds(0.5f);
+        m_MenuCanvasGroup.interactable = true;
+    }
+
+    private IEnumerator Co_DisconnectPlayer(Player player)
+    {
+        yield return new WaitForSeconds(1.0f);
+        GameManager.Instance.RemovePlayerByID(player.PlayerID);
+    }
+
+    private IEnumerator Co_OpenMenu()
+    {
+        m_MenuAnimator.SetBool("IsOpen", true);
+        yield return null;
+        MultiplayerEventSystem.Current.UpdateCursorPositions();
+
+        yield return new WaitForSeconds(0.5f);
+        m_MenuCanvasGroup.interactable = true;
+    }
+
+    private IEnumerator Co_CloseMenu()
+    {
+        m_MenuAnimator.SetBool("IsOpen", false);
+        m_MenuCanvasGroup.interactable = false;
+        yield return new WaitForSeconds(0.5f);
     }
 }
