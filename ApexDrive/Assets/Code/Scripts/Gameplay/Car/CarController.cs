@@ -49,6 +49,7 @@ public class CarController : CarModule
 
     // VFX
     [SerializeField] private ParticleSystem m_BoostVFX;
+    [SerializeField] private ParticleSystem m_DeathVFX;
 
 
 
@@ -90,11 +91,11 @@ public class CarController : CarModule
 
         if(Stats.CanDrive) Stats.PowerAmount += 0.05f * Time.deltaTime;
 
-        if(Stats.CanDrive && InputManager.GetButtonDown(Player.ControllerType, m_BoostInput, Player.ControllerID) && Stats.PowerAmount >= 0.25f)
+        if(Stats.CanDrive && InputManager.GetButtonDown(Player.ControllerType, m_BoostInput, Player.ControllerID) && Stats.PowerAmount >= Stats.BoostCost)
         {
-            Rigidbody.AddForce(transform.forward * 10000.0f, ForceMode.Impulse);
+            Rigidbody.AddForce(transform.forward * Stats.BoostStrength, ForceMode.Impulse);
             if(m_BoostVFX != null) m_BoostVFX.Play();
-            Stats.PowerAmount -= 0.25f;
+            Stats.PowerAmount -= Stats.BoostCost;
         }
         if (Stats.PowerAmount < 0) Stats.PowerAmount = 0;
 
@@ -210,7 +211,6 @@ public class CarController : CarModule
                 {
                     sideBoostRamp = 0;
                 }
-                //Stats.SphereCollider.AddForce(transform.transform.right * Stats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
             }
             Stats.IsDrifting = true;
         }
@@ -340,5 +340,13 @@ public class CarController : CarModule
         sfxEngine.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         sfxImpact.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void Eliminate()
+    {
+        if(m_DeathVFX != null) Destroy(GameObject.Instantiate(m_DeathVFX, transform.position, Quaternion.identity, null), 5.0f);
+        if(CameraManager.Instance != null) CameraManager.Instance.AddShake(2.0f, 0.25f, 0.25f, 0.25f);
+        Player.Laps = 0;
+        Player.TrackProgress = 0;
     }
 }

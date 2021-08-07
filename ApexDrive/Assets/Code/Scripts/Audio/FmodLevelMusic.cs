@@ -19,7 +19,7 @@ public class FmodLevelMusic : MonoBehaviour
         RaceManager.PreRoundStart += RoundStart;
         RaceManager.OnRoundEnd += RoundEnd;
         RaceManager.OnGameEnd += MatchEnd;
-        EliminationScript.OnPlayerEliminated += OnPlayerEliminated;
+        RaceManager.OnPlayerEliminated += OnPlayerEliminated;
 
     }
 

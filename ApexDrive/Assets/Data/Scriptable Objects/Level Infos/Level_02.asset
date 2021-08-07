@@ -16,4 +16,4 @@ MonoBehaviour:
   Difficulty: 2
   Preview: {fileID: 21300000, guid: c782ace1ad525534b88ef5962f51921e, type: 3}
   Description: A medium difficulty track.
-  SceneName: Level_02
+  SceneName: Scene_Level_01

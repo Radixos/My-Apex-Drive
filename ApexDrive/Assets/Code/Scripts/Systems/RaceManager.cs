@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
@@ -19,6 +20,15 @@ public class RaceManager : Singleton<RaceManager>
             return null;
         }
     }
+
+    private float grace = 0.0f;
+
+    private Coroutine[] m_GraceRoutines = new Coroutine[4];
+    private List<Player> m_ActivePlayers = new List<Player>();
+    private List<Player> m_OffscreenPlayers = new List<Player>();
+
+    public delegate void EliminationEvent(Player[] activePlayers);
+    public static EliminationEvent OnPlayerEliminated;
 
     public delegate void RaceEvent();
     public static RaceEvent OnRaceSceneLoaded;
@@ -61,6 +71,8 @@ public class RaceManager : Singleton<RaceManager>
 
             CoreCarModule car = m_CarPrefabs[players[i].PlayerID];
             car.gameObject.SetActive(true);
+            car.Stats.CurrSpeed = 0.0f;
+            car.Rigidbody.velocity = Vector3.zero;
             car.transform.position = spawnPoint;
             car.transform.rotation = op.rot;
             car.Player.Laps = 0;
@@ -75,8 +87,15 @@ public class RaceManager : Singleton<RaceManager>
     {
         State = RaceState.PostRace;
         foreach(Player player in GameManager.Instance.ConnectedPlayers) player.Car.Stats.CanDrive = false;
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) player.Car.gameObject.SetActive(false);
         m_TrackProgress = winner.TrackProgress;
+
+        m_ActivePlayers.Clear();
+        m_OffscreenPlayers.Clear();
+
         if(OnRoundEnd != null) OnRoundEnd();
+
+        
 
         if(winner.RoundWins >= GameManager.Rounds)
         {
@@ -100,12 +119,21 @@ public class RaceManager : Singleton<RaceManager>
     {
         yield return new WaitForSeconds(delay);
         SpawnPlayers(GameManager.Instance.ConnectedPlayers);
-        foreach(Player player in GameManager.Instance.ConnectedPlayers) player.Car.Stats.CanDrive = false;
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) 
+        {
+            player.Car.Stats.CanDrive = false;
+        }
         if(PreRoundStart != null) PreRoundStart();
         yield return StartCoroutine(Co_Countdown());
 
         State = RaceState.Racing;
         foreach(Player player in GameManager.Instance.ConnectedPlayers) player.Car.Stats.CanDrive = true;
+
+        m_ActivePlayers.Clear();
+        m_OffscreenPlayers.Clear();
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) m_ActivePlayers.Add(player);
+        StartCoroutine(Co_CheckEliminations());
+
         if(OnRoundStart != null) OnRoundStart();
     }
 
@@ -113,7 +141,9 @@ public class RaceManager : Singleton<RaceManager>
     {
         foreach(Player player in GameManager.Instance.ConnectedPlayers)
         {
-            player.TrackProgress = ActiveTrack.GetNearestTimeOnSpline(player.Car.Position, 10, 5);
+            float trackProgress = ActiveTrack.GetNearestTimeOnSpline(player.Car.Position, 10, 5);
+            if(Vector3.Distance(ActiveTrack.Evaluate(trackProgress).pos, player.Car.Position) < 5.0f)
+            player.TrackProgress = trackProgress;
         }
 
         Player[] players = GameManager.Instance.ConnectedPlayers;
@@ -167,5 +197,66 @@ public class RaceManager : Singleton<RaceManager>
         if(OnGameEnd != null) OnGameEnd();
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Scene_Menu");   
+    }
+
+    private IEnumerator Co_CheckEliminations()
+    {
+        while(RaceManager.State == RaceManager.RaceState.Racing)
+        {
+            List<Player> noLongerVisiblePlayers = new List<Player>();
+
+            foreach(Player player in m_ActivePlayers)
+            {
+                bool visiblePlayer = IsPointInsideCameraFrustum(player.Car.Position);
+                if (!visiblePlayer && !m_OffscreenPlayers.Contains(player)) noLongerVisiblePlayers.Add(player);
+            }
+            foreach (Player player in noLongerVisiblePlayers) StartCoroutine(Co_Eliminate(player.Car));
+            if(m_ActivePlayers.Count == 1) m_ActivePlayers[0].WinRound();
+            yield return null;
+        }
+        
+    }
+
+    public void EliminatePlayerImmediately(Player player)
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/TukTuk/Elimination");
+        m_ActivePlayers.Remove(player);
+        player.Car.Controller.Eliminate();
+        player.Car.gameObject.SetActive(false);
+
+        if (OnPlayerEliminated != null)
+        {
+            OnPlayerEliminated(m_ActivePlayers.ToArray());
+        }
+    }
+
+    private bool IsPointInsideCameraFrustum(Vector3 point)
+    {
+        Vector3 viewportPosition = Camera.main.WorldToViewportPoint(point);
+        if ((viewportPosition.x > 1.0f || viewportPosition.x < 0.0f) || (viewportPosition.y > 1.0f || viewportPosition.y < 0.0f)) return false;
+        return true;
+    }
+
+    private IEnumerator Co_Eliminate(CoreCarModule car)
+    {
+        float elapsed = 0.0f;
+
+        while(elapsed < grace)
+        {
+            if(IsPointInsideCameraFrustum(car.Position))
+            {
+                // save player
+            }
+            yield return null;
+        }
+
+        car.gameObject.SetActive(false);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/TukTuk/Elimination");
+        m_ActivePlayers.Remove(car.Player);
+        car.Controller.Eliminate();
+        if (OnPlayerEliminated != null)
+        {
+            OnPlayerEliminated(m_ActivePlayers.ToArray());
+        }
     }
 }

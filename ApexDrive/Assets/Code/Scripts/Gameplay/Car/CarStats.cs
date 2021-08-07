@@ -35,10 +35,8 @@ public class CarStats : CarModule
     private float driftSideBoostMultiplier;
 
     [Header("Boost Options")]
-    [SerializeField]
-    private float currentBoostMultiplier = 1f;
-    [SerializeField]
-    private float boostMultiplier;
+    public float BoostStrength = 50.0f;
+    public float BoostCost = 0.5f;
 
     [Header("Turning Options")]
     [SerializeField]
@@ -92,9 +90,6 @@ public class CarStats : CarModule
 
     // Car Stats
     public float DriftSpeedThresholdPercent { get => driftSpeedThresholdPercent; set => driftSpeedThresholdPercent = value; }
-    // public float DriftSideBoostMultiplier { get => driftSideBoostMultiplier; set => driftSideBoostMultiplier = value; }
-    // public float CurrentBoostMultiplier { get => currentBoostMultiplier; set => currentBoostMultiplier = value; }
-    // public float BoostMultiplier { get => boostMultiplier; set => boostMultiplier = value; }
     public float TurnSpeed { get => turnSpeed; set => turnSpeed = value; }
     public float CurrAngle { get => currAngle; set => currAngle = value; }
     public float TargetAngle { get => targetAngle; set => targetAngle = value; }
@@ -117,8 +112,6 @@ public class CarStats : CarModule
     {
         // Assign car attributes
         DriftSpeedThresholdPercent = CarAttributes.driftSpeedThresholdPercent;
-        // DriftSideBoostMultiplier = CarAttributes.driftSideBoostMultiplier;
-        // BoostMultiplier = CarAttributes.boostMultiplier;
 
         TurnSpeed = CarAttributes.turnSpeed;
 
