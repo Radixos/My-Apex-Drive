@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class CarController : CarModule
 {
@@ -26,9 +27,10 @@ public class CarController : CarModule
     private RaycastHit hit;
 
     //FMOD events
-    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath;
-    // [SerializeField, FMODUnity.EventRef] private string m_EngineSFXPath = null;
-    FMOD.Studio.EventInstance m_BoostSFX;
+    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath m_ImpactSFXPath;
+    private FMOD.Studio.EventInstance m_BoostSFX;
+    private FMOD.Studio.EventInstance sfxImpact;
+
     FMOD.Studio.EventInstance sfxEngine;
     FMOD.Studio.EventInstance sfxDrift;
 
@@ -50,12 +52,15 @@ public class CarController : CarModule
 
 
 
+    private float impactForce;
+
     private void Start()
     {
 
         //FMOD Instances
         sfxEngine = FMODUnity.RuntimeManager.CreateInstance(m_EngineSFXPath);
         sfxDrift = FMODUnity.RuntimeManager.CreateInstance(m_DriftSFXPath);
+        sfxImpact = RuntimeManager.CreateInstance(impactPath);
 
         //FMOD Variables
         sfxControl = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
@@ -71,6 +76,7 @@ public class CarController : CarModule
 
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxEngine, transform, this.Rigidbody);
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxDrift, transform, this.Rigidbody);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxImpact, transform, this.Rigidbody);
 
         sfxEngine.start();
     }
@@ -317,5 +323,22 @@ public class CarController : CarModule
     {
         this.Rigidbody.AddForce(direction * force, ForceMode.Impulse);
         Stats.StunDuration = stunDuration;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        impactForce = collision.relativeVelocity.magnitude;
+        if (collision.rigidbody != null)
+        {
+            sfxImpact.setParameterByName("Force", impactForce);
+            sfxImpact.start();
+        }
+    }
+
+    private void OnDisable()
+    {
+        sfxEngine.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        sfxImpact.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }

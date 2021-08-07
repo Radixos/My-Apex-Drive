@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{3d455117-c0d5-4fa1-981e-3e9c5d6d40e3}">
+		<property name="assetPath">
+			<value>Tarmac Skid-001.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.7087981859410433</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3443ab58-a03c-4060-9e65-08810e25ec33}</destination>
+		</relationship>
+	</object>
+</objects>
