@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level_03
   m_EditorClassIdentifier: 
   Name: Apex Drive
-  ReferenceString: Scene_Level_01
-  Description: An advanced track with sharp turns!
+  Difficulty: 0
   Preview: {fileID: 21300000, guid: 2d91dc1ccf2077c4f80d606f776e01df, type: 3}
+  Description: An advanced track with sharp turns!
+  SceneName: Level_03

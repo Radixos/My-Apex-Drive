@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class LevelInfo : ScriptableObject
 {
     public string Name;
-    public string ReferenceString;
-    [TextArea] public string Description;
+    public Difficulty Difficulty;
     public Sprite Preview;
+    [TextArea] public string Description;
+    public string SceneName;
 }

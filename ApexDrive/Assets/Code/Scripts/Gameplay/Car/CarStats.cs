@@ -35,10 +35,8 @@ public class CarStats : CarModule
     private float driftSideBoostMultiplier;
 
     [Header("Boost Options")]
-    [SerializeField]
-    private float currentBoostMultiplier = 1f;
-    [SerializeField]
-    private float boostMultiplier;
+    public float BoostStrength = 50.0f;
+    public float BoostCost = 0.5f;
 
     [Header("Turning Options")]
     [SerializeField]
@@ -92,9 +90,6 @@ public class CarStats : CarModule
 
     // Car Stats
     public float DriftSpeedThresholdPercent { get => driftSpeedThresholdPercent; set => driftSpeedThresholdPercent = value; }
-    // public float DriftSideBoostMultiplier { get => driftSideBoostMultiplier; set => driftSideBoostMultiplier = value; }
-    // public float CurrentBoostMultiplier { get => currentBoostMultiplier; set => currentBoostMultiplier = value; }
-    // public float BoostMultiplier { get => boostMultiplier; set => boostMultiplier = value; }
     public float TurnSpeed { get => turnSpeed; set => turnSpeed = value; }
     public float CurrAngle { get => currAngle; set => currAngle = value; }
     public float TargetAngle { get => targetAngle; set => targetAngle = value; }
@@ -109,21 +104,14 @@ public class CarStats : CarModule
 
     // Car Components
     public CarAttributes CarAttributes { get => carAttributes; set => carAttributes = value; }
-    public GameObject Shield { get => shield; set => shield = value; }
-    public GameObject Rampage { get => rampage; set => rampage = value; }
 
     // Ability Options
     public float PowerAmount { get => powerAmount; set => powerAmount = value; }
-    public bool InitialShieldPowerDepleted { get => initialShieldPowerDepleted; set => initialShieldPowerDepleted = value; }
-    public float RampageLifetime { get => rampageLifetime; set => rampageLifetime = value; }
-    public float RampageTimer { get => rampageTimer; set => rampageTimer = value; }
 
     void Start()
     {
         // Assign car attributes
         DriftSpeedThresholdPercent = CarAttributes.driftSpeedThresholdPercent;
-        // DriftSideBoostMultiplier = CarAttributes.driftSideBoostMultiplier;
-        // BoostMultiplier = CarAttributes.boostMultiplier;
 
         TurnSpeed = CarAttributes.turnSpeed;
 
@@ -137,11 +125,6 @@ public class CarStats : CarModule
 
         // Abilities initialisation
         PowerAmount = 0.0f; // TEMPORARY
-
-        InitialShieldPowerDepleted = false;
-
-        RampageLifetime = 4.0f;
-        RampageTimer = RampageLifetime;
     }
 
     private void Update()

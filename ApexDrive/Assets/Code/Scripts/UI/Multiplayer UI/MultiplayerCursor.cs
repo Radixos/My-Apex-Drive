@@ -8,7 +8,8 @@ using UnityEngine.UI;
 
 public class MultiplayerCursor : MonoBehaviour
 {
-    private Image m_Image;
+    [SerializeField] private Image m_Graphic;
+    [SerializeField] private Image m_Mask;
     private RectTransform m_RectTransform;
     public bool IsLocked = false;
     public bool IsActive = false;
@@ -18,30 +19,33 @@ public class MultiplayerCursor : MonoBehaviour
 
     private void Awake()
     {
-        m_Image = GetComponent<Image>();
         m_RectTransform = GetComponent<RectTransform>();
     }
 
-    public void MoveTo(Vector2 position)
+    public virtual void MoveTo(RectTransform target, float maskFill)
     {
-        m_RectTransform.position = position;
+        m_RectTransform.position = (Vector2)target.position;
+        m_RectTransform.sizeDelta = target.sizeDelta;
+        m_RectTransform.rotation = target.rotation;
+        m_Mask.fillAmount = maskFill;
     }
 
     public void SetColor(Color color)
     {
         m_Color = color;
-        if(m_Image != null) m_Image.color = color;
+        if(m_Graphic != null) m_Graphic.color = color;
     }
 
     public void Lock()
     {
-        if(m_Image != null) StartCoroutine(Co_LerpColor(m_Color, m_Color * m_LockedColor));
-
+        if(m_Graphic != null) StartCoroutine(Co_LerpColor(m_Color, m_Color * m_LockedColor));
+        IsLocked = true;
     }
 
     public void Unlock()
     {
-        if(m_Image != null) StartCoroutine(Co_LerpColor(m_Color * m_LockedColor, m_Color));
+        if(m_Graphic != null) StartCoroutine(Co_LerpColor(m_Color * m_LockedColor, m_Color));
+        IsLocked = false;
     }
 
     private IEnumerator Co_LerpColor(Color from, Color to)
@@ -50,7 +54,7 @@ public class MultiplayerCursor : MonoBehaviour
         while(elapsed < m_TransitionDuration)
         {
             elapsed += Time.deltaTime;
-            m_Image.color = Color.Lerp(from, to, elapsed / m_TransitionDuration);
+            m_Graphic.color = Color.Lerp(from, to, elapsed / m_TransitionDuration);
             yield return null;
         }
     }

@@ -10,7 +10,6 @@ public class CarModule : MonoBehaviour
     public CoreCarModule Core { get { return m_Core; } }
 
     public virtual CarController Controller { get { return Core.Controller; } }
-    public virtual Abilities Abilities { get { return Core.Abilities; } }
     public virtual CarStats Stats { get { return Core.Stats; } }
     public virtual ComboAnalyser ComboAnalyser { get { return Core.ComboAnalyser; } }
     public virtual GameplayInput PlayerInput { get { return Core.PlayerInput; } }

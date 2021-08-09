@@ -7,6 +7,13 @@ using FMODUnity;
 
 public class CarController : CarModule
 {
+    // Inputs
+    [SerializeField] private InputAction m_AccelerateInput;
+    [SerializeField] private InputAction m_HorizontalInput;
+    [SerializeField] private InputAction m_BreakInput;
+    [SerializeField] private InputAction m_DriftInput;
+    [SerializeField] private InputAction m_BoostInput;
+
     public TrailRenderer[] trails;
 
     public Transform model;
@@ -20,9 +27,8 @@ public class CarController : CarModule
     private RaycastHit hit;
 
     //FMOD events
-    [SerializeField]
-    [EventRef]
-    private string impactPath;
+    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath, m_ImpactSFXPath;
+    private FMOD.Studio.EventInstance m_BoostSFX;
     private FMOD.Studio.EventInstance sfxImpact;
 
     FMOD.Studio.EventInstance sfxEngine;
@@ -41,10 +47,11 @@ public class CarController : CarModule
 
     FMOD.Studio.PLAYBACK_STATE state;
 
-    [SerializeField] private InputAction m_AccelerateInput;
-    [SerializeField] private InputAction m_HorizontalInput;
-    [SerializeField] private InputAction m_BreakInput;
-    [SerializeField] private InputAction m_DriftInput;
+    // VFX
+    [SerializeField] private ParticleSystem m_BoostVFX;
+    [SerializeField] private ParticleSystem m_DeathVFX;
+
+
 
     private float impactForce;
 
@@ -52,9 +59,9 @@ public class CarController : CarModule
     {
 
         //FMOD Instances
-        sfxEngine = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/engine");
-        sfxDrift = FMODUnity.RuntimeManager.CreateInstance("event:/TukTuk/Drifting");
-        sfxImpact = RuntimeManager.CreateInstance(impactPath);
+        sfxEngine = FMODUnity.RuntimeManager.CreateInstance(m_EngineSFXPath);
+        sfxDrift = FMODUnity.RuntimeManager.CreateInstance(m_DriftSFXPath);
+        sfxImpact = RuntimeManager.CreateInstance(m_ImpactSFXPath);
 
         //FMOD Variables
         sfxControl = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
@@ -82,10 +89,20 @@ public class CarController : CarModule
         HandleCarState();
         HandleCarAudio();
 
+        if(Stats.CanDrive) Stats.PowerAmount += 0.05f * Time.deltaTime;
+
+        if(Stats.CanDrive && InputManager.GetButtonDown(Player.ControllerType, m_BoostInput, Player.ControllerID) && Stats.PowerAmount >= Stats.BoostCost)
+        {
+            Rigidbody.AddForce(transform.forward * Stats.BoostStrength, ForceMode.Impulse);
+            if(m_BoostVFX != null) m_BoostVFX.Play();
+            Stats.PowerAmount -= Stats.BoostCost;
+        }
+        if (Stats.PowerAmount < 0) Stats.PowerAmount = 0;
+
         //CalculateSpeedAndGear(); DEPRECATED
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Stats.CanDrive && Stats.StunDuration <= 0)
         {
@@ -194,7 +211,6 @@ public class CarController : CarModule
                 {
                     sideBoostRamp = 0;
                 }
-                //Stats.SphereCollider.AddForce(transform.transform.right * Stats.CurrSpeed * -horizontal * 0.5f, ForceMode.Acceleration);
             }
             Stats.IsDrifting = true;
         }
@@ -324,5 +340,13 @@ public class CarController : CarModule
         sfxEngine.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         sfxImpact.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void Eliminate()
+    {
+        if(m_DeathVFX != null) Destroy(GameObject.Instantiate(m_DeathVFX, transform.position, Quaternion.identity, null), 5.0f);
+        if(CameraManager.Instance != null) CameraManager.Instance.AddShake(2.0f, 0.25f, 0.25f, 0.25f);
+        Player.Laps = 0;
+        Player.TrackProgress = 0;
     }
 }

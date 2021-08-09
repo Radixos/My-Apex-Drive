@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c2410b5eba72e4b8691bc8c8262088, type: 3}
   m_Name: Level_02
   m_EditorClassIdentifier: 
-  Name: The Desert
-  ReferenceString: Scene_Level_02
-  Description: A medium difficulty track.
+  Name: Twisting Pass
+  Difficulty: 2
   Preview: {fileID: 21300000, guid: c782ace1ad525534b88ef5962f51921e, type: 3}
+  Description: A medium difficulty track.
+  SceneName: Scene_Level_01
