@@ -455,7 +455,7 @@
 			<value>3.3082291666666666</value>
 		</property>
 		<property name="volume">
-			<value>-22</value>
+			<value>-10.5</value>
 		</property>
 		<relationship name="sounds">
 			<destination>{759462a0-0647-4b38-b745-92aa867552cc}</destination>
@@ -959,7 +959,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-22</value>
+			<value>-23.9999981</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{7127899d-fd8f-4be7-b1da-b2ed919884e4}">
@@ -967,7 +967,7 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>-3.79999924</value>
 		</property>
 	</object>
 </objects>
