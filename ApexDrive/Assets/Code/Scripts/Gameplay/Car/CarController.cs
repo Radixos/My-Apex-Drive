@@ -28,7 +28,6 @@ public class CarController : CarModule
 
     //FMOD events
     [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath, m_ImpactSFXPath;
-    private FMOD.Studio.EventInstance m_BoostSFX;
     private FMOD.Studio.EventInstance sfxImpact;
 
     FMOD.Studio.EventInstance sfxEngine;
@@ -350,14 +349,15 @@ public class CarController : CarModule
 
     public IEnumerator Co_Boost()
     {
-            Stats.CanBoost = false;
-            Stats.CurrSpeed = Stats.MaxSpeed + Stats.BoostStrength;
-            if(m_BoostVFX != null) m_BoostVFX.Play();
-            Debug.Log(Stats.PowerAmount + "-" + Stats.BoostCost + (Stats.PowerAmount - Stats.BoostCost));
-            Stats.PowerAmount -= Stats.BoostCost;
+        FMODUnity.RuntimeManager.PlayOneShot(m_BoostSFXPath, transform.position);
+        Stats.CanBoost = false;
+        Stats.CurrSpeed = Stats.MaxSpeed + Stats.BoostStrength;
+        if(m_BoostVFX != null) m_BoostVFX.Play();
+        Debug.Log(Stats.PowerAmount + "-" + Stats.BoostCost + (Stats.PowerAmount - Stats.BoostCost));
+        Stats.PowerAmount -= Stats.BoostCost;
 
-            yield return new WaitForSeconds(Stats.BoostCooldown);
+        yield return new WaitForSeconds(Stats.BoostCooldown);
 
-            Stats.CanBoost = true;
+        Stats.CanBoost = true;
     }
 }

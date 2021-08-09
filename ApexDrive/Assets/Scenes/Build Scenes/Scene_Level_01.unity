@@ -40662,15 +40662,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5323998243442652420, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: m_BoostSFXPath
+      value: event:/HUD/Abilities/Boost
+      objectReference: {fileID: 0}
     - target: {fileID: 5323998243442652423, guid: 1dd1995881902e842863d46047162eed,
         type: 3}
       propertyPath: m_Name
       value: Car - Player 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5323998243442652423, guid: 1dd1995881902e842863d46047162eed,
+    - target: {fileID: 5323998243442652427, guid: 1dd1995881902e842863d46047162eed,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: BoostStrength
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431316983100826650, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: m_RenderAlignment
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dd1995881902e842863d46047162eed, type: 3}
@@ -44994,7 +45004,7 @@ MonoBehaviour:
   m_ShakeSpeed: 10
   m_TestShakeStrength: 2
   m_TestShakeDuration: 0.25
-  m_OverrideFollowTarget: {fileID: 0}
+  m_OverrideFollowTarget: {fileID: 1609594015}
 --- !u!4 &1802086475
 Transform:
   m_ObjectHideFlags: 0
@@ -52811,6 +52821,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 44503472610200124, guid: f4a869f17b85af84ba9b74379faa4299,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a869f17b85af84ba9b74379faa4299, type: 3}
