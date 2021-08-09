@@ -91,13 +91,11 @@ public class CarController : CarModule
 
         if(Stats.CanDrive) Stats.PowerAmount += 0.05f * Time.deltaTime;
 
-        if(Stats.CanDrive && InputManager.GetButtonDown(Player.ControllerType, m_BoostInput, Player.ControllerID) && Stats.PowerAmount >= Stats.BoostCost)
+        if(Stats.CanDrive && Stats.CanBoost && InputManager.GetButtonDown(Player.ControllerType, m_BoostInput, Player.ControllerID) && Stats.PowerAmount >= Stats.BoostCost)
         {
-            Rigidbody.AddForce(transform.forward * Stats.BoostStrength, ForceMode.Impulse);
-            if(m_BoostVFX != null) m_BoostVFX.Play();
-            Stats.PowerAmount -= Stats.BoostCost;
+            StartCoroutine(Co_Boost());
         }
-        if (Stats.PowerAmount < 0) Stats.PowerAmount = 0;
+        Stats.PowerAmount = Mathf.Clamp01(Stats.PowerAmount);
 
         //CalculateSpeedAndGear(); DEPRECATED
     }
@@ -348,5 +346,18 @@ public class CarController : CarModule
         if(CameraManager.Instance != null) CameraManager.Instance.AddShake(2.0f, 0.25f, 0.25f, 0.25f);
         Player.Laps = 0;
         Player.TrackProgress = 0;
+    }
+
+    public IEnumerator Co_Boost()
+    {
+            Stats.CanBoost = false;
+            Stats.CurrSpeed = Stats.MaxSpeed + Stats.BoostStrength;
+            if(m_BoostVFX != null) m_BoostVFX.Play();
+            Debug.Log(Stats.PowerAmount + "-" + Stats.BoostCost + (Stats.PowerAmount - Stats.BoostCost));
+            Stats.PowerAmount -= Stats.BoostCost;
+
+            yield return new WaitForSeconds(Stats.BoostCooldown);
+
+            Stats.CanBoost = true;
     }
 }
