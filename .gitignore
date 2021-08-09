@@ -42,6 +42,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.log
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -58,7 +59,7 @@ sysinfo.txt
 /Assets/FMODStudioCache.asset
 /Assets/FMODStudioCache.asset.meta
 fmod.log
-ApexDrive/fmod_editor.log
+fmod_editor.log
 
 # Crashlytics generated file
 crashlytics-build.properties
