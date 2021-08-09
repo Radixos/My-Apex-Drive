@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4264477, g: 0.13532375, b: 0.0591868, a: 1}
+  m_IndirectSpecularColor: {r: 0.42643857, g: 0.13518032, b: 0.05916162, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7966,6 +7966,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 317366523}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &317366525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 110288, guid: 5a4e7db6b5d138a48ac28d3c085acb34,
+    type: 3}
+  m_PrefabInstance: {fileID: 317366523}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &317366526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317366525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Environment/trees
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 5
+  OverrideMaxDistance: 55
 --- !u!1001 &321031817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29273,6 +29302,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1120460565}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1120460567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 138012, guid: 2c556cf92c981904599239a20eff8561,
+    type: 3}
+  m_PrefabInstance: {fileID: 1120460565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1120460568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120460567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Environment/waterfall
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 25
+  OverrideMaxDistance: 55
 --- !u!1001 &1126858909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40793,6 +40851,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1620115909}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1620115911 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1500899924992442, guid: a19f2e49529f1ef4d903f3b663ce7893,
+    type: 3}
+  m_PrefabInstance: {fileID: 1620115909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1620115912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620115911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Environment/trees
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 5
+  OverrideMaxDistance: 55
 --- !u!1001 &1623188458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41413,6 +41500,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1633200461}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1633200463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1031576294622548, guid: 345d6370cf80aca4e971c8de6b0e69db,
+    type: 3}
+  m_PrefabInstance: {fileID: 1633200461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1633200464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633200463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Environment/trees
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 5
+  OverrideMaxDistance: 55
 --- !u!1001 &1638245836
 PrefabInstance:
   m_ObjectHideFlags: 0
