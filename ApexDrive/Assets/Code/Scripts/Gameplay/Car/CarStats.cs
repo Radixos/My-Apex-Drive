@@ -37,6 +37,7 @@ public class CarStats : CarModule
     [Header("Boost Options")]
     public float BoostStrength = 50.0f;
     public float BoostCost = 0.5f;
+    public float BoostCooldown = 0.5f;
 
     [Header("Turning Options")]
     [SerializeField]
@@ -86,6 +87,7 @@ public class CarStats : CarModule
     public bool IsDrifting { get => isDrifting; set => isDrifting = value; }
     public int Surface { get => surface; set => surface = value; }
     public bool CanDrive { get => canDrive; set => canDrive = value; }
+    public bool CanBoost = true;
     public float StunDuration { get => stunDuration; set => stunDuration = value; }
 
     // Car Stats
