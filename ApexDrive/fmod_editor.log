@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001D6AF968988 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001D8252DE958 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -19,56 +19,28 @@
 [LOG] SystemI::createSound                     : filename = Assets/Data/Audio/Riding the Apex/Banks/Desktop/Level.bank : mode 02010082
 [LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
 [LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Affinity: 0x8000000000000003, Priority: 0xFFFF7FFC, Stack Size: 114688, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
-[LOG] SystemI::createSound                     : setdata soundi = 000001D6A7A69228 : node = 000001D65E5F9880
-[LOG] SystemI::createSound                     : add node to async list : head = 000001D6D776D538.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D6A7A69228
+[LOG] SystemI::createSound                     : setdata soundi = 000001D82E5B4A18 : node = 000001D6D8B97640
+[LOG] SystemI::createSound                     : add node to async list : head = 000001D74DE0B798.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001D82E5B4A18
 [LOG] SystemI::createSoundInternal             :     Create name='Assets/Data/Audio/Riding the Apex/Banks/Desktop/Level.bank', mode=0x02010082
 [LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
 [LOG] SystemI::createSoundInternal             :     exinfo->length             = 7289920
 [LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 30048
 [LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D65E5F9990
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001D6D8B97750
 [LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
 [LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
 [LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
 [LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Music Main Loop', format=5, channels=2, frequency=48000, lengthbytes=777600, lengthpcm=2304000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.642178.
 [LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFC, Stack Size: 49152, Semaphore: No, Sleep Time: 10, Looping: Yes.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D6A7A69228
-[LOG] SoundI::release                          :  (000001D6D7B0FCC8)
-[LOG] SoundI::release                          :     Highest Rev (000001D6AAAA3DA8)
-[LOG] SoundI::release                          :  (000001D6D7B0C628)
-[LOG] SoundI::release                          :     Medium Rev (000001D6AAAA40E8)
-[LOG] SoundI::release                          :  (000001D6D7B10B28)
-[LOG] SoundI::release                          :     Idle (000001D6AAAA1B88)
-[LOG] SoundI::release                          :  (000001D6D7B0CBE8)
-[LOG] SoundI::release                          :     Music Intro (000001D6AAAA3F48)
-[LOG] SoundI::release                          :  (000001D6D7B0E008)
-[LOG] SoundI::release                          :     Music Idle Loop (000001D6AAAA3248)
-[LOG] SoundI::release                          : Music Main Loop (000001D6A7A69228)
-[LOG] SoundI::release                          :     Music Main Loop (000001D6D6460658)
-[LOG] SoundI::release                          :     Music Main Loop (000001D7A0015538)
-[LOG] SoundI::release                          :  (000001D6D7B0D038)
-[LOG] SoundI::release                          :     Drift Dirt 2 (000001D6AAAA2208)
-[LOG] SoundI::release                          :  (000001D6D7B0F598)
-[LOG] SoundI::release                          :     Tarmac Skid-001 (000001D6AAAA4288)
-[LOG] SoundI::release                          :  (000001D6D7B0BEF8)
-[LOG] SoundI::release                          :     Tarmac Skid-002 (000001D6AAAA4908)
-[LOG] SoundI::release                          :  (000001D6D7B0BD88)
-[LOG] SoundI::release                          :     Tarmac Skid-003 (000001D6AAAA1028)
-[LOG] SoundI::release                          :  (000001D6D7B0E458)
-[LOG] SoundI::release                          :     Drift Dirt 1 (000001D6AAAA0E88)
-[LOG] SoundI::release                          :  (000001D6D7B10568)
-[LOG] SoundI::release                          :     Drift slide 2 (000001D6AAAA4AA8)
-[LOG] SoundI::release                          :  (000001D6D7B0D1A8)
-[LOG] SoundI::release                          :     Drift end dirt-001 (000001D6AAAA33E8)
-[LOG] SoundI::release                          :  (000001D6D7B0B098)
-[LOG] SoundI::release                          :     Drift end dirt-002 (000001D6AAAA1368)
-[LOG] SoundI::release                          :  (000001D6D7B0C1D8)
-[LOG] SoundI::release                          :     Drift end dirt-003 (000001D6AAAA4C48)
-[LOG] SoundI::release                          :  (000001D6D7B0F428)
-[LOG] SoundI::release                          :     Drift end dirt-004 (000001D6AAAA1EC8)
-[LOG] SoundI::release                          :  (000001D6D7B0FFA8)
-[LOG] SoundI::release                          :     Drift slide 1 (000001D6AAAA2A28)
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001D82E5B4A18
+[LOG] SoundI::release                          : Music Main Loop (000001D82E5B4A18)
+[LOG] SoundI::release                          :     Music Main Loop (000001D824FB9368)
+[LOG] SoundI::release                          :     Music Main Loop (000001D82E5B61B8)
+[LOG] SoundI::release                          :  (000001D824BDD268)
+[LOG] SoundI::release                          :     Music Intro (000001D824FB2B68)
+[LOG] SoundI::release                          :  (000001D824BDDF58)
+[LOG] SoundI::release                          :     Music Idle Loop (000001D824FB1B28)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
@@ -79,3 +51,12 @@
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
 [LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.

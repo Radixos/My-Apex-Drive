@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 757786635, guid: 1dd1995881902e842863d46047162eed, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 01af5ffc47666d14f9e42fc61442ca49,
+        type: 3}
     - target: {fileID: 822773017289377161, guid: 1dd1995881902e842863d46047162eed,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -97,6 +102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Car - Player 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323998243442652423, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5432612259087483860, guid: 1dd1995881902e842863d46047162eed,
         type: 3}

@@ -6,8 +6,8 @@ using System;
 
 public class RaceManager : Singleton<RaceManager>
 {
-    public enum RaceState {PreRace, Racing, PostRace}
-    public static RaceState State;
+    public enum RaceState {PreRace, Racing, PostRace, None}
+    public static RaceState State = RaceState.None;
 
     public RoadChain ActiveTrack;
     [SerializeField] private CoreCarModule[] m_CarPrefabs;
@@ -39,6 +39,12 @@ public class RaceManager : Singleton<RaceManager>
     public static RaceEvent CountdownEnd;
     public static RaceEvent OnRoundStart;
     public static RaceEvent OnRoundEnd;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if(GameManager.Instance.PlayerCount > 0) State = RaceState.PreRace;
+    }
 
     private void Start()
     {

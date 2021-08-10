@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c2410b5eba72e4b8691bc8c8262088, type: 3}
   m_Name: Level_03
   m_EditorClassIdentifier: 
-  Name: Apex Drive
-  Difficulty: 0
+  Name: Apex \nDrive
+  Difficulty: 3
   Preview: {fileID: 21300000, guid: 2d91dc1ccf2077c4f80d606f776e01df, type: 3}
   Description: An advanced track with sharp turns!
-  SceneName: Level_03
+  SceneName: Scene_Level_01

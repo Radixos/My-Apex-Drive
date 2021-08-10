@@ -13,6 +13,10 @@ public class CarController : CarModule
     [SerializeField] private InputAction m_BreakInput;
     [SerializeField] private InputAction m_DriftInput;
     [SerializeField] private InputAction m_BoostInput;
+    [SerializeField] private InputAction m_EmoteInput;
+    
+
+    [SerializeField] private Animator m_EmoteAnimator;
 
     public TrailRenderer[] trails;
 
@@ -27,8 +31,7 @@ public class CarController : CarModule
     private RaycastHit hit;
 
     //FMOD events
-    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath, m_ImpactSFXPath;
-    private FMOD.Studio.EventInstance m_BoostSFX;
+    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath, m_ImpactSFXPath, m_HornSFXPath;
     private FMOD.Studio.EventInstance sfxImpact;
 
     FMOD.Studio.EventInstance sfxEngine;
@@ -99,12 +102,13 @@ public class CarController : CarModule
         }
         if (Stats.PowerAmount < 0) Stats.PowerAmount = 0;
 
+        if(InputManager.GetButtonDown(Player.ControllerType, m_EmoteInput, Player.ControllerID)) StartCoroutine(Co_Emote());
         //CalculateSpeedAndGear(); DEPRECATED
     }
 
     private void FixedUpdate()
     {
-        if (Stats.CanDrive && Stats.StunDuration <= 0)
+        if (Stats.CanDrive)
         {
             if (!Stats.InAir)
             {
@@ -161,12 +165,6 @@ public class CarController : CarModule
             default:
                 Stats.Surface = 1;
                 break;
-        }
-
-        // Reduce stun timer if we are stunned :)
-        if (Stats.StunDuration >= 0)
-        {
-            Stats.StunDuration -= Time.deltaTime;
         }
     }
 
@@ -322,7 +320,6 @@ public class CarController : CarModule
     public void Impact(int force, Vector3 direction, float stunDuration = 0)
     {
         this.Rigidbody.AddForce(direction * force, ForceMode.Impulse);
-        Stats.StunDuration = stunDuration;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -348,5 +345,19 @@ public class CarController : CarModule
         if(CameraManager.Instance != null) CameraManager.Instance.AddShake(2.0f, 0.25f, 0.25f, 0.25f);
         Player.Laps = 0;
         Player.TrackProgress = 0;
+    }
+
+    private IEnumerator Co_Emote()
+    {
+        m_EmoteAnimator.SetBool("Visible", true);
+        bool buttonRelease = false;
+        FMODUnity.RuntimeManager.PlayOneShot(m_HornSFXPath, transform.position);
+        while(!buttonRelease)
+        {
+            Debug.Log(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID));
+            yield return null;
+            if(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID)) buttonRelease = true;
+        }
+        m_EmoteAnimator.SetBool("Visible", false);
     }
 }
