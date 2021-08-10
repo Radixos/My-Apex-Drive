@@ -20,7 +20,8 @@ public class Checkpoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CoreCarModule car = other.GetComponent<CoreCarModule>();
-        if(car != null)
+        Debug.Log(car.LastCheckpoint == this);
+        if(car != null && car.LastCheckpoint != this)
         {
             car.LastCheckpoint = this;
             car.Player.Laps ++;

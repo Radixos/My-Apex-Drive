@@ -10,10 +10,6 @@ public class CarStats : CarModule
     [Header("Car Components")]
     [SerializeField]
     private CarAttributes carAttributes;
-    [SerializeField]
-    private GameObject shield;
-    [SerializeField]
-    private GameObject rampage;
 
     [Header("Car States")]
     [SerializeField]
@@ -23,8 +19,6 @@ public class CarStats : CarModule
     private int surface;
     [SerializeField]
     private bool canDrive;
-    [SerializeField]
-    private float stunDuration;
 
     [Header("Drifting Options")]
     [SerializeField]
@@ -69,12 +63,6 @@ public class CarStats : CarModule
     [SerializeField]
     [Range(0, 1)]
     private float powerAmount;
-    [SerializeField]
-    private bool initialShieldPowerDepleted;
-    [SerializeField]
-    private float rampageLifetime;
-    [SerializeField]
-    private float rampageTimer;
 
     [Header("FMOD Global parameters")]
     [SerializeField]
@@ -88,7 +76,6 @@ public class CarStats : CarModule
     public int Surface { get => surface; set => surface = value; }
     public bool CanDrive { get => canDrive; set => canDrive = value; }
     public bool CanBoost = true;
-    public float StunDuration { get => stunDuration; set => stunDuration = value; }
 
     // Car Stats
     public float DriftSpeedThresholdPercent { get => driftSpeedThresholdPercent; set => driftSpeedThresholdPercent = value; }
@@ -125,8 +112,7 @@ public class CarStats : CarModule
 
         OffroadMultiplier = CarAttributes.offroadMultiplier;
 
-        // Abilities initialisation
-        PowerAmount = 0.0f; // TEMPORARY
+        PowerAmount = 0.0f;
     }
 
     private void Update()
