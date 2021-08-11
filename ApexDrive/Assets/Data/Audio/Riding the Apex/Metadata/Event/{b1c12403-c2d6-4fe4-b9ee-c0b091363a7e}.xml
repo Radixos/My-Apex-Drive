@@ -70,6 +70,7 @@
 			<destination>{6ad59587-b6b7-42e9-81c7-507905c79ac2}</destination>
 			<destination>{fd9f403f-a91e-4593-bb98-f8094da07b88}</destination>
 			<destination>{84efcb3e-8841-4104-b3c8-9e0bc2b338ca}</destination>
+			<destination>{964b4f36-c5ef-4c78-8ed4-2fccef44489a}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{95d15bc1-bf87-4413-a1f3-26cdabc0a682}</destination>
@@ -81,6 +82,7 @@
 			<destination>{6ad59587-b6b7-42e9-81c7-507905c79ac2}</destination>
 			<destination>{fd9f403f-a91e-4593-bb98-f8094da07b88}</destination>
 			<destination>{84efcb3e-8841-4104-b3c8-9e0bc2b338ca}</destination>
+			<destination>{964b4f36-c5ef-4c78-8ed4-2fccef44489a}</destination>
 		</relationship>
 		<relationship name="preset">
 			<destination>{55500dcf-847f-4ce9-b530-ab2f68ea410f}</destination>
@@ -137,6 +139,16 @@
 		</relationship>
 		<relationship name="audioFile">
 			<destination>{94afc26c-62e4-433f-94cb-044c8e54300b}</destination>
+		</relationship>
+	</object>
+	<object class="MultiSound" id="{964b4f36-c5ef-4c78-8ed4-2fccef44489a}">
+		<property name="start">
+			<value>4</value>
+		</property>
+		<relationship name="sounds">
+			<destination>{71a03023-48b0-47ac-80f5-9dbc5aadaef9}</destination>
+			<destination>{5eb5ddbc-7edc-4e9d-b65f-45fe59ce63cf}</destination>
+			<destination>{1f910848-69b4-479c-bfab-ab6a31bfa4f0}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{95d15bc1-bf87-4413-a1f3-26cdabc0a682}">
@@ -201,6 +213,21 @@
 		<property name="amount">
 			<value>11.5</value>
 		</property>
+	</object>
+	<object class="SingleSound" id="{71a03023-48b0-47ac-80f5-9dbc5aadaef9}">
+		<relationship name="audioFile">
+			<destination>{ac8fadc6-cafa-4055-9773-2de1e55161c8}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{5eb5ddbc-7edc-4e9d-b65f-45fe59ce63cf}">
+		<relationship name="audioFile">
+			<destination>{fa9da573-a307-4917-8c29-136886a274fa}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{1f910848-69b4-479c-bfab-ab6a31bfa4f0}">
+		<relationship name="audioFile">
+			<destination>{3fbff361-078b-4211-9431-c43ab8e473c2}</destination>
+		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{14c10d32-a421-4dbf-91a0-e11ff1279ca2}">
 		<relationship name="effects">

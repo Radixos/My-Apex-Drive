@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{a8dd14cf-be61-418f-8e03-37800fd62c31}">
+		<property name="assetPath">
+			<value>Cymbal 4.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>8</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{3443ab58-a03c-4060-9e65-08810e25ec33}</destination>
+		</relationship>
+	</object>
+</objects>
