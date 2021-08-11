@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1385137001}
-  m_IndirectSpecularColor: {r: 0.42630032, g: 0.13525367, b: 0.059133768, a: 1}
+  m_IndirectSpecularColor: {r: 0.42629042, g: 0.13525206, b: 0.059135243, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5881,6 +5881,30 @@ PrefabInstance:
       propertyPath: m_DebugPlayersToInstantiate
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5326399234784757212, guid: 1c3a1c7061e820e40b357b0ab802b406,
+        type: 3}
+      propertyPath: m_PlayerSpawnVFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8516684422293879051, guid: 861e33b1ae9b4e041a003e44748f2b1b,
+        type: 3}
+    - target: {fileID: 5326399234784757212, guid: 1c3a1c7061e820e40b357b0ab802b406,
+        type: 3}
+      propertyPath: m_PlayerSpawnVFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 3083563912885580690, guid: ef0f1da89bd73554dbb08f057cd4ed32,
+        type: 3}
+    - target: {fileID: 5326399234784757212, guid: 1c3a1c7061e820e40b357b0ab802b406,
+        type: 3}
+      propertyPath: m_PlayerSpawnVFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 3083563912885580690, guid: 928b5818ed5ac494f95eefdb02a907cb,
+        type: 3}
+    - target: {fileID: 5326399234784757212, guid: 1c3a1c7061e820e40b357b0ab802b406,
+        type: 3}
+      propertyPath: m_PlayerSpawnVFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 3083563912885580690, guid: 382c738a9d639704cb8132377b2bce32,
+        type: 3}
     - target: {fileID: 5326399234784757213, guid: 1c3a1c7061e820e40b357b0ab802b406,
         type: 3}
       propertyPath: m_Name
@@ -6873,9 +6897,6 @@ MonoBehaviour:
   m_Position: 0
   m_Smoothing: 0.125
   m_TrackProgress: 0.135
-  m_ShakeSpeed: 10
-  m_TestShakeStrength: 2
-  m_TestShakeDuration: 0.25
   m_OverrideFollowTarget: {fileID: 0}
 --- !u!4 &1126800161
 Transform:

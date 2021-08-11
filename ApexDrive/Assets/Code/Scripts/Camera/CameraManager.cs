@@ -15,11 +15,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField, Range(0.0f, 2.0f)] private float m_Position;
     [SerializeField, Range(0.0f, 1.0f)] private float m_Smoothing = 0.125f;
     [SerializeField, Range(0.0f, 1.0f)] private float m_TrackProgress;
-    [SerializeField, Range(0.0f, 10.0f)] private float m_ShakeSpeed;
 
     private Vector3 targetPosition = Vector3.zero;
-
-    [SerializeField] private float m_TestShakeStrength, m_TestShakeDuration;
 
     [SerializeField] private Transform m_OverrideFollowTarget;
 
@@ -30,11 +27,23 @@ public class CameraManager : MonoBehaviour
 
     private void OnEnable()
     {
+        m_Cameras = GetComponentsInChildren<Camera>();
+        RaceManager.OnRoundEnd += UpdateTrackProgress;
+        UpdateTrackProgress();
         if(m_Track != null)
         {
             transform.position = m_Track.Evaluate(m_TrackProgress).pos + m_Offset;
         }
-        m_Cameras = GetComponentsInChildren<Camera>();
+    }
+
+    private void OnDisable()
+    {
+        RaceManager.OnRoundEnd -= UpdateTrackProgress;
+    }
+
+    private void UpdateTrackProgress()
+    {
+        m_TrackProgress = RaceManager.Instance.TrackProgress;
     }
 
 
@@ -45,7 +54,7 @@ public class CameraManager : MonoBehaviour
             if(m_Track == null) return;
 
             Player leadPlayer = RaceManager.Instance.FirstPlayer;
-            if(leadPlayer != null) targetPosition = m_Track.GetNearestPositionOnSpline(leadPlayer.Car.Position, 10, 5);
+            if(leadPlayer != null && leadPlayer.Car.gameObject.activeSelf) targetPosition = m_Track.GetNearestPositionOnSpline(leadPlayer.Car.Position, 10, 5);
             else if(m_OverrideFollowTarget != null) targetPosition = m_Track.GetNearestPositionOnSpline(m_OverrideFollowTarget.position, 10, 5);
             else targetPosition = m_Track.Evaluate(m_TrackProgress).pos;
             Vector3 desiredPosition =  targetPosition + m_Offset;
@@ -65,8 +74,8 @@ public class CameraManager : MonoBehaviour
                 }
             }
 
-            float x = Mathf.PerlinNoise(Time.time * m_ShakeSpeed, 0.0f) * strength - strength / 2.0f;
-            float y = Mathf.PerlinNoise(0.0f, Time.time * m_ShakeSpeed) * strength - strength / 2.0f;
+            float x = Mathf.PerlinNoise(Time.time * 10.0f, 0.0f) * strength - strength / 2.0f;
+            float y = Mathf.PerlinNoise(0.0f, Time.time * 10.0f) * strength - strength / 2.0f;
 
             foreach(Camera camera in m_Cameras)
             {
@@ -82,12 +91,6 @@ public class CameraManager : MonoBehaviour
                 
             }
         }
-    }
-
-    [ContextMenu("Add Test Shake")]
-    public void AddTestShake()
-    {
-        AddShake(m_TestShakeStrength, m_TestShakeDuration, 0.25f, 0.25f);
     }
 
     private void Update()
