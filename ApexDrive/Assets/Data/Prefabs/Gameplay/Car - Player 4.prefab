@@ -98,6 +98,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2843409304886317060, guid: afde6753d98cfa54d8cdf064718b4fbc,
         type: 3}
+    - target: {fileID: 5323998243442652420, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: m_VictoryVFX
+      value: 
+      objectReference: {fileID: 164909736133475198, guid: dc811ba843b3a6a49a78bdcd667470a8,
+        type: 3}
     - target: {fileID: 5323998243442652423, guid: 1dd1995881902e842863d46047162eed,
         type: 3}
       propertyPath: m_Name
@@ -113,6 +119,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 64c96d06c034f994882bc020b0064962, type: 2}
+    - target: {fileID: 5607175960084450909, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ab8cd9878bdea9e40812ba88b318c951, type: 2}
     - target: {fileID: 5961887251934309960, guid: 1dd1995881902e842863d46047162eed,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

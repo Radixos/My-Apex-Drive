@@ -25,6 +25,8 @@ public class BoostBarScript : MonoBehaviour
             else m_HUDs[i].SetActive(false);
         }
 
+        foreach(Image meter in m_Meters) meter.fillAmount = 0.0f;
+
     }
 
     private void Update()
@@ -35,8 +37,16 @@ public class BoostBarScript : MonoBehaviour
             if(player.Car != null)
             {
                 if(GameManager.Instance.ConnectedPlayers[i].Car != null) m_Meters[i].fillAmount = player.Car.Stats.PowerAmount;
-                if(player.Car.Stats.PowerAmount > 0.25f) m_BoostButtonAnimators[i].SetBool("CanBoost", true);
-                else m_BoostButtonAnimators[i].SetBool("CanBoost", false);
+                if(player.Car.Stats.PowerAmount > player.Car.Stats.BoostCost) 
+                {
+                    m_BoostButtonAnimators[i].SetBool("CanBoost", true);
+                    m_Meters[i].color = GameManager.Instance.PlayerColors[i];
+                }
+                else 
+                {
+                    m_BoostButtonAnimators[i].SetBool("CanBoost", false);
+                    m_Meters[i].color = Color.grey;
+                }
             }
         }
     }

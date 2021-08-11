@@ -97,8 +97,9 @@ public class CarStats : CarModule
     // Ability Options
     public float PowerAmount { get => powerAmount; set => powerAmount = value; }
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         // Assign car attributes
         DriftSpeedThresholdPercent = CarAttributes.driftSpeedThresholdPercent;
 
@@ -113,6 +114,7 @@ public class CarStats : CarModule
         OffroadMultiplier = CarAttributes.offroadMultiplier;
 
         PowerAmount = 0.0f;
+        CanDrive = false;
     }
 
     private void Update()

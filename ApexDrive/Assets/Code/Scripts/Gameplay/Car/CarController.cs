@@ -53,10 +53,16 @@ public class CarController : CarModule
     // VFX
     [SerializeField] private ParticleSystem m_BoostVFX;
     [SerializeField] private ParticleSystem m_DeathVFX;
+    [SerializeField] private ParticleSystem m_VictoryVFX;
 
 
 
     private float impactForce;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     private void Start()
     {
@@ -102,6 +108,12 @@ public class CarController : CarModule
 
         if(InputManager.GetButtonDown(Player.ControllerType, m_EmoteInput, Player.ControllerID)) StartCoroutine(Co_Emote());
         //CalculateSpeedAndGear(); DEPRECATED
+        Stats.PowerAmount = Mathf.Clamp01(Stats.PowerAmount);
+    }
+
+    public void PlayVictoryVFX()
+    {
+        Destroy(GameObject.Instantiate(m_VictoryVFX, transform.position + Vector3.up, Quaternion.identity), 2.5f);
     }
 
     private void FixedUpdate()
@@ -198,7 +210,7 @@ public class CarController : CarModule
     {
         if (Stats.CurrSpeed <= 0.1f && Stats.CurrSpeed >= -.1f) return;
 
-        if (InputManager.GetButton(Player.ControllerType, m_DriftInput, Player.ControllerID) && Stats.CurrSpeed / Stats.Acceleration >= Stats.DriftSpeedThresholdPercent)
+        if (InputManager.GetAxis(Player.ControllerType, m_DriftInput, Player.ControllerID) > 0.0f && Stats.CurrSpeed / Stats.Acceleration >= Stats.DriftSpeedThresholdPercent)
         {
             if (!Stats.IsDrifting)
             {
@@ -340,7 +352,7 @@ public class CarController : CarModule
     public void Eliminate()
     {
         if(m_DeathVFX != null) Destroy(GameObject.Instantiate(m_DeathVFX, transform.position, Quaternion.identity, null), 5.0f);
-        if(CameraManager.Instance != null) CameraManager.Instance.AddShake(2.0f, 0.25f, 0.25f, 0.25f);
+        if(CameraManager.Instance != null) CameraManager.Instance.AddShake(4.0f, 0.25f, 0.25f, 0.25f);
         Player.Laps = 0;
         Player.TrackProgress = 0;
     }
