@@ -64,7 +64,6 @@ public class Player
     {
         RoundWins ++;
         if(OnRoundWin != null) OnRoundWin(this);
-        if(RoundWins >= GameManager.Rounds && OnGameWin != null) OnGameWin(this);
     }
 
     public void WinGame()

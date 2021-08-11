@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 757786635, guid: 1dd1995881902e842863d46047162eed, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 94aaafb478d7e0340bbf7bbbced3fd5c,
+        type: 3}
     - target: {fileID: 1291151060, guid: 1dd1995881902e842863d46047162eed, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.4622879
@@ -105,16 +110,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5834991908019624065, guid: 47dd9691b0ba2dd40bd4f34c6dbd730d,
         type: 3}
+    - target: {fileID: 5323998243442652420, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: m_VictoryVFX
+      value: 
+      objectReference: {fileID: 164909736133475198, guid: 14c11c6fbbc6d954d91ad2d95e7bf2b5,
+        type: 3}
     - target: {fileID: 5323998243442652423, guid: 1dd1995881902e842863d46047162eed,
         type: 3}
       propertyPath: m_Name
       value: Car - Player 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323998243442652423, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5432612259087483860, guid: 1dd1995881902e842863d46047162eed,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 508cf917f0da6c947ab21c9b884f5477, type: 2}
+    - target: {fileID: 5607175960084450909, guid: 1dd1995881902e842863d46047162eed,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c1fa37e29275cc41bf19df234d65e8b, type: 2}
     - target: {fileID: 5961887251934309960, guid: 1dd1995881902e842863d46047162eed,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

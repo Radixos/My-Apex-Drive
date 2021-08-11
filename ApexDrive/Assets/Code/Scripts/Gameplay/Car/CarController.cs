@@ -13,6 +13,10 @@ public class CarController : CarModule
     [SerializeField] private InputAction m_BreakInput;
     [SerializeField] private InputAction m_DriftInput;
     [SerializeField] private InputAction m_BoostInput;
+    [SerializeField] private InputAction m_EmoteInput;
+    
+
+    [SerializeField] private Animator m_EmoteAnimator;
 
     public TrailRenderer[] trails;
 
@@ -26,9 +30,8 @@ public class CarController : CarModule
     private float sideBoostRamp;
     private RaycastHit hit;
 
-    //FMOD events
-    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath, m_ImpactSFXPath;
-    private FMOD.Studio.EventInstance m_BoostSFX;
+
+    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath, m_ImpactSFXPath, m_HornSFXPath;
     private FMOD.Studio.EventInstance sfxImpact;
 
     FMOD.Studio.EventInstance sfxEngine;
@@ -50,10 +53,16 @@ public class CarController : CarModule
     // VFX
     [SerializeField] private ParticleSystem m_BoostVFX;
     [SerializeField] private ParticleSystem m_DeathVFX;
+    [SerializeField] private ParticleSystem m_VictoryVFX;
 
 
 
     private float impactForce;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
     private void Start()
     {
@@ -97,12 +106,19 @@ public class CarController : CarModule
         }
         Stats.PowerAmount = Mathf.Clamp01(Stats.PowerAmount);
 
+        if(InputManager.GetButtonDown(Player.ControllerType, m_EmoteInput, Player.ControllerID)) StartCoroutine(Co_Emote());
         //CalculateSpeedAndGear(); DEPRECATED
+        Stats.PowerAmount = Mathf.Clamp01(Stats.PowerAmount);
+    }
+
+    public void PlayVictoryVFX()
+    {
+        Destroy(GameObject.Instantiate(m_VictoryVFX, transform.position + Vector3.up, Quaternion.identity), 2.5f);
     }
 
     private void FixedUpdate()
     {
-        if (Stats.CanDrive && Stats.StunDuration <= 0)
+        if (Stats.CanDrive)
         {
             if (!Stats.InAir)
             {
@@ -160,12 +176,6 @@ public class CarController : CarModule
                 Stats.Surface = 1;
                 break;
         }
-
-        // Reduce stun timer if we are stunned :)
-        if (Stats.StunDuration >= 0)
-        {
-            Stats.StunDuration -= Time.deltaTime;
-        }
     }
 
     /// <summary>
@@ -200,7 +210,7 @@ public class CarController : CarModule
     {
         if (Stats.CurrSpeed <= 0.1f && Stats.CurrSpeed >= -.1f) return;
 
-        if (InputManager.GetButton(Player.ControllerType, m_DriftInput, Player.ControllerID) && Stats.CurrSpeed / Stats.Acceleration >= Stats.DriftSpeedThresholdPercent)
+        if (InputManager.GetAxis(Player.ControllerType, m_DriftInput, Player.ControllerID) > 0.0f && Stats.CurrSpeed / Stats.Acceleration >= Stats.DriftSpeedThresholdPercent)
         {
             if (!Stats.IsDrifting)
             {
@@ -320,7 +330,6 @@ public class CarController : CarModule
     public void Impact(int force, Vector3 direction, float stunDuration = 0)
     {
         this.Rigidbody.AddForce(direction * force, ForceMode.Impulse);
-        Stats.StunDuration = stunDuration;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -343,21 +352,36 @@ public class CarController : CarModule
     public void Eliminate()
     {
         if(m_DeathVFX != null) Destroy(GameObject.Instantiate(m_DeathVFX, transform.position, Quaternion.identity, null), 5.0f);
-        if(CameraManager.Instance != null) CameraManager.Instance.AddShake(2.0f, 0.25f, 0.25f, 0.25f);
+        if(CameraManager.Instance != null) CameraManager.Instance.AddShake(4.0f, 0.25f, 0.25f, 0.25f);
         Player.Laps = 0;
         Player.TrackProgress = 0;
     }
 
+
     public IEnumerator Co_Boost()
     {
-            Stats.CanBoost = false;
-            Stats.CurrSpeed = Stats.MaxSpeed + Stats.BoostStrength;
-            if(m_BoostVFX != null) m_BoostVFX.Play();
-            Debug.Log(Stats.PowerAmount + "-" + Stats.BoostCost + (Stats.PowerAmount - Stats.BoostCost));
-            Stats.PowerAmount -= Stats.BoostCost;
+        FMODUnity.RuntimeManager.PlayOneShot(m_BoostSFXPath, transform.position);
+        Stats.CanBoost = false;
+        Stats.CurrSpeed = Stats.MaxSpeed + Stats.BoostStrength;
+        if(m_BoostVFX != null) m_BoostVFX.Play();
+        Debug.Log(Stats.PowerAmount + "-" + Stats.BoostCost + (Stats.PowerAmount - Stats.BoostCost));
+        Stats.PowerAmount -= Stats.BoostCost;
 
-            yield return new WaitForSeconds(Stats.BoostCooldown);
+        yield return new WaitForSeconds(Stats.BoostCooldown);
 
-            Stats.CanBoost = true;
+        Stats.CanBoost = true;
+    }
+
+    private IEnumerator Co_Emote()
+    {
+        m_EmoteAnimator.SetBool("Visible", true);
+        bool buttonRelease = false;
+        FMODUnity.RuntimeManager.PlayOneShot(m_HornSFXPath, transform.position);
+        while(!buttonRelease)
+        {
+            Debug.Log(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID));
+            yield return null;
+            if(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID)) buttonRelease = true;
+        }
     }
 }

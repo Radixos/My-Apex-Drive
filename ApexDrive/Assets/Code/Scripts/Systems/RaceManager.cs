@@ -6,12 +6,13 @@ using System;
 
 public class RaceManager : Singleton<RaceManager>
 {
-    public enum RaceState {PreRace, Racing, PostRace}
-    public static RaceState State;
+    public enum RaceState {PreRace, Racing, PostRace, None}
+    public static RaceState State = RaceState.None;
 
     public RoadChain ActiveTrack;
     [SerializeField] private CoreCarModule[] m_CarPrefabs;
-    public float m_TrackProgress = 0.01f;
+    [SerializeField]private float m_TrackProgress = 0.01f;
+    public float TrackProgress { get{ return m_TrackProgress; } }
     public Player FirstPlayer
     {
         get 
@@ -40,6 +41,15 @@ public class RaceManager : Singleton<RaceManager>
     public static RaceEvent OnRoundStart;
     public static RaceEvent OnRoundEnd;
 
+    [SerializeField] private ParticleSystem[] m_PlayerSpawnVFX = new ParticleSystem[4];
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if(GameManager.Instance.PlayerCount > 0) State = RaceState.PreRace;
+    }
+
     private void Start()
     {
         if(OnRaceSceneLoaded != null) OnRaceSceneLoaded();
@@ -61,51 +71,31 @@ public class RaceManager : Singleton<RaceManager>
         if(State == RaceState.Racing) UpdatePlayerRaceInfo();
     }
 
-    public void SpawnPlayers(Player[] players)
+    private IEnumerator Co_SpawnPlayers(Player[] players)
     {
+        OrientedPoint op = ActiveTrack.Evaluate(m_TrackProgress);
         for(int i = 0; i < players.Length; i++)
         {
-            OrientedPoint op = ActiveTrack.Evaluate(m_TrackProgress);
             Vector3 offset = Vector3.left * (players.Length - i) * 1.5f + Vector3.right * players.Length / 2.0f * 1.5f;
             Vector3 spawnPoint = op.pos + op.rot * offset + Vector3.up * 1.05f;
 
+            Destroy(GameObject.Instantiate(m_PlayerSpawnVFX[i], spawnPoint, Quaternion.identity), 5.0f);
+            yield return new WaitForSeconds(1.0f);
+
             CoreCarModule car = m_CarPrefabs[players[i].PlayerID];
             car.gameObject.SetActive(true);
-            car.Stats.CurrSpeed = 0.0f;
-            car.Rigidbody.velocity = Vector3.zero;
             car.transform.position = spawnPoint;
             car.transform.rotation = op.rot;
-            car.Player.Laps = 0;
 
-            // if(players[i].ControllerID <= 0 || players[i].ControllerID >= 4) players[i].AssignController(i+1); // this shouldn't be the case except for debugging in the race scene
             car.SetPlayer(players[i]);
             players[i].Car = car;
         }
+        yield return new WaitForSeconds(1.0f);
     }
 
     private void EndRound(Player winner)
     {
-        State = RaceState.PostRace;
-        foreach(Player player in GameManager.Instance.ConnectedPlayers) player.Car.Stats.CanDrive = false;
-        foreach(Player player in GameManager.Instance.ConnectedPlayers) player.Car.gameObject.SetActive(false);
-        m_TrackProgress = winner.TrackProgress;
-
-        m_ActivePlayers.Clear();
-        m_OffscreenPlayers.Clear();
-
-        if(OnRoundEnd != null) OnRoundEnd();
-
-        
-
-        if(winner.RoundWins >= GameManager.Rounds)
-        {
-            // end the game
-            StartCoroutine(Co_EndGame());
-        }
-        else
-        {
-            StartCoroutine(Co_StartRound(3.0f));
-        }
+        StartCoroutine(Co_EndRound(winner));
     }
 
     private IEnumerator Co_StartGame()
@@ -118,7 +108,7 @@ public class RaceManager : Singleton<RaceManager>
     private IEnumerator Co_StartRound(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SpawnPlayers(GameManager.Instance.ConnectedPlayers);
+        yield return StartCoroutine(Co_SpawnPlayers(GameManager.Instance.ConnectedPlayers));
         foreach(Player player in GameManager.Instance.ConnectedPlayers) 
         {
             player.Car.Stats.CanDrive = false;
@@ -191,9 +181,51 @@ public class RaceManager : Singleton<RaceManager>
         if(CountdownEnd != null) CountdownEnd();
     }
 
+    private IEnumerator Co_EndRound(Player winner)
+    {
+        State = RaceState.PostRace;
+
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) 
+        {
+            player.Car.Stats.CanDrive = false;
+        }
+        m_TrackProgress = winner.TrackProgress;
+
+        m_ActivePlayers.Clear();
+        m_OffscreenPlayers.Clear();
+
+        if(OnRoundEnd != null) OnRoundEnd();
+
+        yield return new WaitForSeconds(2.0f);
+
+        winner.Car.Controller.PlayVictoryVFX();
+        foreach(Player player in GameManager.Instance.ConnectedPlayers) 
+        {
+            player.Car.Stats.CurrSpeed = 0.0f;
+            player.Car.Rigidbody.velocity = Vector3.zero;
+            player.Car.Player.Laps = 0;
+        }
+        yield return new WaitForSeconds(0.25f);
+
+        winner.Car.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1.75f);
+
+        if(winner.RoundWins >= GameManager.Rounds)
+        {
+            // end the game
+            if(winner.RoundWins >= GameManager.Rounds && Player.OnGameWin != null) Player.OnGameWin(winner);
+            StartCoroutine(Co_EndGame());
+        }
+        else
+        {
+            StartCoroutine(Co_StartRound(0.0f));
+        }
+
+    }
+
     private IEnumerator Co_EndGame()
     {
-        yield return new WaitForSeconds(4.0f);
         if(OnGameEnd != null) OnGameEnd();
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Scene_Menu");   

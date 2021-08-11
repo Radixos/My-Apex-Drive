@@ -158,11 +158,11 @@ public static class InputManager
 
     public static bool GetButtonDown(ControllerType controllerType, InputAction action, int controllerID)
     {
-        return Input.GetButton(GetInputManagerString(controllerType, action, controllerID));
+        return Input.GetButtonDown(GetInputManagerString(controllerType, action, controllerID));
     }
 
     public static bool GetButtonUp(ControllerType controllerType, InputAction action, int controllerID)
     {
-        return Input.GetButton(GetInputManagerString(controllerType, action, controllerID));
+        return Input.GetButtonUp(GetInputManagerString(controllerType, action, controllerID));
     }
 }
