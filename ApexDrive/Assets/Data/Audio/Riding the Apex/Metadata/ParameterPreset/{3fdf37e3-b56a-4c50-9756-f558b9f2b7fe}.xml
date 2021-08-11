@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="ParameterPreset" id="{3fdf37e3-b56a-4c50-9756-f558b9f2b7fe}">
 		<property name="name">
-			<value>Parameter 2</value>
+			<value>Player Count</value>
 		</property>
 		<relationship name="folder">
 			<destination>{39371476-0a55-43e0-8cbc-49e86e0f1f86}</destination>
@@ -16,13 +16,13 @@
 			<value>1</value>
 		</property>
 		<property name="minimum">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<property name="maximum">
 			<value>5</value>
 		</property>
 		<property name="initialValue">
-			<value>2</value>
+			<value>1</value>
 		</property>
 	</object>
 </objects>

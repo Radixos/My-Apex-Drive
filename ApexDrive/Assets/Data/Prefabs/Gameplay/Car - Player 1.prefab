@@ -19641,6 +19641,7 @@ MonoBehaviour:
   driftSideBoostMultiplier: 0
   BoostStrength: 150
   BoostCost: 0.5
+  BoostCooldown: 0.5
   turnSpeed: 0
   currAngle: 0
   targetAngle: 0
@@ -19654,6 +19655,7 @@ MonoBehaviour:
   maxSpeed: 0
   powerAmount: 1
   powerMeter: 
+  CanBoost: 1
 --- !u!114 &5323998243442652426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19720,6 +19722,7 @@ MonoBehaviour:
   m_DriftSFXPath: event:/TukTuk/Drifting
   m_ImpactSFXPath: event:/TukTuk/Impact
   m_HornSFXPath: event:/TukTuk/Horn
+  m_DespawnSFXPath: event:/TukTuk/Despawn
   m_BoostVFX: {fileID: 7599871787293403154}
   m_DeathVFX: {fileID: 5338135414596800380, guid: 927efba2a77168c4e9369ab622a0c0c9,
     type: 3}

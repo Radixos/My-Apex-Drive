@@ -35,6 +35,7 @@ public class RaceManager : Singleton<RaceManager>
     public static RaceEvent OnRaceSceneLoaded;
     public static RaceEvent OnGameStart;
     public static RaceEvent OnGameEnd;
+    public static RaceEvent PreSpawnPlayers;
     public static RaceEvent PreRoundStart;
     public static RaceEvent CountdownStart;
     public static RaceEvent CountdownEnd;
@@ -108,6 +109,7 @@ public class RaceManager : Singleton<RaceManager>
     private IEnumerator Co_StartRound(float delay)
     {
         yield return new WaitForSeconds(delay);
+        if (PreSpawnPlayers != null) PreSpawnPlayers();
         yield return StartCoroutine(Co_SpawnPlayers(GameManager.Instance.ConnectedPlayers));
         foreach(Player player in GameManager.Instance.ConnectedPlayers) 
         {

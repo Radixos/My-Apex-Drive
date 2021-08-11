@@ -16,7 +16,9 @@ public class FmodLevelMusic : MonoBehaviour
         levelMusic = RuntimeManager.CreateInstance(musicPath);
         levelMusic.start();
 
-        RaceManager.PreRoundStart += RoundStart;
+        levelMusic.setParameterByName("Player Count", GameManager.Instance.PlayerCount);
+
+        RaceManager.PreSpawnPlayers += RoundStart;
         RaceManager.OnRoundEnd += RoundEnd;
         RaceManager.OnGameEnd += MatchEnd;
         RaceManager.OnPlayerEliminated += OnPlayerEliminated;
@@ -31,12 +33,14 @@ public class FmodLevelMusic : MonoBehaviour
 
     private void RoundEnd()
     {
+        levelMusic.setParameterByName("Respawn", 0);
         levelMusic.setParameterByName("RoundEnd", 1);
     }
 
     private void RoundStart()
     {
         levelMusic.setParameterByName("RoundEnd", 0);
+        levelMusic.setParameterByName("Respawn", 1);
     }
 
     private void MatchEnd()

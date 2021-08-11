@@ -115,7 +115,7 @@
 	<object class="MixerBusPanner" id="{d0de2c31-85c2-4572-a080-cf9f4e48a3e3}" />
 	<object class="SingleSound" id="{1dfe2bc3-35e5-482a-abb5-79d99581028f}">
 		<property name="start">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{97be30d9-b6fd-440d-ac2b-e2f14ae519aa}</destination>
@@ -123,7 +123,7 @@
 	</object>
 	<object class="SingleSound" id="{015b474e-0b96-4e65-98ce-bb6ae665c016}">
 		<property name="start">
-			<value>3</value>
+			<value>2</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{14442150-db57-40a3-b2ef-32b5ad522187}</destination>
@@ -131,7 +131,7 @@
 	</object>
 	<object class="SingleSound" id="{1e7a38e0-04db-4438-9e95-322d7dd21651}">
 		<property name="start">
-			<value>4</value>
+			<value>3</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{9f557a5f-999f-4680-8e72-15086bbbc803}</destination>
@@ -156,7 +156,7 @@
 	</object>
 	<object class="SingleSound" id="{55e23af5-d3ae-438a-9e7a-3eaaa6e4a40b}">
 		<property name="start">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{c723bf20-ba48-4033-b988-626c813bbbc1}</destination>
@@ -164,7 +164,7 @@
 	</object>
 	<object class="SingleSound" id="{19259e43-025a-47e4-9287-59ce6afe5a77}">
 		<property name="start">
-			<value>3</value>
+			<value>2</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{91a6042c-b628-4cda-bba7-158f00350912}</destination>
@@ -172,7 +172,7 @@
 	</object>
 	<object class="SingleSound" id="{a0dc94b1-dec4-4b63-922c-bd01adb7dfd5}">
 		<property name="start">
-			<value>4</value>
+			<value>3</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{f0c9a252-e00b-453a-bf75-2e4c94a31cd2}</destination>
