@@ -35,12 +35,12 @@ public class GameHUD : MonoBehaviour
 
     private void FadeInScene()
     {
-        m_FaderAnimator.SetTrigger("FadeIn");
+        m_FaderAnimator.SetBool("Visible", false);
     }
 
     private void FadeOutScene()
     {
-        m_FaderAnimator.SetTrigger("FadeOut");
+        m_FaderAnimator.SetBool("Visible", true);
     }
 
     private void Countdown()

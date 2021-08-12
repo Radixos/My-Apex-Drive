@@ -6893,8 +6893,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CameraShakes: []
   m_Track: {fileID: 4839753782936344777}
-  m_Offset: {x: 0, y: 20, z: -12.5}
-  m_Position: 0
+  m_Offset: 25
+  m_ZoomCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Zoom: 0
   m_Smoothing: 0.125
   m_TrackProgress: 0.135
   m_OverrideFollowTarget: {fileID: 0}
@@ -6906,7 +6912,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126800159}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: -29.923437, y: 21.34249, z: -3.137352}
+  m_LocalPosition: {x: -29.923437, y: 22.993124, z: -3.137352}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 550185727}
