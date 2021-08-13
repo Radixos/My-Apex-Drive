@@ -4276,7 +4276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334028187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.283, y: -10, z: -10.4}
+  m_LocalPosition: {x: -8.283, y: -16, z: -10.4}
   m_LocalScale: {x: 262.994, y: 2.4567685, z: 323.96188}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6886,7 +6886,7 @@ PrefabInstance:
     - target: {fileID: 2603186054048729150, guid: 5d38d0392474bd149a702f6487de1846,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
-      value: 1
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2603186054048729151, guid: 5d38d0392474bd149a702f6487de1846,
         type: 3}
