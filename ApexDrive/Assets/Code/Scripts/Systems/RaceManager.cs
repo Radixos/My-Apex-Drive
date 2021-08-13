@@ -191,6 +191,7 @@ public class RaceManager : Singleton<RaceManager>
         foreach(Player player in GameManager.Instance.ConnectedPlayers) 
         {
             player.Car.Stats.CurrSpeed = 0.0f;
+            player.Car.Stats.IsDrifting = false;
             player.Car.Rigidbody.velocity = Vector3.zero;
             player.Car.Player.Laps = 0;
         }

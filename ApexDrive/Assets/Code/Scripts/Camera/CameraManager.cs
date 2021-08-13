@@ -61,7 +61,7 @@ public class CameraManager : MonoBehaviour
             if(m_Track == null) return;
 
             Player leadPlayer = RaceManager.Instance.FirstPlayer;
-            if(leadPlayer != null && leadPlayer.Car.gameObject.activeSelf) targetPosition = m_Track.GetNearestPositionOnSpline(leadPlayer.Car.Position, 10, 5);
+            if(leadPlayer != null && leadPlayer.Car != null && leadPlayer.Car.gameObject.activeSelf) targetPosition = m_Track.GetNearestPositionOnSpline(leadPlayer.Car.Position, 10, 5);
             else if(m_OverrideFollowTarget != null) targetPosition = m_Track.GetNearestPositionOnSpline(m_OverrideFollowTarget.position, 10, 5);
             else targetPosition = m_Track.Evaluate(m_TrackProgress).pos;
             Vector3 desiredPosition =  targetPosition - transform.forward * m_Offset;

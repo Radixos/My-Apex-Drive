@@ -366,7 +366,6 @@ public class CarController : CarModule
         FMODUnity.RuntimeManager.PlayOneShot(m_HornSFXPath, transform.position);
         while(!buttonRelease)
         {
-            Debug.Log(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID));
             yield return null;
             if(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID)) buttonRelease = true;
         }

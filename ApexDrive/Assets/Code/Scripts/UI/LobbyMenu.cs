@@ -265,13 +265,8 @@ public class LobbyMenu : MonoBehaviour
     private IEnumerator Co_DismissControlsPage()
     {
         m_ControlsAnimator.SetBool("Visible", false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
 
-        // trigger scene load now
-        while(m_AsynchronousSceneLoad.progress < 0.9f)
-        {
-            yield return null;
-        }
         m_AsynchronousSceneLoad.allowSceneActivation = true;
     }
 
