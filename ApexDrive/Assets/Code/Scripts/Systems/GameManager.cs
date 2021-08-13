@@ -22,6 +22,8 @@ public class GameManager : GameSystem
     public static PlayerEvent OnPlayerConnected;
     public static PlayerEvent OnPlayerDisconnected;
 
+    public GameInfo CurrentGameInfo;
+
     public void Awake()
     {
         if(Instance == null) Instance = this;
@@ -35,12 +37,12 @@ public class GameManager : GameSystem
 
     private void OnEnable()
     {
-        Player.OnGameWin += ResetRoundScores;
+        Player.OnGameWin += SubmitWinner;
     }
 
     private void OnDisable()
     {
-        Player.OnGameWin = ResetRoundScores;
+        Player.OnGameWin = SubmitWinner;
     }
 
     ///<returns>Returns the PlayerID of the newly created player. Returns null if controller is already in use.</returns>
@@ -85,18 +87,9 @@ public class GameManager : GameSystem
         }
     }
 
-    private void ResetRoundScores(Player winner)
+    private void SubmitWinner(Player winner)
     {
+        if(CurrentGameInfo != null) CurrentGameInfo.SubmitWinner(winner);
         foreach(Player player in m_Players) player.ResetRoundScore();
-    }
-
-    private void OnControllerConnected()
-    {
-
-    }
-
-    private void OnControllerDisconnected()
-    {
-        
     }
 }

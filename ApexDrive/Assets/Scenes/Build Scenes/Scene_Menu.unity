@@ -878,7 +878,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1906,7 +1906,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 610172894}
-  - component: {fileID: 610172893}
   m_Layer: 0
   m_Name: StaticLightingSky
   m_TagString: Untagged
@@ -1914,18 +1913,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &610172893
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 610172892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 441482e8936e35048a1dffac814e3ef8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &610172894
 Transform:
   m_ObjectHideFlags: 1
@@ -2000,9 +1987,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press  <sprite index=1>  or  <sprite index=0>  to join
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6b3ee9df8ed83144ba3d1cdf697f2dc4, type: 2}
-  m_sharedMaterial: {fileID: -8454272808185963871, guid: 6b3ee9df8ed83144ba3d1cdf697f2dc4,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2026,8 +2012,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2206,7 +2192,6 @@ GameObject:
   m_Component:
   - component: {fileID: 797785650}
   - component: {fileID: 797785652}
-  - component: {fileID: 797785651}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2228,18 +2213,6 @@ Transform:
   m_Father: {fileID: 605344574}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 18.093, y: 109.173004, z: -0.446}
---- !u!114 &797785651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 797785649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!108 &797785652
 Light:
   m_ObjectHideFlags: 0
@@ -4363,7 +4336,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1452445801}
   - component: {fileID: 1452445803}
-  - component: {fileID: 1452445802}
   m_Layer: 0
   m_Name: Directional Light (1)
   m_TagString: Untagged
@@ -4385,18 +4357,6 @@ Transform:
   m_Father: {fileID: 605344574}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 22.135, y: 62.156002, z: 19.788}
---- !u!114 &1452445802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452445800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!108 &1452445803
 Light:
   m_ObjectHideFlags: 0

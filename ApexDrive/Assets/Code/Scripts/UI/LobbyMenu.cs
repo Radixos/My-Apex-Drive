@@ -70,7 +70,7 @@ public class LobbyMenu : MonoBehaviour
         m_PlayersReady = new bool[GameManager.MaxPlayers];
         for(int i = 0; i < m_PlayersReady.Length; i++) m_PlayersReady[i] = false;
 
-        m_FaderAnimator.SetTrigger("FadeIn");
+        m_FaderAnimator.SetBool("Visible", false);
         m_CanCancelLoading = true;
     }
 
@@ -245,6 +245,9 @@ public class LobbyMenu : MonoBehaviour
         yield return new WaitForSeconds (1.0f);
 
         m_SelectedLevel = m_LevelVotes[Random.Range(0, m_LevelVotes.Count)];
+
+        GameManager.Instance.CurrentGameInfo = new GameInfo(m_SelectedLevel);
+
         m_AsynchronousSceneLoad = SceneManager.LoadSceneAsync(m_SelectedLevel.SceneName);
         m_AsynchronousSceneLoad.allowSceneActivation = false;   
 
@@ -262,13 +265,8 @@ public class LobbyMenu : MonoBehaviour
     private IEnumerator Co_DismissControlsPage()
     {
         m_ControlsAnimator.SetBool("Visible", false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
 
-        // trigger scene load now
-        while(m_AsynchronousSceneLoad.progress < 0.9f)
-        {
-            yield return null;
-        }
         m_AsynchronousSceneLoad.allowSceneActivation = true;
     }
 

@@ -11,8 +11,10 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private List<CameraShake> m_CameraShakes = new List<CameraShake>();
     private Camera[] m_Cameras;
     [SerializeField] private RoadChain m_Track;
-    [SerializeField] private Vector3 m_Offset;
-    [SerializeField, Range(0.0f, 2.0f)] private float m_Position;
+    [SerializeField] private float m_Offset;
+    [SerializeField] private AnimationCurve m_ZoomCurve;
+    [SerializeField, Range(0.0f, 1.0f)] private float m_Zoom = 0.0f;
+    private float m_ZoomDuration = 10.0f;
     [SerializeField, Range(0.0f, 1.0f)] private float m_Smoothing = 0.125f;
     [SerializeField, Range(0.0f, 1.0f)] private float m_TrackProgress;
 
@@ -32,7 +34,7 @@ public class CameraManager : MonoBehaviour
         UpdateTrackProgress();
         if(m_Track != null)
         {
-            transform.position = m_Track.Evaluate(m_TrackProgress).pos + m_Offset;
+            transform.position = m_Track.Evaluate(m_TrackProgress).pos - transform.forward * m_Offset;
         }
     }
 
@@ -46,6 +48,11 @@ public class CameraManager : MonoBehaviour
         m_TrackProgress = RaceManager.Instance.TrackProgress;
     }
 
+    public void StartZoom()
+    {
+
+    }
+
 
     private void FixedUpdate()
     {
@@ -54,10 +61,10 @@ public class CameraManager : MonoBehaviour
             if(m_Track == null) return;
 
             Player leadPlayer = RaceManager.Instance.FirstPlayer;
-            if(leadPlayer != null && leadPlayer.Car.gameObject.activeSelf) targetPosition = m_Track.GetNearestPositionOnSpline(leadPlayer.Car.Position, 10, 5);
+            if(leadPlayer != null && leadPlayer.Car != null && leadPlayer.Car.gameObject.activeSelf) targetPosition = m_Track.GetNearestPositionOnSpline(leadPlayer.Car.Position, 10, 5);
             else if(m_OverrideFollowTarget != null) targetPosition = m_Track.GetNearestPositionOnSpline(m_OverrideFollowTarget.position, 10, 5);
             else targetPosition = m_Track.Evaluate(m_TrackProgress).pos;
-            Vector3 desiredPosition =  targetPosition + m_Offset;
+            Vector3 desiredPosition =  targetPosition - transform.forward * m_Offset;
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, m_Smoothing);
             transform.position = smoothedPosition;
         }
@@ -97,7 +104,7 @@ public class CameraManager : MonoBehaviour
     {
         if(!Application.isPlaying && m_Track != null)
         {
-            transform.position = m_Track.Evaluate(m_TrackProgress).pos + m_Offset;
+            transform.position = m_Track.Evaluate(m_TrackProgress).pos - transform.forward * m_Offset;
         }
     }
 
@@ -105,16 +112,16 @@ public class CameraManager : MonoBehaviour
     {
         CameraShake shake = new CameraShake(strength, duration, smoothInDuration, smoothOutDuration);
         m_CameraShakes.Add(shake);
-        StartCoroutine(RampShakeValues(shake));
+        StartCoroutine(Co_RampShakeValues(shake));
     }
 
     public void AddShake(CameraShake shake)
     {
         m_CameraShakes.Add(shake);
-        StartCoroutine(RampShakeValues(shake));
+        StartCoroutine(Co_RampShakeValues(shake));
     }
 
-    private IEnumerator RampShakeValues(CameraShake shake)
+    private IEnumerator Co_RampShakeValues(CameraShake shake)
     {
         // Ramp in
         float elapsed = 0.0f;
@@ -136,5 +143,17 @@ public class CameraManager : MonoBehaviour
             shake.Strength = Mathf.Lerp(shake.TargetStrength, 0.0f, elapsed / shake.SmoothOutDuration);
         }
         m_CameraShakes.Remove(shake);
+    }
+
+    private IEnumerator Co_Zoom()
+    {
+        float elapsed = 0.0f;
+
+        while(elapsed < m_ZoomDuration)
+        {
+            yield return null;
+            elapsed += Time.deltaTime;
+            m_Zoom = m_ZoomCurve.Evaluate(elapsed / m_ZoomDuration);
+        }
     }
 }

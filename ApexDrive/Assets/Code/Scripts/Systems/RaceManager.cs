@@ -43,6 +43,8 @@ public class RaceManager : Singleton<RaceManager>
 
     [SerializeField] private ParticleSystem[] m_PlayerSpawnVFX = new ParticleSystem[4];
 
+    private float m_SuddenDeathTime;
+
 
     protected override void Awake()
     {
@@ -149,19 +151,6 @@ public class RaceManager : Singleton<RaceManager>
         }
     }
 
-    [ContextMenu("Spawn Test Car")]
-	private void SpawnTestCar()
-	{
-        if(GameManager.Instance.PlayerCount >= GameManager.MaxPlayers) return;
-
-        string[] controllerNames = Input.GetJoystickNames();
-        if(GameManager.Instance.PlayerCount >= controllerNames.Length) return;
-
-        ControllerType controllerType = ControllerType.Playstation;
-        if(controllerNames[GameManager.Instance.PlayerCount].ToLower().Contains("xbox")) controllerType = ControllerType.Xbox;
-
-		Player player  = GameManager.Instance.AddPlayer(GameManager.Instance.PlayerCount + 1, controllerType);
-	}
 
     public void SpawnPlayer(Player player, bool canDrive = false)
     {
@@ -202,6 +191,7 @@ public class RaceManager : Singleton<RaceManager>
         foreach(Player player in GameManager.Instance.ConnectedPlayers) 
         {
             player.Car.Stats.CurrSpeed = 0.0f;
+            player.Car.Stats.IsDrifting = false;
             player.Car.Rigidbody.velocity = Vector3.zero;
             player.Car.Player.Laps = 0;
         }
@@ -228,7 +218,7 @@ public class RaceManager : Singleton<RaceManager>
     {
         if(OnGameEnd != null) OnGameEnd();
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("Scene_Menu");   
+        SceneManager.LoadScene("Scene_Victory");   
     }
 
     private IEnumerator Co_CheckEliminations()
