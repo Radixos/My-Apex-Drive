@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:ApexDrive/Assets/Data/Audio/Riding the Apex/Metadata/EffectPreset.meta
 guid: 0ce8f47ef0b4fbf4eab72cc03c94059f
 folderAsset: yes
 DefaultImporter:
+=======
+guid: def9974b5fcf0d44e86c1b10c09f9222
+NativeFormatImporter:
+>>>>>>> dev:ApexDrive/Assets/Data/Art/Animations/Camera/Main Camera.controller.meta
   externalObjects: {}
+  mainObjectFileID: 9100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

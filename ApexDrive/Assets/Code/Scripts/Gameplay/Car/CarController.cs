@@ -390,7 +390,6 @@ public class CarController : CarModule
 
         while(!buttonRelease)
         {
-            Debug.Log(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID));
             yield return null;
             if(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID)) buttonRelease = true;
         }
