@@ -7,6 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4555926441997923527, guid: 927efba2a77168c4e9369ab622a0c0c9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f6f20e4da11705640a20119c06e95e68, type: 2}
+    - target: {fileID: 6551992711702253270, guid: 927efba2a77168c4e9369ab622a0c0c9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f6f20e4da11705640a20119c06e95e68, type: 2}
+    - target: {fileID: 6551992711702253270, guid: 927efba2a77168c4e9369ab622a0c0c9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c1fa37e29275cc41bf19df234d65e8b, type: 2}
     - target: {fileID: 7827565550681761892, guid: 927efba2a77168c4e9369ab622a0c0c9,
         type: 3}
       propertyPath: m_RootOrder
@@ -65,7 +80,7 @@ PrefabInstance:
     - target: {fileID: 8988022387699120479, guid: 927efba2a77168c4e9369ab622a0c0c9,
         type: 3}
       propertyPath: m_Name
-      value: PFX_Eplosion_Player_01
+      value: PFX_Eplosion_Player_03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 927efba2a77168c4e9369ab622a0c0c9, type: 3}
