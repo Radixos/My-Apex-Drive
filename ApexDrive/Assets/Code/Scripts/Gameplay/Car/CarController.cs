@@ -103,8 +103,6 @@ public class CarController : CarModule
         HandleCarState();
         HandleCarAudio();
 
-        if(Stats.CanDrive) Stats.PowerAmount += 0.05f * Time.deltaTime;
-
         if(Stats.CanDrive && Stats.CanBoost && InputManager.GetButtonDown(Player.ControllerType, m_BoostInput, Player.ControllerID) && Stats.PowerAmount >= Stats.BoostCost)
         {
             StartCoroutine(Co_Boost());
@@ -393,5 +391,6 @@ public class CarController : CarModule
             yield return null;
             if(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID)) buttonRelease = true;
         }
+        m_EmoteAnimator.SetBool("Visible", false);
     }
 }
