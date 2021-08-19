@@ -31,8 +31,9 @@ public class CarController : CarModule
     private RaycastHit hit;
 
 
-    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath, m_ImpactSFXPath, m_HornSFXPath;
+    [SerializeField, FMODUnity.EventRef] private string m_BoostSFXPath, m_EngineSFXPath, m_DriftSFXPath, m_ImpactSFXPath, m_HornSFXPath, m_DespawnSFXPath;
     private FMOD.Studio.EventInstance sfxImpact;
+    private FMOD.Studio.EventInstance sfxHorn;
 
     FMOD.Studio.EventInstance sfxEngine;
     FMOD.Studio.EventInstance sfxDrift;
@@ -71,8 +72,9 @@ public class CarController : CarModule
         sfxEngine = FMODUnity.RuntimeManager.CreateInstance(m_EngineSFXPath);
         sfxDrift = FMODUnity.RuntimeManager.CreateInstance(m_DriftSFXPath);
         sfxImpact = RuntimeManager.CreateInstance(m_ImpactSFXPath);
+        sfxHorn = RuntimeManager.CreateInstance(m_HornSFXPath);
 
-        //FMOD Variables
+        //FMOD Variables - This is dumb. Remind me never to do it like this again
         sfxControl = FMODUnity.RuntimeManager.GetEventDescription("event:/TukTuk/engine");
         sfxControl.getParameterDescriptionByName("RPM", out sfxSpeed);
         rpm = sfxSpeed.id;
@@ -84,11 +86,14 @@ public class CarController : CarModule
         sfxSkid.getParameterDescriptionByName("Stop Drift", out sfxStopDrift);
         sd = sfxStopDrift.id;
 
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxEngine, transform, this.Rigidbody);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxDrift, transform, this.Rigidbody);
-        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sfxImpact, transform, this.Rigidbody);
+        //FMOD Attaching thingy
+        RuntimeManager.AttachInstanceToGameObject(sfxEngine, transform, Rigidbody);
+        RuntimeManager.AttachInstanceToGameObject(sfxHorn, transform, Rigidbody);
+
+        sfxHorn.setParameterByName("Player", Player.PlayerReadableID);
 
         sfxEngine.start();
+        sfxHorn.start();
     }
 
     private void Update()
@@ -111,6 +116,7 @@ public class CarController : CarModule
 
     public void PlayVictoryVFX()
     {
+        RuntimeManager.PlayOneShotAttached(m_DespawnSFXPath, gameObject);
         Destroy(GameObject.Instantiate(m_VictoryVFX, transform.position + Vector3.up, Quaternion.identity), 2.5f);
     }
 
@@ -304,6 +310,7 @@ public class CarController : CarModule
         }
         if(Stats.IsDrifting)
         {
+            RuntimeManager.AttachInstanceToGameObject(sfxDrift, transform, Rigidbody);
             sfxEngine.setParameterByID(acc, 1f);
             sfxDrift.getPlaybackState(out state);
             if (state == FMOD.Studio.PLAYBACK_STATE.STOPPED || state == FMOD.Studio.PLAYBACK_STATE.STOPPING)
@@ -332,6 +339,7 @@ public class CarController : CarModule
 
     private void OnCollisionEnter(Collision collision)
     {
+        RuntimeManager.AttachInstanceToGameObject(sfxImpact, transform, Rigidbody);
         impactForce = collision.relativeVelocity.magnitude;
         if (collision.rigidbody != null)
         {
@@ -342,9 +350,10 @@ public class CarController : CarModule
 
     private void OnDisable()
     {
-        sfxEngine.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        sfxDrift.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        sfxImpact.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        sfxEngine.release();
+        sfxDrift.release();
+        sfxImpact.release();
+        sfxHorn.release();
     }
 
     public void Eliminate()
@@ -374,7 +383,9 @@ public class CarController : CarModule
     {
         m_EmoteAnimator.SetBool("Visible", true);
         bool buttonRelease = false;
-        FMODUnity.RuntimeManager.PlayOneShot(m_HornSFXPath, transform.position);
+
+        sfxHorn.start();
+
         while(!buttonRelease)
         {
             yield return null;

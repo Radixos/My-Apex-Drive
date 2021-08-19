@@ -19766,6 +19766,7 @@ MonoBehaviour:
   m_DriftSFXPath: event:/TukTuk/Drifting
   m_ImpactSFXPath: event:/TukTuk/Impact
   m_HornSFXPath: event:/TukTuk/Horn
+  m_DespawnSFXPath: event:/TukTuk/Despawn
   m_BoostVFX: {fileID: 7599871787293403154}
   m_DeathVFX: {fileID: 5338135414596800380, guid: 927efba2a77168c4e9369ab622a0c0c9,
     type: 3}
