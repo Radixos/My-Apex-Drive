@@ -391,5 +391,6 @@ public class CarController : CarModule
             yield return null;
             if(InputManager.GetButtonUp(Player.ControllerType, m_EmoteInput, Player.ControllerID)) buttonRelease = true;
         }
+        m_EmoteAnimator.SetBool("Visible", false);
     }
 }
