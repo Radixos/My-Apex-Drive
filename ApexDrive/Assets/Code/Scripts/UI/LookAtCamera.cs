@@ -11,7 +11,7 @@ public class LookAtCamera : MonoBehaviour
     [SerializeField] private bool m_LockY = false;
     [SerializeField] private bool m_LockZ = false;
 
-    private void Update()
+    private void LateUpdate()
     {
         Vector3 lookPos = Camera.main.transform.position - transform.position;
         if(m_LockX) lookPos.x = 0.0f;

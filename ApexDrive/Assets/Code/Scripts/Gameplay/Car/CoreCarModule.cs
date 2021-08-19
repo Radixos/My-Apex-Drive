@@ -51,4 +51,19 @@ public class CoreCarModule : CarModule
         if(m_Stats == null) m_Stats = gameObject.AddComponent<CarStats>();
         if(m_ComboAnalyser == null) m_ComboAnalyser = gameObject.AddComponent<ComboAnalyser>();
     }
+
+    public void ScorePoints(float points)
+    {
+        StartCoroutine(Co_AddPoints(points));
+    }
+
+    private IEnumerator Co_AddPoints(float points)
+    {
+        while(points > 0.0f)
+        {
+            points -= 0.02f;
+            Stats.PowerAmount = Mathf.Clamp01(Stats.PowerAmount + 0.02f);
+            yield return null;
+        }
+    }
 }
